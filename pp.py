@@ -1,7 +1,9 @@
+## @file
+## @brief engine
 
 import os,sys,pickle
 
-######### symbolic class system
+## @defgroup sym symbolic class system
 
 ## base object
 class Object:
@@ -59,6 +61,11 @@ def LOAD():
     try: F = open(sys.argv[0]+'.db','r') ; W = pickle.load(F) ; F.close()
     except: pass
 LOAD()
+
+def SAVE():
+    global W
+    F = open(sys.argv[0]+'.db','w') ; pickle.dump(W, F) ; F.close()
+SAVE()
 
 def qq():
     print W ; print S
