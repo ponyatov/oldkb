@@ -17,6 +17,8 @@ class Object:
         self.value = V
         ## nest[]ed objects can run both as stack and ordered vector
         self.nest = []
+        ## attr{}ibutes can be used for associative array or class slots
+        self.attr = {}
         
     ## @defgroup dump print/dump
     ## @brief text representation for any object
@@ -49,6 +51,13 @@ class Object:
     ## @brief pop nested object
     def pop(self): return self.nest.pop()
     ## @}
+    
+    ## @defgroup symmap map operations
+    ## @ingroup map
+    ## @{
+    
+    def __getitem__(self,key): self.attr[key]
+    ## @}
 
 ## @defgroup prim primitive
 ## @brief close to machine level or implementation language types (Python)
@@ -74,7 +83,8 @@ class Container(Object): pass
 
 class Stack(Container): pass
 
-class Map(Container): pass
+class Map(Container):
+    def __init__(self,V): Object.__init__(self, V)
 
 class Vector(Container): pass
 
@@ -191,8 +201,8 @@ def WORD():
     
 ## `FIND ( symbol -- callable )` search in vocabulary by name
 def FIND():
-    print S.pop()
-    return False
+    WN = S.pop().value
+    S.push(W[WN])
 
 ## process chunk of source code
 ## @param[in] SRC source code string
