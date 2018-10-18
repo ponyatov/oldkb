@@ -1,0 +1,5 @@
+<map id="FORTH VM" name="FORTH VM">
+<area shape="rect" id="node1" href="$group__deb.html" title="debug" alt="" coords="178,5,235,32"/>
+<area shape="rect" id="node2" href="$group__stack.html" title="data stack" alt="" coords="165,56,248,83"/>
+<area shape="rect" id="node3" href="$group__voc.html" title="global vocabulary" alt="" coords="145,107,268,133"/>
+</map>
