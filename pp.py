@@ -132,6 +132,10 @@ tokens = ['symbol','number','integer','string']
 ## drop spaces
 t_ignore = ' \t\r'
 
+## line comments
+def t_ignore_COMMENT(t):
+    r'[#\\].*'
+
 ## count line number
 def t_newline(t):
     r'\n+'
@@ -169,7 +173,24 @@ def REPL():
     while True:
         print S
         INTERPRET(raw_input('\n> '))
-REPL()
+
+## @}
+
+## @defgroup argv command line
+## @brief parameters on system start
+## @{
+
+## process command line parameters
+## @details
+## * process list of files in command line and exit, or
+## * run interactive console if no parameters given
+def process_argv():
+    if len(sys.argv) > 1:
+        for i in sys.argv[1:]:
+            F = open(i,'r') ; INTERPRET(F.read()) ; F.close()
+    else:
+        REPL()
+process_argv()
 
 ## @}
 
