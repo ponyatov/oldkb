@@ -1,4 +1,5 @@
 hello: hello.wasm
 
-%.wasm: %.wat
-	wabt/wat2wasm -o $@ $^
+%.wasm: %.wat Makefile
+	wabt/wat2wasm -o $@ $< && wabt/wasm-objdump -x -h -d -s $@ > $@.dump
+

@@ -1,1 +1,1 @@
-@gvim -p hello.html hello.wat Makefile bat.bat 
+@gvim -p hello.html hello.wat hello.wasm.dump Makefile bat.bat 
