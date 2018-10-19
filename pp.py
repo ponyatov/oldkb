@@ -36,10 +36,15 @@ class Object:
         S = self.pad(depth) + self.head(prefix)
         for i in self.attr:
             S += self.attr[i].dump(depth+1,prefix='%s = '%i)
+        for j in self.nest:
+            S += j.dump(depth+1)
         return S
     ## dump in short header-only form
     def head(self,prefix=''):
-        return '%s<%s:%s> @%X' % (prefix, self.type, self.value, id(self))
+        return '%s<%s:%s> @%X' % (prefix, self.type, self.str(), id(self))
+    ## string representation of value only w/o special formats
+    def str(self):
+        return str(self.value)
     ## left padding
     def pad(self,N):
         return '\n'+'\t'*N
@@ -54,6 +59,8 @@ class Object:
     def push(self,obj): self.nest.append(obj) ; return self
     ## @brief pop nested object
     def pop(self): return self.nest.pop()
+    ## @brief get top of stack without removing
+    def top(self): return self.nest[-1]
     ## @}
     
     ## @defgroup symmap map operations
@@ -73,15 +80,60 @@ class Object:
 ## @brief close to machine level or implementation language types (Python)
 ## @{
 
+## primitive object
 class Primitive(Object): pass
 
+## @defgroup symbol symbol
+## @brief names variables and other objects
+## @{
+
+## symbol (names variables and other objects)
 class Symbol(Primitive): pass
 
-class Number(Primitive): pass
+## @}
 
-class Integer(Number): pass
+## @defgroup string string 
+## @{
 
+## string
 class String(Object): pass
+
+## @}
+
+## @defgroup nums numbers
+## @{
+
+## floating pointer number
+class Number(Primitive):
+    ## construct with `float(value)`
+    def __init__(self,V):
+        Primitive.__init__(self, float(V))
+
+## integer number
+class Integer(Number):
+    ## construct with `integer(value)`
+    def __init__(self,V):
+        Primitive.__init__(self, int(V))
+        
+## hexadecimal machine number
+class Hex(Integer): 
+    ## construct from `0xDeadBeef`
+    def __init__(self,V):
+        Primitive.__init__(self, int(V[2:],0x10))
+    ## represent in `0xNNNN` form
+    def str(self):
+        return '0x%X' % self.value
+
+## binary vector
+class Bin(Integer): 
+    ## construct from `0b1101`
+    def __init__(self,V):
+        Primitive.__init__(self, int(V[2:],0x02))
+    ## represent in `0b1101` form
+    def str(self):
+        return bin(self.value)
+
+## @}    
 
 ## @}
 
@@ -126,9 +178,30 @@ class Fn(Active):
         self.fn = F
     ## call object
     def __call__(self): self.fn()
+    
+## operator
+class Op(Active): pass
 
 ## virtual machine
 class VM(Active): pass
+
+## @}
+
+## @}
+
+## @defgroup doc documenting
+## @brief not only program documentation but any generic docs
+## @{
+
+## documentation element
+class Doc(Object): pass
+
+## @defgroup html HTML
+## @brief most portable format *required for this **online** system*
+## @{
+
+## .html document element
+class HTML(Doc): pass
 
 ## @}
 
@@ -164,7 +237,7 @@ def SAVE():
     global W
     F = open(sys.argv[0]+'.db','w') ; pickle.dump(W, F) ; F.close()
 W << SAVE
-SAVE()
+# SAVE()
 
 ## @}
 
@@ -175,6 +248,11 @@ SAVE()
 def qq():
     print W ; print S
 W['??'] = Fn(qq)
+
+## `? ( -- )` \ print @ref stack only
+def q():
+    print S
+W['?'] = Fn(q)
 
 ## @}
 
@@ -194,7 +272,7 @@ import ply.lex  as lex  # FORTH has no syntax we need lexer only
 ## * follows API of PLY library with object `type`/`value`
 ## * in result we able to directly use @ref prim s as tokens
 ## * and should use lowercased class names here
-tokens = ['symbol','number','integer','string']
+tokens = ['symbol','string','number','integer','hex','bin']
 
 ## drop spaces
 t_ignore = ' \t\r'
@@ -207,6 +285,31 @@ def t_ignore_COMMENT(t):
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
+    
+## hexadecimal
+def t_hex(t):
+    r'0x[0-9a-fA-F]+'
+    return Hex(t.value)
+    
+## binary
+def t_bin(t):
+    r'0b[01]+'
+    return Bin(t.value)
+    
+## exponential with integer base
+def t_number_exp(t):
+    r'[\+\-]?[0-9]+[eE][\+\-]?[0-9]+'
+    return Number(t.value)
+    
+## floating point number token
+def t_number(t):
+    r'[\+\-]?[0-9]+\.[0-9]*([eE][\+\-]?[0-9]+)?'
+    return Number(t.value)
+    
+## integer number token
+def t_integer(t):
+    r'[\+\-]?[0-9]+'
+    return Integer(t.value)
 
 ## symbol token
 def t_symbol(t):
@@ -230,6 +333,7 @@ lexer = lex.lex()
 ## @returns `false` if end of source found
 ## @returns parsed object on @ref stack and `true`
 def WORD():
+    global S
     token = lexer.token()
     if not token: return False  # end of source
     S.push(token) ; return True
@@ -251,8 +355,9 @@ def INTERPRET(SRC):
     lexer.input(SRC)
     while True:
         if not WORD(): break
-        if not FIND(): print '\nunknown ',S.pop() ; break 
-        EXECUTE()
+        if S.top().type in ['symbol']:
+            if not FIND(): print '\nunknown',S.pop().head() ; break 
+            EXECUTE()
         
 ## Read-Eval-Print-Loop
 def REPL():
@@ -262,8 +367,8 @@ def REPL():
 
 ## @}
 
-## @defgroup argv command line
-## @brief parameters on system start
+## @defgroup argv system startup
+## @brief command line parsing and initialization
 ## @{
 
 ## process command line parameters
@@ -271,7 +376,7 @@ def REPL():
 ## * process list of files in command line and exit, or
 ## * run interactive console if no parameters given
 def process_argv():
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 1:       # has command line parameters
         for i in sys.argv[1:]:
             F = open(i,'r') ; INTERPRET(F.read()) ; F.close()
     else:
