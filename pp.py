@@ -3,7 +3,7 @@
 ## @file
 ## @brief engine
 
-import os,sys,pickle
+import os,sys,pickle,types
 
 ## @defgroup sym symbolic class system
 ## @{
@@ -58,7 +58,13 @@ class Object:
     ## @ingroup map
     ## @{
     
-    def __getitem__(self,key): self.attr[key]
+    ## fetch attribute value
+    ## @param[in] key
+    def __getitem__(self,key): return self.attr[key]
+    ## store to attribute
+    ## @param[in] key
+    ## @param[in] obj
+    def __setitem__(self,key,obj): self.attr[key] = obj ; return self
     ## @}
 
 ## @defgroup prim primitive
@@ -81,13 +87,22 @@ class String(Object): pass
 ## @brief any object in @ref sym can be used as stack, vector and map
 ## @{
 
+## data container
 class Container(Object): pass
 
+## LIFO stack
 class Stack(Container): pass
 
+## associative array
 class Map(Container):
-    def __init__(self,V): Object.__init__(self, V)
+    ## shift object both into `attr{}` and `nest[]`ed
+    def __lshift__(self,obj):
+        if type(obj) is types.FunctionType:
+            W[obj.__name__] = Fn(obj)
+        else:
+            W[obj.value] = obj
 
+## ordered vector
 class Vector(Container): pass
 
 ## @}
@@ -96,8 +111,19 @@ class Vector(Container): pass
 ## @brief has execution semantics
 ## @{
 
+## active element has execution semantics
 class Active(Object): pass
 
+## python function wrapper
+class Fn(Active):
+    ## construct wrapper
+    ## @param[in] F python function `void noreturn()`
+    def __init__(self,F):
+        Active.__init__(self, F.__name__)
+        ## function holder
+        self.fn = F
+
+## virtual machine
 class VM(Active): pass
 
 ## @}
@@ -126,12 +152,14 @@ def LOAD():
     global W
     try: F = open(sys.argv[0]+'.db','r') ; W = pickle.load(F) ; F.close()
     except: pass
+W << LOAD
 LOAD()
 
 ## save vocabulary to pickle image
 def SAVE():
     global W
     F = open(sys.argv[0]+'.db','w') ; pickle.dump(W, F) ; F.close()
+W << SAVE
 SAVE()
 
 ## @}
