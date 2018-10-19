@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
 ## @file
 ## @brief engine
@@ -31,8 +31,10 @@ class Object:
         return self.dump()
     ## dump in full tree form
     ## @param[in] depth tree padding
-    def dump(self,depth=0):
-        S = self.pad(depth) + self.head()
+    def dump(self,depth=0,prefix=''):
+        S = self.pad(depth) + self.head(prefix)
+        for i in self.attr:
+            S += self.attr[i].dump(depth+1,prefix='%s = '%i)
         return S
     ## dump in short header-only form
     def head(self,prefix=''):
@@ -88,19 +90,24 @@ class String(Object): pass
 ## @{
 
 ## data container
-class Container(Object): pass
+class Container(Object):
+    def __init__(self,V):
+        Object.__init__(self, V)
 
 ## LIFO stack
 class Stack(Container): pass
 
 ## associative array
 class Map(Container):
+    def __init__(self,V):
+        Container.__init__(self, V)
     ## shift object both into `attr{}` and `nest[]`ed
     def __lshift__(self,obj):
         if type(obj) is types.FunctionType:
-            W[obj.__name__] = Fn(obj)
+            self.attr[obj.__name__] = Fn(obj)
         else:
-            W[obj.value] = obj
+            self.attr[obj.value] = obj
+        print self
 
 ## ordered vector
 class Vector(Container): pass
@@ -170,6 +177,9 @@ SAVE()
 ## `?? ( -- )` \ dump @ref fvm state
 def qq():
     print W ; print S
+W['??'] = Fn(qq)
+
+print W
     
 ## @}
 
