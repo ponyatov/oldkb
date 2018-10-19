@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+
+{% block body %}
+
+<div id=slider>
+
+<pre id=stack>{{ S }}</pre>
+
+<pre id=words>{{ W }}</pre>
+
+<pre id=log># Hello</pre>
+
+</div>
+
+<div id=cmd>
+
+<pre id=error>no error</pre>
+
+<!--textarea autocorrect=off id=meta rows=3>{{ PEGJS }}</textarea-->
+
+<textarea autocorrect=off id=pad rows=15>{{ PAD }}</textarea>
+
+<button id=go>GO</button>
+
+</div>
+
+{% endblock %}

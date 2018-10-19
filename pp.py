@@ -367,6 +367,25 @@ def REPL():
 
 ## @}
 
+## @}
+
+## @defgroup web Web interface
+## @brief Flask powered
+
+## @{
+
+import flask
+
+app = flask.Flask(__name__)
+
+@app.route('/')
+@app.route('/index.html')
+@app.route('/index.htm')
+def index():
+    return flask.render_template('index.html',S=S,W=W,PAD=__name__)
+
+## @}
+
 ## @defgroup argv system startup
 ## @brief command line parsing and initialization
 ## @{
@@ -380,10 +399,9 @@ def process_argv():
         for i in sys.argv[1:]:
             F = open(i,'r') ; INTERPRET(F.read()) ; F.close()
     else:
-        REPL()
+#         REPL()
+        app.run(debug=True,host='0.0.0.0',port=8888)
 process_argv()
-
-## @}
 
 ## @}
 
