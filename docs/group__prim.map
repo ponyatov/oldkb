@@ -1,0 +1,6 @@
+<map id="primitive" name="primitive">
+<area shape="rect" id="node1" href="$group__nums.html" title="numbers" alt="" coords="328,5,400,32"/>
+<area shape="rect" id="node2" href="$group__sym.html" title="symbolic class system" alt="" coords="5,56,161,83"/>
+<area shape="rect" id="node3" href="$group__string.html" title="string" alt="" coords="337,56,391,83"/>
+<area shape="rect" id="node5" href="$group__symbol.html" title="names variables and other objects " alt="" coords="332,107,396,133"/>
+</map>

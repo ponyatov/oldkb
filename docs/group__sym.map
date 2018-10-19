@@ -1,0 +1,5 @@
+<map id="symbolic class system" name="symbolic class system">
+<area shape="rect" id="node2" href="$group__active.html" title="has execution semantics " alt="" coords="209,5,316,32"/>
+<area shape="rect" id="node3" href="$group__prim.html" title="close to machine level or implementation language types (Python) " alt="" coords="227,56,298,83"/>
+<area shape="rect" id="node4" href="$group__cont.html" title="any object in symbolic class system can be used as stack, vector and map " alt="" coords="211,107,315,133"/>
+</map>
