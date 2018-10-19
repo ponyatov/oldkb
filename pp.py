@@ -31,6 +31,7 @@ class Object:
         return self.dump()
     ## dump in full tree form
     ## @param[in] depth tree padding
+    ## @param[in] prefix prefix string before first line of subtree
     def dump(self,depth=0,prefix=''):
         S = self.pad(depth) + self.head(prefix)
         for i in self.attr:
@@ -46,8 +47,7 @@ class Object:
     ## @}
     
     ## @defgroup symstack stack operations
-    ## @ingroup stack
-    ## @brief provided by Object
+    ## @ingroup cont
     ## @{
     
     ## @brief push nested object 
@@ -57,7 +57,7 @@ class Object:
     ## @}
     
     ## @defgroup symmap map operations
-    ## @ingroup map
+    ## @ingroup cont
     ## @{
     
     ## fetch attribute value
@@ -90,24 +90,19 @@ class String(Object): pass
 ## @{
 
 ## data container
-class Container(Object):
-    def __init__(self,V):
-        Object.__init__(self, V)
+class Container(Object): pass
 
 ## LIFO stack
 class Stack(Container): pass
 
 ## associative array
 class Map(Container):
-    def __init__(self,V):
-        Container.__init__(self, V)
     ## shift object both into `attr{}` and `nest[]`ed
     def __lshift__(self,obj):
         if type(obj) is types.FunctionType:
             self.attr[obj.__name__] = Fn(obj)
         else:
             self.attr[obj.value] = obj
-        print self
 
 ## ordered vector
 class Vector(Container): pass
@@ -129,6 +124,8 @@ class Fn(Active):
         Active.__init__(self, F.__name__)
         ## function holder
         self.fn = F
+    ## call object
+    def __call__(self): self.fn()
 
 ## virtual machine
 class VM(Active): pass
@@ -179,8 +176,6 @@ def qq():
     print W ; print S
 W['??'] = Fn(qq)
 
-print W
-    
 ## @}
 
 ## @}
@@ -215,7 +210,7 @@ def t_newline(t):
 
 ## symbol token
 def t_symbol(t):
-    r'[a-zA-Z0-9_\?\:\;]+'
+    r'[a-zA-Z0-9_\?\:\;\+\-\*\/]+'
     return Symbol(t.value)
 
 ## lexer error callback
@@ -239,18 +234,25 @@ def WORD():
     if not token: return False  # end of source
     S.push(token) ; return True
     
-## `FIND ( symbol -- callable )` search in vocabulary by name
+## `FIND ( symbol -- callable|symbol )` search in vocabulary by name
 def FIND():
-    WN = S.pop().value
-    S.push(W[WN])
+    WN = S.pop()
+    try:
+        S.push(W[WN.value]) ; return True
+    except KeyError:
+        S.push(WN) ; return False
 
+## execute callable object from stack
+def EXECUTE(): S.pop()()
+        
 ## process chunk of source code
 ## @param[in] SRC source code string
 def INTERPRET(SRC):
     lexer.input(SRC)
     while True:
-        if not WORD(): break    # get next token
-        if FIND(): EXECUTE()
+        if not WORD(): break
+        if not FIND(): print '\nunknown ',S.pop() ; break 
+        EXECUTE()
         
 ## Read-Eval-Print-Loop
 def REPL():
