@@ -21,8 +21,6 @@ button   { width:100%; background: darkslategray; height: 11vmin; }
 	overflow-y: hidden;
 	white-space: nowrap;
 	display: inline-block;
-	/*display: flex;*/
-	height: 12em;
 	border: solid 5px;
 }
 
