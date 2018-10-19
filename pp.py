@@ -382,7 +382,7 @@ app = flask.Flask(__name__)
 @app.route('/index.html')
 @app.route('/index.htm')
 def index():
-    return flask.render_template('index.html',S=S,W=W,PAD=__name__)
+    return flask.render_template('index.html',S=S,W=W,PAD='\ kb/FORTH commands')
 
 ## @}
 
