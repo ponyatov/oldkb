@@ -374,13 +374,16 @@ def REPL():
 
 ## @{
 
+## IP addr to bind
+IP = '127.0.0.1'
+## IP port to bind
+PORT = 8888
+
 import flask
 
 app = flask.Flask(__name__)
 
 @app.route('/')
-@app.route('/index.html')
-@app.route('/index.htm')
 def index():
     return flask.render_template('index.html',S=S,W=W,PAD='\ kb/FORTH commands')
 
@@ -400,7 +403,7 @@ def process_argv():
             F = open(i,'r') ; INTERPRET(F.read()) ; F.close()
     else:
 #         REPL()
-        app.run(debug=True,host='0.0.0.0',port=8888)
+        app.run(debug=True,host=IP,port=PORT)
 process_argv()
 
 ## @}
