@@ -381,21 +381,25 @@ def REPL():
 
 ## @{
 
+# IP = '127.0.0.1'
 ## IP addr to bind
-IP = '127.0.0.1'
+IP = '0.0.0.0'
 
 ## IP port to bind
 PORT = 8888
+
+## SSL mode
+## * None
+## * `'adhoc'`
+## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
+SSL = None
 
 import flask,flask_wtf,wtforms
 
 app = flask.Flask(__name__)
 
-class FlaskConfig:
-    SECRET_KEY = os.environ.get('FLASK_SECRET_KEY') or \
-                    open('/etc/machine-id').readline()[:-1]
-
-app.config.from_object(FlaskConfig)
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or \
+                            open('/etc/machine-id').readline()[:-1]
 
 class CmdForm(flask_wtf.FlaskForm):
     error = wtforms.StringField('no error')
@@ -425,7 +429,7 @@ def process_argv():
             F = open(i,'r') ; INTERPRET(F.read()) ; F.close()
     else:
 #         REPL()
-        app.run(debug=True,host=IP,port=PORT)
+        app.run(debug=True,host=IP,port=PORT,ssl_context=SSL)
 process_argv()
 
 ## @}
