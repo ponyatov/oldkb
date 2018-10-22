@@ -4,3 +4,5 @@
 *.exe
 *.log
 docs/
+cert.pem
+key.pem

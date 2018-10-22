@@ -393,6 +393,8 @@ PORT = 8888
 ## * `'adhoc'`
 ## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
 SSL = None
+SSL = 'adhoc'
+SSL = ('cert.pem', 'key.pem')
 
 import flask,flask_wtf,wtforms
 
