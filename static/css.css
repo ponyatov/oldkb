@@ -21,7 +21,7 @@ button   { width:100%; background: darkslategray; height: 11vmin; }
 	overflow-y: hidden;
 	white-space: nowrap;
 	display: inline-block;
-	border: solid 2px;
+	border: solid 1px;
 	min-height: 50%;
 	
   display: flex;

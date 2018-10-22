@@ -26,7 +26,13 @@
 
 <script>
 window.onload = function() {
-	console.log(document.getElementById('cmd'));
+	cmd		= document.getElementById('cmd');
+	slider	= document.getElementById('slider');
+	window.onresize();
+}
+
+window.onresize = function() {
+	slider.style.height = cmd.offsetTop-5;
 }
 </script>
 
