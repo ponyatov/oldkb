@@ -402,19 +402,27 @@ app = flask.Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or \
                             open('/etc/machine-id').readline()[:-1]
-                            
+
+## login manager                            
 logman = flask_login.LoginManager() ; logman.init_app(app)
 
+## web user
 class User(flask_login.UserMixin):
+    ## construct user with given name
+    ## @param[in] id unicode string
     def __init__(self,id): self.id= id
 
 @logman.user_loader
 def load_user(user_id):
     return User(user_id) 
-    
+
+## command entry web form
 class CmdForm(flask_wtf.FlaskForm):
+    ## error message
     error = wtforms.StringField('no error')
+    ## FORTH code entry
     pad = wtforms.TextAreaField('padd',render_kw={'rows':7,'autocorrect':'off'})
+    ## go button
     go  = wtforms.SubmitField('GO')
 
 @app.route('/', methods=['GET', 'POST'])
@@ -425,8 +433,12 @@ def index():
     if form.validate_on_submit(): INTERPRET(form.pad.data)
     return flask.render_template('index.html',form=form,S=S,W=W)
 
+## login web form
 class LoginForm(flask_wtf.FlaskForm):
+    ## login field
     login = wtforms.StringField('login')
+    ## password field (stared)
+    pswd  = wtforms.PasswordField('password')
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
