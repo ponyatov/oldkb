@@ -22,6 +22,7 @@ button   { width:100%; background: darkslategray; height: 11vmin; }
 	white-space: nowrap;
 	display: inline-block;
 	border: solid 2px;
+	min-height: 50%;
 }
 
 #slider>* {
