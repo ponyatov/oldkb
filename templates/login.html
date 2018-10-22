@@ -1,0 +1,8 @@
+{% extends "template.html" %}
+
+{% block body %}
+<form id=login action="" method=post novalidate>
+{{ form.hidden_tag() }}
+{{ form.login() }}
+</form>
+{% endblock %}

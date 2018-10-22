@@ -11,8 +11,9 @@ textarea { width:100%; caret-color:red; }
 
 #cmd { position: absolute; bottom:0; width:100%; }
 
-#stack,#pad	{ color:cyan; }
-#words		{ color:lightblue; }
+#stack	{ color:cyan; }
+#pad	{ color:cyan; border-color: darkcyan; }
+#words	{ color:lightblue; }
 
 label[for=error]	{ color:yellow; }
 
@@ -22,7 +23,7 @@ label[for=error]	{ color:yellow; }
 	overflow-y: hidden;
 	white-space: nowrap;
 	display: inline-block;
-	border: solid 1px;
+	border: solid 1px; border-color: darkblue;
 	
   display: flex;
   flex-direction: row;

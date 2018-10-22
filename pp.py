@@ -392,28 +392,48 @@ PORT = 8888
 ## * None
 ## * `'adhoc'`
 ## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
-SSL = None
 SSL = 'adhoc'
 SSL = ('cert.pem', 'key.pem')
+# SSL = None
 
-import flask,flask_wtf,wtforms
+import flask,flask_wtf,wtforms,flask_login
 
 app = flask.Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or \
                             open('/etc/machine-id').readline()[:-1]
+                            
+logman = flask_login.LoginManager() ; logman.init_app(app)
 
+class User(flask_login.UserMixin):
+    def __init__(self,id): self.id= id
+
+@logman.user_loader
+def load_user(user_id):
+    return User(user_id) 
+    
 class CmdForm(flask_wtf.FlaskForm):
     error = wtforms.StringField('no error')
     pad = wtforms.TextAreaField('padd',render_kw={'rows':7,'autocorrect':'off'})
     go  = wtforms.SubmitField('GO')
 
 @app.route('/', methods=['GET', 'POST'])
+@flask_login.login_required
 def index():
     form = CmdForm()
-    if form.validate_on_submit():
-        INTERPRET(form.pad.data)
+    if form.validate_on_submit(): INTERPRET(form.pad.data)
     return flask.render_template('index.html',form=form,S=S,W=W)
+
+class LoginForm(flask_wtf.FlaskForm):
+    login = wtforms.StringField('login')
+
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        flask_login.login_user(User(form.login.data))
+        return flask.redirect('/')
+    return flask.render_template('login.html',form=form)
 
 ## @}
 
