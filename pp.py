@@ -418,8 +418,9 @@ class CmdForm(flask_wtf.FlaskForm):
     go  = wtforms.SubmitField('GO')
 
 @app.route('/', methods=['GET', 'POST'])
-@flask_login.login_required
 def index():
+    if not flask_login.current_user.is_authenticated:
+        return flask.redirect('/login')
     form = CmdForm()
     if form.validate_on_submit(): INTERPRET(form.pad.data)
     return flask.render_template('index.html',form=form,S=S,W=W)
@@ -434,6 +435,12 @@ def login():
         flask_login.login_user(User(form.login.data))
         return flask.redirect('/')
     return flask.render_template('login.html',form=form)
+
+@app.route('/logout')
+@flask_login.login_required
+def logout():
+    flask_login.logout_user()
+    return flask.redirect('/login')
 
 ## @}
 
