@@ -61,6 +61,8 @@ class Object:
     def pop(self): return self.nest.pop()
     ## @brief get top of stack without removing
     def top(self): return self.nest[-1]
+    ## @brief clear stack
+    def clear(self): self.nest = []
     ## @}
     
     ## @defgroup symmap map operations
@@ -254,6 +256,11 @@ def q():
     print S
 W['?'] = Fn(q)
 
+## `. ( ... -- )` \ clear data stack
+def dot():
+    S.clear()
+W['.'] = Fn(dot)
+
 ## @}
 
 ## @}
@@ -313,7 +320,7 @@ def t_integer(t):
 
 ## symbol token
 def t_symbol(t):
-    r'[a-zA-Z0-9_\?\:\;\+\-\*\/]+'
+    r'[a-zA-Z0-9_\?\:\;\+\-\*\/\.]+'
     return Symbol(t.value)
 
 ## lexer error callback
@@ -380,13 +387,27 @@ IP = '127.0.0.1'
 ## IP port to bind
 PORT = 8888
 
-import flask
+import flask,flask_wtf,wtforms
 
 app = flask.Flask(__name__)
 
-@app.route('/')
+class FlaskConfig:
+    SECRET_KEY = os.environ.get('FLASK_SECRET_KEY') or \
+                    open('/etc/machine-id').readline()[:-1]
+
+app.config.from_object(FlaskConfig)
+
+class CmdForm(flask_wtf.FlaskForm):
+    error = wtforms.StringField('no error')
+    pad = wtforms.TextAreaField('padd',render_kw={'rows':7,'autocorrect':'off'})
+    go  = wtforms.SubmitField('GO')
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return flask.render_template('index.html',S=S,W=W,PAD='\ kb/FORTH commands')
+    form = CmdForm()
+    if form.validate_on_submit():
+        INTERPRET(form.pad.data)
+    return flask.render_template('index.html',form=form,S=S,W=W)
 
 ## @}
 

@@ -12,17 +12,13 @@
 
 </div>
 
-<div id=cmd>
-
-<pre id=error>no error</pre>
-
+<form id=cmd action="" method=post novalidate>
+{{ form.hidden_tag() }}
+{{ form.error.label }}
 <!--textarea autocorrect=off id=meta rows=3>{{ PEGJS }}</textarea-->
-
-<textarea autocorrect=off id=pad rows=7>{{ PAD }}</textarea>
-
-<button id=go>GO</button>
-
-</div>
+{{ form.pad() }}
+{{ form.go() }}
+</form>
 
 <script>
 window.onload = function() {
