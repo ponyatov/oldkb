@@ -1,5 +1,6 @@
-# pp kb.net
-## object/graph/knowledge database
+# 
+# object/graph/knowledge database
+
 * made based on Marvin Minsky's
 [Frame Model](https://en.wikipedia.org/wiki/Frame_(artificial_intelligence))
 with some adaptation<br>for modern computing and programming languages

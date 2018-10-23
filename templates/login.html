@@ -3,6 +3,10 @@
 {% block body %}
 <form id=login action="" method=post novalidate>
 {{ form.hidden_tag() }}
-{{ form.login() }}
+<table>
+<tr><td>{{ form.login.label }}</td><td>{{ form.login() }}</td></tr>
+<tr><td>{{ form.pswd.label }}</td><td>{{ form.pswd() }}</td></tr>
+<tr><td></td><td>{{ form.go() }}</td></tr>
+</table>
 </form>
 {% endblock %}
