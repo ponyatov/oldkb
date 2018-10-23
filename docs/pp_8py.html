@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Persistent Python / pyFORTH: pp.py File Reference</title>
+<title>kb/FORTH: pp.py File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Persistent Python / pyFORTH
+   <div id="projectname">kb/FORTH
    </div>
   </td>
  </tr>
@@ -127,6 +127,15 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpp_1_1HTML.html">pp.HTML</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">.html document element  <a href="classpp_1_1HTML.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpp_1_1User.html">pp.User</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">web user  <a href="classpp_1_1User.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpp_1_1CmdForm.html">pp.CmdForm</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">command entry web form  <a href="classpp_1_1CmdForm.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpp_1_1LoginForm.html">pp.LoginForm</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">login web form  <a href="classpp_1_1LoginForm.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -146,6 +155,9 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__deb.html#ga1957dffae046d2d61700405dfaf3b52b">pp.q</a> ()</td></tr>
 <tr class="memdesc:ga1957dffae046d2d61700405dfaf3b52b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>? ( -- )</code> \ print <a class="el" href="group__stack.html">data stack</a> only <br /></td></tr>
 <tr class="separator:ga1957dffae046d2d61700405dfaf3b52b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad82f7768a4b877ab913ba79180606c08"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__deb.html#gad82f7768a4b877ab913ba79180606c08">pp.dot</a> ()</td></tr>
+<tr class="memdesc:gad82f7768a4b877ab913ba79180606c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">`.  <a href="group__deb.html#gad82f7768a4b877ab913ba79180606c08">More...</a><br /></td></tr>
+<tr class="separator:gad82f7768a4b877ab913ba79180606c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad3a2bcb74a7ea37381f3628b340f553e"><td class="memItemLeft" align="right" valign="top">
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#gad3a2bcb74a7ea37381f3628b340f553e">pp.t_ignore_COMMENT</a> (t)</td></tr>
 <tr class="memdesc:gad3a2bcb74a7ea37381f3628b340f553e"><td class="mdescLeft">&#160;</td><td class="mdescRight">line comments <br /></td></tr>
@@ -200,6 +212,22 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__repl.html#ga50a0fbcde3ff3cab1e81d23209e05136">pp.REPL</a> ()</td></tr>
 <tr class="memdesc:ga50a0fbcde3ff3cab1e81d23209e05136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-Eval-Print-Loop. <br /></td></tr>
 <tr class="separator:ga50a0fbcde3ff3cab1e81d23209e05136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga542fd443e2a5e6e375e1c657c86213db"><td class="memItemLeft" align="right" valign="top">
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#ga542fd443e2a5e6e375e1c657c86213db">pp.load_user</a> (user_id)</td></tr>
+<tr class="memdesc:ga542fd443e2a5e6e375e1c657c86213db"><td class="mdescLeft">&#160;</td><td class="mdescRight">login manager user laoder <br /></td></tr>
+<tr class="separator:ga542fd443e2a5e6e375e1c657c86213db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad657b865216715cc808080c47e6233a5"><td class="memItemLeft" align="right" valign="top">
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#gad657b865216715cc808080c47e6233a5">pp.index</a> ()</td></tr>
+<tr class="memdesc:gad657b865216715cc808080c47e6233a5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>/</code> route <br /></td></tr>
+<tr class="separator:gad657b865216715cc808080c47e6233a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaadba488f89ca2dac8980376844def47b"><td class="memItemLeft" align="right" valign="top">
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#gaadba488f89ca2dac8980376844def47b">pp.login</a> ()</td></tr>
+<tr class="memdesc:gaadba488f89ca2dac8980376844def47b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>/login</code> route <br /></td></tr>
+<tr class="separator:gaadba488f89ca2dac8980376844def47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf216ec1f21530abb68675e94aaaacc8e"><td class="memItemLeft" align="right" valign="top">
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#gaf216ec1f21530abb68675e94aaaacc8e">pp.logout</a> ()</td></tr>
+<tr class="memdesc:gaf216ec1f21530abb68675e94aaaacc8e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>/logout</code> route <br /></td></tr>
+<tr class="separator:gaf216ec1f21530abb68675e94aaaacc8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad8a66b3185d14eef7b97871fe6b1f6b6"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__argv.html#gad8a66b3185d14eef7b97871fe6b1f6b6">pp.process_argv</a> ()</td></tr>
 <tr class="memdesc:gad8a66b3185d14eef7b97871fe6b1f6b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">process command line parameters  <a href="group__argv.html#gad8a66b3185d14eef7b97871fe6b1f6b6">More...</a><br /></td></tr>
 <tr class="separator:gad8a66b3185d14eef7b97871fe6b1f6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -225,12 +253,35 @@ string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#gad673f63325d304af9b408e54d4c18fe0">pp.lexer</a> = lex.lex()</td></tr>
 <tr class="memdesc:gad673f63325d304af9b408e54d4c18fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">lexer <br /></td></tr>
 <tr class="separator:gad673f63325d304af9b408e54d4c18fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b3ad9b74129e2ffe1ee64dd0f1dbcf8"><td class="memItemLeft" align="right" valign="top"><a id="a6b3ad9b74129e2ffe1ee64dd0f1dbcf8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>pp.app</b> = flask.Flask(__name__)</td></tr>
-<tr class="separator:a6b3ad9b74129e2ffe1ee64dd0f1dbcf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad657b865216715cc808080c47e6233a5"><td class="memItemLeft" align="right" valign="top"><a id="ad657b865216715cc808080c47e6233a5"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>pp.index</b> ()</td></tr>
-<tr class="separator:ad657b865216715cc808080c47e6233a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab2026b30cc7b7c4290f8c46401134c0e"><td class="memItemLeft" align="right" valign="top">
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#gab2026b30cc7b7c4290f8c46401134c0e">pp.IP</a> = '0.0.0.0'</td></tr>
+<tr class="memdesc:gab2026b30cc7b7c4290f8c46401134c0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">IP addr to bind. <br /></td></tr>
+<tr class="separator:gab2026b30cc7b7c4290f8c46401134c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaff2b74597762e87dab6e7729f6a2bf53"><td class="memItemLeft" align="right" valign="top">
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#gaff2b74597762e87dab6e7729f6a2bf53">pp.PORT</a> = 8888</td></tr>
+<tr class="memdesc:gaff2b74597762e87dab6e7729f6a2bf53"><td class="mdescLeft">&#160;</td><td class="mdescRight">IP port to bind. <br /></td></tr>
+<tr class="separator:gaff2b74597762e87dab6e7729f6a2bf53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga199a2bc834d679622d9b637334037198"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#ga199a2bc834d679622d9b637334037198">pp.SSL</a> = 'adhoc'</td></tr>
+<tr class="memdesc:ga199a2bc834d679622d9b637334037198"><td class="mdescLeft">&#160;</td><td class="mdescRight">SSL mode.  <a href="group__auth.html#ga199a2bc834d679622d9b637334037198">More...</a><br /></td></tr>
+<tr class="separator:ga199a2bc834d679622d9b637334037198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga245c94d96c82222529903934a1bcbbae"><td class="memItemLeft" align="right" valign="top">
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#ga245c94d96c82222529903934a1bcbbae">pp.LOGIN_HASH</a> = 'pbkdf2:sha256:50000$5zcDXIU4$dcc04a1297aef8e6f3517a515e20f79931a70d00f53a4d137828161e6dcd708f'</td></tr>
+<tr class="memdesc:ga245c94d96c82222529903934a1bcbbae"><td class="mdescLeft">&#160;</td><td class="mdescRight">login hash (autorization for single user only) <br /></td></tr>
+<tr class="separator:ga245c94d96c82222529903934a1bcbbae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9bccb776352d6027e2bb9522de50966c"><td class="memItemLeft" align="right" valign="top">
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#ga9bccb776352d6027e2bb9522de50966c">pp.PSWD_HASH</a> = 'pbkdf2:sha256:50000$vnY7fY8Q$2d2aba8310443d291c6d0c76a7721cef1cfe25c08edf72e949d7e7c387488e02'</td></tr>
+<tr class="memdesc:ga9bccb776352d6027e2bb9522de50966c"><td class="mdescLeft">&#160;</td><td class="mdescRight">password hash (autorization for single user only) <br /></td></tr>
+<tr class="separator:ga9bccb776352d6027e2bb9522de50966c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6b3ad9b74129e2ffe1ee64dd0f1dbcf8"><td class="memItemLeft" align="right" valign="top">
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#ga6b3ad9b74129e2ffe1ee64dd0f1dbcf8">pp.app</a> = flask.Flask(__name__)</td></tr>
+<tr class="memdesc:ga6b3ad9b74129e2ffe1ee64dd0f1dbcf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flask application. <br /></td></tr>
+<tr class="separator:ga6b3ad9b74129e2ffe1ee64dd0f1dbcf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga74d43013e12377261423f7e3513132a0"><td class="memItemLeft" align="right" valign="top">
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#ga74d43013e12377261423f7e3513132a0">pp.logman</a> = flask_login.LoginManager() ; logman.init_app(app)</td></tr>
+<tr class="memdesc:ga74d43013e12377261423f7e3513132a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">login manager <br /></td></tr>
+<tr class="separator:ga74d43013e12377261423f7e3513132a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga82f23813241f3e6318b34c9db533b799"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#ga82f23813241f3e6318b34c9db533b799">pp.methods</a></td></tr>
+<tr class="separator:ga82f23813241f3e6318b34c9db533b799"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>engine </p>

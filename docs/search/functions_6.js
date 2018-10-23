@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['load',['LOAD',['../group__voc.html#ga514a5fcac489a739a18b049c04afdeba',1,'pp']]]
+  ['index',['index',['../group__web.html#gad657b865216715cc808080c47e6233a5',1,'pp']]],
+  ['interpret',['INTERPRET',['../group__repl.html#ga9d2acc40160f6533fabc9b151c37a382',1,'pp']]]
 ];

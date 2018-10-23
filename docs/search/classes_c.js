@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['vector',['Vector',['../classpp_1_1Vector.html',1,'pp']]],
-  ['vm',['VM',['../classpp_1_1VM.html',1,'pp']]]
+  ['stack',['Stack',['../classpp_1_1Stack.html',1,'pp']]],
+  ['string',['String',['../classpp_1_1String.html',1,'pp']]],
+  ['symbol',['Symbol',['../classpp_1_1Symbol.html',1,'pp']]]
 ];

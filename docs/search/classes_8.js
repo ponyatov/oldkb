@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['number',['Number',['../classpp_1_1Number.html',1,'pp']]]
+  ['map',['Map',['../classpp_1_1Map.html',1,'pp']]]
 ];

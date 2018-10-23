@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['nest',['nest',['../classpp_1_1Object.html#a4c00e38e27f3551442242247b236f417',1,'pp::Object']]],
-  ['number',['Number',['../classpp_1_1Number.html',1,'pp']]],
-  ['numbers',['numbers',['../group__nums.html',1,'']]]
+  ['map',['Map',['../classpp_1_1Map.html',1,'pp']]],
+  ['methods',['methods',['../group__web.html#ga82f23813241f3e6318b34c9db533b799',1,'pp']]],
+  ['map_20operations',['map operations',['../group__symmap.html',1,'']]]
 ];

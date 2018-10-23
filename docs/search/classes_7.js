@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['map',['Map',['../classpp_1_1Map.html',1,'pp']]]
+  ['loginform',['LoginForm',['../classpp_1_1LoginForm.html',1,'pp']]]
 ];

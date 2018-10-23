@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['pad',['pad',['../group__dump.html#ga9fdb939cdd459c0f5a3a46c010afb689',1,'pp::Object']]],
-  ['pop',['pop',['../group__symstack.html#ga99a2f7bf13aa7757b35bc013af898edd',1,'pp::Object']]],
-  ['process_5fargv',['process_argv',['../group__argv.html#gad8a66b3185d14eef7b97871fe6b1f6b6',1,'pp']]],
-  ['push',['push',['../group__symstack.html#ga13d42b21f06cbf1533d696b1d3736418',1,'pp::Object']]]
+  ['load',['LOAD',['../group__voc.html#ga514a5fcac489a739a18b049c04afdeba',1,'pp']]],
+  ['load_5fuser',['load_user',['../group__auth.html#ga542fd443e2a5e6e375e1c657c86213db',1,'pp']]],
+  ['login',['login',['../group__auth.html#gaadba488f89ca2dac8980376844def47b',1,'pp']]],
+  ['logout',['logout',['../group__auth.html#gaf216ec1f21530abb68675e94aaaacc8e',1,'pp']]]
 ];

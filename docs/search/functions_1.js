@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dump',['dump',['../group__dump.html#gafbf87a40feb38b8c4e71e61bc89c3bb9',1,'pp::Object']]]
+  ['clear',['clear',['../group__symstack.html#gae4c05ee50037681b33c793fbc9e00ed4',1,'pp::Object']]]
 ];
