@@ -3,3 +3,7 @@
 *.o
 *.exe
 *.log
+
+cert.pem
+key.pem
+doxygen_sqlite3.db

@@ -61,6 +61,8 @@ class Object:
     def pop(self): return self.nest.pop()
     ## @brief get top of stack without removing
     def top(self): return self.nest[-1]
+    ## @brief clear stack
+    def clear(self): self.nest = []
     ## @}
     
     ## @defgroup symmap map operations
@@ -254,6 +256,11 @@ def q():
     print S
 W['?'] = Fn(q)
 
+## `. ( ... -- )` \ clear data stack
+def dot():
+    S.clear()
+W['.'] = Fn(dot)
+
 ## @}
 
 ## @}
@@ -313,7 +320,7 @@ def t_integer(t):
 
 ## symbol token
 def t_symbol(t):
-    r'[a-zA-Z0-9_\?\:\;\+\-\*\/]+'
+    r'[a-zA-Z0-9_\?\:\;\+\-\*\/\.]+'
     return Symbol(t.value)
 
 ## lexer error callback
@@ -371,18 +378,115 @@ def REPL():
 
 ## @defgroup web Web interface
 ## @brief Flask powered
-
 ## @{
 
-import flask
+## IP addr to bind 
+IP = '0.0.0.0'
 
+## IP port to bind
+PORT = 8888
+
+## @defgroup auth authorization
+## @brief HTTPS and hashed login/password for single user only
+## @{
+
+## SSL mode
+## * None
+## * `'adhoc'`
+## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
+SSL = 'adhoc'
+SSL = ('cert.pem', 'key.pem')
+# SSL = None
+
+## login hash (autorization for single user only)
+LOGIN_HASH = 'pbkdf2:sha256:50000$5zcDXIU4$dcc04a1297aef8e6f3517a515e20f79931a70d00f53a4d137828161e6dcd708f'
+## password hash (autorization for single user only)
+PSWD_HASH  = 'pbkdf2:sha256:50000$vnY7fY8Q$2d2aba8310443d291c6d0c76a7721cef1cfe25c08edf72e949d7e7c387488e02'
+
+## @}
+
+import flask,flask_wtf,wtforms,flask_login
+from werkzeug.security import generate_password_hash,check_password_hash
+
+## Flask application
 app = flask.Flask(__name__)
 
-@app.route('/')
-@app.route('/index.html')
-@app.route('/index.htm')
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or \
+                            open('/etc/machine-id').readline()[:-1]
+
+## login manager
+logman = flask_login.LoginManager() ; logman.init_app(app)
+
+## web user
+class User(flask_login.UserMixin):
+    ## construct user with given name
+    ## @param[in] id unicode string
+    def __init__(self,id):
+        ## user id (unicode string)
+        self.id = id
+
+## login manager user laoder
+## @ingroup auth
+@logman.user_loader
+def load_user(user_id):
+    return User(user_id) 
+
+## command entry web form
+class CmdForm(flask_wtf.FlaskForm):
+    ## error message
+    error = wtforms.StringField('no error')
+    ## FORTH code entry
+    pad = wtforms.TextAreaField('padd',render_kw={'rows':7,'autocorrect':'off'})
+    ## go button
+    go  = wtforms.SubmitField('GO')
+
+
+## @param[in] methods
+@app.route('/', methods=['GET', 'POST'])
+## `/` route
 def index():
-    return flask.render_template('index.html',S=S,W=W,PAD=__name__)
+    if not flask_login.current_user.is_authenticated:
+        return flask.redirect('/login')
+    form = CmdForm()
+    if form.validate_on_submit(): INTERPRET(form.pad.data)
+    return flask.render_template('index.html',form=form,S=S,W=W)
+
+## @brief login web form
+## @ingroup auth
+class LoginForm(flask_wtf.FlaskForm):
+    ## login field
+    login  = wtforms.StringField('login')
+    ## password field (stared)
+    pswd   = wtforms.PasswordField('password')
+    ## submit button
+    go = wtforms.SubmitField('GO')
+
+## @param[in] methods
+@app.route('/login', methods = ['GET', 'POST'])
+## @brief `/login` route
+## @ingroup auth
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        LOGIN = form.login.data
+        PSWD  = form.pswd.data
+#         print generate_password_hash(LOGIN)
+#         print generate_password_hash(PSWD)
+        if  check_password_hash(LOGIN_HASH, form.login.data) \
+        and check_password_hash(PSWD_HASH , form.pswd.data ):
+            flask_login.login_user(User(LOGIN))
+            return flask.redirect('/')
+        else:
+            return flask.redirect('/login')
+    return flask.render_template('login.html',form=form)
+
+## `/logout` route
+## @ingroup auth
+@app.route('/logout')
+@flask_login.login_required
+def logout():
+    flask_login.logout_user()
+    return flask.redirect('/login')
 
 ## @}
 
@@ -400,7 +504,7 @@ def process_argv():
             F = open(i,'r') ; INTERPRET(F.read()) ; F.close()
     else:
 #         REPL()
-        app.run(debug=True,host='0.0.0.0',port=8888)
+        app.run(debug=True,host=IP,port=PORT,ssl_context=SSL)
 process_argv()
 
 ## @}
