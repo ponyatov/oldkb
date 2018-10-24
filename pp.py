@@ -189,6 +189,78 @@ class VM(Active): pass
 
 ## @}
 
+## @defgroup meta meta
+## @{
+
+class Meta(Object): pass
+
+## @defgroup class class
+## @brief class-less OOP
+## @{
+
+## class is an abstract @ref Object
+class Class(Meta): pass
+
+## group of messages understandable by some @ref Class
+class Interface(Meta): pass 
+
+## @}
+
+## @defgroup lang lang
+## @brief computer-oriented language (programming, markup, description,..)
+## @{
+
+## computer-oriented language (programming, markup, description,..)
+class Lang(Meta): pass
+
+## @}
+
+## @}
+
+## @defgroup deploy deploy
+## @brief target deploy environments and platforms for software synthesys
+## @{
+
+class Deploy(Object): pass
+
+## @defgroup hw hardware
+## @brief architecture and computing hardware
+## @{
+
+## hardware component
+class HW(Deploy): pass
+
+## processor/SoC/MCU arhitecture
+class ARCH(HW): pass
+
+## processor/SoC/MCU core
+class CPU(HW): pass 
+
+## @}
+
+## @defgroup os os
+## @brief operating system
+## @{
+
+class OS(Deploy): pass
+
+## @}
+
+## @defgroup compiler compiler
+## @brief compiler/interpreter for @ref lang
+## @{
+
+## @}
+
+## @defgroup fw framework
+## @{
+
+class FrameWork(Deploy): pass
+
+## @}
+
+## @}
+
 ## @}
 
 ## @defgroup doc documenting
@@ -386,27 +458,41 @@ IP = '0.0.0.0'
 ## IP port to bind
 PORT = 8888
 
+## debug mode must be enabled only on dev station
+DEBUG = False
+
 ## @defgroup auth authorization
 ## @brief HTTPS and hashed login/password for single user only
 ## @{
 
-## SSL mode
-## * None
+## SSL modes:
+
 ## * `'adhoc'`
-## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
 SSL = 'adhoc'
-SSL = ('cert.pem', 'key.pem')
-# SSL = None
+
+try:
+    ## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
+    SSL = ('cert.pem', 'key.pem')
+    # check files available
+    for i in SSL: open(i+'x','r').close()
+except IOError:
+    ## * None: pure HTTP for Eclipse internal browser 
+    SSL = None
+    # force only local bind, does not put your ass to Internet or even LAN
+    IP = '127.0.0.1'
+    # enable debug on dev station
+    DEBUG = True
 
 ## login hash (autorization for single user only)
 LOGIN_HASH = 'pbkdf2:sha256:50000$5zcDXIU4$dcc04a1297aef8e6f3517a515e20f79931a70d00f53a4d137828161e6dcd708f'
 ## password hash (autorization for single user only)
 PSWD_HASH  = 'pbkdf2:sha256:50000$vnY7fY8Q$2d2aba8310443d291c6d0c76a7721cef1cfe25c08edf72e949d7e7c387488e02'
 
+from werkzeug.security import generate_password_hash,check_password_hash
+
 ## @}
 
 import flask,flask_wtf,wtforms,flask_login
-from werkzeug.security import generate_password_hash,check_password_hash
 
 ## Flask application
 app = flask.Flask(__name__)
@@ -504,7 +590,7 @@ def process_argv():
             F = open(i,'r') ; INTERPRET(F.read()) ; F.close()
     else:
 #         REPL()
-        app.run(debug=True,host=IP,port=PORT,ssl_context=SSL)
+        app.run(debug=DEBUG,host=IP,port=PORT,ssl_context=SSL)
 process_argv()
 
 ## @}
