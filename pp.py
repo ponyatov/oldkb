@@ -466,6 +466,22 @@ def REPL():
 
 ## @}
 
+## @defgroup oop OOP
+## @brief minimalistic object oriented programming
+## 
+## * full-sized languages like Smalltalk and Java has very complex object model
+## * kbFORTH core built with objects in roots
+## * class-based OOP models has a lot of limitations we don't want to have
+##
+## so we must provide very thin layer between kb core and user console
+## * create objects of classes implemented in kb core
+## * implement classless OOP model with 
+## * late dispatch message passing 
+##
+## @{
+
+## @}
+
 ## @defgroup web Web interface
 ## @brief Flask powered
 ## @{
