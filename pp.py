@@ -195,7 +195,7 @@ class VM(Active): pass
 class Meta(Object): pass
 
 ## @defgroup class class
-## @brief class-less OOP
+## @brief OOP abstractions
 ## @{
 
 ## class is an abstract @ref Object
@@ -244,18 +244,33 @@ class CPU(HW): pass
 
 class OS(Deploy): pass
 
+## @defgroup fw framework
+## @brief multi-platform high-level OS abstraction
+## @{
+
+## multi-platform high-level OS abstraction
+class Framework(Deploy): pass
+
+## @}
+
 ## @}
 
 ## @defgroup compiler compiler
 ## @brief compiler/interpreter for @ref lang
 ## @{
 
-## @}
+## generic compiler/interpreter
+class Compiler(Deploy): pass
 
-## @defgroup fw framework
-## @{
+## C compiler
+class CC(Compiler): pass
 
-class FrameWork(Deploy): pass
+## C++ compiler
+
+class CXX(CC): pass
+
+## Assembler
+class AS(Compiler): pass
 
 ## @}
 
@@ -423,7 +438,10 @@ def FIND():
     try:
         S.push(W[WN.value]) ; return True
     except KeyError:
-        S.push(WN) ; return False
+        try:
+            S.push(W[WN.value.upper()]) ; return True
+        except KeyError:
+            S.push(WN) ; return False
 
 ## execute callable object from stack
 def EXECUTE(): S.pop()()
