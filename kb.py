@@ -519,7 +519,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 
 try:
     # check files available
-    for i in SSL_KEYS: open(i+'x','r').close()
+    for i in SSL_KEYS: open(i,'r').close()
 except IOError:
     SSL_KEYS = None
     # force only local bind, does not put your ass to Internet or even LAN
