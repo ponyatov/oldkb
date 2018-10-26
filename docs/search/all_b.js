@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['lexer',['lexer',['../group__syntax.html#gad673f63325d304af9b408e54d4c18fe0',1,'pp']]],
-  ['load',['LOAD',['../group__voc.html#ga514a5fcac489a739a18b049c04afdeba',1,'pp']]],
-  ['load_5fuser',['load_user',['../group__auth.html#ga542fd443e2a5e6e375e1c657c86213db',1,'pp']]],
-  ['login',['login',['../classpp_1_1LoginForm.html#a1306b9d627f1e3d0cd5608820b557e24',1,'pp.LoginForm.login()'],['../group__auth.html#gaadba488f89ca2dac8980376844def47b',1,'pp.login()']]],
-  ['login_5fhash',['LOGIN_HASH',['../group__auth.html#ga245c94d96c82222529903934a1bcbbae',1,'pp']]],
-  ['loginform',['LoginForm',['../classpp_1_1LoginForm.html',1,'pp']]],
-  ['logman',['logman',['../group__web.html#ga74d43013e12377261423f7e3513132a0',1,'pp']]],
-  ['logout',['logout',['../group__auth.html#gaf216ec1f21530abb68675e94aaaacc8e',1,'pp']]]
+  ['lang',['Lang',['../classkb_1_1Lang.html',1,'kb.Lang'],['../group__lang.html',1,'(Global Namespace)']]],
+  ['lexer',['lexer',['../group__syntax.html#gaccd19afcb1dad73e9480916821657550',1,'kb']]],
+  ['load',['LOAD',['../group__voc.html#ga93d95d7ec1bb591a4f147dc05e77b3ea',1,'kb']]],
+  ['load_5fuser',['load_user',['../group__auth.html#ga1ad4ec4b8a2d67cc9f9787b5b86d7241',1,'kb']]],
+  ['login',['login',['../classkb_1_1LoginForm.html#a118365ac495f347f9477cb03cfb5f4b7',1,'kb.LoginForm.login()'],['../group__auth.html#ga679b1bb48baaf2fd3a435da79b60f337',1,'kb.login()']]],
+  ['login_5fhash',['LOGIN_HASH',['../group__auth.html#gadb4a20f3d42f3e15a50d0f52926d3939',1,'kb']]],
+  ['loginform',['LoginForm',['../classkb_1_1LoginForm.html',1,'kb']]],
+  ['logman',['logman',['../group__web.html#gae1f0cd6e0fcf4c7e0433336d2f6e44d2',1,'kb']]],
+  ['logout',['logout',['../group__auth.html#ga967ba74d57c235f86cf18b432541b699',1,'kb']]]
 ];

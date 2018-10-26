@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['html',['HTML',['../group__html.html',1,'']]]
+  ['global_20vocabulary',['global vocabulary',['../group__voc.html',1,'']]]
 ];

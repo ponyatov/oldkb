@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['error',['error',['../classpp_1_1CmdForm.html#ae92e8c3306a09345a7df85c4544e5e2f',1,'pp::CmdForm']]]
+  ['debug',['DEBUG',['../group__web.html#gac63ef2e44f90b8daab677f9f7b15ed4b',1,'kb']]]
 ];

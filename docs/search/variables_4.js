@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['id',['id',['../classpp_1_1User.html#a4fb5496df4008e915443373a3408bf85',1,'pp::User']]],
-  ['ip',['IP',['../group__web.html#gab2026b30cc7b7c4290f8c46401134c0e',1,'pp']]]
+  ['go',['go',['../classkb_1_1CmdForm.html#ade503df9ac152beac88156bf2212a8ee',1,'kb.CmdForm.go()'],['../classkb_1_1LoginForm.html#a7d9de5fbe199fa7d6e6ff29e3467a1b5',1,'kb.LoginForm.go()']]]
 ];

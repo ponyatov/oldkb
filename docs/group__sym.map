@@ -1,5 +1,7 @@
 <map id="symbolic class system" name="symbolic class system">
-<area shape="rect" id="node2" href="$group__active.html" title="has execution semantics " alt="" coords="209,5,316,32"/>
-<area shape="rect" id="node3" href="$group__prim.html" title="close to machine level or implementation language types (Python) " alt="" coords="227,56,298,83"/>
-<area shape="rect" id="node4" href="$group__cont.html" title="any object in symbolic class system can be used as stack, vector and map " alt="" coords="211,107,315,133"/>
+<area shape="rect" id="node1" href="$group__meta.html" title="meta" alt="" coords="237,5,288,32"/>
+<area shape="rect" id="node3" href="$group__active.html" title="has execution semantics " alt="" coords="209,56,316,83"/>
+<area shape="rect" id="node4" href="$group__deploy.html" title="target deploy environments and platforms for software synthesys " alt="" coords="233,107,293,133"/>
+<area shape="rect" id="node5" href="$group__prim.html" title="close to machine level or implementation language types (Python) " alt="" coords="227,157,298,184"/>
+<area shape="rect" id="node6" href="$group__cont.html" title="any object in symbolic class system can be used as stack, vector and map " alt="" coords="211,208,315,235"/>
 </map>

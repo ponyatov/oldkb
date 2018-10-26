@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['loginform',['LoginForm',['../classpp_1_1LoginForm.html',1,'pp']]]
+  ['lang',['Lang',['../classkb_1_1Lang.html',1,'kb']]],
+  ['loginform',['LoginForm',['../classkb_1_1LoginForm.html',1,'kb']]]
 ];

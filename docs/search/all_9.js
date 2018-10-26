@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['id',['id',['../classpp_1_1User.html#a4fb5496df4008e915443373a3408bf85',1,'pp::User']]],
-  ['index',['index',['../group__web.html#gad657b865216715cc808080c47e6233a5',1,'pp']]],
-  ['integer',['Integer',['../classpp_1_1Integer.html',1,'pp']]],
+  ['id',['id',['../classkb_1_1User.html#a8461fbf35ec594cd28cc2c6a333a6326',1,'kb::User']]],
+  ['index',['index',['../group__web.html#gabd19bcffd001d0d4c7853af08cfcdf87',1,'kb']]],
+  ['integer',['Integer',['../classkb_1_1Integer.html',1,'kb']]],
+  ['interface',['Interface',['../classkb_1_1Interface.html',1,'kb']]],
   ['interpreter',['Interpreter',['../group__interp.html',1,'']]],
-  ['interpret',['INTERPRET',['../group__repl.html#ga9d2acc40160f6533fabc9b151c37a382',1,'pp']]],
-  ['ip',['IP',['../group__web.html#gab2026b30cc7b7c4290f8c46401134c0e',1,'pp']]]
+  ['interpret',['INTERPRET',['../group__repl.html#ga13665e187d7d034c1b9cac05ec349e1c',1,'kb']]],
+  ['ip',['IP',['../group__web.html#ga9f9065c25e78c2c28d4d8d2b22fec4ea',1,'kb']]]
 ];

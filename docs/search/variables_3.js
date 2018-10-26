@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['go',['go',['../classpp_1_1CmdForm.html#a50530c32270cc74f73f27f6aa7310f5d',1,'pp.CmdForm.go()'],['../classpp_1_1LoginForm.html#ab790f13c9a2441aeea69a6cc14400a48',1,'pp.LoginForm.go()']]]
+  ['fn',['fn',['../classkb_1_1Fn.html#acd5e20a542795611d74d39a1d255ac10',1,'kb::Fn']]]
 ];

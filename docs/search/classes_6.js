@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['integer',['Integer',['../classpp_1_1Integer.html',1,'pp']]]
+  ['integer',['Integer',['../classkb_1_1Integer.html',1,'kb']]],
+  ['interface',['Interface',['../classkb_1_1Interface.html',1,'kb']]]
 ];

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['hex',['Hex',['../classpp_1_1Hex.html',1,'pp']]],
-  ['html',['HTML',['../classpp_1_1HTML.html',1,'pp']]]
+  ['hex',['Hex',['../classkb_1_1Hex.html',1,'kb']]],
+  ['html',['HTML',['../classkb_1_1HTML.html',1,'kb']]],
+  ['hw',['HW',['../classkb_1_1HW.html',1,'kb']]]
 ];

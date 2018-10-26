@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['find',['FIND',['../group__repl.html#ga82c8e403fe13462c747e2beb3b6b6819',1,'pp']]],
-  ['fn',['Fn',['../classpp_1_1Fn.html',1,'pp.Fn'],['../classpp_1_1Fn.html#a90c92a367520cad21494e6c8e63e1a66',1,'pp.Fn.fn()']]],
-  ['forth_20vm',['FORTH VM',['../group__fvm.html',1,'']]]
+  ['find',['FIND',['../group__repl.html#ga962cea071b4fc78c901712bb3c24cd88',1,'kb']]],
+  ['fn',['Fn',['../classkb_1_1Fn.html',1,'kb.Fn'],['../classkb_1_1Fn.html#acd5e20a542795611d74d39a1d255ac10',1,'kb.Fn.fn()']]],
+  ['framework',['Framework',['../classkb_1_1Framework.html',1,'kb']]],
+  ['forth_20vm',['FORTH VM',['../group__fvm.html',1,'']]],
+  ['framework',['framework',['../group__fw.html',1,'']]]
 ];

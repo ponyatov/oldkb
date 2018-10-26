@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['interpreter',['Interpreter',['../group__interp.html',1,'']]]
+  ['html',['HTML',['../group__html.html',1,'']]],
+  ['hardware',['hardware',['../group__hw.html',1,'']]]
 ];
