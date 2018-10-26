@@ -1,4 +1,4 @@
-# kbFORTH {#kbf}
+# kb/FORTH {#kbf}
 ### @brief script language for object manipulations
 
 #
