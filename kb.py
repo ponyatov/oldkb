@@ -534,8 +534,7 @@ import flask,flask_wtf,wtforms,flask_login
 ## Flask application
 app = flask.Flask(__name__)
 
-app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or \
-                            open('/etc/machine-id').readline()[:-1]
+app.config['SECRET_KEY'] = os.urandom(32)
 
 ## login manager
 logman = flask_login.LoginManager() ; logman.init_app(app)
@@ -584,17 +583,13 @@ class LoginForm(flask_wtf.FlaskForm):
     ## submit button
     go = wtforms.SubmitField('GO')
     
-## any try to relogin will kickout active user and invalidate all sessions
-def drop_sessions():
-    flask_login.logout_user()
-    flask.session.clear()
-    app.secret_key = os.urandom(32)
-
 ## @param[in] methods
 @app.route('/login', methods = ['GET', 'POST'])
+## any try to relogin will kickout active user and invalidate all sessions
 ## @brief `/login` route
 ## @ingroup auth
 def login():
+    flask_login.logout_user()
     form = LoginForm()
     if form.validate_on_submit():
         LOGIN = form.login.data
@@ -607,7 +602,7 @@ def login():
             print 'LOGIN_HASH',generate_password_hash(LOGIN)
             print 'PSWD_HASH' ,generate_password_hash(PSWD)
             return flask.redirect('/login')
-    drop_sessions()
+#     app.config['SECRET_KEY'] = os.urandom(32)
     return flask.render_template('login.html',form=form)
 
 ## `/logout` route
