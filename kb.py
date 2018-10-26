@@ -583,14 +583,18 @@ class LoginForm(flask_wtf.FlaskForm):
     pswd   = wtforms.PasswordField('password',render_kw={'autocomplete':'c'})
     ## submit button
     go = wtforms.SubmitField('GO')
+    
+## any try to relogin will kickout active user and invalidate all sessions
+def drop_sessions():
+    flask_login.logout_user()
+    flask.session.clear()
+    app.secret_key = os.urandom(32)
 
 ## @param[in] methods
 @app.route('/login', methods = ['GET', 'POST'])
 ## @brief `/login` route
 ## @ingroup auth
 def login():
-    # any try to relogin will kickout active user and sessions
-    flask_login.logout_user() ; flask.session.clear()
     form = LoginForm()
     if form.validate_on_submit():
         LOGIN = form.login.data
@@ -603,6 +607,7 @@ def login():
             print 'LOGIN_HASH',generate_password_hash(LOGIN)
             print 'PSWD_HASH' ,generate_password_hash(PSWD)
             return flask.redirect('/login')
+    drop_sessions()
     return flask.render_template('login.html',form=form)
 
 ## `/logout` route
