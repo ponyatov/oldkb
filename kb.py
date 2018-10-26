@@ -518,9 +518,11 @@ except IOError:
     DEBUG = True
 
 ## login hash (autorization for single user only)
-LOGIN_HASH = 'pbkdf2:sha256:50000$5zcDXIU4$dcc04a1297aef8e6f3517a515e20f79931a70d00f53a4d137828161e6dcd708f'
+LOGIN_HASH = ''
 ## password hash (autorization for single user only)
-PSWD_HASH  = 'pbkdf2:sha256:50000$vnY7fY8Q$2d2aba8310443d291c6d0c76a7721cef1cfe25c08edf72e949d7e7c387488e02'
+PSWD_HASH  = ''
+# this module can't be publicated on github
+from secrets import LOGIN_HASH, PSWD_HASH
 
 from werkzeug.security import generate_password_hash,check_password_hash
 
@@ -575,9 +577,9 @@ def index():
 ## @ingroup auth
 class LoginForm(flask_wtf.FlaskForm):
     ## login field
-    login  = wtforms.StringField('login')
+    login  = wtforms.StringField('login',render_kw={'autocomplete':'username'})
     ## password field (stared)
-    pswd   = wtforms.PasswordField('password')
+    pswd   = wtforms.PasswordField('password',render_kw={'autocomplete':'current_password'})
     ## submit button
     go = wtforms.SubmitField('GO')
 
@@ -586,17 +588,19 @@ class LoginForm(flask_wtf.FlaskForm):
 ## @brief `/login` route
 ## @ingroup auth
 def login():
+    # any try to relogin will kickout active user
+    flask_login.logout_user()
     form = LoginForm()
     if form.validate_on_submit():
         LOGIN = form.login.data
         PSWD  = form.pswd.data
-#         print generate_password_hash(LOGIN)
-#         print generate_password_hash(PSWD)
         if  check_password_hash(LOGIN_HASH, form.login.data) \
         and check_password_hash(PSWD_HASH , form.pswd.data ):
             flask_login.login_user(User(LOGIN))
             return flask.redirect('/')
         else:
+            print 'LOGIN_HASH',generate_password_hash(LOGIN)
+            print 'PSWD_HASH' ,generate_password_hash(PSWD)
             return flask.redirect('/login')
     return flask.render_template('login.html',form=form)
 
@@ -605,7 +609,6 @@ def login():
 @app.route('/logout')
 @flask_login.login_required
 def logout():
-    flask_login.logout_user()
     return flask.redirect('/login')
 
 ## @}
