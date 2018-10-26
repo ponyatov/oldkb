@@ -589,8 +589,8 @@ class LoginForm(flask_wtf.FlaskForm):
 ## @brief `/login` route
 ## @ingroup auth
 def login():
-    # any try to relogin will kickout active user
-    flask_login.logout_user()
+    # any try to relogin will kickout active user and sessions
+    flask_login.logout_user() ; flask.session.clear()
     form = LoginForm()
     if form.validate_on_submit():
         LOGIN = form.login.data
