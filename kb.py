@@ -501,30 +501,31 @@ DEBUG = False
 
 ## SSL modes:
 
+## * None: pure HTTP for Eclipse internal browser 
+SSL_KEYS = None
 ## * `'adhoc'`
-SSL = 'adhoc'
-
-try:
-    ## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
-    SSL = ('cert.pem', 'key.pem')
-    # check files available
-    for i in SSL: open(i+'x','r').close()
-except IOError:
-    ## * None: pure HTTP for Eclipse internal browser 
-    SSL = None
-    # force only local bind, does not put your ass to Internet or even LAN
-    IP = '127.0.0.1'
-    # enable debug on dev station
-    DEBUG = True
+SSL_KEYS = 'adhoc'
+## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
+SSL_KEYS = ('cert.pem', 'key.pem')
 
 ## login hash (autorization for single user only)
 LOGIN_HASH = ''
 ## password hash (autorization for single user only)
 PSWD_HASH  = ''
 # this module can't be publicated on github
-from secrets import LOGIN_HASH, PSWD_HASH
+from secrets import LOGIN_HASH, PSWD_HASH, SSL_KEYS
 
 from werkzeug.security import generate_password_hash,check_password_hash
+
+try:
+    # check files available
+    for i in SSL_KEYS: open(i+'x','r').close()
+except IOError:
+    SSL_KEYS = None
+    # force only local bind, does not put your ass to Internet or even LAN
+    IP = '127.0.0.1'
+    # enable debug on dev station
+    DEBUG = True
 
 ## @}
 
@@ -579,7 +580,7 @@ class LoginForm(flask_wtf.FlaskForm):
     ## login field
     login  = wtforms.StringField('login',render_kw={'autocomplete':'username'})
     ## password field (stared)
-    pswd   = wtforms.PasswordField('password',render_kw={'autocomplete':'current_password'})
+    pswd   = wtforms.PasswordField('password',render_kw={'autocomplete':'c'})
     ## submit button
     go = wtforms.SubmitField('GO')
 
@@ -627,7 +628,7 @@ def process_argv():
             F = open(i,'r') ; INTERPRET(F.read()) ; F.close()
     else:
 #         REPL()
-        app.run(debug=DEBUG,host=IP,port=PORT,ssl_context=SSL)
+        app.run(debug=DEBUG,host=IP,port=PORT,ssl_context=SSL_KEYS)
 process_argv()
 
 ## @}

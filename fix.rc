@@ -1,0 +1,4 @@
+#!/bin/sh
+
+chmod 400 *.pem
+chmod 600 secret*
