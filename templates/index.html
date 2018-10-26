@@ -22,9 +22,15 @@
 
 <script>
 window.onload = function() {
+	
 	cmd		= document.getElementById('cmd');
 	slider	= document.getElementById('slider');
+	
 	window.onresize();
+	
+	cmd.onkeyup = function(e) {
+		if(e.keyCode == 13 && e.ctrlKey) { cmd.submit() }
+	}
 }
 
 window.onresize = function() {
