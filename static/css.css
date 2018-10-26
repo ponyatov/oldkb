@@ -1,13 +1,23 @@
 * {
 	background: black; color: lightgreen;
-	font-family: Consolas,monospace,monospace; font-size: 4vmin;
+	font-family: Consolas,monospace,monospace;
 	margin: 0; 
+}
+
+@media only screen and (max-width: 800px) {
+	*	{ font-size:	7mm; }
+	#go	{ height:		11vmin; }
+}
+
+@media only screen and (min-width: 800px) {
+	*	{ font-size:	4mm; }
+	#go	{ height:		5vmin; }
 }
 
 /* pre		 { } /* white-space: pre-wrap; word-break: break-all; } */
 pre		 { width:100%; tab-size: 4; }
 textarea { width:100%; caret-color:red; }
-#go		 { width:100%; background: darkslategray; height: 11vmin; }
+#go		 { width:100%; background: darkslategray; }
 
 #cmd { position: absolute; bottom:0; width:100%; }
 
