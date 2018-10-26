@@ -4,8 +4,8 @@
 <form id=loginform action="" method=post novalidate>
 {{ form.hidden_tag() }}
 <table>
-<tr><td>{{ form.login.label }}</td><td>{{ form.login() }}</td></tr>
-<tr><td>{{ form.pswd.label }}</td><td>{{ form.pswd() }}</td></tr>
+<tr><td>{{ form.login.label }}</td><td>{{ form.login(autocomplete='username',autofocus=true) }}</td></tr>
+<tr><td>{{ form.pswd.label }}</td><td>{{ form.pswd(autocomplete='current_password') }}</td></tr>
 <tr><td></td><td>{{ form.go() }}</td></tr>
 </table>
 </form>

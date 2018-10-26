@@ -558,7 +558,7 @@ class CmdForm(flask_wtf.FlaskForm):
     ## error message
     error = wtforms.StringField('no error')
     ## FORTH code entry
-    pad = wtforms.TextAreaField('padd',render_kw={'rows':7,'autocorrect':'off'})
+    pad = wtforms.TextAreaField('pad')
     ## go button
     go  = wtforms.SubmitField('GO')
 
@@ -577,9 +577,9 @@ def index():
 ## @ingroup auth
 class LoginForm(flask_wtf.FlaskForm):
     ## login field
-    login  = wtforms.StringField('login',render_kw={'autocomplete':'username'})
+    login  = wtforms.StringField('login')
     ## password field (stared)
-    pswd   = wtforms.PasswordField('password',render_kw={'autocomplete':'c'})
+    pswd   = wtforms.PasswordField('password')
     ## submit button
     go = wtforms.SubmitField('GO')
     
