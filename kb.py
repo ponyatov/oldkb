@@ -360,6 +360,7 @@ W['.'] = Fn(dot)
 ## @{
 
 import ply.lex  as lex  # FORTH has no syntax we need lexer only
+import ply.yacc as yacc # Treelon-B script extension
 
 ## token types list
 ## @details @ref sym
