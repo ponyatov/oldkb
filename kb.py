@@ -359,8 +359,11 @@ W['.'] = Fn(dot)
 ## @brief powered with PLY library
 ## @{
 
-import ply.lex  as lex  # FORTH has no syntax we need lexer only
-import ply.yacc as yacc # tree script extension
+import ply.lex  as lex      # FORTH has no syntax we need lexer only
+import ply.yacc as yacc     # tree script extension
+
+## @defgroup lexer lexer
+## @{
 
 ## token types list
 ## @details @ref sym
@@ -381,35 +384,47 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
     
+## operator
+def t_op(t):
+    r'[\+\-\*\/\^]'
+    t.value = Op(t.value)
+    t.type = t.value.type ; return t
+    
 ## hexadecimal
 def t_hex(t):
     r'0x[0-9a-fA-F]+'
-    return Hex(t.value)
+    t.value = Hex(t.value)
+    t.type = t.value.type ; return t
     
 ## binary
 def t_bin(t):
     r'0b[01]+'
-    return Bin(t.value)
+    t.value = Bin(t.value)
+    t.type = t.value.type ; return t
     
 ## exponential with integer base
 def t_number_exp(t):
     r'[\+\-]?[0-9]+[eE][\+\-]?[0-9]+'
-    return Number(t.value)
+    t.value = Number(t.value)
+    t.type = t.value.type ; return t
     
 ## floating point number token
 def t_number(t):
     r'[\+\-]?[0-9]+\.[0-9]*([eE][\+\-]?[0-9]+)?'
-    return Number(t.value)
+    t.value = Number(t.value)
+    t.type = t.value.type ; return t
     
 ## integer number token
 def t_integer(t):
     r'[\+\-]?[0-9]+'
-    return Integer(t.value)
+    t.value = Integer(t.value)
+    t.type = t.value.type ; return t
 
 ## symbol token
 def t_symbol(t):
     r'[a-zA-Z0-9_\?\:\;\+\-\*\/\.]+'
-    return Symbol(t.value)
+    t.value = Symbol(t.value)
+    t.type = t.value.type ; return t
 
 ## lexer error callback
 def t_error(t):
@@ -417,6 +432,54 @@ def t_error(t):
 
 ## lexer
 lexer = lex.lex()
+
+## @}
+
+## @defgroup parser parser
+## @{
+
+## start of (empty) source
+def p_none(p):
+    ' token : '
+    p[0] = []
+    
+## recursive rule for sequece of expressions
+def p_recur(p):
+    ' token : token primitive '
+    p[0] = p[1] + [p[2]]
+
+## primitive tokens
+def p_primitive(p):
+    ''' primitive : symbol
+              | number
+              | integer
+              | bin
+              | hex
+              | op
+              | string    '''
+    p[0] = p[1]
+
+## parser error callback
+def p_error(p):
+    raise SyntaxError(p)
+
+## parser
+parser = yacc.yacc(debug=False,write_tables=False)
+
+## @}
+
+## @defgroup parsegen iterator wrapper
+## @{
+
+## generator wrapper
+def parser_generator(tokens):
+    for i in tokens: yield i
+
+## feed source code
+def parser_feed(source):
+    global parsed ; parsed = parser_generator(parser.parse(source))
+
+## @}    
 
 ## @}
 
@@ -429,9 +492,13 @@ lexer = lex.lex()
 ## @returns parsed object on @ref stack and `true`
 def WORD():
     global S
-    token = lexer.token()
-    if not token: return False  # end of source
-    S.push(token) ; return True
+    #token = lexer.token()
+    #if not token: return False  # end of source
+    try:
+        S.push( parsed.next() )
+        return True
+    except StopIteration:
+        return False
     
 ## `FIND ( symbol -- callable|symbol )` search in vocabulary by name
 def FIND():
@@ -446,11 +513,11 @@ def FIND():
 
 ## execute callable object from stack
 def EXECUTE(): S.pop()()
-        
+
 ## process chunk of source code
 ## @param[in] SRC source code string
 def INTERPRET(SRC):
-    lexer.input(SRC)
+    parser_feed(SRC)
     while True:
         if not WORD(): break
         if S.top().type in ['symbol']:
