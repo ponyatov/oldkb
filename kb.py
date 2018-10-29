@@ -370,7 +370,7 @@ import ply.yacc as yacc     # tree script extension
 ## * follows API of PLY library with object `type`/`value`
 ## * in result we able to directly use @ref prim s as tokens
 ## * and should use lowercased class names here
-tokens = ['symbol','string','number','integer','hex','bin','op']
+tokens = ['symbol','string','number','integer','hex','bin','op','newline']
 
 ## drop spaces
 t_ignore = ' \t\r'
@@ -382,7 +382,7 @@ def t_ignore_COMMENT(t):
 ## count line number
 def t_newline(t):
     r'\n+'
-    t.lexer.lineno += len(t.value)
+    t.lexer.lineno += len(t.value) ; return t
     
 ## operator
 def t_op(t):
@@ -438,15 +438,41 @@ lexer = lex.lex()
 ## @defgroup parser parser
 ## @{
 
+## operator precedence
+precedence = (
+    ('left','infix'),
+    ('right','prefix'),
+    )
+
 ## start of (empty) source
 def p_none(p):
-    ' token : '
+    ' tokens : '
     p[0] = []
     
-## recursive rule for sequece of expressions
-def p_recur(p):
-    ' token : token primitive '
+## recursive end line separator
+def p_recur_endline(p):
+    ' tokens : tokens newline '
+    p[0] = p[1]
+    
+## recursive rule for expressions
+def p_recur_ex(p):
+    ' tokens : tokens ex '
     p[0] = p[1] + [p[2]]
+    
+## expression
+def p_ex_primitive(p):
+    ' ex : primitive '
+    p[0] = p[1]
+
+## expression
+def p_ex_prefix(p):
+    ' ex : prefix '
+    p[0] = p[1]
+
+## expression
+def p_ex_infix(p):
+    ' ex : infix '
+    p[0] = p[1]
 
 ## primitive tokens
 def p_primitive(p):
@@ -455,9 +481,18 @@ def p_primitive(p):
               | integer
               | bin
               | hex
-              | op
               | string    '''
     p[0] = p[1]
+    
+## prefix operators
+def p_prefix(p):
+    ' prefix : op ex %prec prefix '
+    p[0] = p[1] ; p[1].push(p[2])
+    
+## infix operators
+def p_infix(p):
+    ' infix : ex op ex %prec infix '
+    p[0] = p[2] ; p[2].push(p[1]) ; p[2].push(p[3])
 
 ## parser error callback
 def p_error(p):
