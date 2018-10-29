@@ -360,14 +360,14 @@ W['.'] = Fn(dot)
 ## @{
 
 import ply.lex  as lex  # FORTH has no syntax we need lexer only
-import ply.yacc as yacc # Treelon-B script extension
+import ply.yacc as yacc # tree script extension
 
 ## token types list
 ## @details @ref sym
 ## * follows API of PLY library with object `type`/`value`
 ## * in result we able to directly use @ref prim s as tokens
 ## * and should use lowercased class names here
-tokens = ['symbol','string','number','integer','hex','bin']
+tokens = ['symbol','string','number','integer','hex','bin','op']
 
 ## drop spaces
 t_ignore = ' \t\r'
@@ -578,9 +578,9 @@ def index():
 ## @ingroup auth
 class LoginForm(flask_wtf.FlaskForm):
     ## login field
-    login  = wtforms.StringField('login')
+    login  = wtforms.StringField('login', [wtforms.validators.DataRequired()])
     ## password field (stared)
-    pswd   = wtforms.PasswordField('password')
+    pswd   = wtforms.PasswordField('password', [wtforms.validators.DataRequired()])
     ## submit button
     go = wtforms.SubmitField('GO')
     
