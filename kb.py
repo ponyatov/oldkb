@@ -386,7 +386,7 @@ def t_newline(t):
     
 ## operator
 def t_op(t):
-    r'[\+\-\*\/\^]'
+    r'[\+\-\*\/\^\~]'
     t.value = Op(t.value)
     t.type = t.value.type ; return t
     
@@ -422,7 +422,7 @@ def t_integer(t):
 
 ## symbol token
 def t_symbol(t):
-    r'[a-zA-Z0-9_\?\:\;\+\-\*\/\.]+'
+    r'[a-zA-Z0-9_\?]+|[\.\:\;]'
     t.value = Symbol(t.value)
     t.type = t.value.type ; return t
 
@@ -477,11 +477,11 @@ def p_ex_infix(p):
 ## primitive tokens
 def p_primitive(p):
     ''' primitive : symbol
-              | number
-              | integer
-              | bin
-              | hex
-              | string    '''
+                  | number
+                  | integer
+                  | bin
+                  | hex
+                  | string    '''
     p[0] = p[1]
     
 ## prefix operators
