@@ -370,7 +370,7 @@ import ply.yacc as yacc     # tree script extension
 ## * follows API of PLY library with object `type`/`value`
 ## * in result we able to directly use @ref prim s as tokens
 ## * and should use lowercased class names here
-tokens = ['symbol','string','number','integer','hex','bin','op','newline']
+tokens = ['symbol','string','number','integer','hex','bin','op','eq','newline']
 
 ## drop spaces
 t_ignore = ' \t\r'
@@ -389,6 +389,11 @@ def t_op(t):
     r'[\+\-\*\/\^\~]'
     t.value = Op(t.value)
     t.type = t.value.type ; return t
+    
+## eval operator
+def t_eq(t):
+    r'\='
+    t.value = Symbol(t.value) ; return t
     
 ## hexadecimal
 def t_hex(t):
@@ -457,6 +462,11 @@ def p_recur_endline(p):
 ## recursive rule for expressions
 def p_recur_ex(p):
     ' tokens : tokens ex '
+    p[0] = p[1] + [p[2]]
+    
+## send eval message to top object
+def p_recur_eq(p):
+    ' tokens : tokens eq '
     p[0] = p[1] + [p[2]]
     
 ## expression
@@ -582,6 +592,11 @@ def REPL():
 ## * late dispatch message passing 
 ##
 ## @{
+
+## @defgroup msg Messaging
+## @{
+
+## @}
 
 ## @}
 
