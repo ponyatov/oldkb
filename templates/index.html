@@ -28,7 +28,7 @@ window.onload = function() {
 	
 	window.onresize();
 	
-	cmd.onkeyup = function(e) {
+	cmd.onkeydown = function(e) {
 		if(e.keyCode == 13 && e.ctrlKey) { cmd.submit() }
 	}
 }
