@@ -77,6 +77,13 @@ class Object:
     ## @param[in] obj
     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
     ## @}
+    
+    ## @ingroup msg
+    ## @{
+    
+    ## evaluate object
+    def eval(self): return self
+    ## @}
 
 ## @defgroup prim primitive
 ## @brief close to machine level or implementation language types (Python)
@@ -595,6 +602,10 @@ def REPL():
 
 ## @defgroup msg Messaging
 ## @{
+
+## `= ( obj -- obj.eval )` \ run eval message to top object
+def EQ(): S.push(S.pop().eval())
+W['='] = Fn(EQ)
 
 ## @}
 
