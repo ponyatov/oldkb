@@ -692,7 +692,6 @@ class CmdForm(flask_wtf.FlaskForm):
     go  = wtforms.SubmitField('GO')
 
 
-## @param[in] methods
 @app.route('/', methods=['GET', 'POST'])
 ## `/` route
 def index():
@@ -712,7 +711,6 @@ class LoginForm(flask_wtf.FlaskForm):
     ## submit button
     go = wtforms.SubmitField('GO')
     
-## @param[in] methods
 @app.route('/login', methods = ['GET', 'POST'])
 ## any try to relogin will kickout active user and invalidate all sessions
 ## @brief `/login` route
