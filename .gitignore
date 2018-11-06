@@ -3,7 +3,10 @@
 *.o
 *.exe
 *.log
+*.pyc
 
 cert.pem
 key.pem
 doxygen_sqlite3.db
+
+secrets.py

@@ -1,3 +1,6 @@
 <map id="syntax parser" name="syntax parser">
-<area shape="rect" id="node2" href="$group__interp.html" title="Interpreter" alt="" coords="5,5,87,32"/>
+<area shape="rect" id="node3" href="$group__parsegen.html" title="iterator wrapper" alt="" coords="284,5,396,32"/>
+<area shape="rect" id="node4" href="$group__lexer.html" title="lexer" alt="" coords="315,56,365,83"/>
+<area shape="rect" id="node5" href="$group__parser.html" title="parser" alt="" coords="311,107,369,133"/>
+<area shape="rect" id="node2" href="$group__interp.html" title="Interpreter" alt="" coords="5,56,87,83"/>
 </map>

@@ -92,9 +92,8 @@ Functions</h2></td></tr>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#ga1ad4ec4b8a2d67cc9f9787b5b86d7241">kb.load_user</a> (user_id)</td></tr>
 <tr class="memdesc:ga1ad4ec4b8a2d67cc9f9787b5b86d7241"><td class="mdescLeft">&#160;</td><td class="mdescRight">login manager user laoder <br /></td></tr>
 <tr class="separator:ga1ad4ec4b8a2d67cc9f9787b5b86d7241"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga679b1bb48baaf2fd3a435da79b60f337"><td class="memItemLeft" align="right" valign="top"><a id="ga679b1bb48baaf2fd3a435da79b60f337"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#ga679b1bb48baaf2fd3a435da79b60f337">kb.login</a> ()</td></tr>
-<tr class="memdesc:ga679b1bb48baaf2fd3a435da79b60f337"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>/login</code> route <br /></td></tr>
+<tr class="memitem:ga679b1bb48baaf2fd3a435da79b60f337"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#ga679b1bb48baaf2fd3a435da79b60f337">kb.login</a> ()</td></tr>
+<tr class="memdesc:ga679b1bb48baaf2fd3a435da79b60f337"><td class="mdescLeft">&#160;</td><td class="mdescRight">any try to relogin will kickout active user and invalidate all sessions  <a href="group__auth.html#ga679b1bb48baaf2fd3a435da79b60f337">More...</a><br /></td></tr>
 <tr class="separator:ga679b1bb48baaf2fd3a435da79b60f337"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga967ba74d57c235f86cf18b432541b699"><td class="memItemLeft" align="right" valign="top"><a id="ga967ba74d57c235f86cf18b432541b699"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#ga967ba74d57c235f86cf18b432541b699">kb.logout</a> ()</td></tr>
@@ -103,38 +102,59 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ga8d014dbba44885859b7e633beb4cab2e"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#ga8d014dbba44885859b7e633beb4cab2e">kb.SSL</a> = 'adhoc'</td></tr>
-<tr class="memdesc:ga8d014dbba44885859b7e633beb4cab2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">SSL modes:  <a href="group__auth.html#ga8d014dbba44885859b7e633beb4cab2e">More...</a><br /></td></tr>
-<tr class="separator:ga8d014dbba44885859b7e633beb4cab2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5995b791a84afa2e79063ee50c3504a9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#ga5995b791a84afa2e79063ee50c3504a9">kb.SSL_KEYS</a> = None</td></tr>
+<tr class="memdesc:ga5995b791a84afa2e79063ee50c3504a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">SSL modes:  <a href="group__auth.html#ga5995b791a84afa2e79063ee50c3504a9">More...</a><br /></td></tr>
+<tr class="separator:ga5995b791a84afa2e79063ee50c3504a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadb4a20f3d42f3e15a50d0f52926d3939"><td class="memItemLeft" align="right" valign="top"><a id="gadb4a20f3d42f3e15a50d0f52926d3939"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#gadb4a20f3d42f3e15a50d0f52926d3939">kb.LOGIN_HASH</a> = 'pbkdf2:sha256:50000$5zcDXIU4$dcc04a1297aef8e6f3517a515e20f79931a70d00f53a4d137828161e6dcd708f'</td></tr>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#gadb4a20f3d42f3e15a50d0f52926d3939">kb.LOGIN_HASH</a> = ''</td></tr>
 <tr class="memdesc:gadb4a20f3d42f3e15a50d0f52926d3939"><td class="mdescLeft">&#160;</td><td class="mdescRight">login hash (autorization for single user only) <br /></td></tr>
 <tr class="separator:gadb4a20f3d42f3e15a50d0f52926d3939"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad357d20cb8d31a661f47082215bab64d"><td class="memItemLeft" align="right" valign="top"><a id="gad357d20cb8d31a661f47082215bab64d"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#gad357d20cb8d31a661f47082215bab64d">kb.PSWD_HASH</a> = 'pbkdf2:sha256:50000$vnY7fY8Q$2d2aba8310443d291c6d0c76a7721cef1cfe25c08edf72e949d7e7c387488e02'</td></tr>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html#gad357d20cb8d31a661f47082215bab64d">kb.PSWD_HASH</a> = ''</td></tr>
 <tr class="memdesc:gad357d20cb8d31a661f47082215bab64d"><td class="mdescLeft">&#160;</td><td class="mdescRight">password hash (autorization for single user only) <br /></td></tr>
 <tr class="separator:gad357d20cb8d31a661f47082215bab64d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>HTTPS and hashed login/password for single user only. </p>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="ga8d014dbba44885859b7e633beb4cab2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8d014dbba44885859b7e633beb4cab2e">&#9670;&nbsp;</a></span>SSL</h2>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga679b1bb48baaf2fd3a435da79b60f337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga679b1bb48baaf2fd3a435da79b60f337">&#9670;&nbsp;</a></span>login()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">tuple kb.SSL = 'adhoc'</td>
+          <td class="memname">def kb.login </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>any try to relogin will kickout active user and invalidate all sessions </p>
+<p><code>/login</code> route </p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ga5995b791a84afa2e79063ee50c3504a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5995b791a84afa2e79063ee50c3504a9">&#9670;&nbsp;</a></span>SSL_KEYS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple kb.SSL_KEYS = None</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>SSL modes: </p>
 <ul>
+<li>None: pure HTTP for Eclipse internal browser</li>
 <li><code>'adhoc'</code></li>
-<li>self-signed <code>openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365</code></li>
-<li>None: pure HTTP for Eclipse internal browser </li>
+<li>self-signed <code>openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365</code> </li>
 </ul>
 
 </div>

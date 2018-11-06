@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['value',['value',['../classkb_1_1Object.html#a444fb540ea410b54274cfb3e1856dd5d',1,'kb::Object']]]
+  ['w',['W',['../group__voc.html#gaa5f6c89b9c6bbba8a828cc92b5c7640b',1,'kb']]]
 ];

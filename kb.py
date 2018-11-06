@@ -77,20 +77,49 @@ class Object:
     ## @param[in] obj
     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
     ## @}
+    
+    ## @ingroup msg
+    ## @{
+    
+    ## evaluate object in a generic recursive way
+    def eval(self):
+        for j in self.nest: j = j.eval()
+        return self
+    
+    def __call__(self): S.push(self) ; return self
+    
+    ## @}
 
 ## @defgroup prim primitive
 ## @brief close to machine level or implementation language types (Python)
 ## @{
 
 ## primitive object
-class Primitive(Object): pass
+class Primitive(Object):
+    ## evaluate primitive as itself
+    ## @ingroup msg
+    def eval(self): return self
 
 ## @defgroup symbol symbol
 ## @brief names variables and other objects
 ## @{
 
 ## symbol (names variables and other objects)
-class Symbol(Primitive): pass
+class Symbol(Primitive):
+    ## evaluate via vocabulary
+    ## @ingroup msg
+    def eval(self):
+        return self.lookup()
+    ## lookup in vocabulary 
+    ## @ingroup msg
+    def lookup(self):
+        try:
+            return W[self.value]
+        except KeyError:
+            try:
+                return W[self.value.upper()]
+            except KeyError:
+                raise KeyError(self)
 
 ## @}
 
@@ -103,19 +132,84 @@ class String(Object): pass
 ## @}
 
 ## @defgroup nums numbers
+## @brief multiple number classes: float, integer, complex,..
 ## @{
+
+## @defgroup math math
+## @brief numerical computations starting from primitive arithmetics
+
+import math
 
 ## floating pointer number
 class Number(Primitive):
     ## construct with `float(value)`
     def __init__(self,V):
         Primitive.__init__(self, float(V))
-
+    ## @ingroup math
+    ## @{
+    
+    def pfxadd(self): return Number(+self.value)
+    def pfxsub(self): return Number(-self.value)
+    
+    def add(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(self.value + obj.value)
+        raise SyntaxError(obj)
+    
+    def sub(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(self.value - obj.value)
+        raise SyntaxError(obj)
+    
+    def mul(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(self.value * obj.value)
+        raise SyntaxError(obj)
+    
+    def div(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(float(self.value) / obj.value)
+        raise SyntaxError(obj)
+    
+    def pow(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(math.pow(self.value, obj.value))
+        raise SyntaxError(obj)
+    
+    ## `( num -- sin(num) )` sinus
+    def sin(self): return Number(math.sin(self.value))
+    ## `( num -- cos(num) )` cosinus
+    def cos(self): return Number(math.sin(self.value))
+    ## `( num -- tan(num) )` tangens
+    def tan(self): return Number(math.tan(self.value))
+    ## @}
+    
 ## integer number
 class Integer(Number):
     ## construct with `integer(value)`
     def __init__(self,V):
         Primitive.__init__(self, int(V))
+    ## @ingroup math
+    ## @{
+    
+    def pfxadd(self): return Integer(+self.value)
+    def pfxsub(self): return Integer(-self.value)
+    
+    def add(self,obj):
+        if isinstance(obj, Integer): return Integer(self.value + obj.value)
+        else: return Number.add(self,obj)
+    def sub(self,obj):
+        if isinstance(obj, Integer): return Integer(self.value - obj.value)
+        else: return Number.sub(self,obj)
+    def mul(self,obj):
+        if isinstance(obj, Integer): return Integer(self.value * obj.value)
+        else: return Number.mul(self,obj)
+    def div(self,obj):
+        return Number.div(self,obj)
+    def pow(self,obj):
+        if isinstance(obj, Integer): return Integer(math.pow(self.value, obj.value))
+        else: return Number.add(self,obj)
+    ## @}
         
 ## hexadecimal machine number
 class Hex(Integer): 
@@ -178,11 +272,28 @@ class Fn(Active):
         Active.__init__(self, F.__name__)
         ## function holder
         self.fn = F
-    ## call object
+    ## execute wrapped function
+    ## @ingroup msg
     def __call__(self): self.fn()
     
 ## operator
-class Op(Active): pass
+class Op(Active):
+    ## compute basic math operators
+    ## @ingroup msg
+    def eval(self):
+        if self.value == '+':
+            if len(self.nest) == 1: return self.nest[0].eval().pfxadd()
+            else: return self.nest[0].eval() .add( self.nest[1].eval() )
+        if self.value == '-':
+            if len(self.nest) == 1: return self.nest[0].eval().pfxsub()
+            else: return self.nest[0].eval() .sub( self.nest[1].eval() )
+        if self.value == '*':
+            return self.nest[0].eval() .mul( self.nest[1].eval() )
+        if self.value == '/':
+            return self.nest[0].eval() .div( self.nest[1].eval() )
+        if self.value == '^':
+            return self.nest[0].eval() .pow( self.nest[1].eval() )
+        return self
 
 ## virtual machine
 class VM(Active): pass
@@ -359,14 +470,19 @@ W['.'] = Fn(dot)
 ## @brief powered with PLY library
 ## @{
 
-import ply.lex  as lex  # FORTH has no syntax we need lexer only
+import ply.lex  as lex      # FORTH has no syntax we need lexer only
+import ply.yacc as yacc     # tree script extension
+
+## @defgroup lexer lexer
+## @{
 
 ## token types list
 ## @details @ref sym
 ## * follows API of PLY library with object `type`/`value`
 ## * in result we able to directly use @ref prim s as tokens
 ## * and should use lowercased class names here
-tokens = ['symbol','string','number','integer','hex','bin']
+tokens = ['symbol','string','number','integer','hex','bin','op','eq','newline',
+          'lp','rp']
 
 ## drop spaces
 t_ignore = ' \t\r'
@@ -378,37 +494,61 @@ def t_ignore_COMMENT(t):
 ## count line number
 def t_newline(t):
     r'\n+'
-    t.lexer.lineno += len(t.value)
+    t.lexer.lineno += len(t.value) ; return t
+    
+def t_lp(t):
+    r'\('
+    return t
+def t_rp(t):
+    r'\)'
+    return t
+    
+## operator
+def t_op(t):
+    r'[\+\-\*\/\^\~]'
+    t.value = Op(t.value)
+    t.type = t.value.type ; return t
+    
+## eval operator
+def t_eq(t):
+    r'\='
+    t.value = Symbol(t.value) ; return t
     
 ## hexadecimal
 def t_hex(t):
     r'0x[0-9a-fA-F]+'
-    return Hex(t.value)
+    t.value = Hex(t.value)
+    t.type = t.value.type ; return t
     
 ## binary
 def t_bin(t):
     r'0b[01]+'
-    return Bin(t.value)
+    t.value = Bin(t.value)
+    t.type = t.value.type ; return t
     
 ## exponential with integer base
 def t_number_exp(t):
     r'[\+\-]?[0-9]+[eE][\+\-]?[0-9]+'
-    return Number(t.value)
+    t.value = Number(t.value)
+    t.type = t.value.type ; return t
     
 ## floating point number token
 def t_number(t):
     r'[\+\-]?[0-9]+\.[0-9]*([eE][\+\-]?[0-9]+)?'
-    return Number(t.value)
+    t.value = Number(t.value)
+    t.type = t.value.type ; return t
     
 ## integer number token
 def t_integer(t):
     r'[\+\-]?[0-9]+'
-    return Integer(t.value)
+    t.value = Integer(t.value)
+    t.type = t.value.type ; return t
 
 ## symbol token
 def t_symbol(t):
-    r'[a-zA-Z0-9_\?\:\;\+\-\*\/\.]+'
-    return Symbol(t.value)
+    r'[a-zA-Z0-9_\?]+|[\.\:\;]'
+    t.value = Symbol(t.value)
+    t.type = t.value.type ; return t
 
 ## lexer error callback
 def t_error(t):
@@ -416,6 +556,99 @@ def t_error(t):
 
 ## lexer
 lexer = lex.lex()
+
+## @}
+
+## @defgroup parser parser
+## @{
+
+## operator precedence
+precedence = (
+    ('left','infix'),
+    ('right','prefix'),
+    )
+
+## start of (empty) source
+def p_none(p):
+    ' tokens : '
+    p[0] = []
+    
+## recursive end line separator
+def p_recur_endline(p):
+    ' tokens : tokens newline '
+    p[0] = p[1]
+    
+## recursive rule for expressions
+def p_recur_ex(p):
+    ' tokens : tokens ex '
+    p[0] = p[1] + [p[2]]
+    
+## send eval message to top object
+def p_recur_eq(p):
+    ' tokens : tokens eq '
+    p[0] = p[1] + [p[2]]
+    
+## expression
+def p_ex_primitive(p):
+    ' ex : primitive '
+    p[0] = p[1]
+
+## expression
+def p_ex_prefix(p):
+    ' ex : prefix '
+    p[0] = p[1]
+
+## expression
+def p_ex_infix(p):
+    ' ex : infix '
+    p[0] = p[1]
+    
+## parens
+def p_ex_parens(p):
+    ' ex : lp ex rp '
+    p[0] = p[2]
+
+## primitive tokens
+def p_primitive(p):
+    ''' primitive : symbol
+                  | number
+                  | integer
+                  | bin
+                  | hex
+                  | string    '''
+    p[0] = p[1]
+    
+## prefix operators
+def p_prefix(p):
+    ' prefix : op ex %prec prefix '
+    p[0] = p[1] ; p[1].push(p[2])
+    
+## infix operators
+def p_infix(p):
+    ' infix : ex op ex %prec infix '
+    p[0] = p[2] ; p[2].push(p[1]) ; p[2].push(p[3])
+
+## parser error callback
+def p_error(p):
+    raise SyntaxError(p)
+
+## parser
+parser = yacc.yacc(debug=False,write_tables=False)
+
+## @}
+
+## @defgroup parsegen iterator wrapper
+## @{
+
+## generator wrapper
+def parser_generator(tokens):
+    for i in tokens: yield i
+
+## feed source code
+def parser_feed(source):
+    global parsed ; parsed = parser_generator(parser.parse(source))
+
+## @}    
 
 ## @}
 
@@ -428,32 +661,42 @@ lexer = lex.lex()
 ## @returns parsed object on @ref stack and `true`
 def WORD():
     global S
-    token = lexer.token()
-    if not token: return False  # end of source
-    S.push(token) ; return True
+    #token = lexer.token()
+    #if not token: return False  # end of source
+    try:
+        S.push( parsed.next() )
+        return True
+    except StopIteration:
+        return False
     
 ## `FIND ( symbol -- callable|symbol )` search in vocabulary by name
 def FIND():
-    WN = S.pop()
+    symbol = S.pop()
     try:
-        S.push(W[WN.value]) ; return True
+        S.push( symbol.lookup() ) ; return True
     except KeyError:
-        try:
-            S.push(W[WN.value.upper()]) ; return True
-        except KeyError:
-            S.push(WN) ; return False
+        S.push( symbol ) ; return False
 
 ## execute callable object from stack
+## @ingroup msg
 def EXECUTE(): S.pop()()
-        
+
+## `= ( obj -- obj.eval )` \ run eval message to top object
+## @ingroup msg
+def EQ(): S.push(S.pop().eval())
+W['='] = Fn(EQ)
+
+## @}
+
+
 ## process chunk of source code
 ## @param[in] SRC source code string
 def INTERPRET(SRC):
-    lexer.input(SRC)
+    parser_feed(SRC)
     while True:
         if not WORD(): break
         if S.top().type in ['symbol']:
-            if not FIND(): print '\nunknown',S.pop().head() ; break 
+            if not FIND(): raise SyntaxError(S.pop())
             EXECUTE()
         
 ## Read-Eval-Print-Loop
@@ -480,6 +723,25 @@ def REPL():
 ##
 ## @{
 
+## @defgroup msg Messaging
+
+## @}
+
+## @ingroup math
+## @{
+
+W['e'] = Number(math.e)
+W['pi'] = Number(math.pi)
+
+## sine
+def SIN(): S.push ( S.pop().sin() )
+## cosine
+def COS(): S.push ( S.pop().cos() )
+## tangens
+def TAN(): S.push ( S.pop().tan() )
+
+W << SIN ; W << COS ; W << TAN
+
 ## @}
 
 ## @defgroup web Web interface
@@ -501,28 +763,31 @@ DEBUG = False
 
 ## SSL modes:
 
+## * None: pure HTTP for Eclipse internal browser 
+SSL_KEYS = None
 ## * `'adhoc'`
-SSL = 'adhoc'
+SSL_KEYS = 'adhoc'
+## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
+SSL_KEYS = ('cert.pem', 'key.pem')
+
+## login hash (autorization for single user only)
+LOGIN_HASH = ''
+## password hash (autorization for single user only)
+PSWD_HASH  = ''
+# this module can't be publicated on github
+from secrets import LOGIN_HASH, PSWD_HASH, SSL_KEYS
+
+from werkzeug.security import generate_password_hash,check_password_hash
 
 try:
-    ## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
-    SSL = ('cert.pem', 'key.pem')
     # check files available
-    for i in SSL: open(i+'x','r').close()
+    for i in SSL_KEYS: open(i,'r').close()
 except IOError:
-    ## * None: pure HTTP for Eclipse internal browser 
-    SSL = None
+    SSL_KEYS = None
     # force only local bind, does not put your ass to Internet or even LAN
     IP = '127.0.0.1'
     # enable debug on dev station
     DEBUG = True
-
-## login hash (autorization for single user only)
-LOGIN_HASH = 'pbkdf2:sha256:50000$5zcDXIU4$dcc04a1297aef8e6f3517a515e20f79931a70d00f53a4d137828161e6dcd708f'
-## password hash (autorization for single user only)
-PSWD_HASH  = 'pbkdf2:sha256:50000$vnY7fY8Q$2d2aba8310443d291c6d0c76a7721cef1cfe25c08edf72e949d7e7c387488e02'
-
-from werkzeug.security import generate_password_hash,check_password_hash
 
 ## @}
 
@@ -531,8 +796,7 @@ import flask,flask_wtf,wtforms,flask_login
 ## Flask application
 app = flask.Flask(__name__)
 
-app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or \
-                            open('/etc/machine-id').readline()[:-1]
+app.config['SECRET_KEY'] = os.urandom(32)
 
 ## login manager
 logman = flask_login.LoginManager() ; logman.init_app(app)
@@ -556,12 +820,11 @@ class CmdForm(flask_wtf.FlaskForm):
     ## error message
     error = wtforms.StringField('no error')
     ## FORTH code entry
-    pad = wtforms.TextAreaField('padd',render_kw={'rows':7,'autocorrect':'off'})
+    pad = wtforms.TextAreaField('pad')
     ## go button
     go  = wtforms.SubmitField('GO')
 
 
-## @param[in] methods
 @app.route('/', methods=['GET', 'POST'])
 ## `/` route
 def index():
@@ -575,29 +838,31 @@ def index():
 ## @ingroup auth
 class LoginForm(flask_wtf.FlaskForm):
     ## login field
-    login  = wtforms.StringField('login')
+    login  = wtforms.StringField('login', [wtforms.validators.DataRequired()])
     ## password field (stared)
-    pswd   = wtforms.PasswordField('password')
+    pswd   = wtforms.PasswordField('password', [wtforms.validators.DataRequired()])
     ## submit button
     go = wtforms.SubmitField('GO')
-
-## @param[in] methods
+    
 @app.route('/login', methods = ['GET', 'POST'])
+## any try to relogin will kickout active user and invalidate all sessions
 ## @brief `/login` route
 ## @ingroup auth
 def login():
+    flask_login.logout_user()
     form = LoginForm()
     if form.validate_on_submit():
         LOGIN = form.login.data
         PSWD  = form.pswd.data
-#         print generate_password_hash(LOGIN)
-#         print generate_password_hash(PSWD)
         if  check_password_hash(LOGIN_HASH, form.login.data) \
         and check_password_hash(PSWD_HASH , form.pswd.data ):
             flask_login.login_user(User(LOGIN))
             return flask.redirect('/')
         else:
+            print 'LOGIN_HASH',generate_password_hash(LOGIN)
+            print 'PSWD_HASH' ,generate_password_hash(PSWD)
             return flask.redirect('/login')
+#     app.config['SECRET_KEY'] = os.urandom(32)
     return flask.render_template('login.html',form=form)
 
 ## `/logout` route
@@ -605,7 +870,6 @@ def login():
 @app.route('/logout')
 @flask_login.login_required
 def logout():
-    flask_login.logout_user()
     return flask.redirect('/login')
 
 ## @}
@@ -624,7 +888,7 @@ def process_argv():
             F = open(i,'r') ; INTERPRET(F.read()) ; F.close()
     else:
 #         REPL()
-        app.run(debug=DEBUG,host=IP,port=PORT,ssl_context=SSL)
+        app.run(debug=DEBUG,host=IP,port=PORT,ssl_context=SSL_KEYS)
 process_argv()
 
 ## @}

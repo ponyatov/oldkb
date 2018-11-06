@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['methods',['methods',['../group__web.html#gac70c9e1da23f9c047a9bcc1cc9f40f94',1,'kb']]]
+  ['nest',['nest',['../classkb_1_1Object.html#afe5db6bb1ebee8fac3b2e03fc6a842a7',1,'kb::Object']]]
 ];

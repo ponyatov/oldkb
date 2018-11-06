@@ -60,8 +60,7 @@ $(function() {
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#groups">Modules</a>  </div>
   <div class="headertitle">
 <div class="title">syntax parser<div class="ingroups"><a class="el" href="group__interp.html">Interpreter</a></div></div>  </div>
 </div><!--header-->
@@ -74,88 +73,25 @@ Collaboration diagram for syntax parser:</div>
 <div class="dyncontent">
 <center><table><tr><td><img src="group__syntax.png" border="0" alt="" usemap="#group____syntax"/>
 <map name="group____syntax" id="group____syntax">
-<area shape="rect" id="node2" href="group__interp.html" title="Interpreter" alt="" coords="5,5,87,32"/>
+<area shape="rect" id="node3" href="group__parsegen.html" title="iterator wrapper" alt="" coords="284,5,396,32"/>
+<area shape="rect" id="node4" href="group__lexer.html" title="lexer" alt="" coords="315,56,365,83"/>
+<area shape="rect" id="node5" href="group__parser.html" title="parser" alt="" coords="311,107,369,133"/>
+<area shape="rect" id="node2" href="group__interp.html" title="Interpreter" alt="" coords="5,56,87,83"/>
 </map>
 </td></tr></table></center>
 </div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga39c9ec8e121684709ffa99c7f000e061"><td class="memItemLeft" align="right" valign="top"><a id="ga39c9ec8e121684709ffa99c7f000e061"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#ga39c9ec8e121684709ffa99c7f000e061">kb.t_ignore_COMMENT</a> (t)</td></tr>
-<tr class="memdesc:ga39c9ec8e121684709ffa99c7f000e061"><td class="mdescLeft">&#160;</td><td class="mdescRight">line comments <br /></td></tr>
-<tr class="separator:ga39c9ec8e121684709ffa99c7f000e061"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2e48705a9ff68a4ed345fe9b3281a0eb"><td class="memItemLeft" align="right" valign="top"><a id="ga2e48705a9ff68a4ed345fe9b3281a0eb"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#ga2e48705a9ff68a4ed345fe9b3281a0eb">kb.t_newline</a> (t)</td></tr>
-<tr class="memdesc:ga2e48705a9ff68a4ed345fe9b3281a0eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">count line number <br /></td></tr>
-<tr class="separator:ga2e48705a9ff68a4ed345fe9b3281a0eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadaa52d05e65ddae93659751b0acfde8a"><td class="memItemLeft" align="right" valign="top"><a id="gadaa52d05e65ddae93659751b0acfde8a"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#gadaa52d05e65ddae93659751b0acfde8a">kb.t_hex</a> (t)</td></tr>
-<tr class="memdesc:gadaa52d05e65ddae93659751b0acfde8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">hexadecimal <br /></td></tr>
-<tr class="separator:gadaa52d05e65ddae93659751b0acfde8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga809bead24ffc46b3372717c8d793008d"><td class="memItemLeft" align="right" valign="top"><a id="ga809bead24ffc46b3372717c8d793008d"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#ga809bead24ffc46b3372717c8d793008d">kb.t_bin</a> (t)</td></tr>
-<tr class="memdesc:ga809bead24ffc46b3372717c8d793008d"><td class="mdescLeft">&#160;</td><td class="mdescRight">binary <br /></td></tr>
-<tr class="separator:ga809bead24ffc46b3372717c8d793008d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6e186f081efc6dcf7542147db9bd2a84"><td class="memItemLeft" align="right" valign="top"><a id="ga6e186f081efc6dcf7542147db9bd2a84"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#ga6e186f081efc6dcf7542147db9bd2a84">kb.t_number_exp</a> (t)</td></tr>
-<tr class="memdesc:ga6e186f081efc6dcf7542147db9bd2a84"><td class="mdescLeft">&#160;</td><td class="mdescRight">exponential with integer base <br /></td></tr>
-<tr class="separator:ga6e186f081efc6dcf7542147db9bd2a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf744c799605efb4de1000c639948b648"><td class="memItemLeft" align="right" valign="top"><a id="gaf744c799605efb4de1000c639948b648"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#gaf744c799605efb4de1000c639948b648">kb.t_number</a> (t)</td></tr>
-<tr class="memdesc:gaf744c799605efb4de1000c639948b648"><td class="mdescLeft">&#160;</td><td class="mdescRight">floating point number token <br /></td></tr>
-<tr class="separator:gaf744c799605efb4de1000c639948b648"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0fc570113a24f5508967dd4c9dfab29e"><td class="memItemLeft" align="right" valign="top"><a id="ga0fc570113a24f5508967dd4c9dfab29e"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#ga0fc570113a24f5508967dd4c9dfab29e">kb.t_integer</a> (t)</td></tr>
-<tr class="memdesc:ga0fc570113a24f5508967dd4c9dfab29e"><td class="mdescLeft">&#160;</td><td class="mdescRight">integer number token <br /></td></tr>
-<tr class="separator:ga0fc570113a24f5508967dd4c9dfab29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacd3193e111fdf9327dfa88b449a37f83"><td class="memItemLeft" align="right" valign="top"><a id="gacd3193e111fdf9327dfa88b449a37f83"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#gacd3193e111fdf9327dfa88b449a37f83">kb.t_symbol</a> (t)</td></tr>
-<tr class="memdesc:gacd3193e111fdf9327dfa88b449a37f83"><td class="mdescLeft">&#160;</td><td class="mdescRight">symbol token <br /></td></tr>
-<tr class="separator:gacd3193e111fdf9327dfa88b449a37f83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad1aade70bba435b3efac29d23d95192c"><td class="memItemLeft" align="right" valign="top"><a id="gad1aade70bba435b3efac29d23d95192c"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#gad1aade70bba435b3efac29d23d95192c">kb.t_error</a> (t)</td></tr>
-<tr class="memdesc:gad1aade70bba435b3efac29d23d95192c"><td class="mdescLeft">&#160;</td><td class="mdescRight">lexer error callback <br /></td></tr>
-<tr class="separator:gad1aade70bba435b3efac29d23d95192c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ga63ab7643c03055d53a073f670b822f8f"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#ga63ab7643c03055d53a073f670b822f8f">kb.tokens</a> = ['symbol','string','number','integer','hex','bin']</td></tr>
-<tr class="memdesc:ga63ab7643c03055d53a073f670b822f8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">token types list  <a href="group__syntax.html#ga63ab7643c03055d53a073f670b822f8f">More...</a><br /></td></tr>
-<tr class="separator:ga63ab7643c03055d53a073f670b822f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad8ba02211b39339f085eeae44dbddfeb"><td class="memItemLeft" align="right" valign="top"><a id="gad8ba02211b39339f085eeae44dbddfeb"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#gad8ba02211b39339f085eeae44dbddfeb">kb.t_ignore</a> = ' \t\r'</td></tr>
-<tr class="memdesc:gad8ba02211b39339f085eeae44dbddfeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">drop spaces <br /></td></tr>
-<tr class="separator:gad8ba02211b39339f085eeae44dbddfeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaccd19afcb1dad73e9480916821657550"><td class="memItemLeft" align="right" valign="top"><a id="gaccd19afcb1dad73e9480916821657550"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__syntax.html#gaccd19afcb1dad73e9480916821657550">kb.lexer</a> = lex.lex()</td></tr>
-<tr class="memdesc:gaccd19afcb1dad73e9480916821657550"><td class="mdescLeft">&#160;</td><td class="mdescRight">lexer <br /></td></tr>
-<tr class="separator:gaccd19afcb1dad73e9480916821657550"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__lexer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__lexer.html">lexer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__parser"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html">parser</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__parsegen"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parsegen.html">iterator wrapper</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>powered with PLY library </p>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="ga63ab7643c03055d53a073f670b822f8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga63ab7643c03055d53a073f670b822f8f">&#9670;&nbsp;</a></span>tokens</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">list kb.tokens = ['symbol','string','number','integer','hex','bin']</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>token types list </p>
-<p><a class="el" href="group__sym.html">symbolic class system</a></p><ul>
-<li>follows API of PLY library with object <code>type</code>/<code>value</code></li>
-<li>in result we able to directly use <a class="el" href="group__prim.html">primitive</a> s as tokens</li>
-<li>and should use lowercased class names here </li>
-</ul>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

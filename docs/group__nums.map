@@ -1,3 +1,4 @@
 <map id="numbers" name="numbers">
-<area shape="rect" id="node2" href="$group__prim.html" title="close to machine level or implementation language types (Python) " alt="" coords="5,5,76,32"/>
+<area shape="rect" id="node1" href="$group__math.html" title="numerical computations starting from primitive arithmetics " alt="" coords="244,5,295,32"/>
+<area shape="rect" id="node3" href="$group__prim.html" title="close to machine level or implementation language types (Python) " alt="" coords="5,5,76,32"/>
 </map>
