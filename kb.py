@@ -81,8 +81,13 @@ class Object:
     ## @ingroup msg
     ## @{
     
-    ## evaluate object
-    def eval(self): return self
+    ## evaluate object in a generic recursive way
+    def eval(self):
+        for j in self.nest: j = j.eval()
+        return self
+    
+    def __call__(self): S.push(self) ; return self
+    
     ## @}
 
 ## @defgroup prim primitive
@@ -90,14 +95,31 @@ class Object:
 ## @{
 
 ## primitive object
-class Primitive(Object): pass
+class Primitive(Object):
+    ## evaluate primitive as itself
+    ## @ingroup msg
+    def eval(self): return self
 
 ## @defgroup symbol symbol
 ## @brief names variables and other objects
 ## @{
 
 ## symbol (names variables and other objects)
-class Symbol(Primitive): pass
+class Symbol(Primitive):
+    ## evaluate via vocabulary
+    ## @ingroup msg
+    def eval(self):
+        return self.lookup()
+    ## lookup in vocabulary 
+    ## @ingroup msg
+    def lookup(self):
+        try:
+            return W[self.value]
+        except KeyError:
+            try:
+                return W[self.value.upper()]
+            except KeyError:
+                raise KeyError(self)
 
 ## @}
 
@@ -110,19 +132,43 @@ class String(Object): pass
 ## @}
 
 ## @defgroup nums numbers
+## @brief multiple number classes: float, integer, complex,..
 ## @{
+
+## @defgroup math math
+## @brief numerical computations starting from primitive arithmetics
+
+import math
 
 ## floating pointer number
 class Number(Primitive):
     ## construct with `float(value)`
     def __init__(self,V):
         Primitive.__init__(self, float(V))
-
+    ## @ingroup math
+    ## @{
+    
+    def add(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(self.value + obj.value)
+        raise SyntaxError(obj)
+    ## @}
+        
 ## integer number
 class Integer(Number):
     ## construct with `integer(value)`
     def __init__(self,V):
         Primitive.__init__(self, int(V))
+    ## @ingroup math
+    ## @{
+    
+    def add(self,obj):
+        if isinstance(obj, Integer):
+            return Integer(self.value + obj.value)
+        if isinstance(obj, Number):
+            return Number(self.value + obj.value)
+        raise SyntaxError(obj)
+    ## @}
         
 ## hexadecimal machine number
 class Hex(Integer): 
@@ -185,11 +231,18 @@ class Fn(Active):
         Active.__init__(self, F.__name__)
         ## function holder
         self.fn = F
-    ## call object
+    ## execute wrapped function
+    ## @ingroup msg
     def __call__(self): self.fn()
     
 ## operator
-class Op(Active): pass
+class Op(Active):
+    ## compute basic math operators
+    ## @ingroup msg
+    def eval(self):
+        if self.value == '+':
+            return self.nest[0].eval() .add( self.nest[1].eval() )
+        return self
 
 ## virtual machine
 class VM(Active): pass
@@ -554,17 +607,23 @@ def WORD():
     
 ## `FIND ( symbol -- callable|symbol )` search in vocabulary by name
 def FIND():
-    WN = S.pop()
+    symbol = S.pop()
     try:
-        S.push(W[WN.value]) ; return True
+        S.push( symbol.lookup() ) ; return True
     except KeyError:
-        try:
-            S.push(W[WN.value.upper()]) ; return True
-        except KeyError:
-            S.push(WN) ; return False
+        S.push( symbol ) ; return False
 
 ## execute callable object from stack
+## @ingroup msg
 def EXECUTE(): S.pop()()
+
+## `= ( obj -- obj.eval )` \ run eval message to top object
+## @ingroup msg
+def EQ(): S.push(S.pop().eval())
+W['='] = Fn(EQ)
+
+## @}
+
 
 ## process chunk of source code
 ## @param[in] SRC source code string
@@ -573,7 +632,7 @@ def INTERPRET(SRC):
     while True:
         if not WORD(): break
         if S.top().type in ['symbol']:
-            if not FIND(): print '\nunknown',S.pop().head() ; break 
+            if not FIND(): raise SyntaxError(S.pop())
             EXECUTE()
         
 ## Read-Eval-Print-Loop
@@ -601,13 +660,14 @@ def REPL():
 ## @{
 
 ## @defgroup msg Messaging
-## @{
-
-## `= ( obj -- obj.eval )` \ run eval message to top object
-def EQ(): S.push(S.pop().eval())
-W['='] = Fn(EQ)
 
 ## @}
+
+## @ingroup math
+## @{
+
+W['e'] = Number(math.e)
+W['pi'] = Number(math.pi)
 
 ## @}
 
