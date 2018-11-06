@@ -1,0 +1,9 @@
+{
+	"short_name": "KB/js",
+	"name": "kbFORTH/js",
+	"icons": [ { "src": "/static/logo.png", "type": "image/png" } ],	
+	"orientation": "portrait",
+	"display": "standalone",
+	"background_color": "black",
+	"theme_color": "black"
+}

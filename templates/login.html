@@ -1,0 +1,12 @@
+{% extends "template.html" %}
+
+{% block body %}
+<form id=loginform action="" method=post validate>
+{{ form.hidden_tag() }}
+<table>
+<tr><td>{{ form.login.label }}</td><td>{{ form.login(autocomplete='username',autofocus=true,required=true,pattern='[a-zA-Z0-9]{1,20}') }}</td></tr>
+<tr><td>{{ form.pswd.label }}</td><td>{{ form.pswd(autocomplete='current_password',required=true) }}</td></tr>
+<tr><td></td><td>{{ form.go() }}</td></tr>
+</table>
+</form>
+{% endblock %}

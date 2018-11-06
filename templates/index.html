@@ -12,16 +12,30 @@
 
 </div>
 
-<div id=cmd>
-
-<pre id=error>no error</pre>
-
+<form id=cmd action="" method=post novalidate>
+{{ form.hidden_tag() }}
+{{ form.error.label }}
 <!--textarea autocorrect=off id=meta rows=3>{{ PEGJS }}</textarea-->
+{{ form.pad(autofocus=true,rows=7,autocorrect='off') }}
+{{ form.go() }}
+</form>
 
-<textarea autocorrect=off id=pad rows=15>{{ PAD }}</textarea>
+<script>
+window.onload = function() {
+	
+	cmd		= document.getElementById('cmd');
+	slider	= document.getElementById('slider');
+	
+	window.onresize();
+	
+	cmd.onkeydown = function(e) {
+		if(e.keyCode == 13 && e.ctrlKey) { cmd.submit() }
+	}
+}
 
-<button id=go>GO</button>
-
-</div>
+window.onresize = function() {
+	slider.style.height = cmd.offsetTop-5;
+}
+</script>
 
 {% endblock %}
