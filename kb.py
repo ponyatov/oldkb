@@ -497,14 +497,26 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value) ; return t
     
+## @defgroup brtokens bracket
+## @brief `tokens`
+## @{    
+    
+## `(`
 def t_lp(t):
     r'\('
     return t
+## `)`
 def t_rp(t):
     r'\)'
     return t
+
+## @}
     
-## operator
+## @defgroup optokens operator
+## @brief `tokens`
+## @{
+
+## `+` token
 def t_add(t):
     r'\+'
     t.value = Op(t.value) ; return t
@@ -525,10 +537,16 @@ def t_tild(t):
     r'\~'
     t.value = Op(t.value) ; return t
     
-## eval operator
+## `=` eval operator
 def t_eq(t):
     r'\='
     t.value = Symbol(t.value) ; return t
+    
+## @}
+
+## @defgroup numtokens number
+## @brief `tokens`
+## @{
     
 ## hexadecimal
 def t_hex(t):
@@ -559,6 +577,8 @@ def t_integer(t):
     r'[\+\-]?[0-9]+'
     t.value = Integer(t.value)
     t.type = t.value.type ; return t
+    
+## @}
 
 ## symbol token
 def t_symbol(t):
@@ -567,6 +587,7 @@ def t_symbol(t):
     t.type = t.value.type ; return t
 
 ## lexer error callback
+## @ingroup plyerr
 def t_error(t):
     raise SyntaxError(t)
 
@@ -586,6 +607,10 @@ precedence = (
     ('right','pow'),
     ('right','pfx'),
     )
+
+## @defgroup plyrec recursive
+## @brief REPL
+## @{
 
 ## start of (empty) source
 def p_none(p):
@@ -607,14 +632,19 @@ def p_recur_eq(p):
     ' tokens : tokens eq '
     p[0] = p[1] + [p[2]]
     
-def p_tild(p):
-    ' ex : tild ex '
-    p[0] = p[1] .push ( p[2] ) 
+## @}
     
 ## expression
 def p_ex_primitive(p):
     ' ex : primitive '
     p[0] = p[1]
+    
+## @defgroup plyops operators
+## @{
+    
+def p_tild(p):
+    ' ex : tild ex '
+    p[0] = p[1] .push ( p[2] ) 
     
 def p_add_pfx(p):
     ' ex : add ex %prec pfx'
@@ -638,11 +668,18 @@ def p_div(p):
 def p_pow(p):
     ' ex : ex pow ex '
     p[0] = p[2] .push ( p[1] ) .push ( p[3] )
+    
+## @}
 
-## parens
+## @defgroup plyparens parens
+## @{
+
+## `( )` parens
 def p_ex_parens(p):
     ' ex : lp ex rp '
     p[0] = p[2]
+    
+## @}    
 
 ## primitive tokens
 def p_primitive(p):
@@ -655,6 +692,7 @@ def p_primitive(p):
     p[0] = p[1]
     
 ## parser error callback
+## @ingroup plyerr
 def p_error(p):
     raise SyntaxError(p)
 
@@ -662,6 +700,8 @@ def p_error(p):
 parser = yacc.yacc(debug=False,write_tables=False)
 
 ## @}
+
+## @defgroup plyerr error callbacks
 
 ## @defgroup parsegen iterator wrapper
 ## @{
