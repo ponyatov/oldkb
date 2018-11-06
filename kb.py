@@ -281,6 +281,7 @@ class Op(Active):
     ## compute basic math operators
     ## @ingroup msg
     def eval(self):
+        if self.value == '~': return self.nest[0]
         if self.value == '+':
             if len(self.nest) == 1: return self.nest[0].eval().pfxadd()
             else: return self.nest[0].eval() .add( self.nest[1].eval() )
@@ -481,8 +482,8 @@ import ply.yacc as yacc     # tree script extension
 ## * follows API of PLY library with object `type`/`value`
 ## * in result we able to directly use @ref prim s as tokens
 ## * and should use lowercased class names here
-tokens = ['symbol','string','number','integer','hex','bin','op','eq','newline',
-          'lp','rp']
+tokens = ['symbol','string','number','integer','hex','bin','eq','newline',
+          'add','sub','mul','div','pow','lp','rp','tild']
 
 ## drop spaces
 t_ignore = ' \t\r'
@@ -504,10 +505,25 @@ def t_rp(t):
     return t
     
 ## operator
-def t_op(t):
-    r'[\+\-\*\/\^\~]'
-    t.value = Op(t.value)
-    t.type = t.value.type ; return t
+def t_add(t):
+    r'\+'
+    t.value = Op(t.value) ; return t
+def t_sub(t):
+    r'\-'
+    t.value = Op(t.value) ; return t
+def t_mul(t):
+    r'\*'
+    t.value = Op(t.value) ; return t
+def t_div(t):
+    r'\/'
+    t.value = Op(t.value) ; return t
+def t_pow(t):
+    r'\^'
+    t.value = Op(t.value) ; return t
+
+def t_tild(t):
+    r'\~'
+    t.value = Op(t.value) ; return t
     
 ## eval operator
 def t_eq(t):
@@ -564,8 +580,11 @@ lexer = lex.lex()
 
 ## operator precedence
 precedence = (
-    ('left','infix'),
-    ('right','prefix'),
+    ('left','tild'),
+    ('left','add','sub'),
+    ('left','mul','div'),
+    ('right','pow'),
+    ('right','pfx'),
     )
 
 ## start of (empty) source
@@ -588,21 +607,38 @@ def p_recur_eq(p):
     ' tokens : tokens eq '
     p[0] = p[1] + [p[2]]
     
+def p_tild(p):
+    ' ex : tild ex '
+    p[0] = p[1] .push ( p[2] ) 
+    
 ## expression
 def p_ex_primitive(p):
     ' ex : primitive '
     p[0] = p[1]
-
-## expression
-def p_ex_prefix(p):
-    ' ex : prefix '
-    p[0] = p[1]
-
-## expression
-def p_ex_infix(p):
-    ' ex : infix '
-    p[0] = p[1]
     
+def p_add_pfx(p):
+    ' ex : add ex %prec pfx'
+    p[0] = p[1] .push( p[2] )
+def p_sub_pfx(p):
+    ' ex : sub ex %prec pfx'
+    p[0] = p[1] .push( p[2] )
+    
+def p_add(p):
+    ' ex : ex add ex '
+    p[0] = p[2] .push ( p[1] ) .push ( p[3] )
+def p_sub(p):
+    ' ex : ex sub ex '
+    p[0] = p[2] .push ( p[1] ) .push ( p[3] )
+def p_mul(p):
+    ' ex : ex mul ex '
+    p[0] = p[2] .push ( p[1] ) .push ( p[3] )
+def p_div(p):
+    ' ex : ex div ex '
+    p[0] = p[2] .push ( p[1] ) .push ( p[3] )
+def p_pow(p):
+    ' ex : ex pow ex '
+    p[0] = p[2] .push ( p[1] ) .push ( p[3] )
+
 ## parens
 def p_ex_parens(p):
     ' ex : lp ex rp '
@@ -618,16 +654,6 @@ def p_primitive(p):
                   | string    '''
     p[0] = p[1]
     
-## prefix operators
-def p_prefix(p):
-    ' prefix : op ex %prec prefix '
-    p[0] = p[1] ; p[1].push(p[2])
-    
-## infix operators
-def p_infix(p):
-    ' infix : ex op ex %prec infix '
-    p[0] = p[2] ; p[2].push(p[1]) ; p[2].push(p[3])
-
 ## parser error callback
 def p_error(p):
     raise SyntaxError(p)
