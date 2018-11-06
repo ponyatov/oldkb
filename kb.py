@@ -148,12 +148,42 @@ class Number(Primitive):
     ## @ingroup math
     ## @{
     
+    def pfxadd(self): return Number(+self.value)
+    def pfxsub(self): return Number(-self.value)
+    
     def add(self,obj):
         if isinstance(obj, (Number,Integer)):
             return Number(self.value + obj.value)
         raise SyntaxError(obj)
+    
+    def sub(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(self.value - obj.value)
+        raise SyntaxError(obj)
+    
+    def mul(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(self.value * obj.value)
+        raise SyntaxError(obj)
+    
+    def div(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(float(self.value) / obj.value)
+        raise SyntaxError(obj)
+    
+    def pow(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(math.pow(self.value, obj.value))
+        raise SyntaxError(obj)
+    
+    ## `( num -- sin(num) )` sinus
+    def sin(self): return Number(math.sin(self.value))
+    ## `( num -- cos(num) )` cosinus
+    def cos(self): return Number(math.sin(self.value))
+    ## `( num -- tan(num) )` tangens
+    def tan(self): return Number(math.tan(self.value))
     ## @}
-        
+    
 ## integer number
 class Integer(Number):
     ## construct with `integer(value)`
@@ -162,12 +192,23 @@ class Integer(Number):
     ## @ingroup math
     ## @{
     
+    def pfxadd(self): return Integer(+self.value)
+    def pfxsub(self): return Integer(-self.value)
+    
     def add(self,obj):
-        if isinstance(obj, Integer):
-            return Integer(self.value + obj.value)
-        if isinstance(obj, Number):
-            return Number(self.value + obj.value)
-        raise SyntaxError(obj)
+        if isinstance(obj, Integer): return Integer(self.value + obj.value)
+        else: return Number.add(self,obj)
+    def sub(self,obj):
+        if isinstance(obj, Integer): return Integer(self.value - obj.value)
+        else: return Number.sub(self,obj)
+    def mul(self,obj):
+        if isinstance(obj, Integer): return Integer(self.value * obj.value)
+        else: return Number.mul(self,obj)
+    def div(self,obj):
+        return Number.div(self,obj)
+    def pow(self,obj):
+        if isinstance(obj, Integer): return Integer(math.pow(self.value, obj.value))
+        else: return Number.add(self,obj)
     ## @}
         
 ## hexadecimal machine number
@@ -241,7 +282,17 @@ class Op(Active):
     ## @ingroup msg
     def eval(self):
         if self.value == '+':
-            return self.nest[0].eval() .add( self.nest[1].eval() )
+            if len(self.nest) == 1: return self.nest[0].eval().pfxadd()
+            else: return self.nest[0].eval() .add( self.nest[1].eval() )
+        if self.value == '-':
+            if len(self.nest) == 1: return self.nest[0].eval().pfxsub()
+            else: return self.nest[0].eval() .sub( self.nest[1].eval() )
+        if self.value == '*':
+            return self.nest[0].eval() .mul( self.nest[1].eval() )
+        if self.value == '/':
+            return self.nest[0].eval() .div( self.nest[1].eval() )
+        if self.value == '^':
+            return self.nest[0].eval() .pow( self.nest[1].eval() )
         return self
 
 ## virtual machine
@@ -430,7 +481,8 @@ import ply.yacc as yacc     # tree script extension
 ## * follows API of PLY library with object `type`/`value`
 ## * in result we able to directly use @ref prim s as tokens
 ## * and should use lowercased class names here
-tokens = ['symbol','string','number','integer','hex','bin','op','eq','newline']
+tokens = ['symbol','string','number','integer','hex','bin','op','eq','newline',
+          'lp','rp']
 
 ## drop spaces
 t_ignore = ' \t\r'
@@ -443,6 +495,13 @@ def t_ignore_COMMENT(t):
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value) ; return t
+    
+def t_lp(t):
+    r'\('
+    return t
+def t_rp(t):
+    r'\)'
+    return t
     
 ## operator
 def t_op(t):
@@ -543,6 +602,11 @@ def p_ex_prefix(p):
 def p_ex_infix(p):
     ' ex : infix '
     p[0] = p[1]
+    
+## parens
+def p_ex_parens(p):
+    ' ex : lp ex rp '
+    p[0] = p[2]
 
 ## primitive tokens
 def p_primitive(p):
@@ -668,6 +732,15 @@ def REPL():
 
 W['e'] = Number(math.e)
 W['pi'] = Number(math.pi)
+
+## sine
+def SIN(): S.push ( S.pop().sin() )
+## cosine
+def COS(): S.push ( S.pop().cos() )
+## tangens
+def TAN(): S.push ( S.pop().tan() )
+
+W << SIN ; W << COS ; W << TAN
 
 ## @}
 
