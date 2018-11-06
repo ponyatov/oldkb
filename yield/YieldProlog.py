@@ -42,6 +42,11 @@ class T:
     ## @ingroup ynest
     def __lshift__(self,obj):
         self.nest.append(obj) ; return self
+    ## iterate
+    def __iter__(self): return iter(self.nest)
+    ## iterate with unifing var
+    def __call__(self,var):
+        for i in self.nest: yield var % i
 
 ## @}
 
@@ -50,6 +55,18 @@ class T:
 ## @{ 
 
 ## sample object with 3 elements of diff.type
-A = T('A') << T('B') << T(123) << T('C') ; print A
+a = T('A') << T('B') << T(123) << T('C')
+
+## unifing variable
+class V(T):
+    ## unification `%` operator
+    def __mod__(self,obj):
+        self.nest = [obj]
+        return self
+
+A = V('var')
+for i in a(A): print i
 
 ## @}
+
+
