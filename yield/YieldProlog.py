@@ -61,9 +61,11 @@ a = T('A') << T('B') << T(123) << T('C')
 class V(T):
     ## unification `%` operator
     def __mod__(self,obj):
+        ## nested elements
         self.nest = [obj]
         return self
 
+## test object
 A = V('var')
 for i in a(A): print i
 

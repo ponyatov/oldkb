@@ -132,7 +132,7 @@ class String(Object): pass
 ## @}
 
 ## @defgroup nums numbers
-## @brief multiple number classes: float, integer, complex,..
+## @brief multiple number classes: float, integer, complex...
 ## @{
 
 ## @defgroup math math
@@ -281,6 +281,7 @@ class Op(Active):
     ## compute basic math operators
     ## @ingroup msg
     def eval(self):
+        ## operator by its name
         if self.value == '~': return self.nest[0]
         if self.value == '+':
             if len(self.nest) == 1: return self.nest[0].eval().pfxadd()
@@ -520,19 +521,24 @@ def t_rp(t):
 def t_add(t):
     r'\+'
     t.value = Op(t.value) ; return t
+## `-` token
 def t_sub(t):
     r'\-'
     t.value = Op(t.value) ; return t
+## `*` token
 def t_mul(t):
     r'\*'
     t.value = Op(t.value) ; return t
+## `/` token
 def t_div(t):
     r'\/'
     t.value = Op(t.value) ; return t
+## `^` token
 def t_pow(t):
     r'\^'
     t.value = Op(t.value) ; return t
 
+## `~` token
 def t_tild(t):
     r'\~'
     t.value = Op(t.value) ; return t
@@ -641,30 +647,38 @@ def p_ex_primitive(p):
     
 ## @defgroup plyops operators
 ## @{
-    
+
+## `~A`    
 def p_tild(p):
     ' ex : tild ex '
     p[0] = p[1] .push ( p[2] ) 
     
+## `-A`
 def p_add_pfx(p):
     ' ex : add ex %prec pfx'
     p[0] = p[1] .push( p[2] )
+## `-A`    
 def p_sub_pfx(p):
     ' ex : sub ex %prec pfx'
     p[0] = p[1] .push( p[2] )
     
+## `A+B`
 def p_add(p):
     ' ex : ex add ex '
     p[0] = p[2] .push ( p[1] ) .push ( p[3] )
+## `A-B`
 def p_sub(p):
     ' ex : ex sub ex '
     p[0] = p[2] .push ( p[1] ) .push ( p[3] )
+## `A*B`
 def p_mul(p):
     ' ex : ex mul ex '
     p[0] = p[2] .push ( p[1] ) .push ( p[3] )
+## `A/B`
 def p_div(p):
     ' ex : ex div ex '
     p[0] = p[2] .push ( p[1] ) .push ( p[3] )
+## `A^B`
 def p_pow(p):
     ' ex : ex pow ex '
     p[0] = p[2] .push ( p[1] ) .push ( p[3] )
@@ -890,7 +904,7 @@ class CmdForm(flask_wtf.FlaskForm):
     ## go button
     go  = wtforms.SubmitField('GO')
 
-
+## get/post
 @app.route('/', methods=['GET', 'POST'])
 ## `/` route
 def index():
@@ -910,6 +924,7 @@ class LoginForm(flask_wtf.FlaskForm):
     ## submit button
     go = wtforms.SubmitField('GO')
     
+## login
 @app.route('/login', methods = ['GET', 'POST'])
 ## any try to relogin will kickout active user and invalidate all sessions
 ## @brief `/login` route
