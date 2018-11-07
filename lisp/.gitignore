@@ -1,3 +1,5 @@
+lisp
+*.log
 lisp.lexer.c
 lisp.parser.?
 
