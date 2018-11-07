@@ -5,6 +5,8 @@ def quote(args): return args
 
 def apply(args): return args[0] ( args[1] )
 
+def map(args): return [ args[0](i) for i in args[1] ]
+
 # the Lisp magic
 def eval(that):
     # evaluate atoms as is
@@ -19,6 +21,8 @@ def eval(that):
 
 def plus(args): return sum(args)
 
+def inc(arg): return arg+1
+
 print eval([plus,1,2,3])
 print eval((plus,1,2,3))
 print eval((plus, 3, (plus, 2, 10), 5))
@@ -29,3 +33,5 @@ print eval([quote,1,[quote,2,3]])
 
 # print eval((plus, (quote, 1, 2, 3)))
 print eval((apply, plus, (quote, 1, 2, 3)))
+
+print eval((map, inc, (quote, 1, 2, 3)))
