@@ -5,3 +5,5 @@
 %option noyywrap yylineno
 
 %%
+
+^#!.*\n		{}		/* drop script heading */
