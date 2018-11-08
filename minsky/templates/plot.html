@@ -1,0 +1,20 @@
+{% extends "template.html" %}
+
+{% block body %}
+{{ plot }}
+<svg id=plot></svg>
+{% endblock %}
+
+{% block script %}
+<script src="/static/D3.js"></script>
+<script>
+d3.select("#plot")
+	.attr("width", 50)
+    .attr("height", 200)
+    	.append("rect")
+		    .attr("width", 50)
+	    	.attr("height", 200)
+	    	.style("fill", "red");
+</script>
+{% endblock %}
+

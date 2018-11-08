@@ -8,7 +8,9 @@
 </head>
 
 <body>
+<div id=slider>
 {% block body %}{% endblock %}
+</div>
 
 <form id=cmd action="" method=post novalidate>
 {{ form.hidden_tag() }}
@@ -21,8 +23,9 @@
 
 </body>
 
-<script>
 {% block script %}{% endblock %}
+
+<script>
 
 window.onload = function() {
 	

@@ -60,6 +60,9 @@ class Frame:
     # represent any frame/object in html
     def html(self):
         return self.dump()
+    # plot object via D3.js
+    def plot(self):
+        return self.value
     
     # dump in full tree
     dumped = []
@@ -127,7 +130,7 @@ tokens = ['frame']
 t_ignore = ' \t\r\n'
 
 def t_frame(t):
-    r'[a-zA-Z0-9_\+\-\*\/\:\;\?\.\:\;]+'
+    r'[a-zA-Z0-9_\+\-\*\/\:\;\?\.\:\;\<\>\(\)]+'
     return Frame(t.value)
 
 def t_error(t):
@@ -173,12 +176,20 @@ def index():
     if form.validate_on_submit(): INTERPRET(form.pad.data)
     return flask.render_template('index.html', form=form, S=S.dump(), W=W.dump())
 
-# vocabulary visualization by single name
-@web.route('/<frame>', methods=['GET', 'POST'])
-def plot(frame):
+# vocabulary dump by single name
+@web.route('/dump/<frame>', methods=['GET', 'POST'])
+def dumpX(frame):
     form = Form()
     if form.validate_on_submit(): INTERPRET(form.pad.data)
     return flask.render_template('dump.html', form=form, dump = W[frame].dump())
+
+# vocabulary element vizualization by single name
+@web.route('/plot/<frame>', methods=['GET', 'POST'])
+def plotX(frame):
+    form = Form()
+    if form.validate_on_submit(): INTERPRET(form.pad.data)
+    return flask.render_template('plot.html', \
+                    form=form, dump = W[frame].dump(), plot = W[frame].plot() )
 
 #############################################################
 
