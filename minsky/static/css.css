@@ -6,6 +6,8 @@ html,body { width:100%; overflow: hidden; margin: 0; padding: 0; }
 	margin: 0;
 }
 
+#words	{ color: #00AAAA; }
+
 #cmd	{ position: absolute; bottom:0; width:100%; }
 #pad	{ width:89%; caret-color:red; border-color: darkgreen; }
 #go		{ width:9%; background: darkslategray; height: 5vmin; }

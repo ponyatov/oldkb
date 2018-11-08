@@ -3,6 +3,7 @@
 ### in Python
 
 import os, sys, re, pickle
+from __builtin__ import isinstance
 
 ##################### frame class system #################
 
@@ -31,6 +32,13 @@ class Frame:
         else:
             self.attr[key] = Frame(frame)
         return self
+    
+    # get slot value by name
+    def __getitem__(self, key):
+        if isinstance(key, Frame):
+            return self.attr[key.value]
+        else:
+            return self.attr[key]
 
     # << operator    
     def __lshift__(self, frame):
@@ -49,9 +57,17 @@ class Frame:
     def __repr__(self):
         return self.dump()
     
+    # represent any frame/object in html
+    def html(self):
+        return self.dump()
+    
     # dump in full tree
+    dumped = []
     def dump(self, depth=0, prefix=''):
         S = self.pad(depth) + self.head(prefix)
+        if not depth: Frame.dumped = []
+        if self in Frame.dumped: return S + ' ...'
+        else: Frame.dumped.append(self)
         for i in self.attr:
             S += self.attr[i].dump(depth + 1, prefix='%s = ' % i)
         for j in self.nest:
@@ -74,10 +90,18 @@ class Container(Frame): pass
 class Stack(Container): pass
 
 # vocabulary ( map, associative array )
-class Voc(Frame): pass
+class Voc(Frame):
+    
+    # << operator    
+    def __lshift__(self, frame):
+        if isinstance(frame,Frame):
+            self[frame.value] = frame
+        else:
+            self.push(Frame(frame))
 
 ####################### global vocabulary ###################
 
+# global vocabulary
 W = Voc('global')
 
 # load from .db
@@ -86,16 +110,13 @@ def LOAD():
     try:    F = open(sys.argv[0] + '.db', 'r') ; W = pickle.load(F) ; F.close()
     except: pass
     
-# autoload on system startup
-LOAD()
-
 # save to .db
 def SAVE():
     pickle.dump(W, open(sys.argv[0] + '.db', 'w'))
     
 ########################## data stack #######################
 
-S = Stack('DATA')
+S = Stack('data')
 
 ################# Dumb FORTH-like interpreter ###########
 
@@ -106,7 +127,7 @@ tokens = ['frame']
 t_ignore = ' \t\r\n'
 
 def t_frame(t):
-    r'[0-9a-zA-Z_]+'
+    r'[a-zA-Z0-9_\+\-\*\/\:\;\?\.\:\;]+'
     return Frame(t.value)
 
 def t_error(t):
@@ -119,7 +140,10 @@ def INTERPRET(SRC):
     while True:
         token = lexer.token()
         if not token: break
-        S << token
+        try:
+            S << W[token]
+        except KeyError:
+            S << token
 
 ######################### Internet ######################
 
@@ -141,16 +165,20 @@ class Form(flask_wtf.FlaskForm):
     ## go button
     go  = wtforms.SubmitField('GO')
 
+
+# main page route
 @web.route('/', methods=['GET', 'POST'])
 def index():
     form = Form()
     if form.validate_on_submit(): INTERPRET(form.pad.data)
-    return flask.render_template('index.html', form=form, S=S.dump())
+    return flask.render_template('index.html', form=form, S=S.dump(), W=W.dump())
 
-######################### startup ########################
-
-if __name__ == '__main__':
-    web.run(debug=True,host='127.0.0.1',port=2345)
+# vocabulary visualization by single name
+@web.route('/<frame>', methods=['GET', 'POST'])
+def plot(frame):
+    form = Form()
+    if form.validate_on_submit(): INTERPRET(form.pad.data)
+    return flask.render_template('dump.html', form=form, dump = W[frame].dump())
 
 #############################################################
 
@@ -158,7 +186,19 @@ if __name__ == '__main__':
 # marvin['first_name'] = 'Marvin'
 # marvin['last_name' ] = 'Minsky'
 # marvin << 'https://en.wikipedia.org/wiki/Marvin_Minsky'
-# # W << marvin
-# # SAVE()
+# W << marvin
+# SAVE()
 
-print W
+################# build base vocabulary ##################
+
+W['W'] = W
+W['S'] = S
+# SAVE()
+
+######################### startup ########################
+
+# autoload on system startup
+# LOAD()
+
+if __name__ == '__main__':
+    web.run(debug=True,host='127.0.0.1',port=2345)
