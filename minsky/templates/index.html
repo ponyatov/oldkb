@@ -1,0 +1,42 @@
+<html>
+
+<head>
+	<title>Minsky</title>
+	<link rel="stylesheet" type="text/css" href="/static/css.css">
+	<meta name="theme-color" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<div id=slider>
+
+<pre id=stack>{{ S }}</pre>
+
+<pre id=log>Hello</pre>
+
+</div>
+
+<form id=cmd action="" method=post novalidate>
+{{ form.hidden_tag() }}
+{{ form.error.label }}
+{{ form.pad(autofocus=true,rows=3,autocorrect='off') }}
+{{ form.go() }}
+</form>
+
+<script>
+window.onload = function() {
+	
+	cmd		= document.getElementById('cmd');
+	slider	= document.getElementById('slider');
+	
+	window.onresize();
+	
+	cmd.onkeydown = function(e) {
+		if(e.keyCode == 13 && e.ctrlKey) { cmd.submit() }
+	}
+}
+
+window.onresize = function() {
+	slider.style.height = cmd.offsetTop-5;
+	slider.style.width  = cmd.style.width;
+}
+</script>

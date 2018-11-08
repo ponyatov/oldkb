@@ -1,0 +1,24 @@
+html,body { width:100%; overflow: hidden; margin: 0; padding: 0; }
+
+* {
+	background: black; color: lightgreen;
+	font-family: Consolas,monospace,monospace; font-size: 4mm;
+	margin: 0;
+}
+
+#cmd	{ position: absolute; bottom:0; width:100%; }
+#pad	{ width:100%; caret-color:red; border-color: darkgreen; }
+#go		{ width:100%; background: darkslategray; height: 5vmin; }
+
+label[for=error]	{ color:yellow; }
+
+#slider {
+	width: 99%;
+	border: solid 1px; border-color: darkgreen;
+}
+
+#slider>* {
+	border: solid 1px; border-color: darkgreen;
+	display: inline-block;
+}
+
