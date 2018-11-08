@@ -1,3 +1,5 @@
+html,body { width:100%; overflow: hidden; margin: 0; padding: 0; }
+
 * {
 	background: black; color: lightgreen;
 	font-family: Consolas,monospace,monospace; font-size: 4mm;

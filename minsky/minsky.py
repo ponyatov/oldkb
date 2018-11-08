@@ -12,6 +12,9 @@ class Frame:
     # construct with given name
     def __init__(self, V):
         
+        # type/class tag
+        self.type = self.__class__.__name__.lower()
+        
         # primitive value (implementation language type)
         self.value = V
         
@@ -57,7 +60,7 @@ class Frame:
     
     # dump in short header-only form
     def head(self, prefix=''):
-        return '%s<%s:%s>' % (prefix, self.__class__.__name__.lower(), self.value)
+        return '%s<%s:%s>' % (prefix, self.type, self.value)
     
     # left pad with tabs for tree dump
     def pad(self, N):
@@ -90,12 +93,35 @@ LOAD()
 def SAVE():
     pickle.dump(W, open(sys.argv[0] + '.db', 'w'))
     
-    
 ########################## data stack #######################
 
 S = Stack('DATA')
 
-####################### Internet ###################
+################# Dumb FORTH-like interpreter ###########
+
+import ply.lex  as lex      # no syntax parser, lexer only
+
+tokens = ['frame']
+
+t_ignore = ' \t\r\n'
+
+def t_frame(t):
+    r'[0-9a-zA-Z_]+'
+    return Frame(t.value)
+
+def t_error(t):
+    raise SyntaxError(t)
+
+lexer = lex.lex()
+
+def INTERPRET(SRC):
+    lexer.input(SRC)
+    while True:
+        token = lexer.token()
+        if not token: break
+        S << token
+
+######################### Internet ######################
 
 class URL(Frame): pass
 
@@ -117,7 +143,9 @@ class Form(flask_wtf.FlaskForm):
 
 @web.route('/', methods=['GET', 'POST'])
 def index():
-    return flask.render_template('index.html',form=Form(),S=S.dump())
+    form = Form()
+    if form.validate_on_submit(): INTERPRET(form.pad.data)
+    return flask.render_template('index.html', form=form, S=S.dump())
 
 ######################### startup ########################
 
