@@ -18,8 +18,10 @@
 <form id=cmd action="" method=post novalidate>
 {{ form.hidden_tag() }}
 {{ form.error.label }}
+<div>
 {{ form.pad(autofocus=true,rows=3,autocorrect='off') }}
 {{ form.go() }}
+</div>
 </form>
 
 <script>
