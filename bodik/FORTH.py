@@ -3,29 +3,19 @@ import os,sys,time
 # base frame class
 class Object:
     def __init__(self,V):
-        self.type = self.__class__.__name__.lower()
-        self.value = V
-        self.attr = {}
-        self.nest = []
+        self.type = self.__class__.__name__.lower() ; self.value = V
+        self.attr = {} ; self.nest = []
         
-    def __setitem__(self,key,obj):
-        self.attr[key] = obj ; return self
-    def __getitem__(self,key):
-        return self.attr[key]
-    def __lshift__(self,obj):
-        self.attr[obj.value] = obj
+    def __setitem__(self,key,obj): self.attr[key] = obj ; return self
+    def __getitem__(self,key): return self.attr[key]
+    def __lshift__(self,obj): self.attr[obj.value] = obj
         
-    def push(self,obj):
-        self.nest.append(obj) ; return self
-    def pop(self):
-        return self.nest.pop()
-    def top(self):
-        return self.nest[-1]
-    def dropall(self):
-        self.nest = []
+    def push(self,obj): self.nest.append(obj) ; return self
+    def pop(self): return self.nest.pop()
+    def top(self): return self.nest[-1]
+    def dropall(self): self.nest = []
         
-    def __repr__(self):
-        return self.dump()
+    def __repr__(self): return self.dump()
     dumped = []
     def dump(self,depth=0,prefix=''):
         S = self.pad(depth) + self.head(prefix)
@@ -37,10 +27,8 @@ class Object:
         for j in self.nest:
             S += j.dump(depth+1)
         return S
-    def head(self,prefix=''):
-        return '%s<%s:%s>'%(prefix,self.type,self.value)
-    def pad(self,N):
-        return '\n'+'   '*N
+    def head(self,prefix=''): return '%s<%s:%s>'%(prefix,self.type,self.value)
+    def pad(self,N): return '\n'+'   '*N
 
 class Class(Object): pass    
 class Frame(Object): pass
@@ -57,11 +45,8 @@ class Map(Container): pass
 class Active(Object): pass
 class VM(Active): pass
 class Fn(Active):
-    def __init__(self,F):
-        Active.__init__(self, F.__name__)
-        self.fn = F
-    def __call__(self,vm):
-        self.fn(vm)
+    def __init__(self,F): Active.__init__(self, F.__name__) ; self.fn = F
+    def __call__(self,vm): self.fn(vm)
 
 F = VM('FORTH')
 
@@ -121,6 +106,4 @@ def INTERPRET(vm):
 F << Fn(INTERPRET)
 
 while __name__ == '__main__':
-    print F
-    F.push( String( raw_input('\ninfer> ') ) )
-    INTERPRET(F)
+    print F ; F.push( String( raw_input('\ninfer> ') ) ) ; INTERPRET(F)
