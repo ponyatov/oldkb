@@ -32,15 +32,30 @@ class Container(Object): pass
 
 class Stack(Object): pass
 
-class Map(Container): pass
+class Map(Container):
+    def __lshift__(self,obj):
+        if isinstance(obj,Object):
+            self[obj.value] = obj
+        elif callable(obj):
+            self << Fn(obj)
+        else:
+            raise SyntaxError(obj)
+        
+class Active(Object): pass
 
-def BYE(): sys.exit(0)
+class Fn(Active):
+    def __init__(self,F):
+        Active.__init__(self, F.__name__)
+        self.fn = F
 
 S = Stack('data')
 
 W = Map('vocabulary')
 W['W'] = W
 W['S'] = S
+
+def BYE(): sys.exit(0)
+W << BYE
 
 import ply.lex as lex
 
