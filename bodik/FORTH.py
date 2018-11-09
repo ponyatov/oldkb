@@ -119,6 +119,33 @@ def ADD():
     B = S.pop() ; A = S.pop() ; S.push( A.add(B) )
 W['+'] = Fn(ADD)
 
+# << ( frame obj -- frame ) push to frame
+def PUSH():
+    obj = S.pop() ; S.top() .push( obj )
+W << PUSH
+W['<<'] = Fn(PUSH)
+
+# >> ( frame -- frame obj ) pop from frame
+def POP():
+    S.push( S.top().pop() )
+W << POP
+W['>>'] = Fn(POP)
+
+# ! ( frame slot obj -- frame ) set slot value
+def ST():
+    obj = S.pop() ; slot = S.pop()
+    S.top()[slot.value] = obj
+W << ST    
+W['!'] = Fn(ST)
+
+# @ ( frame slot -- frame value | frame ) fetch slot value
+def LD():
+    slot = S.pop()
+    try: S.push ( S.top()[slot.value] )
+    except KeyError: pass
+W << LD    
+W['@'] = Fn(LD)
+
 import ply.lex as lex
 
 tokens = ['symbol','number']
@@ -130,7 +157,7 @@ def t_number(t):
     return Number(t.value)
     
 def t_symbol(t):
-    r'[0-9a-zA-Z_\.\?\+\-]+'
+    r'[0-9a-zA-Z_\.\?\+\-\@\!\:\;\<\>]+'
     return Symbol(t.value)
 
 def t_error(t): raise SyntaxError(t)
