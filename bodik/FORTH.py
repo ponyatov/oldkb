@@ -40,6 +40,9 @@ class Object:
     # top element
     def top(self):
         return self.nest[-1]
+    # clear stack
+    def dropall(self):
+        self.nest = []
     
     # dumping
     
@@ -59,7 +62,7 @@ class Object:
     def head(self,prefix=''):
         return '%s<%s:%s>'%(prefix,self.type,self.value)
     def pad(self,N):
-        return '\n'+'\t'*N
+        return '\n'+'    '*N
     
 class Primitive(Object): pass
 
@@ -101,6 +104,14 @@ W = Map('vocabulary')
 W['W'] = W
 W['S'] = S
 
+def q():
+    print S.pop()
+W['?'] = Fn(q)
+
+def DROPALL(): S.dropall()
+W['.'] = Fn(DROPALL)
+W << DROPALL
+
 def BYE(): sys.exit(0)
 W << BYE
 
@@ -139,11 +150,14 @@ def FIND():
     try:
         S.push( W[token.value] ) ; return True
     except KeyError:
-        S.push(token) ; return False
+        try:
+            S.push( W[token.value.upper()] ) ; return True
+        except KeyError:
+            S.push(token) ; return False
     
 # EXECUTE ( callable -- ) run callable
 def EXECUTE():
-    S.pop() ()
+    if callable(S.top()): S.pop() ()
 
 # INTERPET ( str -- ) interpret string
 def INTERPRET():
@@ -155,7 +169,7 @@ def INTERPRET():
 W << INTERPRET
 
 while True:
-    print W,S
+    print S
     try:
         S .push( String ( raw_input('\nbodik> ') )) ; INTERPRET()
     except EOFError:
