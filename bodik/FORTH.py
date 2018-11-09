@@ -36,7 +36,7 @@ class Map(Container):
     def __lshift__(self,obj):
         if isinstance(obj,Object):
             self[obj.value] = obj
-        elif callable(obj):
+        elif callable(objbye):
             self << Fn(obj)
         else:
             raise SyntaxError(obj)
