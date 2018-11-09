@@ -40,9 +40,15 @@ class Object:
     # top element
     def top(self):
         return self.nest[-1]
-    # clear stack
     def dropall(self):
         self.nest = []
+    # classical stack ops
+    def dup(self): self.push(self.top()) ; return self
+    def drop(self): self.nest.pop() ; return self
+    def swap(self):
+        B = self.pop(); A = self.pop();
+        self.push(B) ; self.push(A)
+        return self
     
     # dumping
     
@@ -87,6 +93,8 @@ class Stack(Object): pass
 class Map(Container):
     def __lshift__(self,F):
         self.attr[F.__name__] = Fn(F)
+    def push(self,obj):
+        self.attr[obj.value] = obj
         
 class Active(Object): pass
 
@@ -145,6 +153,17 @@ def LD():
     except KeyError: pass
 W << LD    
 W['@'] = Fn(LD)
+
+def DUP(): S.dup()
+W << DUP
+
+def DROP(): S.drop()
+W << DROP
+
+def SWAP(): S.swap()
+W << SWAP
+
+def OVER(): S.over()
 
 import ply.lex as lex
 
