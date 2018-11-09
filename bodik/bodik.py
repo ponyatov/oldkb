@@ -8,10 +8,20 @@ class Object:
         self.value = V
         self.attr = {}
         self.nest = []
+    def __setitem__(self,key,obj):
+        self.attr[key] = obj
     def __repr__(self):
         return self.dump()
+    dumped = []
     def dump(self,depth=0,prefix=''):
         S = self.pad(depth) + self.head(prefix)
+        if not depth: Object.dumped = []
+        if self in Object.dumped: return S + '...'
+        Object.dumped.append(self)
+        for i in self.attr:
+            S += self.attr[i].dump(depth+1,prefix='%s = '%i)
+        for j in self.nest:
+            S += j.dump(depth+1)
         return S
     def head(self,prefix=''):
         return '%s<%s:%s>'%(prefix,self.type,self.value)
@@ -29,6 +39,8 @@ def BYE(): sys.exit(0)
 S = Stack('data')
 
 W = Map('vocabulary')
+W['W'] = W
+W['S'] = S
 
 import ply.lex as lex
 
@@ -44,13 +56,16 @@ def t_error(t): raise SyntaxError(t)
 
 lexer = lex.lex()
 
-while True:
-    print S.dump()+'\n'
-    try:
-        lexer.input(raw_input('bodik> '))
-    except EOFError:
-        BYE()
+def INTERPRET(SRC):
+    lexer.input(SRC)
     while True:
         token = lexer.token()
         if not token: break
         print token
+
+while True:
+    print W,S
+    try:
+        INTERPRET(raw_input('\nbodik> '))
+    except EOFError:
+        BYE()
