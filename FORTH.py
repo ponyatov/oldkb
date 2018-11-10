@@ -1,42 +1,13 @@
+## @file
+## @brief Object/Frame FORTH system
+
+## @defgroup forth FORTH
+## @brief object/frame FORTH system
+## @{
 
 import os,sys,time,pickle
 
-############################## base frame class ###############################
-class Object:
-    def __init__(self,V):
-        self.type = self.__class__.__name__.lower() ; self.value = V
-        self.attr = {} ; self.nest = []
-        
-    def __setitem__(self,key,obj): self.attr[key] = obj ; return self
-    def __getitem__(self,key): return self.attr[key]
-    def __lshift__(self,obj): self.attr[obj.value] = obj
-        
-    def push(self,obj): self.nest.append(obj) ; return self
-    def pop(self): return self.nest.pop()
-    def top(self): return self.nest[-1]
-    def dropall(self): self.nest = []
-    
-    def dup(self): self.push(self.top())
-    def drop(self): self.pop()
-    def swap(self):
-        B = self.pop() ; A = self.pop()
-        self.push(B) ; self.push(A) 
-    def over(self): self.push(self.nest[-2])
-        
-    def __repr__(self): return self.dump()
-    dumped = []
-    def dump(self,depth=0,prefix='',slots=True):
-        S = self.pad(depth) + self.head(prefix)
-        if not depth: Object.dumped=[]
-        if self in Object.dumped: return S+'...' 
-        else: Object.dumped.append(self)
-        if slots:
-            for i in self.attr: S += self.attr[i].dump(depth+1,prefix='%s = '%i)
-            if self.nest: S += self.pad(depth+1) + '+'*22
-        for j in self.nest: S += j.dump(depth+1)
-        return S
-    def head(self,prefix=''): return '%s<%s:%s>'%(prefix,self.type,self.value)
-    def pad(self,N): return '\n'+'    '*N
+from Sym import *
 
 class Class(Object): pass    
 class Frame(Object): pass
@@ -61,9 +32,15 @@ class Fn(Active):
     
 ################################## FORTH machine as CLI #######################    
 
+## @defgroup ffvm VM
+## @{
+
+## global virtual machine
 F = VM('FORTH')
 
 F['vm'] = F
+
+## @}
 
 def BYE(vm): sys.exit(0)
 F << Fn(BYE)
@@ -166,3 +143,5 @@ F << Fn(INTERPRET)
 while __name__ == '__main__':
     print F.dump(slots=None)
     F.push( String( raw_input('\ninfer> ') ) ) ; INTERPRET(F)
+
+## @}
