@@ -1,8 +1,8 @@
 ## @file
-## @brief Object/Frame FORTH system
+## @brief Object/Frame FORTH-like system
 
 ## @defgroup forth FORTH
-## @brief object/frame FORTH system
+## @brief object/frame FORTH-like system
 ## @{
 
 import os,sys,time,pickle

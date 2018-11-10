@@ -5,90 +5,46 @@
 
 import os,sys,pickle,types
 
-## @defgroup sym symbolic class system
-## @{
+from Sym import * 
 
-## base object
-class Object:
-    
-    ## constructor 
-    def __init__(self,V):
-        ## type/class tag
-        self.type = self.__class__.__name__.lower()
-        ## single primitive value
-        self.value = V
-        ## nest[]ed objects can run both as stack and ordered vector
-        self.nest = []
-        ## attr{}ibutes can be used for associative array or class slots
-        self.attr = {}
-        
-    ## @defgroup dump print/dump
-    ## @brief text representation for any object
-    ## @{
-    
-    ## return text representation for any object
-    def __repr__(self):
-        return self.dump()
-    ## dump in full tree form
-    ## @param[in] depth tree padding
-    ## @param[in] prefix prefix string before first line of subtree
-    def dump(self,depth=0,prefix=''):
-        S = self.pad(depth) + self.head(prefix)
-        for i in self.attr:
-            S += self.attr[i].dump(depth+1,prefix='%s = '%i)
-        for j in self.nest:
-            S += j.dump(depth+1)
-        return S
-    ## dump in short header-only form
-    def head(self,prefix=''):
-        return '%s<%s:%s> @%X' % (prefix, self.type, self.str(), id(self))
-    ## string representation of value only w/o special formats
-    def str(self):
-        return str(self.value)
-    ## left padding
-    def pad(self,N):
-        return '\n'+'\t'*N
-    
-    ## @}
-    
-    ## @defgroup symstack stack operations
-    ## @ingroup cont
-    ## @{
-    
-    ## @brief push nested object 
-    def push(self,obj): self.nest.append(obj) ; return self
-    ## @brief pop nested object
-    def pop(self): return self.nest.pop()
-    ## @brief get top of stack without removing
-    def top(self): return self.nest[-1]
-    ## @brief clear stack
-    def clear(self): self.nest = []
-    ## @}
-    
-    ## @defgroup symmap map operations
-    ## @ingroup cont
-    ## @{
-    
-    ## fetch attribute value
-    ## @param[in] key
-    def __getitem__(self,key): return self.attr[key]
-    ## store to attribute
-    ## @param[in] key
-    ## @param[in] obj
-    def __setitem__(self,key,obj): self.attr[key] = obj ; return self
-    ## @}
-    
-    ## @ingroup msg
-    ## @{
-    
-    ## evaluate object in a generic recursive way
-    def eval(self):
-        for j in self.nest: j = j.eval()
-        return self
-    
-    def __call__(self): S.push(self) ; return self
-    
-    ## @}
+#     ## @defgroup symstack stack operations
+#     ## @ingroup cont
+#     ## @{
+#     
+#     ## @brief push nested object 
+#     def push(self,obj): self.nest.append(obj) ; return self
+#     ## @brief pop nested object
+#     def pop(self): return self.nest.pop()
+#     ## @brief get top of stack without removing
+#     def top(self): return self.nest[-1]
+#     ## @brief clear stack
+#     def clear(self): self.nest = []
+#     ## @}
+#     
+#     ## @defgroup symmap map operations
+#     ## @ingroup cont
+#     ## @{
+#     
+#     ## fetch attribute value
+#     ## @param[in] key
+#     def __getitem__(self,key): return self.attr[key]
+#     ## store to attribute
+#     ## @param[in] key
+#     ## @param[in] obj
+#     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
+#     ## @}
+#     
+#     ## @ingroup msg
+#     ## @{
+#     
+#     ## evaluate object in a generic recursive way
+#     def eval(self):
+#         for j in self.nest: j = j.eval()
+#         return self
+#     
+#     def __call__(self): S.push(self) ; return self
+#     
+#     ## @}
 
 ## @defgroup prim primitive
 ## @brief close to machine level or implementation language types (Python)
