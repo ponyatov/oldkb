@@ -12,12 +12,6 @@ from Sym import *
 class Class(Object): pass    
 class Frame(Object): pass
 
-################################# primitives ##################################
-class Primitite(Object): pass
-class Symbol(Primitite): pass
-class Number(Primitite): pass
-class String(Primitite): pass
-
 ################################### data containers ###########################
 class Container(Object): pass
 class Stack(Container): pass

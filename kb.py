@@ -7,33 +7,6 @@ import os,sys,pickle,types
 
 from Sym import * 
 
-#     ## @defgroup symstack stack operations
-#     ## @ingroup cont
-#     ## @{
-#     
-#     ## @brief push nested object 
-#     def push(self,obj): self.nest.append(obj) ; return self
-#     ## @brief pop nested object
-#     def pop(self): return self.nest.pop()
-#     ## @brief get top of stack without removing
-#     def top(self): return self.nest[-1]
-#     ## @brief clear stack
-#     def clear(self): self.nest = []
-#     ## @}
-#     
-#     ## @defgroup symmap map operations
-#     ## @ingroup cont
-#     ## @{
-#     
-#     ## fetch attribute value
-#     ## @param[in] key
-#     def __getitem__(self,key): return self.attr[key]
-#     ## store to attribute
-#     ## @param[in] key
-#     ## @param[in] obj
-#     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
-#     ## @}
-#     
 #     ## @ingroup msg
 #     ## @{
 #     
@@ -46,46 +19,31 @@ from Sym import *
 #     
 #     ## @}
 
-## @defgroup prim primitive
-## @brief close to machine level or implementation language types (Python)
-## @{
-
-## primitive object
-class Primitive(Object):
-    ## evaluate primitive as itself
-    ## @ingroup msg
-    def eval(self): return self
+# ## primitive object
+# class Primitive(Object):
+#     ## evaluate primitive as itself
+#     ## @ingroup msg
+#     def eval(self): return self
 
 ## @defgroup symbol symbol
 ## @brief names variables and other objects
 ## @{
 
-## symbol (names variables and other objects)
-class Symbol(Primitive):
-    ## evaluate via vocabulary
-    ## @ingroup msg
-    def eval(self):
-        return self.lookup()
-    ## lookup in vocabulary 
-    ## @ingroup msg
-    def lookup(self):
-        try:
-            return W[self.value]
-        except KeyError:
-            try:
-                return W[self.value.upper()]
-            except KeyError:
-                raise KeyError(self)
-
-## @}
-
-## @defgroup string string 
-## @{
-
-## string
-class String(Object): pass
-
-## @}
+# class Symbol(Primitive):
+#     ## evaluate via vocabulary
+#     ## @ingroup msg
+#     def eval(self):
+#         return self.lookup()
+#     ## lookup in vocabulary 
+#     ## @ingroup msg
+#     def lookup(self):
+#         try:
+#             return W[self.value]
+#         except KeyError:
+#             try:
+#                 return W[self.value.upper()]
+#             except KeyError:
+#                 raise KeyError(self)
 
 ## @defgroup nums numbers
 ## @brief multiple number classes: float, integer, complex...
@@ -98,9 +56,6 @@ import math
 
 ## floating pointer number
 class Number(Primitive):
-    ## construct with `float(value)`
-    def __init__(self,V):
-        Primitive.__init__(self, float(V))
     ## @ingroup math
     ## @{
     
@@ -142,9 +97,6 @@ class Number(Primitive):
     
 ## integer number
 class Integer(Number):
-    ## construct with `integer(value)`
-    def __init__(self,V):
-        Primitive.__init__(self, int(V))
     ## @ingroup math
     ## @{
     
@@ -780,23 +732,6 @@ W << SIN ; W << COS ; W << TAN
 
 ## @}
 
-## @defgroup web Web interface
-## @brief Flask powered
-## @{
-
-## IP addr to bind 
-IP = '0.0.0.0'
-
-## IP port to bind
-PORT = 8888
-
-## debug mode must be enabled only on dev station
-DEBUG = False
-
-## @defgroup auth authorization
-## @brief HTTPS and hashed login/password for single user only
-## @{
-
 ## SSL modes:
 
 ## * None: pure HTTP for Eclipse internal browser 
@@ -810,32 +745,10 @@ SSL_KEYS = ('cert.pem', 'key.pem')
 LOGIN_HASH = ''
 ## password hash (autorization for single user only)
 PSWD_HASH  = ''
-# this module can't be publicated on github
-from secrets import LOGIN_HASH, PSWD_HASH, SSL_KEYS
 
 from werkzeug.security import generate_password_hash,check_password_hash
 
-try:
-    # check files available
-    for i in SSL_KEYS: open(i,'r').close()
-except IOError:
-    SSL_KEYS = None
-    # force only local bind, does not put your ass to Internet or even LAN
-    IP = '127.0.0.1'
-    # enable debug on dev station
-    DEBUG = True
-
 ## @}
-
-import flask,flask_wtf,wtforms,flask_login
-
-## Flask application
-app = flask.Flask(__name__)
-
-app.config['SECRET_KEY'] = os.urandom(32)
-
-## login manager
-logman = flask_login.LoginManager() ; logman.init_app(app)
 
 ## web user
 class User(flask_login.UserMixin):
