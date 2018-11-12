@@ -60,7 +60,6 @@ $(function() {
 
 <div class="header">
   <div class="summary">
-<a href="#groups">Modules</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -69,68 +68,71 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Flask powered.  
+<p>Flask-based: http/https, user authorisation.  
 <a href="#details">More...</a></p>
-<div class="dynheader">
-Collaboration diagram for Web interface:</div>
-<div class="dyncontent">
-<center><table><tr><td><img src="group__web.png" border="0" alt="" usemap="#group____web"/>
-<map name="group____web" id="group____web">
-<area shape="rect" id="node1" href="group__auth.html" title="HTTPS and hashed login/password for single user only. " alt="" coords="236,5,332,32"/>
-</map>
-</td></tr></table></center>
-</div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
-Modules</h2></td></tr>
-<tr class="memitem:group__auth"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__auth.html">authorization</a></td></tr>
-<tr class="memdesc:group__auth"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTPS and hashed login/password for single user only. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkb_1_1User.html">kb.User</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">web user  <a href="classkb_1_1User.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1CmdForm.html">web.CmdForm</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkb_1_1CmdForm.html">kb.CmdForm</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">command entry web form  <a href="classkb_1_1CmdForm.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1User.html">web.User</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkb_1_1LoginForm.html">kb.LoginForm</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">login web form  <a href="classkb_1_1LoginForm.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1LoginForm.html">web.LoginForm</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gabd19bcffd001d0d4c7853af08cfcdf87"><td class="memItemLeft" align="right" valign="top"><a id="gabd19bcffd001d0d4c7853af08cfcdf87"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#gabd19bcffd001d0d4c7853af08cfcdf87">kb.index</a> ()</td></tr>
-<tr class="memdesc:gabd19bcffd001d0d4c7853af08cfcdf87"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>/</code> route <br /></td></tr>
-<tr class="separator:gabd19bcffd001d0d4c7853af08cfcdf87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeada248cfd66c8496d003ff403ee1e04"><td class="memItemLeft" align="right" valign="top"><a id="gaeada248cfd66c8496d003ff403ee1e04"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>web.index</b> ()</td></tr>
+<tr class="separator:gaeada248cfd66c8496d003ff403ee1e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5bc608126bd2307880c0ff5c4fc12a8d"><td class="memItemLeft" align="right" valign="top"><a id="ga5bc608126bd2307880c0ff5c4fc12a8d"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>web.load_user</b> (user_id)</td></tr>
+<tr class="separator:ga5bc608126bd2307880c0ff5c4fc12a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2f5c6c084f7d09215a949aead88fa504"><td class="memItemLeft" align="right" valign="top"><a id="ga2f5c6c084f7d09215a949aead88fa504"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>web.login</b> ()</td></tr>
+<tr class="separator:ga2f5c6c084f7d09215a949aead88fa504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad06de9f494c6c3b8251b8b37905811aa"><td class="memItemLeft" align="right" valign="top"><a id="gad06de9f494c6c3b8251b8b37905811aa"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>web.logout</b> ()</td></tr>
+<tr class="separator:gad06de9f494c6c3b8251b8b37905811aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ga9f9065c25e78c2c28d4d8d2b22fec4ea"><td class="memItemLeft" align="right" valign="top"><a id="ga9f9065c25e78c2c28d4d8d2b22fec4ea"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#ga9f9065c25e78c2c28d4d8d2b22fec4ea">kb.IP</a> = '0.0.0.0'</td></tr>
-<tr class="memdesc:ga9f9065c25e78c2c28d4d8d2b22fec4ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">IP addr to bind. <br /></td></tr>
-<tr class="separator:ga9f9065c25e78c2c28d4d8d2b22fec4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga84c44b038acca47b4935fd66cb18871f"><td class="memItemLeft" align="right" valign="top"><a id="ga84c44b038acca47b4935fd66cb18871f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#ga84c44b038acca47b4935fd66cb18871f">kb.PORT</a> = 8888</td></tr>
-<tr class="memdesc:ga84c44b038acca47b4935fd66cb18871f"><td class="mdescLeft">&#160;</td><td class="mdescRight">IP port to bind. <br /></td></tr>
-<tr class="separator:ga84c44b038acca47b4935fd66cb18871f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac63ef2e44f90b8daab677f9f7b15ed4b"><td class="memItemLeft" align="right" valign="top"><a id="gac63ef2e44f90b8daab677f9f7b15ed4b"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#gac63ef2e44f90b8daab677f9f7b15ed4b">kb.DEBUG</a> = False</td></tr>
-<tr class="memdesc:gac63ef2e44f90b8daab677f9f7b15ed4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">debug mode must be enabled only on dev station <br /></td></tr>
-<tr class="separator:gac63ef2e44f90b8daab677f9f7b15ed4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga05d65829c0bd0826fa5616ef6b98ec3a"><td class="memItemLeft" align="right" valign="top"><a id="ga05d65829c0bd0826fa5616ef6b98ec3a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#ga05d65829c0bd0826fa5616ef6b98ec3a">kb.app</a> = flask.Flask(__name__)</td></tr>
-<tr class="memdesc:ga05d65829c0bd0826fa5616ef6b98ec3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flask application. <br /></td></tr>
-<tr class="separator:ga05d65829c0bd0826fa5616ef6b98ec3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae1f0cd6e0fcf4c7e0433336d2f6e44d2"><td class="memItemLeft" align="right" valign="top"><a id="gae1f0cd6e0fcf4c7e0433336d2f6e44d2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__web.html#gae1f0cd6e0fcf4c7e0433336d2f6e44d2">kb.logman</a> = flask_login.LoginManager() ; logman.init_app(app)</td></tr>
-<tr class="memdesc:gae1f0cd6e0fcf4c7e0433336d2f6e44d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">login manager <br /></td></tr>
-<tr class="separator:gae1f0cd6e0fcf4c7e0433336d2f6e44d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4dde0b8731a833a3bf1c0e84db489a4d"><td class="memItemLeft" align="right" valign="top"><a id="ga4dde0b8731a833a3bf1c0e84db489a4d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>web.app</b> = flask.Flask(__name__)</td></tr>
+<tr class="separator:ga4dde0b8731a833a3bf1c0e84db489a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab6e02f24b69e05c8ae03327bff452f5f"><td class="memItemLeft" align="right" valign="top"><a id="gab6e02f24b69e05c8ae03327bff452f5f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>web.logman</b> = flask_login.LoginManager() ; logman.init_app(app)</td></tr>
+<tr class="separator:gab6e02f24b69e05c8ae03327bff452f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac177bf7d1d1f716f7ce18b64424513b0"><td class="memItemLeft" align="right" valign="top"><a id="gac177bf7d1d1f716f7ce18b64424513b0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>web.SSL_KEYS</b> = None</td></tr>
+<tr class="separator:gac177bf7d1d1f716f7ce18b64424513b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac156e96bc82ae6e139d390b105d4040c"><td class="memItemLeft" align="right" valign="top"><a id="gac156e96bc82ae6e139d390b105d4040c"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>web.IP</b> = '127.0.0.1'</td></tr>
+<tr class="separator:gac156e96bc82ae6e139d390b105d4040c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae6ba725395647b25838ce764bcd2619a"><td class="memItemLeft" align="right" valign="top"><a id="gae6ba725395647b25838ce764bcd2619a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>web.DEBUG</b> = True</td></tr>
+<tr class="separator:gae6ba725395647b25838ce764bcd2619a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf1743c512f7cbbdd4f9e1d0cf205b5fd"><td class="memItemLeft" align="right" valign="top"><a id="gaf1743c512f7cbbdd4f9e1d0cf205b5fd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>web.debug</b></td></tr>
+<tr class="separator:gaf1743c512f7cbbdd4f9e1d0cf205b5fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1aed686fffb015eb21c336eb59db2f0b"><td class="memItemLeft" align="right" valign="top"><a id="ga1aed686fffb015eb21c336eb59db2f0b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>web.True</b></td></tr>
+<tr class="separator:ga1aed686fffb015eb21c336eb59db2f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5f5087f00e7c325f64aa64587fc7dc56"><td class="memItemLeft" align="right" valign="top"><a id="ga5f5087f00e7c325f64aa64587fc7dc56"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>web.host</b></td></tr>
+<tr class="separator:ga5f5087f00e7c325f64aa64587fc7dc56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9ad2682da1f0d50248acb2910860001e"><td class="memItemLeft" align="right" valign="top"><a id="ga9ad2682da1f0d50248acb2910860001e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>web.port</b></td></tr>
+<tr class="separator:ga9ad2682da1f0d50248acb2910860001e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaee26efa4f45180d588160d628c82304"><td class="memItemLeft" align="right" valign="top"><a id="gaaee26efa4f45180d588160d628c82304"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>web.PORT</b></td></tr>
+<tr class="separator:gaaee26efa4f45180d588160d628c82304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga06e0202d42ead310880b4dbc99dc11e5"><td class="memItemLeft" align="right" valign="top"><a id="ga06e0202d42ead310880b4dbc99dc11e5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>web.ssl_context</b></td></tr>
+<tr class="separator:ga06e0202d42ead310880b4dbc99dc11e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Flask powered. </p>
+<p>Flask-based: http/https, user authorisation. </p>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

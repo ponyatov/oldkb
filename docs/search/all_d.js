@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['nest',['nest',['../classkb_1_1Object.html#afe5db6bb1ebee8fac3b2e03fc6a842a7',1,'kb::Object']]],
-  ['number',['Number',['../classkb_1_1Number.html',1,'kb']]],
-  ['numbers',['numbers',['../group__nums.html',1,'']]]
+  ['syntax_20parser',['Syntax parser',['../group__parser.html',1,'']]],
+  ['stack',['Stack',['../classsym_1_1Stack.html',1,'sym']]],
+  ['string',['String',['../classsym_1_1String.html',1,'sym']]],
+  ['symbolic_20type_20system',['Symbolic type system',['../group__sym.html',1,'']]],
+  ['sym_2epy',['sym.py',['../sym_8py.html',1,'']]],
+  ['symbol',['Symbol',['../classsym_1_1Symbol.html',1,'sym']]]
 ];

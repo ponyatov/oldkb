@@ -1,3 +1,9 @@
+## @file
+## @brief Syntax parser (primitive lexer-only) /@ref ply/
+
+## @defgroup parser Syntax parser
+## @brief primitive lexer-only parser using @ref ply
+## @{ 
 
 from sym import *
 
@@ -34,3 +40,5 @@ def t_symbol(t):
 def t_error(t): raise SyntaxError(t)
 
 lexer = lex.lex()
+
+## @}

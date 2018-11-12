@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['class',['class',['../group__class.html',1,'']]],
-  ['compiler',['compiler',['../group__compiler.html',1,'']]]
+  ['syntax_20parser',['Syntax parser',['../group__parser.html',1,'']]],
+  ['symbolic_20type_20system',['Symbolic type system',['../group__sym.html',1,'']]]
 ];

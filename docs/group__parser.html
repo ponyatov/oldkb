@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KB: parser</title>
+<title>KB: Syntax parser</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,123 +63,51 @@ $(function() {
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">parser<div class="ingroups"><a class="el" href="group__interp.html">Interpreter</a> &raquo; <a class="el" href="group__syntax.html">syntax parser</a></div></div>  </div>
+<div class="title">Syntax parser</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Collaboration diagram for parser:</div>
-<div class="dyncontent">
-<center><table><tr><td><img src="group__parser.png" border="0" alt="" usemap="#group____parser"/>
-<map name="group____parser" id="group____parser">
-<area shape="rect" id="node1" href="group__syntax.html" title="powered with PLY library " alt="" coords="5,5,107,32"/>
-</map>
-</td></tr></table></center>
-</div>
+
+<p>primitive lexer-only parser using <a class="el" href="ply.html">PLY library</a>  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga407c6fe490032919ff127d0d4917e418"><td class="memItemLeft" align="right" valign="top"><a id="ga407c6fe490032919ff127d0d4917e418"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga407c6fe490032919ff127d0d4917e418">kb.p_none</a> (p)</td></tr>
-<tr class="memdesc:ga407c6fe490032919ff127d0d4917e418"><td class="mdescLeft">&#160;</td><td class="mdescRight">start of (empty) source <br /></td></tr>
-<tr class="separator:ga407c6fe490032919ff127d0d4917e418"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga79aa59d4d57b393a540fe50345a84357"><td class="memItemLeft" align="right" valign="top"><a id="ga79aa59d4d57b393a540fe50345a84357"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga79aa59d4d57b393a540fe50345a84357">kb.p_recur_endline</a> (p)</td></tr>
-<tr class="memdesc:ga79aa59d4d57b393a540fe50345a84357"><td class="mdescLeft">&#160;</td><td class="mdescRight">recursive end line separator <br /></td></tr>
-<tr class="separator:ga79aa59d4d57b393a540fe50345a84357"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9dcfbc0e89a2d4168bc3f57ccbb3b5a1"><td class="memItemLeft" align="right" valign="top"><a id="ga9dcfbc0e89a2d4168bc3f57ccbb3b5a1"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga9dcfbc0e89a2d4168bc3f57ccbb3b5a1">kb.p_recur_ex</a> (p)</td></tr>
-<tr class="memdesc:ga9dcfbc0e89a2d4168bc3f57ccbb3b5a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">recursive rule for expressions <br /></td></tr>
-<tr class="separator:ga9dcfbc0e89a2d4168bc3f57ccbb3b5a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0a957d4e8bb8f9a5cf779146010fb637"><td class="memItemLeft" align="right" valign="top"><a id="ga0a957d4e8bb8f9a5cf779146010fb637"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga0a957d4e8bb8f9a5cf779146010fb637">kb.p_recur_eq</a> (p)</td></tr>
-<tr class="memdesc:ga0a957d4e8bb8f9a5cf779146010fb637"><td class="mdescLeft">&#160;</td><td class="mdescRight">send eval message to top object <br /></td></tr>
-<tr class="separator:ga0a957d4e8bb8f9a5cf779146010fb637"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga44158f480ad59bacde3c2e98da631db5"><td class="memItemLeft" align="right" valign="top"><a id="ga44158f480ad59bacde3c2e98da631db5"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga44158f480ad59bacde3c2e98da631db5">kb.p_ex_primitive</a> (p)</td></tr>
-<tr class="memdesc:ga44158f480ad59bacde3c2e98da631db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression <br /></td></tr>
-<tr class="separator:ga44158f480ad59bacde3c2e98da631db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab457df39ee65e10dd2c249015ab52dc1"><td class="memItemLeft" align="right" valign="top"><a id="gab457df39ee65e10dd2c249015ab52dc1"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gab457df39ee65e10dd2c249015ab52dc1">kb.p_ex_prefix</a> (p)</td></tr>
-<tr class="memdesc:gab457df39ee65e10dd2c249015ab52dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression <br /></td></tr>
-<tr class="separator:gab457df39ee65e10dd2c249015ab52dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaae8d53e18a8cd2b6866ca1783a754489"><td class="memItemLeft" align="right" valign="top"><a id="gaae8d53e18a8cd2b6866ca1783a754489"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gaae8d53e18a8cd2b6866ca1783a754489">kb.p_ex_infix</a> (p)</td></tr>
-<tr class="memdesc:gaae8d53e18a8cd2b6866ca1783a754489"><td class="mdescLeft">&#160;</td><td class="mdescRight">expression <br /></td></tr>
-<tr class="separator:gaae8d53e18a8cd2b6866ca1783a754489"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7e969bcf116af53faa2d43b018b3f1a3"><td class="memItemLeft" align="right" valign="top"><a id="ga7e969bcf116af53faa2d43b018b3f1a3"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga7e969bcf116af53faa2d43b018b3f1a3">kb.p_ex_parens</a> (p)</td></tr>
-<tr class="memdesc:ga7e969bcf116af53faa2d43b018b3f1a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">parens <br /></td></tr>
-<tr class="separator:ga7e969bcf116af53faa2d43b018b3f1a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabf4d977cd814eeca76bc80011d50d644"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gabf4d977cd814eeca76bc80011d50d644">kb.p_primitive</a> (p)</td></tr>
-<tr class="memdesc:gabf4d977cd814eeca76bc80011d50d644"><td class="mdescLeft">&#160;</td><td class="mdescRight">primitive tokens  <a href="group__parser.html#gabf4d977cd814eeca76bc80011d50d644">More...</a><br /></td></tr>
-<tr class="separator:gabf4d977cd814eeca76bc80011d50d644"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga428c84f44a70a391207aed4c82ec5cdb"><td class="memItemLeft" align="right" valign="top"><a id="ga428c84f44a70a391207aed4c82ec5cdb"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga428c84f44a70a391207aed4c82ec5cdb">kb.p_prefix</a> (p)</td></tr>
-<tr class="memdesc:ga428c84f44a70a391207aed4c82ec5cdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">prefix operators <br /></td></tr>
-<tr class="separator:ga428c84f44a70a391207aed4c82ec5cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa45188adceb521b16166478ecaa34f1a"><td class="memItemLeft" align="right" valign="top"><a id="gaa45188adceb521b16166478ecaa34f1a"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gaa45188adceb521b16166478ecaa34f1a">kb.p_infix</a> (p)</td></tr>
-<tr class="memdesc:gaa45188adceb521b16166478ecaa34f1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">infix operators <br /></td></tr>
-<tr class="separator:gaa45188adceb521b16166478ecaa34f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7e3efe7189d8455204ed92af5a9e97d8"><td class="memItemLeft" align="right" valign="top"><a id="ga7e3efe7189d8455204ed92af5a9e97d8"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga7e3efe7189d8455204ed92af5a9e97d8">kb.p_error</a> (p)</td></tr>
-<tr class="memdesc:ga7e3efe7189d8455204ed92af5a9e97d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">parser error callback <br /></td></tr>
-<tr class="separator:ga7e3efe7189d8455204ed92af5a9e97d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa7447daa55bc0b693d701d40784e509f"><td class="memItemLeft" align="right" valign="top"><a id="gaa7447daa55bc0b693d701d40784e509f"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_number</b> (t)</td></tr>
+<tr class="separator:gaa7447daa55bc0b693d701d40784e509f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac38bb362d1bb8bda698994d8e3c0770d"><td class="memItemLeft" align="right" valign="top"><a id="gac38bb362d1bb8bda698994d8e3c0770d"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_expint</b> (t)</td></tr>
+<tr class="separator:gac38bb362d1bb8bda698994d8e3c0770d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1100b08faeac2a1815d8a74c675f334e"><td class="memItemLeft" align="right" valign="top"><a id="ga1100b08faeac2a1815d8a74c675f334e"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_hex</b> (t)</td></tr>
+<tr class="separator:ga1100b08faeac2a1815d8a74c675f334e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa90bed33e95c3f7b4821128b619361ca"><td class="memItemLeft" align="right" valign="top"><a id="gaa90bed33e95c3f7b4821128b619361ca"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_bin</b> (t)</td></tr>
+<tr class="separator:gaa90bed33e95c3f7b4821128b619361ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga84a5a58b3016dce39d5ddbabd324144b"><td class="memItemLeft" align="right" valign="top"><a id="ga84a5a58b3016dce39d5ddbabd324144b"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_integer</b> (t)</td></tr>
+<tr class="separator:ga84a5a58b3016dce39d5ddbabd324144b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga90977c0cededa7b43a42ed14656c8c7b"><td class="memItemLeft" align="right" valign="top"><a id="ga90977c0cededa7b43a42ed14656c8c7b"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_symbol</b> (t)</td></tr>
+<tr class="separator:ga90977c0cededa7b43a42ed14656c8c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadb3858677388f09173df615cf0eebf44"><td class="memItemLeft" align="right" valign="top"><a id="gadb3858677388f09173df615cf0eebf44"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_error</b> (t)</td></tr>
+<tr class="separator:gadb3858677388f09173df615cf0eebf44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ga295024a6a766af74e09a82dff9f0faff"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga295024a6a766af74e09a82dff9f0faff">kb.precedence</a></td></tr>
-<tr class="memdesc:ga295024a6a766af74e09a82dff9f0faff"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator precedence  <a href="group__parser.html#ga295024a6a766af74e09a82dff9f0faff">More...</a><br /></td></tr>
-<tr class="separator:ga295024a6a766af74e09a82dff9f0faff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5c0a059021c4793de08e2139862f2721"><td class="memItemLeft" align="right" valign="top"><a id="ga5c0a059021c4793de08e2139862f2721"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga5c0a059021c4793de08e2139862f2721">kb.parser</a> = yacc.yacc(debug=False,write_tables=False)</td></tr>
-<tr class="memdesc:ga5c0a059021c4793de08e2139862f2721"><td class="mdescLeft">&#160;</td><td class="mdescRight">parser <br /></td></tr>
-<tr class="separator:ga5c0a059021c4793de08e2139862f2721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga63021b012594c12a2442fd96a20bd192"><td class="memItemLeft" align="right" valign="top"><a id="ga63021b012594c12a2442fd96a20bd192"></a>
+list&#160;</td><td class="memItemRight" valign="bottom"><b>parser.tokens</b> = ['symbol','number','integer','hex','bin']</td></tr>
+<tr class="separator:ga63021b012594c12a2442fd96a20bd192"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad179fcae65ea12fa2c484adc1bf1a1ac"><td class="memItemLeft" align="right" valign="top"><a id="gad179fcae65ea12fa2c484adc1bf1a1ac"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_ignore</b> = ' \t\r\n'</td></tr>
+<tr class="separator:gad179fcae65ea12fa2c484adc1bf1a1ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacf904655befa96ebe149a6540f032838"><td class="memItemLeft" align="right" valign="top"><a id="gacf904655befa96ebe149a6540f032838"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>parser.lexer</b> = lex.lex()</td></tr>
+<tr class="separator:gacf904655befa96ebe149a6540f032838"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="gabf4d977cd814eeca76bc80011d50d644"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabf4d977cd814eeca76bc80011d50d644">&#9670;&nbsp;</a></span>p_primitive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def kb.p_primitive </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>primitive tokens </p>
-<pre class="fragment">primitive : symbol
-              | number
-              | integer
-              | bin
-              | hex
-              | string    </pre> 
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="ga295024a6a766af74e09a82dff9f0faff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga295024a6a766af74e09a82dff9f0faff">&#9670;&nbsp;</a></span>precedence</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">tuple kb.precedence</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  (</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    (<span class="stringliteral">&#39;left&#39;</span>,<span class="stringliteral">&#39;infix&#39;</span>),</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    (<span class="stringliteral">&#39;right&#39;</span>,<span class="stringliteral">&#39;prefix&#39;</span>),</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    )</div></div><!-- fragment -->
-<p>operator precedence </p>
-
-</div>
-</div>
+<p>primitive lexer-only parser using <a class="el" href="ply.html">PLY library</a> </p>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

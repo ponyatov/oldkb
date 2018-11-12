@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['python_20persistance',['Python persistance',['../pp.html',1,'']]]
+  ['logical_20programming',['Logical programming',['../logic.html',1,'']]]
 ];

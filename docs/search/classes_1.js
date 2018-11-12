@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bin',['Bin',['../classkb_1_1Bin.html',1,'kb']]]
+  ['bin',['Bin',['../classsym_1_1Bin.html',1,'sym']]]
 ];
