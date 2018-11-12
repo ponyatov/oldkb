@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['pow',['POW',['../group__math.html#gae1b5ae1d406a8109953570f0cde2b61c',1,'forth']]]
+  ['mod',['MOD',['../group__math.html#gad599714ea7fa09f76dbdef9fa35b276c',1,'forth']]],
+  ['mul',['MUL',['../group__math.html#ga5ee3cc03093546bf80880648604ae634',1,'forth']]]
 ];

@@ -7,28 +7,51 @@
 
 from sym import *
 
-# ########################## FORTH Virtual Machine ###########################
+# ############################# FORTH Virtual Machine ########################
 
-## FORTH Virtual Machine
+## @ref kbf Virtual Machine
 class FORTH(VM): pass
 
 ## global FVM
 F = FORTH('vm')
 
-F['vm'] = F
+F['VM'] = F
 
 # ################################## debug ###################################
+## @ingroup debug
+## @{
 
+## `BYE ( -- )` stop whole system
 def BYE(vm): sys.exit(0)
 F << Fn(BYE)
 
+## `? ( -- )` dump stack
 def q(vm): print vm.pop()
 F['?'] = Fn(q)
 
+## `WORDS ( -- )` dump vocabulary
 def WORDS(vm): vm.push(vm.slots())
 F << Fn(WORDS)
 
+## @}
+
+# ################################ persistance ###############################
+## @ingroup persist
+## @{
+
+## `SAVE ( -- )` pickle VM to `.db` file
+def SAVE(vm): vm.save()
+F << Fn(SAVE)
+
+## `LOAD ( -- )` unpickle VM from `.db` file
+def LOAD(vm): vm.load()
+F << Fn(LOAD)
+
+## @}
+
 # ################################## stack ###################################
+## @ingroup stack
+## @{
 
 def DUP(vm): vm.dup()
 F << Fn(DUP)
@@ -45,6 +68,8 @@ F << Fn(OVER)
 def DROPALL(vm): vm.dropall()
 F << Fn(DROPALL)
 F['.'] = Fn(DROPALL)
+
+## @}
 
 # ################################# math #####################################
 ## @ingroup math

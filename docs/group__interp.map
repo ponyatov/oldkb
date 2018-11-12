@@ -1,4 +1,0 @@
-<map id="Interpreter" name="Interpreter">
-<area shape="rect" id="node1" href="$group__repl.html" title="Read&#45;Eval&#45;Print&#45;Loop. " alt="" coords="157,5,214,32"/>
-<area shape="rect" id="node2" href="$group__syntax.html" title="powered with PLY library " alt="" coords="135,56,236,83"/>
-</map>

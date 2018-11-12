@@ -1,4 +1,0 @@
-<map id="os" name="os">
-<area shape="rect" id="node1" href="$group__deploy.html" title="target deploy environments and platforms for software synthesys " alt="" coords="5,5,65,32"/>
-<area shape="rect" id="node2" href="$group__fw.html" title="multi&#45;platform high&#45;level OS abstraction " alt="" coords="200,5,283,32"/>
-</map>

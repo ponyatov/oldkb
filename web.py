@@ -78,6 +78,11 @@ def login():
 @flask_login.login_required
 def logout(): flask.redirect('/login')
 
+@app.route('/dump/<sym>')
+@flask_login.login_required
+def dump(sym):
+    return flask.render_template('dump.html',dump=F[sym].dump())
+
 if __name__ == '__main__':
     app.run(debug=True, host=IP, port=PORT, ssl_context = SSL_KEYS)
 

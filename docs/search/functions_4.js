@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['find',['FIND',['../group__interpret.html#ga6603558a1dd348f13444f83f74b8c629',1,'forth']]]
+  ['execute',['EXECUTE',['../group__interpret.html#ga9751eb882f1367a08280473527215946',1,'forth']]]
 ];

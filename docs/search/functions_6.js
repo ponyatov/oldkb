@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['mod',['MOD',['../group__math.html#gad599714ea7fa09f76dbdef9fa35b276c',1,'forth']]],
-  ['mul',['MUL',['../group__math.html#ga5ee3cc03093546bf80880648604ae634',1,'forth']]]
+  ['int',['INT',['../group__math.html#ga95b8def66744e24021efee2a47478c9b',1,'forth']]],
+  ['interpret',['INTERPRET',['../group__interpret.html#gad715cc8353f6df16833c070e48bd7c1f',1,'forth']]]
 ];

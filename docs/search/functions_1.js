@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cos',['COS',['../group__math.html#ga22b75f18a06ec810e35d6eef11b9d6ba',1,'forth']]]
+  ['bye',['BYE',['../group__debug.html#ga662f66fa2489eb1c142a40352d7189ef',1,'forth']]]
 ];

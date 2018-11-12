@@ -1,7 +1,0 @@
-<map id="pp.Number" name="pp.Number">
-<area shape="rect" id="node4" href="$classpp_1_1Integer.html" title="integer number " alt="" coords="37,229,117,256"/>
-<area shape="rect" id="node2" href="$classpp_1_1Primitive.html" title="primitive object " alt="" coords="32,80,123,107"/>
-<area shape="rect" id="node3" href="$classpp_1_1Object.html" title="base object " alt="" coords="38,5,117,32"/>
-<area shape="rect" id="node5" href="$classpp_1_1Bin.html" title="binary vector " alt="" coords="5,304,64,331"/>
-<area shape="rect" id="node6" href="$classpp_1_1Hex.html" title="hexadecimal machine number " alt="" coords="88,304,152,331"/>
-</map>

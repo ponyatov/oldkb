@@ -1,8 +1,0 @@
-<map id="kb.Primitive" name="kb.Primitive">
-<area shape="rect" id="node3" href="$classkb_1_1Number.html" title="floating pointer number " alt="" coords="34,155,121,181"/>
-<area shape="rect" id="node7" href="$classkb_1_1Symbol.html" title="symbol (names variables and other objects) " alt="" coords="145,155,229,181"/>
-<area shape="rect" id="node2" href="$classkb_1_1Object.html" title="base object " alt="" coords="93,5,171,32"/>
-<area shape="rect" id="node4" href="$classkb_1_1Integer.html" title="integer number " alt="" coords="37,229,117,256"/>
-<area shape="rect" id="node5" href="$classkb_1_1Bin.html" title="binary vector " alt="" coords="5,304,64,331"/>
-<area shape="rect" id="node6" href="$classkb_1_1Hex.html" title="hexadecimal machine number " alt="" coords="88,304,152,331"/>
-</map>
