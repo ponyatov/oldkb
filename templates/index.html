@@ -3,24 +3,20 @@
 {% block body %}
 
 <div id=slider>
-
-<pre id=stack>{{ S }}</pre>
-
-<pre id=words>{{ W }}</pre>
-
-<pre id=log># Hello</pre>
-
+<pre id=vm>{{ vm }}</pre>
 </div>
 
 <form id=cmd action="" method=post novalidate>
 {{ form.hidden_tag() }}
 {{ form.error.label }}
-<!--textarea autocorrect=off id=meta rows=3>{{ PEGJS }}</textarea-->
-{{ form.pad(autofocus=true,rows=7,autocorrect='off') }}
+{{ form.pad(autofocus=true,rows=3,autocorrect='off') }}
 {{ form.go() }}
 </form>
 
-<script>
+{% endblock %}
+
+{% block script %}
+
 window.onload = function() {
 	
 	cmd		= document.getElementById('cmd');
@@ -36,6 +32,5 @@ window.onload = function() {
 window.onresize = function() {
 	slider.style.height = cmd.offsetTop-5;
 }
-</script>
 
 {% endblock %}

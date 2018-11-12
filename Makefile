@@ -1,7 +1,2 @@
-all: doxy test.log
-
-doxy:
-	doxygen doxy.gen 1> /dev/null
-
-test.log: pp.py test.src
-	python $^ > $@ && tail $(TAIL) $@
+static/D3.js:
+	wget -c -O $@ http://d3js.org/d3.v3.min.js
