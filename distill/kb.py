@@ -1,58 +1,3 @@
-#!/usr/bin/env python2.7
-
-## @file
-## @brief engine
-
-import os,sys,pickle,types
-
-from Sym import * 
-
-#     ## @ingroup msg
-#     ## @{
-#     
-#     ## evaluate object in a generic recursive way
-#     def eval(self):
-#         for j in self.nest: j = j.eval()
-#         return self
-#     
-#     def __call__(self): S.push(self) ; return self
-#     
-#     ## @}
-
-# ## primitive object
-# class Primitive(Object):
-#     ## evaluate primitive as itself
-#     ## @ingroup msg
-#     def eval(self): return self
-
-## @defgroup symbol symbol
-## @brief names variables and other objects
-## @{
-
-# class Symbol(Primitive):
-#     ## evaluate via vocabulary
-#     ## @ingroup msg
-#     def eval(self):
-#         return self.lookup()
-#     ## lookup in vocabulary 
-#     ## @ingroup msg
-#     def lookup(self):
-#         try:
-#             return W[self.value]
-#         except KeyError:
-#             try:
-#                 return W[self.value.upper()]
-#             except KeyError:
-#                 raise KeyError(self)
-
-## @defgroup nums numbers
-## @brief multiple number classes: float, integer, complex...
-## @{
-
-## @defgroup math math
-## @brief numerical computations starting from primitive arithmetics
-
-import math
 
 ## floating pointer number
 class Number(Primitive):
@@ -119,26 +64,6 @@ class Integer(Number):
         else: return Number.add(self,obj)
     ## @}
         
-## hexadecimal machine number
-class Hex(Integer): 
-    ## construct from `0xDeadBeef`
-    def __init__(self,V):
-        Primitive.__init__(self, int(V[2:],0x10))
-    ## represent in `0xNNNN` form
-    def str(self):
-        return '0x%X' % self.value
-
-## binary vector
-class Bin(Integer): 
-    ## construct from `0b1101`
-    def __init__(self,V):
-        Primitive.__init__(self, int(V[2:],0x02))
-    ## represent in `0b1101` form
-    def str(self):
-        return bin(self.value)
-
-## @}    
-
 ## @}
 
 ## @defgroup cont data container
@@ -731,39 +656,3 @@ def TAN(): S.push ( S.pop().tan() )
 W << SIN ; W << COS ; W << TAN
 
 ## @}
-
-## web user
-class User(flask_login.UserMixin):
-    ## construct user with given name
-    ## @param[in] id unicode string
-    def __init__(self,id):
-        ## user id (unicode string)
-        self.id = id
-
-## login manager user laoder
-## @ingroup auth
-@logman.user_loader
-def load_user(user_id):
-    return User(user_id) 
-
-## @}
-
-## @defgroup argv system startup
-## @brief command line parsing and initialization
-## @{
-
-## process command line parameters
-## @details
-## * process list of files in command line and exit, or
-## * run interactive console if no parameters given
-def process_argv():
-    if len(sys.argv) > 1:       # has command line parameters
-        for i in sys.argv[1:]:
-            F = open(i,'r') ; INTERPRET(F.read()) ; F.close()
-    else:
-#         REPL()
-        app.run(debug=DEBUG,host=IP,port=PORT,ssl_context=SSL_KEYS)
-process_argv()
-
-## @}
-

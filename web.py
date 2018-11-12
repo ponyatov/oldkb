@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 
 from forth import *
 
@@ -37,6 +38,11 @@ def index():
     form = CmdForm()
     if form.validate_on_submit(): INTERPRET(form.pad.data)
     return flask.render_template('index.html', form=form, vm=F)
+
+class User(flask_login.UserMixin):
+    def __init__(self,id): self.id = id
+@logman.user_loader
+def load_user(user_id): return User(user_id) 
 
 class LoginForm(flask_wtf.FlaskForm):
     login = wtforms.StringField('login', [wtforms.validators.DataRequired()])

@@ -1,12 +1,16 @@
 
 import os,sys,time,pickle
 
+################################# Object #####################################
+
 class Object:
     def __init__(self, V):
         self.type  = self.__class__.__name__.lower()
         self.value = V
         self.attr  = {}
         self.nest  = []
+        
+    ############## dump ##############
         
     def __repr__(self): return self.dump()
     dumped = []
@@ -24,10 +28,14 @@ class Object:
     def pad(self, N): return '\n' + '    ' * N
     def str(self): return str(self.value)
     
+    ############## slots ##############
+        
     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
     def __getitem__(self,key): return self.attr[key]
     def __lshift__(self,obj): self.attr[obj.value] = obj
 
+    ############## stack ##############
+        
     def push(self,obj): self.nest.append(obj) ; return self
     def pop(self): return self.nest.pop()
     def top(self): return self.nest[-1]
@@ -38,18 +46,38 @@ class Object:
     def swap(self): B = self.pop() ; A = self.pop() ; self.push(B) ; self.push(A)
     def over(self): self.push(self.nest[-2])
     
+################################### Primitite #################################   
+
 class Primitite(Object): pass
 class Symbol(Primitite): pass
 class String(Primitite): pass
 
+#################################### Number ###################################
+
+import math
+
 class Number(Primitite):
     def __init__(self,V): Primitive.__init__(self, float(V))
+    
+################################### Integer ###################################
+
 class Integer(Number):
     def __init__(self,V): Primitive.__init__(self, int(V))
+    
+class Hex(Integer): 
+    def __init__(self,V): Primitive.__init__(self, int(V[2:],0x10))
+    def str(self): return '0x%X' % self.value
+class Bin(Integer): 
+    def __init__(self,V): Primitive.__init__(self, int(V[2:],0x02))
+    def str(self): return bin(self.value)
+    
+################################### Container #################################
 
 class Container(Object): pass
 class Stack(Container): pass
 class Map(Container): pass
+
+#################################### Active ###################################
 
 class Active(Object): pass
 class VM(Active): pass
