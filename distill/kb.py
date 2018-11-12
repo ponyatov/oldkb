@@ -732,24 +732,6 @@ W << SIN ; W << COS ; W << TAN
 
 ## @}
 
-## SSL modes:
-
-## * None: pure HTTP for Eclipse internal browser 
-SSL_KEYS = None
-## * `'adhoc'`
-SSL_KEYS = 'adhoc'
-## * self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
-SSL_KEYS = ('cert.pem', 'key.pem')
-
-## login hash (autorization for single user only)
-LOGIN_HASH = ''
-## password hash (autorization for single user only)
-PSWD_HASH  = ''
-
-from werkzeug.security import generate_password_hash,check_password_hash
-
-## @}
-
 ## web user
 class User(flask_login.UserMixin):
     ## construct user with given name
@@ -763,54 +745,6 @@ class User(flask_login.UserMixin):
 @logman.user_loader
 def load_user(user_id):
     return User(user_id) 
-
-## get/post
-## `/` route
-def index():
-    if not flask_login.current_user.is_authenticated:
-        return flask.redirect('/login')
-    form = CmdForm()
-    if form.validate_on_submit(): INTERPRET(form.pad.data)
-    return flask.render_template('index.html',form=form,S=S,W=W)
-
-## @brief login web form
-## @ingroup auth
-class LoginForm(flask_wtf.FlaskForm):
-    ## login field
-    login  = wtforms.StringField('login', [wtforms.validators.DataRequired()])
-    ## password field (stared)
-    pswd   = wtforms.PasswordField('password', [wtforms.validators.DataRequired()])
-    ## submit button
-    go = wtforms.SubmitField('GO')
-    
-## login
-@app.route('/login', methods = ['GET', 'POST'])
-## any try to relogin will kickout active user and invalidate all sessions
-## @brief `/login` route
-## @ingroup auth
-def login():
-    flask_login.logout_user()
-    form = LoginForm()
-    if form.validate_on_submit():
-        LOGIN = form.login.data
-        PSWD  = form.pswd.data
-        if  check_password_hash(LOGIN_HASH, form.login.data) \
-        and check_password_hash(PSWD_HASH , form.pswd.data ):
-            flask_login.login_user(User(LOGIN))
-            return flask.redirect('/')
-        else:
-            print 'LOGIN_HASH',generate_password_hash(LOGIN)
-            print 'PSWD_HASH' ,generate_password_hash(PSWD)
-            return flask.redirect('/login')
-#     app.config['SECRET_KEY'] = os.urandom(32)
-    return flask.render_template('login.html',form=form)
-
-## `/logout` route
-## @ingroup auth
-@app.route('/logout')
-@flask_login.login_required
-def logout():
-    return flask.redirect('/login')
 
 ## @}
 

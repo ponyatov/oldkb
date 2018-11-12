@@ -1,6 +1,7 @@
 {% extends "template.html" %}
 
 {% block body %}
+
 <form id=loginform action="" method=post validate>
 {{ form.hidden_tag() }}
 <table>
@@ -9,4 +10,5 @@
 <tr><td></td><td>{{ form.go() }}</td></tr>
 </table>
 </form>
+
 {% endblock %}

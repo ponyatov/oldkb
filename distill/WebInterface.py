@@ -23,13 +23,7 @@ DEBUG = False
 ## @brief HTTPS and hashed login/password for single user only
 ## @{
 
-import flask_login
-
-## login manager
-logman = flask_login.LoginManager() ; logman.init_app(app)
-
 # this module can't be publicated on github
-from secrets import LOGIN_HASH, PSWD_HASH, SSL_KEYS
 
 try:
     # check files available
