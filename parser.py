@@ -28,7 +28,7 @@ def t_integer(t):
     return Integer(t.value)
 
 def t_symbol(t):
-    r'[a-zA-Z0-9_\?\.\:\;\+\-\*\/\^\@\!\<\>]+'
+    r'[a-zA-Z0-9_\?\.\:\;\+\-\*\/\%\^\@\!\<\>]+'
     return Symbol(t.value)
 
 def t_error(t): raise SyntaxError(t)

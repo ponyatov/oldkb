@@ -38,7 +38,7 @@ def index():
     form = CmdForm()
     if form.validate_on_submit():
         F.push(String(form.pad.data)) ; INTERPRET(F)
-    return flask.render_template('index.html', form=form, vm=F)
+    return flask.render_template('index.html', form=form, vm=F.dump(slots=False))
 
 class User(flask_login.UserMixin):
     def __init__(self,id): self.id = id

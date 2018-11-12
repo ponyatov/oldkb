@@ -33,6 +33,10 @@ class Object:
     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
     def __getitem__(self,key): return self.attr[key]
     def __lshift__(self,obj): self.attr[obj.value] = obj
+    def slots(self):
+        R = self.__class__(self.value)
+        R.attr = self.attr
+        return R
 
     ############## stack ##############
         
@@ -78,6 +82,10 @@ class Number(Primitive):
         if isinstance(obj, (Number,Integer)):
             return Number(self.value / obj.value)
         raise SyntaxError(obj)
+    def pow(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(math.pow(self.value, obj.value))
+        raise SyntaxError(obj)
     
     def int(self): return Integer(self.value)
     def num(self): return self
@@ -108,6 +116,16 @@ class Integer(Number):
     def div(self,obj):
         if isinstance(obj, (Integer,Number)):
             return Number(float(self.value) / obj.value)
+        raise SyntaxError(obj)
+    def mod(self,obj):
+        if isinstance(obj, Integer):
+            return Integer(self.value % obj.value)
+        raise SyntaxError(obj)
+    def pow(self,obj):
+        if isinstance(obj, Integer) and obj.value > 0:
+            return Integer(math.pow(self.value, obj.value))
+        elif isinstance(obj, (Integer,Number)):
+            return Number(math.pow(self.value, obj.value))
         raise SyntaxError(obj)
     
     def int(self): return self

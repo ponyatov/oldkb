@@ -3,14 +3,7 @@ from sym import *
 
 ############################# FORTH Virtual Machine ###########################
 
-class FORTH(VM):
-    def add(self): B = self.pop() ; A = self.pop() ; self.push(A.add(B))
-    def sub(self): B = self.pop() ; A = self.pop() ; self.push(A.sub(B))
-    def mul(self): B = self.pop() ; A = self.pop() ; self.push(A.mul(B))
-    def div(self): B = self.pop() ; A = self.pop() ; self.push(A.div(B))
-    def pow(self): B = self.pop() ; A = self.pop() ; self.push(A.pow(B))
-    def int(self): self.push(self.pop().int())
-    def num(self): self.push(self.pop().num())
+class FORTH(VM): pass
 
 F = FORTH('vm')
 
@@ -23,6 +16,9 @@ F << Fn(BYE)
 
 def q(vm): print vm.pop()
 F['?'] = Fn(q)
+
+def WORDS(vm): vm.push(vm.slots())
+F << Fn(WORDS)
 
 ##################################### stack ###################################
 
@@ -44,30 +40,34 @@ F['.'] = Fn(DROPALL)
 
 #################################### math #####################################
 
-def ADD(vm): vm.add()
+def ADD(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.add(B))
 F << Fn(ADD)
 F['+'] = Fn(ADD)
 
-def SUB(vm): vm.sub()
+def SUB(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.sub(B))
 F << Fn(SUB)
 F['-'] = Fn(SUB)
 
-def MUL(vm): vm.mul()
+def MUL(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.mul(B))
 F << Fn(MUL)
 F['*'] = Fn(MUL)
 
-def DIV(vm): vm.div()
+def DIV(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.div(B))
 F << Fn(DIV)
 F['/'] = Fn(DIV)
 
-def POW(vm): vm.pow()
+def MOD(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.mod(B))
+F << Fn(MOD)
+F['%'] = Fn(MOD)
+
+def POW(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.pow(B))
 F << Fn(POW)
 F['^'] = Fn(POW)
 
-def INT(vm): vm.int()
+def INT(vm): vm.push(vm.pop().int())
 F << Fn(INT)
 
-def NUM(vm): vm.num()
+def NUM(vm): vm.push(vm.pop().num())
 F << Fn(NUM)
 
 ################################## interpreter ################################
