@@ -1,8 +1,4 @@
-{% extends "template.html" %}
 
-{% block body %}
-
-<div id=slider>
 
 <pre id=stack>{{ S }}</pre>
 
@@ -10,32 +6,4 @@
 
 <pre id=log># Hello</pre>
 
-</div>
-
-<form id=cmd action="" method=post novalidate>
-{{ form.hidden_tag() }}
-{{ form.error.label }}
 <!--textarea autocorrect=off id=meta rows=3>{{ PEGJS }}</textarea-->
-{{ form.pad(autofocus=true,rows=3,autocorrect='off') }}
-{{ form.go() }}
-</form>
-
-<script>
-window.onload = function() {
-	
-	cmd		= document.getElementById('cmd');
-	slider	= document.getElementById('slider');
-	
-	window.onresize();
-	
-	cmd.onkeydown = function(e) {
-		if(e.keyCode == 13 && e.ctrlKey) { cmd.submit() }
-	}
-}
-
-window.onresize = function() {
-	slider.style.height = cmd.offsetTop-5;
-}
-</script>
-
-{% endblock %}

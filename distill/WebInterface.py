@@ -6,21 +6,17 @@ import os,sys
 ## @brief Flask powered
 ## @{
 
-import flask,flask_wtf,wtforms
+,flask_wtf,wtforms
 
 ## IP addr to bind 
-IP = '0.0.0.0'
 
 ## IP port to bind
-PORT = 8888
 
 ## debug mode must be enabled only on dev station
 DEBUG = False
 
 ## Flask application
-app = flask.Flask(__name__)
 
-app.config['SECRET_KEY'] = os.urandom(32)
 
 
 ## @defgroup auth authorization

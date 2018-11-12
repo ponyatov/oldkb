@@ -764,17 +764,7 @@ class User(flask_login.UserMixin):
 def load_user(user_id):
     return User(user_id) 
 
-## command entry web form
-class CmdForm(flask_wtf.FlaskForm):
-    ## error message
-    error = wtforms.StringField('no error')
-    ## FORTH code entry
-    pad = wtforms.TextAreaField('pad')
-    ## go button
-    go  = wtforms.SubmitField('GO')
-
 ## get/post
-@app.route('/', methods=['GET', 'POST'])
 ## `/` route
 def index():
     if not flask_login.current_user.is_authenticated:

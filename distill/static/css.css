@@ -1,23 +1,12 @@
-html,body { width:100%; overflow: hidden; margin: 0; padding: 0; }
-
-* {
-	background: black; color: lightgreen;
-	font-family: Consolas,monospace,monospace; font-size: 4mm;
-	margin: 0; 
-}
 
 /* pre		 { } /* white-space: pre-wrap; word-break: break-all; } */
 pre		 { width:100%; tab-size: 4; }
 textarea { width:100%; caret-color:red; }
-#go		 { width:100%; background: darkslategray; height: 5vmin; }
 
-#cmd { position: absolute; bottom:0; width:100%; }
 
 #stack	{ color:cyan; }
 #pad	{ color:cyan; border-color: darkcyan; }
 #words	{ color:lightblue; }
-
-label[for=error]	{ color:yellow; }
 
 #slider {
 	width: 100%;
@@ -45,7 +34,3 @@ label[for=error]	{ color:yellow; }
 	vertical-align:top;
 }
 
-@media only screen and (max-width: 800px) {
-	*	{ font-size:	5mm; }
-	#go	{ height:		11vmin; }
-}
