@@ -12,6 +12,6 @@
 
 (c) Dmitry Ponyatov <<dponyatov@gmail.com>> , All rights reserved
 
-github: https://github.com/ponyatov/pp
+github: https://github.com/ponyatov/kb
 
-manual: https://ponyatov.github.io/pp
+manual: https://ponyatov.github.io/kb

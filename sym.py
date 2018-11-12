@@ -1,7 +1,13 @@
+## @file
+## @brief Symbolic type system
+
+## @defgroup sym Symbolic type system
+## @brief universal object/frame/tree data structures
+## @{ 
 
 import os,sys,time,pickle
 
-################################# Object #####################################
+# ############################## Object #####################################
 
 class Object:
     def __init__(self, V):
@@ -50,13 +56,13 @@ class Object:
     def swap(self): B = self.pop() ; A = self.pop() ; self.push(B) ; self.push(A)
     def over(self): self.push(self.nest[-2])
     
-################################### Primitive #################################   
+# ############################### Primitive #################################   
 
 class Primitive(Object): pass
 class Symbol(Primitive): pass
 class String(Primitive): pass
 
-#################################### Number ###################################
+# ################################ Number ###################################
 
 import math
 
@@ -90,7 +96,7 @@ class Number(Primitive):
     def int(self): return Integer(self.value)
     def num(self): return self
     
-################################### Integer ###################################
+# ############################### Integer ###################################
 
 class Integer(Number):
     def __init__(self,V): Primitive.__init__(self, int(V))
@@ -138,16 +144,18 @@ class Bin(Integer):
     def __init__(self,V): Primitive.__init__(self, int(V[2:],0x02))
     def str(self): return bin(self.value)
     
-################################### Container #################################
+# ############################### Container #################################
 
 class Container(Object): pass
 class Stack(Container): pass
 class Map(Container): pass
 
-#################################### Active ###################################
+# ################################ Active ###################################
 
 class Active(Object): pass
 class VM(Active): pass
 class Fn(Active):
     def __init__(self,F): Active.__init__(self, F.__name__) ; self.fn = F
     def __call__(self,vm): self.fn(vm)
+
+## @}

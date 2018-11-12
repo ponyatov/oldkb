@@ -1,5 +1,12 @@
 #!/usr/bin/env python2.7
 
+## @file
+## @brief Web interface /Flask/
+
+## @defgroup web Web interface
+## @brief Flask-based: http/https, user authorisation
+## @{ 
+
 from forth import *
 
 import os
@@ -73,3 +80,5 @@ def logout(): flask.redirect('/login')
 
 if __name__ == '__main__':
     app.run(debug=True, host=IP, port=PORT, ssl_context = SSL_KEYS)
+
+## @}

@@ -1,7 +1,13 @@
+## @file
+## @ref kbf FORTH-like script language
+
+## @defgroup forth kb/FORTH
+## @brief @ref FORTH-like script language (more: @ref kbf)
+## @{ 
 
 from sym import *
 
-############################# FORTH Virtual Machine ###########################
+# ########################## FORTH Virtual Machine ###########################
 
 class FORTH(VM): pass
 
@@ -9,7 +15,7 @@ F = FORTH('vm')
 
 F['vm'] = F
 
-##################################### debug ###################################
+# ################################## debug ###################################
 
 def BYE(vm): sys.exit(0)
 F << Fn(BYE)
@@ -20,7 +26,7 @@ F['?'] = Fn(q)
 def WORDS(vm): vm.push(vm.slots())
 F << Fn(WORDS)
 
-##################################### stack ###################################
+# ################################## stack ###################################
 
 def DUP(vm): vm.dup()
 F << Fn(DUP)
@@ -38,7 +44,7 @@ def DROPALL(vm): vm.dropall()
 F << Fn(DROPALL)
 F['.'] = Fn(DROPALL)
 
-#################################### math #####################################
+# ################################# math #####################################
 
 def ADD(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.add(B))
 F << Fn(ADD)
@@ -70,7 +76,7 @@ F << Fn(INT)
 def NUM(vm): vm.push(vm.pop().num())
 F << Fn(NUM)
 
-################################## interpreter ################################
+# ############################### interpreter ################################
 
 from parser import *
 
@@ -100,8 +106,10 @@ def INTERPRET(vm):
             if FIND(vm): EXECUTE(vm)
 F << Fn(INTERPRET)
 
-#################################### startup ##################################
+# ################################# startup ##################################
 
 while __name__ == '__main__':
     print F.dump(slots=None)
     F.push( String( raw_input('\ninfer> ') ) ) ; INTERPRET(F)
+
+#}
