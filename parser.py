@@ -2,6 +2,7 @@
 ## @brief Syntax parser (primitive lexer-only) /@ref ply/
 
 ## @defgroup parser Syntax parser
+## @ingroup interpret
 ## @brief primitive lexer-only parser using @ref ply
 ## @{ 
 
@@ -9,8 +10,10 @@ from sym import *
 
 import ply.lex as lex
 
+## parse directly into primitive @ref sym objects
 tokens = ['symbol','number','integer','hex','bin']
 
+## drop spaces
 t_ignore = ' \t\r\n'
 
 def t_number(t):
@@ -37,6 +40,7 @@ def t_symbol(t):
     r'[a-zA-Z0-9_\?\.\:\;\+\-\*\/\%\^\@\!\<\>]+'
     return Symbol(t.value)
 
+## lexer error callback
 def t_error(t): raise SyntaxError(t)
 
 lexer = lex.lex()

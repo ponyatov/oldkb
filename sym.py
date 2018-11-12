@@ -16,7 +16,11 @@ class Object:
         self.attr  = {}
         self.nest  = []
         
-    ############## dump ##############
+    # ############# dump ##############
+    ## @defgroup dump dump/print
+    ## @brief represent object in human-readable text form
+    ## @ingroup sym
+    ## @{
         
     def __repr__(self): return self.dump()
     dumped = []
@@ -34,7 +38,13 @@ class Object:
     def pad(self, N): return '\n' + '    ' * N
     def str(self): return str(self.value)
     
-    ############## slots ##############
+    ## @}
+    
+    # ############# slots ##############
+    ## @defgroup slot slot/attribute
+    ## @brief operations on named attributes = frame slots
+    ## @ingroup sym
+    ## @{
         
     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
     def __getitem__(self,key): return self.attr[key]
@@ -43,8 +53,14 @@ class Object:
         R = self.__class__(self.value)
         R.attr = self.attr
         return R
+    
+    ## @}
 
-    ############## stack ##############
+    # ############# stack ##############
+    ## @defgroup stack stack
+    ## @brief Any object can act as generic stack
+    ## @ingroup sym
+    ## @{
         
     def push(self,obj): self.nest.append(obj) ; return self
     def pop(self): return self.nest.pop()
@@ -56,18 +72,33 @@ class Object:
     def swap(self): B = self.pop() ; A = self.pop() ; self.push(B) ; self.push(A)
     def over(self): self.push(self.nest[-2])
     
-# ############################### Primitive #################################   
+    ## @}
+    
+# ############################### Primitive #################################
+## @defgroup prim Primitive
+## @brief primitive types in implementation language (Python)
+## @{   
 
 class Primitive(Object): pass
 class Symbol(Primitive): pass
 class String(Primitive): pass
 
 # ################################ Number ###################################
+## @defgroup num Number
+## @brief Multiple number types (floating, integer, machine, complex,..)
+## @{
+
+## @defgroup math
+## @brief Basic numerical computations
 
 import math
 
+## floating point
 class Number(Primitive):
     def __init__(self,V): Primitive.__init__(self, float(V))
+    
+    ## @ingroup math
+    ## @{
 
     def pfxadd(self): return self.__class__(+self.value)
     def pfxsub(self): return self.__class__(-self.value)
@@ -96,11 +127,17 @@ class Number(Primitive):
     def int(self): return Integer(self.value)
     def num(self): return self
     
+    ## @}
+    
 # ############################### Integer ###################################
 
+## integer
 class Integer(Number):
     def __init__(self,V): Primitive.__init__(self, int(V))
     
+    ## @ingroup math
+    ## @{
+
     def add(self,obj):
         if isinstance(obj, Integer):
             return Integer(self.value + obj.value)
@@ -136,26 +173,48 @@ class Integer(Number):
     
     def int(self): return self
     def num(self): return Number(self.value)
+    
+    ## @}
 
+## machine hexadecimal
 class Hex(Integer): 
     def __init__(self,V): Primitive.__init__(self, int(V[2:],0x10))
     def str(self): return '0x%X' % self.value
+    
+## binary string
 class Bin(Integer): 
     def __init__(self,V): Primitive.__init__(self, int(V[2:],0x02))
     def str(self): return bin(self.value)
     
+## @}
+## @}
+    
 # ############################### Container #################################
+## @defgroup cont Container
+## @brief Data containers
+## @{
 
 class Container(Object): pass
 class Stack(Container): pass
 class Map(Container): pass
 
+## @}
+
 # ################################ Active ###################################
+## @defgroup active Active
+## @brief Objects has execution semantics
+## @{
 
 class Active(Object): pass
+
+## Virtual Machine
 class VM(Active): pass
+
+## Function
 class Fn(Active):
     def __init__(self,F): Active.__init__(self, F.__name__) ; self.fn = F
     def __call__(self,vm): self.fn(vm)
+    
+## @}
 
 ## @}
