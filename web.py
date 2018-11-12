@@ -20,7 +20,7 @@ class CmdForm(flask_wtf.FlaskForm):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = CmdForm()
-    return flask.render_template('index.html', form=form, vm='<vm:FORTH>')
+    return flask.render_template('index.html', form=form, vm=F)
 
 if __name__ == '__main__':
     app.run(debug=True, host=IP, port=PORT)#, ssl_context = SSL_KEYS)
