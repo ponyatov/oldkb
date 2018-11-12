@@ -46,17 +46,17 @@ class Object:
     def swap(self): B = self.pop() ; A = self.pop() ; self.push(B) ; self.push(A)
     def over(self): self.push(self.nest[-2])
     
-################################### Primitite #################################   
+################################### Primitive #################################   
 
-class Primitite(Object): pass
-class Symbol(Primitite): pass
-class String(Primitite): pass
+class Primitive(Object): pass
+class Symbol(Primitive): pass
+class String(Primitive): pass
 
 #################################### Number ###################################
 
 import math
 
-class Number(Primitite):
+class Number(Primitive):
     def __init__(self,V): Primitive.__init__(self, float(V))
     
 ################################### Integer ###################################

@@ -14,7 +14,7 @@ logman = flask_login.LoginManager() ; logman.init_app(app)
 
 from secrets import IP,PORT
 from secrets import LOGIN_HASH, PSWD_HASH 
-# self-signed `openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365`
+# openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
 from secrets import SSL_KEYS
 
 try:
@@ -36,7 +36,8 @@ def index():
     if not flask_login.current_user.is_authenticated:
         return flask.redirect('/login')
     form = CmdForm()
-    if form.validate_on_submit(): INTERPRET(form.pad.data)
+    if form.validate_on_submit():
+        F.push(String(form.pad.data)) ; INTERPRET(F)
     return flask.render_template('index.html', form=form, vm=F)
 
 class User(flask_login.UserMixin):
