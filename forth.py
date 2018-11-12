@@ -104,8 +104,8 @@ F << Fn(INT)
 def NUM(vm): vm.push(vm.pop().num())
 F << Fn(NUM)
 
-F['e']  = Number(math.e)
-F['pi'] = Number(math.pi)
+F['E']  = Number(math.e)
+F['PI'] = Number(math.pi)
 
 ## @}
 
