@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['q',['q',['../group__deb.html#gaf61489db29f74ef28c37b52354a4af45',1,'kb']]],
-  ['qq',['qq',['../group__deb.html#gaf4a6bd27190f9c3b0acc6529b6e049f1',1,'kb']]]
+  ['sin',['SIN',['../group__math.html#ga5bc6d7101b2208bdc9582b31920c17f1',1,'forth']]],
+  ['sqrt',['SQRT',['../group__math.html#ga3b02920ca844c6cb9fc6db26e36429b9',1,'forth']]],
+  ['sub',['SUB',['../group__math.html#gae5b8d38a74eeb5bb0dea64ab50c1e107',1,'forth']]]
 ];

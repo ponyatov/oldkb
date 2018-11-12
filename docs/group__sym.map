@@ -1,3 +1,8 @@
 <map id="Symbolic type system" name="Symbolic type system">
-<area shape="rect" id="node2" href="$group__object.html" title="Object" alt="" coords="205,5,265,32"/>
+<area shape="rect" id="node1" href="$group__slot.html" title="operations on named attributes = frame slots " alt="" coords="205,5,300,32"/>
+<area shape="rect" id="node3" href="$group__active.html" title="Objects has execution semantics. " alt="" coords="223,56,282,83"/>
+<area shape="rect" id="node4" href="$group__prim.html" title="primitive types in implementation language (Python) " alt="" coords="216,107,289,133"/>
+<area shape="rect" id="node5" href="$group__dump.html" title="represent object in human&#45;readable text form " alt="" coords="211,157,294,184"/>
+<area shape="rect" id="node6" href="$group__stack.html" title="Any object can act as generic stack. " alt="" coords="225,208,280,235"/>
+<area shape="rect" id="node7" href="$group__cont.html" title="Data containers. " alt="" coords="213,259,292,285"/>
 </map>

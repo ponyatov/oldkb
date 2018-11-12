@@ -63,12 +63,21 @@ $(function() {
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">Syntax parser</div>  </div>
+<div class="title">Syntax parser<div class="ingroups"><a class="el" href="group__forth.html">kb/FORTH</a> &raquo; <a class="el" href="group__interpret.html">Interpreter</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>primitive lexer-only parser using <a class="el" href="ply.html">PLY library</a>  
 <a href="#details">More...</a></p>
+<div class="dynheader">
+Collaboration diagram for Syntax parser:</div>
+<div class="dyncontent">
+<center><table><tr><td><img src="group__parser.png" border="0" alt="" usemap="#group____parser"/>
+<map name="group____parser" id="group____parser">
+<area shape="rect" id="node1" href="group__interpret.html" title="Simplest postfix script language. " alt="" coords="5,5,87,32"/>
+</map>
+</td></tr></table></center>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -91,16 +100,19 @@ def&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_integer</b> (
 def&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_symbol</b> (t)</td></tr>
 <tr class="separator:ga90977c0cededa7b43a42ed14656c8c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadb3858677388f09173df615cf0eebf44"><td class="memItemLeft" align="right" valign="top"><a id="gadb3858677388f09173df615cf0eebf44"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_error</b> (t)</td></tr>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gadb3858677388f09173df615cf0eebf44">parser.t_error</a> (t)</td></tr>
+<tr class="memdesc:gadb3858677388f09173df615cf0eebf44"><td class="mdescLeft">&#160;</td><td class="mdescRight">lexer error callback <br /></td></tr>
 <tr class="separator:gadb3858677388f09173df615cf0eebf44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ga63021b012594c12a2442fd96a20bd192"><td class="memItemLeft" align="right" valign="top"><a id="ga63021b012594c12a2442fd96a20bd192"></a>
-list&#160;</td><td class="memItemRight" valign="bottom"><b>parser.tokens</b> = ['symbol','number','integer','hex','bin']</td></tr>
+list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga63021b012594c12a2442fd96a20bd192">parser.tokens</a> = ['symbol','number','integer','hex','bin']</td></tr>
+<tr class="memdesc:ga63021b012594c12a2442fd96a20bd192"><td class="mdescLeft">&#160;</td><td class="mdescRight">parse directly into primitive <a class="el" href="group__sym.html">Symbolic type system</a> objects <br /></td></tr>
 <tr class="separator:ga63021b012594c12a2442fd96a20bd192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad179fcae65ea12fa2c484adc1bf1a1ac"><td class="memItemLeft" align="right" valign="top"><a id="gad179fcae65ea12fa2c484adc1bf1a1ac"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><b>parser.t_ignore</b> = ' \t\r\n'</td></tr>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gad179fcae65ea12fa2c484adc1bf1a1ac">parser.t_ignore</a> = ' \t\r\n'</td></tr>
+<tr class="memdesc:gad179fcae65ea12fa2c484adc1bf1a1ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">drop spaces <br /></td></tr>
 <tr class="separator:gad179fcae65ea12fa2c484adc1bf1a1ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacf904655befa96ebe149a6540f032838"><td class="memItemLeft" align="right" valign="top"><a id="gacf904655befa96ebe149a6540f032838"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>parser.lexer</b> = lex.lex()</td></tr>

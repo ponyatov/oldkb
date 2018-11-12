@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KB: data stack</title>
+<title>KB: stack</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,29 +60,53 @@ $(function() {
 
 <div class="header">
   <div class="summary">
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">data stack<div class="ingroups"><a class="el" href="group__fvm.html">FORTH VM</a></div></div>  </div>
+<div class="title">stack<div class="ingroups"><a class="el" href="group__sym.html">Symbolic type system</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Any object can act as generic stack.  
+<a href="#details">More...</a></p>
 <div class="dynheader">
-Collaboration diagram for data stack:</div>
+Collaboration diagram for stack:</div>
 <div class="dyncontent">
 <center><table><tr><td><img src="group__stack.png" border="0" alt="" usemap="#group____stack"/>
 <map name="group____stack" id="group____stack">
-<area shape="rect" id="node2" href="group__fvm.html" title="FORTH VM" alt="" coords="5,5,97,32"/>
+<area shape="rect" id="node1" href="group__sym.html" title="universal object/frame/tree data structures " alt="" coords="5,5,157,32"/>
 </map>
 </td></tr></table></center>
 </div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ga53cff56128725c0c82f908524c330e18"><td class="memItemLeft" align="right" valign="top"><a id="ga53cff56128725c0c82f908524c330e18"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stack.html#ga53cff56128725c0c82f908524c330e18">kb.S</a> = <a class="el" href="classkb_1_1Stack.html">Stack</a>('DATA')</td></tr>
-<tr class="memdesc:ga53cff56128725c0c82f908524c330e18"><td class="mdescLeft">&#160;</td><td class="mdescRight">global data stack <br /></td></tr>
-<tr class="separator:ga53cff56128725c0c82f908524c330e18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga6c9f01029e87f823a9a908ace2296561"><td class="memItemLeft" align="right" valign="top"><a id="ga6c9f01029e87f823a9a908ace2296561"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>sym.Object.push</b> (self, obj)</td></tr>
+<tr class="separator:ga6c9f01029e87f823a9a908ace2296561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6694f5473a89fa0a6a33478b4e5177df"><td class="memItemLeft" align="right" valign="top"><a id="ga6694f5473a89fa0a6a33478b4e5177df"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>sym.Object.pop</b> (self)</td></tr>
+<tr class="separator:ga6694f5473a89fa0a6a33478b4e5177df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga602a0a261a76dd0ab73d49b9b4f50ce5"><td class="memItemLeft" align="right" valign="top"><a id="ga602a0a261a76dd0ab73d49b9b4f50ce5"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>sym.Object.top</b> (self)</td></tr>
+<tr class="separator:ga602a0a261a76dd0ab73d49b9b4f50ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab14953efb5bd1c0cf5c674f6775846c3"><td class="memItemLeft" align="right" valign="top"><a id="gab14953efb5bd1c0cf5c674f6775846c3"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>sym.Object.dropall</b> (self)</td></tr>
+<tr class="separator:gab14953efb5bd1c0cf5c674f6775846c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga59058513915d53e31bc6f6004e8db788"><td class="memItemLeft" align="right" valign="top"><a id="ga59058513915d53e31bc6f6004e8db788"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>sym.Object.dup</b> (self)</td></tr>
+<tr class="separator:ga59058513915d53e31bc6f6004e8db788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3342c882648a859e67d93628b4a83e4f"><td class="memItemLeft" align="right" valign="top"><a id="ga3342c882648a859e67d93628b4a83e4f"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>sym.Object.drop</b> (self)</td></tr>
+<tr class="separator:ga3342c882648a859e67d93628b4a83e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga616f13c9a2a808a3967613492687f2ab"><td class="memItemLeft" align="right" valign="top"><a id="ga616f13c9a2a808a3967613492687f2ab"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>sym.Object.swap</b> (self)</td></tr>
+<tr class="separator:ga616f13c9a2a808a3967613492687f2ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8b982d21eb857c29cbfa65c22ba30a21"><td class="memItemLeft" align="right" valign="top"><a id="ga8b982d21eb857c29cbfa65c22ba30a21"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>sym.Object.over</b> (self)</td></tr>
+<tr class="separator:ga8b982d21eb857c29cbfa65c22ba30a21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Any object can act as generic stack. </p>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

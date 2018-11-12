@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['active',['Active',['../classsym_1_1Active.html',1,'sym']]]
+  ['bin',['Bin',['../classsym_1_1Bin.html',1,'sym']]]
 ];

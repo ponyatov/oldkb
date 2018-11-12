@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['html',['HTML',['../group__html.html',1,'']]],
-  ['hardware',['hardware',['../group__hw.html',1,'']]]
+  ['math',['Math',['../group__math.html',1,'']]]
 ];

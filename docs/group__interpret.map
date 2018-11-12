@@ -1,0 +1,4 @@
+<map id="Interpreter" name="Interpreter">
+<area shape="rect" id="node3" href="$group__parser.html" title="primitive lexer&#45;only parser using PLY library " alt="" coords="269,5,372,32"/>
+<area shape="rect" id="node2" href="$group__forth.html" title="FORTH&#45;like script language (more: kb/FORTH) " alt="" coords="5,5,92,32"/>
+</map>

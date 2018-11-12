@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['fn',['Fn',['../classsym_1_1Fn.html',1,'sym']]],
-  ['forth',['FORTH',['../classforth_1_1FORTH.html',1,'forth']]],
-  ['forth_2epy',['forth.py',['../forth_8py.html',1,'']]]
+  ['execute',['EXECUTE',['../group__interpret.html#ga9751eb882f1367a08280473527215946',1,'forth']]]
 ];

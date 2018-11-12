@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['repl',['REPL',['../group__interp.html#gae9a54aa219f7652626fdb5d26987cc4b',1,'kb']]]
+  ['t_5ferror',['t_error',['../group__parser.html#gadb3858677388f09173df615cf0eebf44',1,'parser']]],
+  ['tan',['TAN',['../group__math.html#ga9fdebc8c6a12252a77e8a292dd653986',1,'forth']]]
 ];

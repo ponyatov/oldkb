@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['math',['math',['../group__math.html',1,'']]],
-  ['meta',['meta',['../group__meta.html',1,'']]],
-  ['messaging',['Messaging',['../group__msg.html',1,'']]],
-  ['map_20operations',['map operations',['../group__symmap.html',1,'']]]
+  ['syntax_20parser',['Syntax parser',['../group__parser.html',1,'']]],
+  ['slot_2fattribute',['slot/attribute',['../group__slot.html',1,'']]],
+  ['stack',['stack',['../group__stack.html',1,'']]],
+  ['symbolic_20type_20system',['Symbolic type system',['../group__sym.html',1,'']]]
 ];

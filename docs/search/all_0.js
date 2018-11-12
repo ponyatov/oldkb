@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_5f_5frepr_5f_5f',['__repr__',['../classsym_1_1Object.html#a0c700b878ee07eebb386f9e3105239b7',1,'sym::Object']]],
-  ['_5f_5fsetitem_5f_5f',['__setitem__',['../classsym_1_1Object.html#a6ce2d1686de577a53160e3268523f623',1,'sym::Object']]]
+  ['active',['Active',['../classsym_1_1Active.html',1,'sym.Active'],['../group__active.html',1,'(Global Namespace)']]],
+  ['add',['ADD',['../group__math.html#ga6ee323a6e1a8bc5314f55c8ccc4289e3',1,'forth']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['map',['Map',['../classsym_1_1Map.html',1,'sym']]]
+  ['logical_20programming',['Logical programming',['../logic.html',1,'']]],
+  ['loginform',['LoginForm',['../classweb_1_1LoginForm.html',1,'web']]]
 ];
