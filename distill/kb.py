@@ -4,14 +4,6 @@ class Number(Primitive):
     ## @ingroup math
     ## @{
     
-    def pfxadd(self): return Number(+self.value)
-    def pfxsub(self): return Number(-self.value)
-    
-    def add(self,obj):
-        if isinstance(obj, (Number,Integer)):
-            return Number(self.value + obj.value)
-        raise SyntaxError(obj)
-    
     def sub(self,obj):
         if isinstance(obj, (Number,Integer)):
             return Number(self.value - obj.value)

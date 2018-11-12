@@ -5,6 +5,12 @@ from sym import *
 
 class FORTH(VM):
     def add(self): B = self.pop() ; A = self.pop() ; self.push(A.add(B))
+    def sub(self): B = self.pop() ; A = self.pop() ; self.push(A.sub(B))
+    def mul(self): B = self.pop() ; A = self.pop() ; self.push(A.mul(B))
+    def div(self): B = self.pop() ; A = self.pop() ; self.push(A.div(B))
+    def pow(self): B = self.pop() ; A = self.pop() ; self.push(A.pow(B))
+    def int(self): self.push(self.pop().int())
+    def num(self): self.push(self.pop().num())
 
 F = FORTH('vm')
 
@@ -57,6 +63,12 @@ F['/'] = Fn(DIV)
 def POW(vm): vm.pow()
 F << Fn(POW)
 F['^'] = Fn(POW)
+
+def INT(vm): vm.int()
+F << Fn(INT)
+
+def NUM(vm): vm.num()
+F << Fn(NUM)
 
 ################################## interpreter ################################
 

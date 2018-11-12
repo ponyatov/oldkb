@@ -58,12 +58,61 @@ import math
 
 class Number(Primitive):
     def __init__(self,V): Primitive.__init__(self, float(V))
+
+    def pfxadd(self): return self.__class__(+self.value)
+    def pfxsub(self): return self.__class__(-self.value)
+    
+    def add(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(self.value + obj.value)
+        raise SyntaxError(obj)
+    def sub(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(self.value - obj.value)
+        raise SyntaxError(obj)
+    def mul(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(self.value * obj.value)
+        raise SyntaxError(obj)
+    def div(self,obj):
+        if isinstance(obj, (Number,Integer)):
+            return Number(self.value / obj.value)
+        raise SyntaxError(obj)
+    
+    def int(self): return Integer(self.value)
+    def num(self): return self
     
 ################################### Integer ###################################
 
 class Integer(Number):
     def __init__(self,V): Primitive.__init__(self, int(V))
     
+    def add(self,obj):
+        if isinstance(obj, Integer):
+            return Integer(self.value + obj.value)
+        if isinstance(obj, Number):
+            return Number(float(self.value) + obj.value)
+        raise SyntaxError(obj)
+    def sub(self,obj):
+        if isinstance(obj, Integer):
+            return Integer(self.value - obj.value)
+        if isinstance(obj, Number):
+            return Number(float(self.value) - obj.value)
+        raise SyntaxError(obj)
+    def mul(self,obj):
+        if isinstance(obj, Integer):
+            return Integer(self.value * obj.value)
+        if isinstance(obj, Number):
+            return Number(float(self.value) * obj.value)
+        raise SyntaxError(obj)
+    def div(self,obj):
+        if isinstance(obj, (Integer,Number)):
+            return Number(float(self.value) / obj.value)
+        raise SyntaxError(obj)
+    
+    def int(self): return self
+    def num(self): return Number(self.value)
+
 class Hex(Integer): 
     def __init__(self,V): Primitive.__init__(self, int(V[2:],0x10))
     def str(self): return '0x%X' % self.value
