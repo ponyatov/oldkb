@@ -3,7 +3,10 @@ from sym import *
 
 ############################# FORTH Virtual Machine ###########################
 
-F = VM('FORTH')
+class FORTH(VM):
+    def add(self): B = self.pop() ; A = self.pop() ; self.push(A.add(B))
+
+F = FORTH('vm')
 
 F['vm'] = F
 
@@ -32,6 +35,28 @@ F << Fn(OVER)
 def DROPALL(vm): vm.dropall()
 F << Fn(DROPALL)
 F['.'] = Fn(DROPALL)
+
+#################################### math #####################################
+
+def ADD(vm): vm.add()
+F << Fn(ADD)
+F['+'] = Fn(ADD)
+
+def SUB(vm): vm.sub()
+F << Fn(SUB)
+F['-'] = Fn(SUB)
+
+def MUL(vm): vm.mul()
+F << Fn(MUL)
+F['*'] = Fn(MUL)
+
+def DIV(vm): vm.div()
+F << Fn(DIV)
+F['/'] = Fn(DIV)
+
+def POW(vm): vm.pow()
+F << Fn(POW)
+F['^'] = Fn(POW)
 
 ################################## interpreter ################################
 
