@@ -1,4 +1,6 @@
 
+from forth import *
+
 import os
 import flask,flask_wtf,wtforms
 
