@@ -15,7 +15,7 @@ class FORTH(VM): pass
 ## global FVM
 F = FORTH('vm')
 
-F['vm'] = F
+F['VM'] = F
 
 # ################################## debug ###################################
 ## @ingroup debug
