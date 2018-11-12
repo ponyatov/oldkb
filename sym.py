@@ -123,6 +123,11 @@ class Number(Primitive):
         if isinstance(obj, (Number,Integer)):
             return Number(math.pow(self.value, obj.value))
         raise SyntaxError(obj)
+
+    def sqrt(self): return Number(math.sqrt(self.value))
+    def sin(self):  return Number(math.sin(self.value))
+    def cos(self):  return Number(math.cos(self.value))
+    def tan(self):  return Number(math.tan(self.value))
     
     def int(self): return Integer(self.value)
     def num(self): return self

@@ -84,6 +84,18 @@ F['^'] = Fn(POW)
 def SQRT(vm): vm.push(vm.pop().sqrt())
 F << Fn(SQRT)
 
+## `sin ( a -- sin(a) )`
+def SIN(vm): vm.push(vm.pop().sin())
+F << Fn(SIN)
+
+## `cos ( a -- cos(a) )`
+def COS(vm): vm.push(vm.pop().cos())
+F << Fn(COS)
+
+## `tan ( a -- tan(a) )`
+def TAN(vm): vm.push(vm.pop().tan())
+F << Fn(TAN)
+
 ## `int ( number: -- integer: )` trail to integer part
 def INT(vm): vm.push(vm.pop().int())
 F << Fn(INT)
@@ -91,6 +103,9 @@ F << Fn(INT)
 ## `num ( integer: -- number: )` to floating point
 def NUM(vm): vm.push(vm.pop().num())
 F << Fn(NUM)
+
+F['e']  = Number(math.e)
+F['pi'] = Number(math.pi)
 
 ## @}
 
