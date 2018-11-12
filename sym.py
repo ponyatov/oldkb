@@ -74,6 +74,38 @@ class Object:
     
     ## @}
     
+    # ############## persistance ########
+    ## @defgroup persist persistance
+    ## @details @ref pp
+    ## @ingroup sym
+    ## @{
+    
+    ## save to disk .db
+    def save(self):
+        try: os.mkdir('db')
+        except OSError: pass
+        try: os.mkdir('db/%s' % self.type)
+        except OSError: pass
+        with open('db/%s/%s.attr'%(self.type,self.value) ,'w') as db:
+            pickle.dump(self.attr,db)
+        with open('db/%s/%s.nest'%(self.type,self.value) ,'w') as db:
+            pickle.dump(self.nest,db)
+        
+    ## restore from disk .db
+    def load(self):
+        try: os.mkdir('db')
+        except OSError: pass
+        try: os.mkdir('db/%s' % self.type)
+        except OSError: pass
+        with open('db/%s/%s.attr'%(self.type,self.value) ,'r') as db:
+            self.attr = pickle.load(db)
+        with open('db/%s/%s.nest'%(self.type,self.value) ,'r') as db:
+            self.nest = pickle.load(db)
+    
+    ## @}
+
+## @defgroup debug debug
+    
 # ############################### Primitive #################################
 ## @defgroup prim Primitive
 ## @brief primitive types in implementation language (Python)
