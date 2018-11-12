@@ -3,7 +3,7 @@
 	"name": "kbFORTH/js",
 	"icons": [ { "src": "/static/logo.png", "type": "image/png" } ],	
 	"orientation": "portrait",
-	"display": "fullscreen",
+	"display": "standalone",
 	"background_color": "black",
 	"theme_color": "black"
 }
