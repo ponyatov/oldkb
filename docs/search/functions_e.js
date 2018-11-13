@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['word',['WORD',['../group__interpret.html#gaadc2bdd14b056a2231944f18dfdbc338',1,'forth']]],
-  ['words',['WORDS',['../group__debug.html#gaa036f59f637e8cd344ee150c882316f8',1,'forth']]]
+  ['t_5ferror',['t_error',['../group__parser.html#gadb3858677388f09173df615cf0eebf44',1,'parser']]],
+  ['tan',['TAN',['../group__math.html#ga9fdebc8c6a12252a77e8a292dd653986',1,'forth']]]
 ];

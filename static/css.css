@@ -15,10 +15,12 @@ label[for=error]	{ color:yellow; }
 #go		{ width:100%; background: darkslategray; height: 5vmin; }
 
 #slider {
+	max-height: 100%;
 	border: solid 1px; border-color: darkgreen;
 }
 
 #slider > * {
+	overflow: scroll; max-height: 100%;
 	border: solid 1px; border-color: darkgreen;
 	display: inline-block;
 }

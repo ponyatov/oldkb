@@ -8,6 +8,7 @@
 import os,sys,time,pickle
 
 # ############################## Object #####################################
+## @defgroup object Object 
 
 class Object:
     def __init__(self, V):
@@ -19,7 +20,7 @@ class Object:
     # ############# dump ##############
     ## @defgroup dump dump/print
     ## @brief represent object in human-readable text form
-    ## @ingroup sym
+    ## @ingroup object
     ## @{
         
     def __repr__(self): return self.dump()
@@ -43,12 +44,15 @@ class Object:
     # ############# slots ##############
     ## @defgroup slot slot/attribute
     ## @brief operations on named attributes = frame slots
-    ## @ingroup sym
+    ## @ingroup object
     ## @{
         
     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
     def __getitem__(self,key): return self.attr[key]
-    def __lshift__(self,obj): self.attr[obj.value] = obj
+    def __lshift__(self,obj):
+        if isinstance(obj, Object): self.attr[obj.value] = obj
+        elif callable(obj): self << Fn(obj)
+        else: raise TypeError(obj)
     def slots(self):
         R = self.__class__(self.value)
         R.attr = self.attr
@@ -59,7 +63,7 @@ class Object:
     # ############# stack ##############
     ## @defgroup stack stack
     ## @brief Any object can act as generic stack
-    ## @ingroup sym
+    ## @ingroup object
     ## @{
         
     def push(self,obj): self.nest.append(obj) ; return self
@@ -71,13 +75,14 @@ class Object:
     def drop(self): self.pop()
     def swap(self): B = self.pop() ; A = self.pop() ; self.push(B) ; self.push(A)
     def over(self): self.push(self.nest[-2])
+    def press(self): del self.nest[-2]
     
     ## @}
     
     # ############## persistance ########
     ## @defgroup persist persistance
     ## @details @ref pp
-    ## @ingroup sym
+    ## @ingroup object
     ## @{
     
     ## save to disk .db
@@ -105,7 +110,7 @@ class Object:
     ## @}
 
 ## @defgroup debug debug
-    
+
 # ############################### Primitive #################################
 ## @defgroup prim Primitive
 ## @brief primitive types in implementation language (Python)
@@ -120,7 +125,7 @@ class String(Primitive): pass
 ## @brief Multiple number types (floating, integer, machine, complex,..)
 ## @{
 
-## @defgroup math
+## @defgroup math math
 ## @brief Basic numerical computations
 
 import math
@@ -138,23 +143,23 @@ class Number(Primitive):
     def add(self,obj):
         if isinstance(obj, (Number,Integer)):
             return Number(self.value + obj.value)
-        raise SyntaxError(obj)
+        raise TypeError(obj)
     def sub(self,obj):
         if isinstance(obj, (Number,Integer)):
             return Number(self.value - obj.value)
-        raise SyntaxError(obj)
+        raise TypeError(obj)
     def mul(self,obj):
         if isinstance(obj, (Number,Integer)):
             return Number(self.value * obj.value)
-        raise SyntaxError(obj)
+        raise TypeError(obj)
     def div(self,obj):
         if isinstance(obj, (Number,Integer)):
             return Number(self.value / obj.value)
-        raise SyntaxError(obj)
+        raise TypeError(obj)
     def pow(self,obj):
         if isinstance(obj, (Number,Integer)):
             return Number(math.pow(self.value, obj.value))
-        raise SyntaxError(obj)
+        raise TypeError(obj)
 
     def sqrt(self): return Number(math.sqrt(self.value))
     def sin(self):  return Number(math.sin(self.value))
@@ -180,33 +185,33 @@ class Integer(Number):
             return Integer(self.value + obj.value)
         if isinstance(obj, Number):
             return Number(float(self.value) + obj.value)
-        raise SyntaxError(obj)
+        raise TypeError(obj)
     def sub(self,obj):
         if isinstance(obj, Integer):
             return Integer(self.value - obj.value)
         if isinstance(obj, Number):
             return Number(float(self.value) - obj.value)
-        raise SyntaxError(obj)
+        raise TypeError(obj)
     def mul(self,obj):
         if isinstance(obj, Integer):
             return Integer(self.value * obj.value)
         if isinstance(obj, Number):
             return Number(float(self.value) * obj.value)
-        raise SyntaxError(obj)
+        raise TypeError(obj)
     def div(self,obj):
         if isinstance(obj, (Integer,Number)):
             return Number(float(self.value) / obj.value)
-        raise SyntaxError(obj)
+        raise TypeError(obj)
     def mod(self,obj):
         if isinstance(obj, Integer):
             return Integer(self.value % obj.value)
-        raise SyntaxError(obj)
+        raise TypeError(obj)
     def pow(self,obj):
         if isinstance(obj, Integer) and obj.value > 0:
             return Integer(math.pow(self.value, obj.value))
         elif isinstance(obj, (Integer,Number)):
             return Number(math.pow(self.value, obj.value))
-        raise SyntaxError(obj)
+        raise TypeError(obj)
     
     def int(self): return self
     def num(self): return Number(self.value)

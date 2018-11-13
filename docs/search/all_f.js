@@ -8,6 +8,7 @@ var searchData=
   ['stack',['Stack',['../classsym_1_1Stack.html',1,'sym.Stack'],['../group__stack.html',1,'(Global Namespace)']]],
   ['string',['String',['../classsym_1_1String.html',1,'sym']]],
   ['sub',['SUB',['../group__math.html#gae5b8d38a74eeb5bb0dea64ab50c1e107',1,'forth']]],
+  ['swap',['SWAP',['../group__stack.html#gabd186355aecdc6fb27c009652a972f43',1,'forth']]],
   ['symbolic_20type_20system',['Symbolic type system',['../group__sym.html',1,'']]],
   ['sym_2epy',['sym.py',['../sym_8py.html',1,'']]],
   ['symbol',['Symbol',['../classsym_1_1Symbol.html',1,'sym']]]

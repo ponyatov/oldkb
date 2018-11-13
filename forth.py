@@ -23,15 +23,15 @@ F['VM'] = F
 
 ## `BYE ( -- )` stop whole system
 def BYE(vm): sys.exit(0)
-F << Fn(BYE)
+F << BYE
 
 ## `? ( -- )` dump stack
 def q(vm): print vm.pop()
 F['?'] = Fn(q)
 
-## `WORDS ( -- )` dump vocabulary
+## `WORDS ( -- slots )` isolate vocabulary
 def WORDS(vm): vm.push(vm.slots())
-F << Fn(WORDS)
+F << WORDS
 
 ## @}
 
@@ -41,11 +41,11 @@ F << Fn(WORDS)
 
 ## `SAVE ( -- )` pickle VM to `.db` file
 def SAVE(vm): vm.save()
-F << Fn(SAVE)
+F << SAVE
 
 ## `LOAD ( -- )` unpickle VM from `.db` file
 def LOAD(vm): vm.load()
-F << Fn(LOAD)
+F << LOAD
 
 ## @}
 
@@ -53,20 +53,29 @@ F << Fn(LOAD)
 ## @ingroup stack
 ## @{
 
+## `DUP ( obj -- obj obj )`
 def DUP(vm): vm.dup()
-F << Fn(DUP)
+F << DUP
 
+## `DROP ( obj1 obj2 -- obj1 )`
 def DROP(vm): vm.drop()
-F << Fn(DROP)
+F << DROP
 
+## `SWAP ( obj1 obj2 -- obj2 obj1 )`
 def SWAP(vm): vm.swap()
-F << Fn(SWAP)
+F << SWAP
 
+## `OVER ( obj1 obj2 -- obj1 obj2 obj1 )`
 def OVER(vm): vm.over()
-F << Fn(OVER)
+F << OVER
 
+## `PRESS ( obj1 obj2 -- obj2 )`
+def PRESS(vm): vm.press()
+F << PRESS
+
+## `DROPALL ( `...` -- )` clear stack
 def DROPALL(vm): vm.dropall()
-F << Fn(DROPALL)
+F << DROPALL
 F['.'] = Fn(DROPALL)
 
 ## @}
@@ -77,57 +86,57 @@ F['.'] = Fn(DROPALL)
 
 ## `+ ADD ( a b -- a+b )`
 def ADD(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.add(B))
-F << Fn(ADD)
+F << ADD
 F['+'] = Fn(ADD)
 
 ## `- SUB ( a b -- a-b )`
 def SUB(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.sub(B))
-F << Fn(SUB)
+F << SUB
 F['-'] = Fn(SUB)
 
 ## `* MUL ( a b -- a*b )`
 def MUL(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.mul(B))
-F << Fn(MUL)
+F << MUL
 F['*'] = Fn(MUL)
 
 ## `/ DIV ( a b -- a/b )`
 def DIV(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.div(B))
-F << Fn(DIV)
+F << DIV
 F['/'] = Fn(DIV)
 
 ## `% MOD ( a b -- a%b )`
 def MOD(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.mod(B))
-F << Fn(MOD)
+F << MOD
 F['%'] = Fn(MOD)
 
 ## `^ POW ( a b -- a^b )`
 def POW(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.pow(B))
-F << Fn(POW)
+F << POW
 F['^'] = Fn(POW)
 
 ## `SQRT ( a -- Va )` square root
 def SQRT(vm): vm.push(vm.pop().sqrt())
-F << Fn(SQRT)
+F << SQRT
 
 ## `sin ( a -- sin(a) )`
 def SIN(vm): vm.push(vm.pop().sin())
-F << Fn(SIN)
+F << SIN
 
 ## `cos ( a -- cos(a) )`
 def COS(vm): vm.push(vm.pop().cos())
-F << Fn(COS)
+F << COS
 
 ## `tan ( a -- tan(a) )`
 def TAN(vm): vm.push(vm.pop().tan())
-F << Fn(TAN)
+F << TAN
 
 ## `int ( number: -- integer: )` trail to integer part
 def INT(vm): vm.push(vm.pop().int())
-F << Fn(INT)
+F << INT
 
 ## `num ( integer: -- number: )` to floating point
 def NUM(vm): vm.push(vm.pop().num())
-F << Fn(NUM)
+F << NUM
 
 F['E']  = Number(math.e)
 F['PI'] = Number(math.pi)
@@ -146,7 +155,7 @@ def WORD(vm):
     token = lexer.token()
     if not token: return False
     vm.push( token ) ; return True
-F << Fn(WORD)
+F << WORD
     
 ## `FIND ( token -- callable | token )` lookup token in vocabulary
 def FIND(vm):
@@ -155,12 +164,12 @@ def FIND(vm):
     except KeyError:
         try: vm.push( vm[token.value.upper()] ) ; return True
         except KeyError:       vm.push( token ) ; return False
-F << Fn(FIND)
+F << FIND
     
 ## `EXECUTE ( callable -- )` run executable object
 def EXECUTE(vm):
     if callable(vm.top()): vm.pop() (vm)
-F << Fn(EXECUTE)
+F << EXECUTE
 
 ## `INTERPRET ( string:source -- )` interpret source code from string
 def INTERPRET(vm):
@@ -169,7 +178,7 @@ def INTERPRET(vm):
         if not WORD(vm): break
         if isinstance(vm.top(),Symbol):
             if FIND(vm): EXECUTE(vm)
-F << Fn(INTERPRET)
+F << INTERPRET
 
 ## @}
 

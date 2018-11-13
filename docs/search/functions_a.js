@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pow',['POW',['../group__math.html#gae1b5ae1d406a8109953570f0cde2b61c',1,'forth']]]
+  ['over',['OVER',['../group__stack.html#ga21c3a43afa78d844f1ddca6dbe7a6753',1,'forth']]]
 ];

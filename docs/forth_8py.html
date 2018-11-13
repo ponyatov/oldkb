@@ -106,7 +106,7 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 <tr class="separator:ga0277e1b21b1d96540fbe3561658b2ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa036f59f637e8cd344ee150c882316f8"><td class="memItemLeft" align="right" valign="top">
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__debug.html#gaa036f59f637e8cd344ee150c882316f8">forth.WORDS</a> (vm)</td></tr>
-<tr class="memdesc:gaa036f59f637e8cd344ee150c882316f8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>WORDS ( -- )</code> dump vocabulary <br /></td></tr>
+<tr class="memdesc:gaa036f59f637e8cd344ee150c882316f8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>WORDS ( -- slots )</code> isolate vocabulary <br /></td></tr>
 <tr class="separator:gaa036f59f637e8cd344ee150c882316f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ga4b8a704e6d74198b37542219825ad729"><td class="memItemLeft" align="right" valign="top">
@@ -119,19 +119,28 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 <tr class="separator:ga5c44c26ad02e86eefcb79c3af76c729b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ga86ff46984efc58ee2775be5dc927a53e"><td class="memItemLeft" align="right" valign="top">
-def&#160;</td><td class="memItemRight" valign="bottom"><b>forth.DUP</b> (vm)</td></tr>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stack.html#ga86ff46984efc58ee2775be5dc927a53e">forth.DUP</a> (vm)</td></tr>
+<tr class="memdesc:ga86ff46984efc58ee2775be5dc927a53e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>DUP ( obj -- obj obj )</code> <br /></td></tr>
 <tr class="separator:ga86ff46984efc58ee2775be5dc927a53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga79d748491eddb0e40ac10a02b41ba749"><td class="memItemLeft" align="right" valign="top">
-def&#160;</td><td class="memItemRight" valign="bottom"><b>forth.DROP</b> (vm)</td></tr>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stack.html#ga79d748491eddb0e40ac10a02b41ba749">forth.DROP</a> (vm)</td></tr>
+<tr class="memdesc:ga79d748491eddb0e40ac10a02b41ba749"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>DROP ( obj1 obj2 -- obj1 )</code> <br /></td></tr>
 <tr class="separator:ga79d748491eddb0e40ac10a02b41ba749"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabd186355aecdc6fb27c009652a972f43"><td class="memItemLeft" align="right" valign="top">
-def&#160;</td><td class="memItemRight" valign="bottom"><b>forth.SWAP</b> (vm)</td></tr>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stack.html#gabd186355aecdc6fb27c009652a972f43">forth.SWAP</a> (vm)</td></tr>
+<tr class="memdesc:gabd186355aecdc6fb27c009652a972f43"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>SWAP ( obj1 obj2 -- obj2 obj1 )</code> <br /></td></tr>
 <tr class="separator:gabd186355aecdc6fb27c009652a972f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga21c3a43afa78d844f1ddca6dbe7a6753"><td class="memItemLeft" align="right" valign="top">
-def&#160;</td><td class="memItemRight" valign="bottom"><b>forth.OVER</b> (vm)</td></tr>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stack.html#ga21c3a43afa78d844f1ddca6dbe7a6753">forth.OVER</a> (vm)</td></tr>
+<tr class="memdesc:ga21c3a43afa78d844f1ddca6dbe7a6753"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>OVER ( obj1 obj2 -- obj1 obj2 obj1 )</code> <br /></td></tr>
 <tr class="separator:ga21c3a43afa78d844f1ddca6dbe7a6753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa43be9cfdec34a323620be319f4b92aa"><td class="memItemLeft" align="right" valign="top">
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stack.html#gaa43be9cfdec34a323620be319f4b92aa">forth.PRESS</a> (vm)</td></tr>
+<tr class="memdesc:gaa43be9cfdec34a323620be319f4b92aa"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>PRESS ( obj1 obj2 -- obj2 )</code> <br /></td></tr>
+<tr class="separator:gaa43be9cfdec34a323620be319f4b92aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga37d7c3b3e5f1d89b82c92b252a8b1639"><td class="memItemLeft" align="right" valign="top">
-def&#160;</td><td class="memItemRight" valign="bottom"><b>forth.DROPALL</b> (vm)</td></tr>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__stack.html#ga37d7c3b3e5f1d89b82c92b252a8b1639">forth.DROPALL</a> (vm)</td></tr>
+<tr class="memdesc:ga37d7c3b3e5f1d89b82c92b252a8b1639"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>DROPALL (</code>...<code>-- )</code> clear stack <br /></td></tr>
 <tr class="separator:ga37d7c3b3e5f1d89b82c92b252a8b1639"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ga6ee323a6e1a8bc5314f55c8ccc4289e3"><td class="memItemLeft" align="right" valign="top">
