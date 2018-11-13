@@ -43,7 +43,7 @@ LLVM_GZ = $(LLVM).src.tar.xz
 llvm/README.txt: $(GZ)/$(LLVM_GZ)
 	xzcat $< | tar x && rm -rf llvm && mv $(LLVM).src llvm && touch $@
 $(GZ)/$(LLVM_GZ):
-	wget -c -O $@ http://releases.llvm.org/$(LLVM_VER)/$(LLVM_GZ)
+	mkdir -p $(GZ) ; wget -c -O $@ http://releases.llvm.org/$(LLVM_VER)/$(LLVM_GZ)
 #	git clone -b $(LLVM_VER) --depth=1 https://git.llvm.org/git/llvm.git/
 #	cd llvm ; git config branch.master.rebase true
 
