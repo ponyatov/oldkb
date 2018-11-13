@@ -32,9 +32,11 @@ $(LLCONFIG): llvm/README.txt
 	rm -rf build ; mkdir build ; cd build ; cmake -G "Unix Makefiles" \
 		-DCMAKE_INSTALL_PREFIX=$(PREFIX) \
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo \
-		-DLLVM_TARGETS_TO_BUILD="ARM;Mips;WebAssembly;X86" \
+		-DLLVM_TARGETS_TO_BUILD="" \
+		-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
 		-DLLVM_OPTIMIZED_TABLEGEN=Y \
 	../llvm && $(MAKE) && sudo $(MAKE) install
+#		-DLLVM_TARGETS_TO_BUILD="ARM;Mips;X86" \
 
 LLVM	= llvm-$(LLVM_VER)
 LLVM_GZ = $(LLVM).src.tar.xz
