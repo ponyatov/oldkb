@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['stm32',['STM32',['../md_doc_STM32.html',1,'']]],
   ['syntax_20parser',['Syntax parser',['../group__parser.html',1,'']]],
   ['save',['save',['../group__persist.html#ga96fa8e56e7af6b878b3a2291c6bad41a',1,'sym.Object.save()'],['../group__persist.html#ga4b8a704e6d74198b37542219825ad729',1,'forth.SAVE()']]],
   ['sin',['SIN',['../group__math.html#ga5bc6d7101b2208bdc9582b31920c17f1',1,'forth']]],

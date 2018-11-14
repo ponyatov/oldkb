@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ply_20library',['PLY library',['../ply.html',1,'']]],
-  ['python_20persistance',['Python persistance',['../pp.html',1,'']]]
+  ['metaprogramming',['metaprogramming',['../meta.html',1,'']]],
+  ['metacircular_20knowledge_20base',['metacircular knowledge base',['../metakb.html',1,'']]]
 ];
