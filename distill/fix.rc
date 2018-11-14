@@ -1,8 +1,0 @@
-#!/bin/sh
-
-chmod 400 *.pem
-chmod 600 secret*
-chmod 600 *.db
-
-chmod 600 *.py*
-chmod 700 kb.py
