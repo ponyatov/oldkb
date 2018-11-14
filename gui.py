@@ -14,7 +14,9 @@ from forth import *
 
 ## generic GUI window
 class GUI_window(wx.Frame):
-    pass
+    ## define constructor parameters to default values specific for our app
+    def __init__(self,parent=None,title='KB/wx'):
+        wx.Frame.__init__(self,parent,title=title)
 
 ## GUI works in a separate thread to let UI work in parallel with Forth VM
 class GUI_thread(threading.Thread):
@@ -24,16 +26,9 @@ class GUI_thread(threading.Thread):
         ## wx application
         self.app = wx.App()
         ## main window
-        self.main = wx.Frame(None,wx.ID_ANY,title='KB/wx')
-        # init menu
-        self.menu()
-    ## construct menu
-    def menu(self):
-        self.menubar = wx.MenuBar()
-    ## activate GUI thread
+        self.main = GUI_window()
+    ## activate GUI event loop thread
     def run(self):
-        self.main.SetMenuBar(self.menubar)
-        # GUI loop
         self.main.Show()
         self.app.MainLoop()
 
