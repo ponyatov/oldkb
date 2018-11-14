@@ -1,8 +1,8 @@
 # Google Cloud deploy {#gcp}
 
 ```
-virtualenv env
+virtualenv -p /usr/bin/python2.7 env
 source env/bin/activate
-pip install -t lib -r requirements.txt
+pip install --upgrade -t lib -r requirements.txt
 deactivate
 ```
