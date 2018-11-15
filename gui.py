@@ -42,6 +42,9 @@ class GUI_window(wx.Frame):
         self.quit = self.file.Append(wx.ID_EXIT,'&Quit')
         self.Bind(wx.EVT_MENU,self.onQuit,self.quit)
         
+        ## debug submenu
+        self.debug = wx.Menu() ; self.menubar.Append(self.debug,'&Debug')
+        
     ## @name event callbacks
     
     ## quit event callback
@@ -50,7 +53,7 @@ class GUI_window(wx.Frame):
     def onSave(self,event):
         with open(self.filename,'w') as F: F.write(self.editor.GetValue())
     ## reload last file
-    def onLoad(self):
+    def onLoad(self,event):
         try:
             with open(self.filename,'r') as F: self.editor.SetValue(F.read())
         except IOError: pass
@@ -61,9 +64,35 @@ class GUI_window(wx.Frame):
     def initEditor(self):
         ## script editor widget (Scintilla)
         self.editor = wx.stc.StyledTextCtrl(self)
-        ## reload last file
-        self.onLoad()
+        # reload last file
+        self.onLoad(None)
+        # configure style & colors
+        self.initColorizer()
         
+    ## @name colorizer
+    
+    ## init colorizer styles & lexer
+    def initColorizer(self):
+        ## monospace font from system
+        self.font = wx.Font(14, wx.FONTFAMILY_MODERN,
+                            wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+        # configure default editor font
+        self.editor.StyleSetSpec(wx.stc.STC_STYLE_DEFAULT,
+        "face:%s,size:%d" % (self.font.GetFaceName(), self.font.GetPointSize()))
+        # configure styles
+        ## default style
+        self.style_DEFAULT = wx.stc.STC_STYLE_DEFAULT
+        self.editor.StyleSetSpec(self.style_DEFAULT,'fore:lightgreen,back:black')
+        self.editor.StyleClearAll()
+        self.editor.SetCaretForeground('red')
+#         # bind colorizer event
+#         self.editor.Bind(wx.stc.EVT_STC_STYLENEEDED,self.onStyle)
+        
+    ## colorizer callback
+    def onStyle(self,event):
+        text = self.editor.GetValue()
+        self.editor.StartStyling(0,0xFF)
+        self.editor.SetStyling(len(text),self.style_DEFAULT)
         
 ## GUI works in a separate thread to let UI work in parallel with Forth VM
 class GUI_thread(threading.Thread):
