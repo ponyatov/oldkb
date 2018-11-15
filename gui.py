@@ -7,13 +7,12 @@
 ## @frief wxWidgets
 ## @{
 
-import wx, wx.stc, threading
-
-from sym import *
+from sym   import *
 from forth import *
 
 import time
 
+import wx, wx.stc, threading
 ## wx application
 app = wx.App()
 
@@ -68,7 +67,9 @@ class GUI_window(wx.Frame):
     ## update callback
     def onUpdate(self,event):
         wnStack.Show() ; wnWords.Show()
-
+        wnStack.editor.SetValue(F.dump(slots=False))
+        wnWords.editor.SetValue(F.dump())
+        
     ## @name script editor
     
     ## initialize script editor widget
@@ -79,7 +80,20 @@ class GUI_window(wx.Frame):
         self.onLoad(None)
         # configure style & colors
         self.initColorizer()
+        # bind keys
+        self.editor.Bind(wx.EVT_CHAR,self.onKey)
         
+    ## key press callback
+    def onKey(self,event):
+        char  = event.GetKeyCode()  # char code
+        ctrl  = event.CmdDown()     # Ctrl key
+        shift = event.ShiftDown()   # Shift key
+        if char == 13 and ( ctrl or shift ):    # Ctrl-Enter
+            F.push( String(self.editor.GetSelectedText()) )
+            INTERPRET(F)
+            self.onUpdate(None)
+        else: event.Skip()
+
     ## @name colorizer
     
     ## init colorizer styles & lexer
