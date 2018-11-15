@@ -26,9 +26,10 @@ class GUI_window(wx.Frame):
         wx.Frame.__init__(self,parent,title='%s:%s'%(title,filename))
         ## file name will be used for console content save/load
         self.filename = filename
-        self.menu()
+        self.initMenu()
+        self.initEditor()
     ## initialize menu
-    def menu(self):
+    def initMenu(self):
         ## menu bar
         self.menubar = wx.MenuBar() ; self.SetMenuBar(self.menubar)
         
@@ -47,10 +48,23 @@ class GUI_window(wx.Frame):
     def onQuit(self,event): self.Close()
     ## save console content callback
     def onSave(self,event):
-        with open(self.filename,'a') as F:
-            print >>F,time.strftime('\n%H:%M:%S %d/%m/%Y',time.localtime()),
-            print >>F,self.GetTitle() 
+        with open(self.filename,'w') as F: F.write(self.editor.GetValue())
+    ## reload last file
+    def onLoad(self):
+        try:
+            with open(self.filename,'r') as F: self.editor.SetValue(F.read())
+        except IOError: pass
 
+    ## @name script editor
+    
+    ## initialize script editor widget
+    def initEditor(self):
+        ## script editor widget (Scintilla)
+        self.editor = wx.stc.StyledTextCtrl(self)
+        ## reload last file
+        self.onLoad()
+        
+        
 ## GUI works in a separate thread to let UI work in parallel with Forth VM
 class GUI_thread(threading.Thread):
     ## construct main window
