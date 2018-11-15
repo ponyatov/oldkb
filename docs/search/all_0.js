@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['active',['Active',['../classsym_1_1Active.html',1,'sym.Active'],['../group__active.html',1,'(Global Namespace)']]],
-  ['add',['ADD',['../group__math.html#ga6ee323a6e1a8bc5314f55c8ccc4289e3',1,'forth']]]
+  ['_5f_5finit_5f_5f',['__init__',['../classgui_1_1GUI__window.html#aab18d1f964177ce7d058c26ce4763760',1,'gui::GUI_window']]]
 ];

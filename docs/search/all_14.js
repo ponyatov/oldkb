@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['user',['User',['../classkb_1_1User.html',1,'kb']]]
+  ['vm',['VM',['../classsym_1_1VM.html',1,'sym']]]
 ];

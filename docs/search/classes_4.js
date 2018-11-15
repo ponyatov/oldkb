@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hex',['Hex',['../classsym_1_1Hex.html',1,'sym']]]
+  ['gui_5fwindow',['GUI_window',['../classgui_1_1GUI__window.html',1,'gui']]]
 ];

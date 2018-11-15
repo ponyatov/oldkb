@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['t_5fignore',['t_ignore',['../group__parser.html#gad179fcae65ea12fa2c484adc1bf1a1ac',1,'parser']]],
-  ['tokens',['tokens',['../group__parser.html#ga63021b012594c12a2442fd96a20bd192',1,'parser']]]
+  ['debug',['debug',['../classgui_1_1GUI__window.html#a639e71ec64de949803a52b4be6afe49c',1,'gui::GUI_window']]]
 ];

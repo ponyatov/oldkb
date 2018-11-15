@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['web_2epy',['web.py',['../web_8py.html',1,'']]]
+  ['sym_2epy',['sym.py',['../sym_8py.html',1,'']]]
 ];

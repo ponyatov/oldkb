@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['num',['NUM',['../group__math.html#ga133c9411950d695b5a2a777da804835d',1,'forth.NUM()'],['../group__num.html',1,'(Global Namespace)']]],
-  ['number',['Number',['../classsym_1_1Number.html',1,'sym']]]
+  ['load',['load',['../group__persist.html#gaa5564e96ce105ef355a6a8b1e68d63a7',1,'sym.Object.load()'],['../group__persist.html#ga5c44c26ad02e86eefcb79c3af76c729b',1,'forth.LOAD()']]],
+  ['logical_20programming',['Logical programming',['../logic.html',1,'']]],
+  ['loginform',['LoginForm',['../classweb_1_1LoginForm.html',1,'web']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loginform',['LoginForm',['../classweb_1_1LoginForm.html',1,'web']]]
+  ['integer',['Integer',['../classsym_1_1Integer.html',1,'sym']]]
 ];

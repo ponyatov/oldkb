@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['number',['Number',['../classsym_1_1Number.html',1,'sym']]]
+  ['map',['Map',['../classsym_1_1Map.html',1,'sym']]]
 ];
