@@ -131,24 +131,4 @@ wnWords = GUI_window(filename=sys.argv[0]+'.words')
 # start application
 app.MainLoop()
 
-# ## GUI works in a separate thread to let UI work in parallel with Forth VM
-# class GUI_thread(threading.Thread):
-#     ## construct main window
-#     def __init__(self):
-#         threading.Thread.__init__(self)
-#         ## main window
-#         self.main = GUI_window()
-#     ## activate GUI event loop thread
-#     def run(self):
-#         self.main.Show()
-# 
-# ## singleton thread processes all GUI events
-# gui_thread = GUI_thread()
-# 
-# ## start GUI system
-# def GUI(): gui_thread.start() ; gui_thread.join()
-# F << GUI
-# 
-# if __name__ == '__main__': GUI()
-
 ## @}
