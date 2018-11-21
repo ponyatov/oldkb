@@ -118,7 +118,15 @@ class Object:
 
 class Primitive(Object): pass
 class Symbol(Primitive): pass
-class String(Primitive): pass
+
+class String(Primitive):
+    def str(self):
+        S = ''
+        for c in self.value:
+            if   c == '\t': S += '\\t'
+            elif c == '\n': S += '\\n'
+            else: S += c
+        return S
 
 # ################################ Number ###################################
 ## @defgroup num Number
