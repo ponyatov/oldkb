@@ -7,7 +7,8 @@ from sym import *
 ## @brief Personal Planning System
 ## @{
 
-class Plan(Object): pass
+class Plan(Object):
+    def push(self,obj): self[obj.value] = obj ; return self
 
 ## activity task
 class Task(Plan): pass
