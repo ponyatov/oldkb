@@ -50,7 +50,8 @@ and do not overload the intro manual with details.
 
 ## web interface
 
-run `web.py` uses Flask framework
+* run `web.py` uses Flask framework
+* @ref kiosk
 
 ## wxWidgets
 ### native client GUI
