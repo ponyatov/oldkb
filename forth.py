@@ -182,10 +182,20 @@ F << INTERPRET
 
 ## @}
 
+# ############################ PPS integration ###############################
+## @defgroup ppsi PPS interface
+## @{
+
+from pps import *
+
+F << Plan('PPS')
+
+## @}
+
 # ################################# startup ##################################
 
 while __name__ == '__main__':
     print F.dump(slots=None)
     F.push( String( raw_input('\ninfer> ') ) ) ; INTERPRET(F)
 
-#}
+## @}
