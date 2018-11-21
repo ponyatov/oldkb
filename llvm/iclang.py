@@ -10,7 +10,7 @@ llvm.initialize()
 llvm.initialize_all_targets()
 llvm.initialize_all_asmprinters()
 
-# print llvm.Target.from_triple('arm-unknown-unknown')
+target = llvm.Target.from_triple('wasm32') ; print 'target',target
 
 module = ir.Module(name='fibonacci') ; print 'module',module
 
