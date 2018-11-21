@@ -11,9 +11,9 @@ CWD = $(CURDIR)
 
 GZ	?= $(HOME)/gz
 
-.PHONY: all build lite clean distclean uninstall uninstall-llvm uninstall-lite
+.PHONY: all llvm lite clean distclean uninstall uninstall-llvm uninstall-lite
 
-all: build lite
+all: llvm lite
 
 clean:
 	rm -rf build
@@ -27,12 +27,12 @@ uninstall-llvm:
 		$(PREFIX)/bin/llvm* $(PREFIX)/bin/ll? \
 		$(PREFIX)/include/llvm* $(PREFIX)/lib/cmake/llvm
 
-build: $(LLCONFIG)
+llvm: $(LLCONFIG)
 $(LLCONFIG): llvm/README.txt
 	rm -rf build ; mkdir build ; cd build ; cmake -G "Unix Makefiles" \
 		-DCMAKE_INSTALL_PREFIX=$(PREFIX) \
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo \
-		-DLLVM_TARGETS_TO_BUILD="" \
+		-DLLVM_TARGETS_TO_BUILD="X86;ARM;Mips" \
 		-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
 		-DLLVM_OPTIMIZED_TABLEGEN=Y \
 	../llvm && $(MAKE) && sudo $(MAKE) install
@@ -48,6 +48,6 @@ $(GZ)/$(LLVM_GZ):
 #	cd llvm ; git config branch.master.rebase true
 
 lite: llvmlite/README.rst
-	cd llvmlite ; echo LLVM_CONFIG=$(LLCONFIG) python setup.py build
+	cd llvmlite ; LLVM_CONFIG=$(LLCONFIG) python setup.py build install --user
 llvmlite/README.rst:
 	git clone -b $(LITE_VER) --depth=1 https://github.com/numba/llvmlite.git
