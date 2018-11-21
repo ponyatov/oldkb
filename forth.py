@@ -182,6 +182,26 @@ F << INTERPRET
 
 ## @}
 
+# ############################### messaging ##################################
+## @defgroup msg messaging
+## @brief message passing programming
+## @{
+
+## `.push ( obj1 obj2 -- obj1/obj2 )` push obj2 to obj1 (as stack)
+def dPUSH(vm): obj2 = vm.pop() ; vm.top().push(obj2)
+F['.PUSH'] = Fn(dPUSH)
+F['//']    = Fn(dPUSH)
+
+## `.pop ( obj1/obj2 -- obj1 obj2 )` decompose obj1 by popping obj2
+def dPOP(vm): vm.push(vm.top().pop())
+F['.POP'] = Fn(dPOP)
+
+## `.save ( obj -- obj )` save object to persistant store
+def pSAVE(vm): vm.top().save()
+F['.SAVE'] = Fn(pSAVE)
+
+## @}
+
 # ############################ PPS integration ###############################
 ## @defgroup ppsi PPS interface
 ## @{
