@@ -212,7 +212,7 @@ F['.LOAD'] = Fn(pLOAD)
 
 from pps import *
 
-F << Plan('PPS')
+F << Plan('plan')
 
 ## create new task
 def TASK(vm):
