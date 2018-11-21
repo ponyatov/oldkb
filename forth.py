@@ -200,6 +200,10 @@ F['.POP'] = Fn(dPOP)
 def pSAVE(vm): vm.top().save()
 F['.SAVE'] = Fn(pSAVE)
 
+## `.load ( obj -- obj )` load object from persistant store
+def pLOAD(vm): vm.top().load()
+F['.LOAD'] = Fn(pLOAD)
+
 ## @}
 
 # ############################ PPS integration ###############################
