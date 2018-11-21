@@ -22,11 +22,11 @@ states = (('str','exclusive'),)
 t_str_ignore = ''
 
 def t_string(t):
-    r'\''
+    r'[\'\`\"]'
     t.lexer.string = ''
     t.lexer.push_state('str')
 def t_str_string(t):
-    r'\''
+    r'[\'\`\"]'
     t.lexer.pop_state()
     return String(t.lexer.string)
 def t_str_tab(t):
