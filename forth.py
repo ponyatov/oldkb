@@ -190,6 +190,11 @@ from pps import *
 
 F << Plan('PPS')
 
+## create new task
+def TASK(vm):
+    vm.push(Task(vm.pop().value))
+F << TASK
+
 ## @}
 
 # ################################# startup ##################################

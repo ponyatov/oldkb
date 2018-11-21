@@ -12,8 +12,14 @@ class Plan(Object): pass
 ## activity task
 class Task(Plan): pass
 
+## procrastination
+class Frog(Task): pass
+
+## supertask must be splitted
+class Eleph(Task): pass
+
 ## target axes (metrics)
-class Axes(Plan): pass
+class Axis(Plan): pass
 
 ## sheduler
 class Shed(Plan): pass

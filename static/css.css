@@ -20,7 +20,7 @@ label[for=error]	{ color:yellow; }
 }
 
 #slider > * {
-	overflow: scroll; max-height: 100%;
+	overflow: auto; max-height: 100%;
 	border: solid 1px; border-color: darkgreen;
 	display: inline-block;
 }
