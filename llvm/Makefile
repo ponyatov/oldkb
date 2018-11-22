@@ -51,3 +51,4 @@ lite: llvmlite/README.rst
 	cd llvmlite ; LLVM_CONFIG=$(LLCONFIG) python setup.py build install --user
 llvmlite/README.rst:
 	git clone -b $(LITE_VER) --depth=1 https://github.com/numba/llvmlite.git
+
