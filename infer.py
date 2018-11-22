@@ -15,7 +15,10 @@
 ##     * [SWI Prolog online](https://swish.swi-prolog.org/) for test and learning
 ##     * [look here first](https://swish.swi-prolog.org/p/CS_164_Prolog_intro_implementing.swinb)
 ##       notebook with sample code and links for SWI Prolog (reference system)
+##   * **Lec.7** [**real magic starts here**](https://www.youtube.com/watch?v=HKUL_iLYTQs&list=PLddc343N7YqgYvD0Kfc91QUcssH_5_sn8&index=11)
  
 ## @{
+
+
 
 ## @}
