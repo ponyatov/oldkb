@@ -17,7 +17,7 @@ class Task(Plan): pass
 class Frog(Task): pass
 
 ## supertask must be splitted
-class Eleph(Task): pass
+class Slon(Task): pass
 
 ## target axes (metrics)
 class Axis(Plan): pass

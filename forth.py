@@ -218,6 +218,14 @@ F << Plan('plan')
 def TASK(vm): vm.push(Task(vm.pop().value))
 F << TASK
 
+## create big task (elephant)
+def SLON(vm): vm.push(Slon(vm.pop().value))
+F << SLON
+
+## create boring task
+def FROG(vm): vm.push(Frog(vm.pop().value))
+F << FROG
+
 ## create new axis
 def AXIS(vm): vm.push(Axis(vm.pop().value))
 F << AXIS
