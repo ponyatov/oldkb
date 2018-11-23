@@ -215,9 +215,12 @@ from pps import *
 F << Plan('plan')
 
 ## create new task
-def TASK(vm):
-    vm.push(Task(vm.pop().value))
+def TASK(vm): vm.push(Task(vm.pop().value))
 F << TASK
+
+## create new axis
+def AXIS(vm): vm.push(Axis(vm.pop().value))
+F << AXIS
 
 ## @}
 
