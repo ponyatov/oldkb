@@ -77,7 +77,7 @@ def login():
 @flask_login.login_required
 def logout(): flask.redirect('/login')
 
-@web.route('/dump/<sym>')
+@web.route('/<sym>')
 @flask_login.login_required
 def dump(sym):
     return flask.render_template('dump.html',dump=F[sym].dump())

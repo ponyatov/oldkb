@@ -26,6 +26,10 @@ def index():
     if form.validate_on_submit(): F.push(String(form.pad.data)) ; INTERPRET(F)
     return flask.render_template('index.html', form=form, vm=F.dump(slots=False))
 
+@web.route('/<sym>')
+def dump(sym):
+    return flask.render_template('dump.html',dump=F[sym].dump())
+
 web.run(debug=True,host='127.0.0.1',port=8888)
 
 ## @}
