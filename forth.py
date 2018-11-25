@@ -182,6 +182,21 @@ F << INTERPRET
 
 ## @}
 
+# ####################### container manipulations ############################
+## @defgroup msg messaging
+## @brief message passing programming
+## @{
+
+def VECTOR(vm):
+    vm.push(Vector(vm.pop().value))
+F << VECTOR
+
+def STACK(vm):
+    vm.push(Stack(vm.pop().value))
+F << STACK
+
+## @}
+
 # ############################### messaging ##################################
 ## @defgroup msg messaging
 ## @brief message passing programming

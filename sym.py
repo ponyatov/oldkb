@@ -245,6 +245,7 @@ class Bin(Integer):
 ## @{
 
 class Container(Object): pass
+class Vector(Container): pass
 class Stack(Container): pass
 class Map(Container): pass
 
