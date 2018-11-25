@@ -14,6 +14,8 @@ label[for=error]	{ color:yellow; }
 #cmd	{ position: absolute; bottom:0; width:100%; }
 #pad	{ width:100%; caret-color:red; border-color: darkgreen; }
 #go		{ width:100%; background: darkslategray; height: 5vmin; }
+#file	{ width:100%; }
+#log	{ width:100%; }
 
 #slider {
 	max-height: 100%;

@@ -9,7 +9,7 @@
 from forth import *
 
 import os,sys
-import flask,flask_wtf,wtforms
+import flask,flask_wtf,wtforms,werkzeug
 
 web = flask.Flask(__name__)
 
@@ -30,6 +30,20 @@ def index():
 @web.route('/<sym>')
 def dump(sym):
     return flask.render_template('dump.html',dump=F[sym].dump())
+
+@web.route('/upload', methods=['GET','POST'])
+def upload():
+    content = ''
+    if flask.request.method == 'POST':
+        print flask.request.files
+        file = flask.request.files['file'] ; print 'file',file
+        name = werkzeug.utils.secure_filename(file.filename) ; print 'name',name
+        if not name: return flask.redirect(flask.request.url)
+        mime = file.mimetype
+        print 'mime',mime
+        if mime == 'application/octet-stream':
+            content = '%s' % pickle.loads(file.read())
+    return flask.render_template('upload.html',data=content)
 
 web.run(debug=True,host='127.0.0.1',port=8888)
 
