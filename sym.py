@@ -10,11 +10,17 @@ import os,sys,time,pickle
 # ############################## Object #####################################
 ## @defgroup object Object 
 
+## base object
+## @ingroup object
 class Object:
     def __init__(self, V):
+        ## type/class tag
         self.type  = self.__class__.__name__.lower()
+        ## primitive value (implementation language type)
         self.value = V
+        ## object attributes/slots
         self.attr  = {}
+        ## nested elements = vector = stack
         self.nest  = []
         
     # ############# dump ##############
@@ -49,6 +55,7 @@ class Object:
         
     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
     def __getitem__(self,key): return self.attr[key]
+    def delete(self,key): del self.attr[key] ; return self
     def __lshift__(self,obj):
         if isinstance(obj, Object): self.attr[obj.value] = obj
         elif callable(obj): self << Fn(obj)
@@ -269,3 +276,6 @@ class Fn(Active):
 ## @}
 
 ## @}
+
+## @defgroup msg Messaging
+## @brief message-passing OOP & distributed computing

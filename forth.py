@@ -183,8 +183,7 @@ F << INTERPRET
 ## @}
 
 # ####################### container manipulations ############################
-## @defgroup msg messaging
-## @brief message passing programming
+## @ingroup cont
 ## @{
 
 ## `VECTOR ( symbol:name -- vector:name )`  create vector
@@ -200,36 +199,42 @@ F << STACK
 ## `MAP ( symbol:name -- map:name )` create associative array
 def MAP(vm):
     vm.push(Map(vm.pop().value))
-F << STACK
+F << MAP
 
 ## @}
 
 # ############################### messaging ##################################
-## @defgroup msg messaging
-## @brief message passing programming
+## @ingroup msg
 ## @{
 
-## `.push ( obj1 obj2 -- obj1/obj2 )` push obj2 to obj1 (as stack)
+## `// .PUSH ( obj1 obj2 -- obj1/obj2 )` push obj2 to obj1 (as stack)
 def dPUSH(vm): obj2 = vm.pop() ; vm.top().push(obj2)
 F['.PUSH'] = Fn(dPUSH)
 F['//']    = Fn(dPUSH)
 
-## `.pop ( obj1/obj2 -- obj1 obj2 )` decompose obj1 by popping obj2
+## `.POP ( obj1/obj2 -- obj1 obj2 )` decompose obj1 by popping obj2
 def dPOP(vm): vm.push(vm.top().pop())
 F['.POP'] = Fn(dPOP)
 
-## `.save ( obj -- obj )` save object to persistant store
+## `.SAVE ( obj -- obj )` save object to persistant store
 def pSAVE(vm): vm.top().save()
 F['.SAVE'] = Fn(pSAVE)
 
-## `.load ( obj -- obj )` load object from persistant store
+## `.LOAD ( obj -- obj )` load object from persistant store
 def pLOAD(vm): vm.top().load()
 F['.LOAD'] = Fn(pLOAD)
+
+## `.DEL ( object key -- )` delete object by key
+def pDEL(vm):
+    key = vm.pop().value ; vm.top().delete(key)
+F['.DEL'] = Fn(pDEL)
+
+## `.DUP
 
 ## @}
 
 # ############################ PPS integration ###############################
-## @defgroup ppsi PPS interface
+## @ingroup pps
 ## @{
 
 from pps import *
