@@ -204,17 +204,8 @@ F << MAP
 ## @}
 
 # ############################### messaging ##################################
-## @ingroup msg
+## @ingroup persist
 ## @{
-
-## `// .PUSH ( obj1 obj2 -- obj1/obj2 )` push obj2 to obj1 (as stack)
-def dPUSH(vm): obj2 = vm.pop() ; vm.top().push(obj2)
-F['.PUSH'] = Fn(dPUSH)
-F['//']    = Fn(dPUSH)
-
-## `.POP ( obj1/obj2 -- obj1 obj2 )` decompose obj1 by popping obj2
-def dPOP(vm): vm.push(vm.top().pop())
-F['.POP'] = Fn(dPOP)
 
 ## `.SAVE ( obj -- obj )` save object to persistant store
 def pSAVE(vm): vm.top().save()
@@ -224,12 +215,38 @@ F['.SAVE'] = Fn(pSAVE)
 def pLOAD(vm): vm.top().load()
 F['.LOAD'] = Fn(pLOAD)
 
+## @}
+
+## @defgroup compose compose
+## @ingroup msg
+## @brief [de]compose objects inner/outer elements
+## @{
+
+## `// .PUSH ( obj1 obj2 -- obj1/obj2 )` push obj2 to obj1 (as stack)
+def pPUSH(vm): obj2 = vm.pop() ; vm.top().push(obj2)
+F['.PUSH'] = Fn(pPUSH)
+F['//']    = Fn(pPUSH)
+
+## `.POP ( obj1/obj2 -- obj1 obj2 )` decompose obj1 by popping obj2
+def pPOP(vm): vm.push(vm.top().pop())
+F['.POP'] = Fn(pPOP)
+
+## `<< LSHIFT ( obj1 obj2 -- obj1/obj2 )` push obj2 as slot into obj1
+def LSHIFT(vm):
+    obj2 = vm.pop() ; vm.top() << obj2
+F['<<'] = Fn(LSHIFT)
+F['LSHIFT'] = Fn(LSHIFT)
+
+## `>> RSHIFT ( obj1/obj2 string:obj2 -- obj1/obj2 obj2 )` lookup from obj1
+def RSHIFT(vm):
+    obj2 = vm.pop() ; vm.push( vm.top() >> obj2 )
+F['>>'] = Fn(RSHIFT)
+F['RSHIFT'] = Fn(RSHIFT)
+
 ## `.DEL ( object key -- )` delete object by key
 def pDEL(vm):
     key = vm.pop().value ; vm.top().delete(key)
 F['.DEL'] = Fn(pDEL)
-
-## `.DUP
 
 ## @}
 

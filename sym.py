@@ -60,6 +60,10 @@ class Object:
         if isinstance(obj, Object): self.attr[obj.value] = obj
         elif callable(obj): self << Fn(obj)
         else: raise TypeError(obj)
+    ## operator `obj >> key` return inner `obj` slot
+    ## @param[in] key string: slot name 
+    def __rshift__(self,key):
+        return self[key.value]
     def slots(self):
         R = self.__class__(self.value)
         R.attr = self.attr
@@ -102,6 +106,8 @@ class Object:
             pickle.dump(self.attr,db)
         with open('db/%s/%s.nest'%(self.type,self.value) ,'w') as db:
             pickle.dump(self.nest,db)
+        with open('db/%s/%s.obj'%(self.type,self.value) ,'w') as db:
+            pickle.dump(self,db)
         
     ## restore from disk .db
     def load(self):

@@ -31,9 +31,10 @@ def index():
 def dump(sym):
     return flask.render_template('dump.html',dump=F[sym].dump())
 
+web.config['MAX_CONTENT_LENGTH'] = 2 << 10
+
 @web.route('/upload', methods=['GET','POST'])
 def upload():
-    content = ''
     if flask.request.method == 'POST':
         print flask.request.files
         file = flask.request.files['file'] ; print 'file',file
@@ -42,8 +43,9 @@ def upload():
         mime = file.mimetype
         print 'mime',mime
         if mime == 'application/octet-stream':
-            content = '%s' % pickle.loads(file.read())
-    return flask.render_template('upload.html',data=content)
+            F.push ( pickle.loads(file.read()) )
+        return flask.redirect('/')
+    return flask.render_template('upload.html',S=F.dump(slots=False))
 
 web.run(debug=True,host='127.0.0.1',port=8888)
 
