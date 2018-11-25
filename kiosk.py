@@ -24,7 +24,8 @@ class CmdForm(flask_wtf.FlaskForm):
 def index():
     form = CmdForm()
     if form.validate_on_submit(): F.push(String(form.pad.data)) ; INTERPRET(F)
-    return flask.render_template('index.html', form=form, vm=F.dump(slots=False))
+    return flask.render_template('index.html', form=form, \
+                                vm=F.dump(slots=False), plan=F['plan'].dump())
 
 @web.route('/<sym>')
 def dump(sym):
