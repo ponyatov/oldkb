@@ -187,12 +187,19 @@ F << INTERPRET
 ## @brief message passing programming
 ## @{
 
+## `VECTOR ( symbol:name -- vector:name )`  create vector
 def VECTOR(vm):
     vm.push(Vector(vm.pop().value))
 F << VECTOR
 
+## `STACK ( symbol:name -- stack:name )` create stack
 def STACK(vm):
     vm.push(Stack(vm.pop().value))
+F << STACK
+
+## `MAP ( symbol:name -- map:name )` create associative array
+def MAP(vm):
+    vm.push(Map(vm.pop().value))
 F << STACK
 
 ## @}
