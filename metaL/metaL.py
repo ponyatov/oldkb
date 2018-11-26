@@ -1,12 +1,12 @@
 # metaLanguage engine: FORTH in Python -> ANSI'C
 
+import os,sys,dill,gzip
+
 class Obj:
     # construct with name
     def __init__(self,V):
-        self.type  = self.__class__.__name__.lower()
-        self.value = V
-        self.attr  = {}
-        self.nest  = []
+        self.type = self.__class__.__name__.lower() ; self.value = V
+        self.attr = {} ; self.nest = []
         
     # print object
     def __repr__(self):
@@ -28,7 +28,6 @@ class Obj:
         if isinstance(obj,Obj): self[obj.value] = obj ; return self
         if callable(obj): return self << Fn(obj)
         raise TypeError(obj)
-        
     # nest[] as stack
     def dropall(self): self.nest = []
     def push(self,obj): self.nest.append(obj) ; return self
@@ -67,6 +66,13 @@ W['DROP']  = Fn(S.drop)
 W['SWAP']  = Fn(S.swap)
 W['OVER']  = Fn(S.over)
 W['PRESS'] = Fn(S.press)
+
+def SAVE():
+    with gzip.GzipFile(sys.argv[0]+'.db','wb',9) as db: dill.dump(W,db)
+W << SAVE
+
+def LOAD():
+    with gzip.open(sys.argv[0]+'.db','rb',9) as db: W = dill.load(db)
 
 import ply.lex as lex
 
