@@ -1,2 +1,2 @@
-all: metaL.py metaL.py.ml
+all: metaL.py metaL.py.ml 
 	python $^

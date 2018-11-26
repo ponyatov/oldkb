@@ -4,6 +4,8 @@
 
 import os,sys
 
+# ####################################################### symbolic type system
+
 class Obj:
     # construct with name
     def __init__(self,V):
@@ -60,6 +62,8 @@ class Fn(Obj):
 
 class Module(Obj): pass
 
+# ############################################### virtual object FORTH machine
+
 # stack
 S = StacK('data')
 
@@ -69,8 +73,19 @@ W = Map('FORTH')
 W['S'] = S
 W['W'] = W
 
-def q(): print W
+def BYE(): sys.exit(0)
+W << BYE
+
+def q(): print S
 W['?'] = W['WORDS'] = Fn(q)
+
+def qq(): print W ; print S ; BYE()
+W['??'] = Fn(qq)
+
+def MODULE(): S.push( Module(S.pop().value) )
+W << MODULE
+
+# ############################################################# stack swanking
 
 W['.'] = W['DROPALL'] = Fn(S.dropall)
 W['DUP']   = Fn(S.dup)
@@ -79,11 +94,22 @@ W['SWAP']  = Fn(S.swap)
 W['OVER']  = Fn(S.over)
 W['PRESS'] = Fn(S.press)
 
-def MODULE(): S.push( Module(S.pop().value) )
-W << MODULE
+# FETCH @ ( name -- obj ) fetch obj from vocabulary by name
+def FETCH(): S.push( W[S.pop().value] )
+W << FETCH
+W['@'] = Fn(FETCH)
+
+# STORE ! ( obj name -- ) store obj to vocabulary with given name
+def STORE(): name = S.pop().value ; W[name] = S.pop()
+W << STORE
+W['!'] = Fn(STORE)
+
+# #################################################### structural manipulators
 
 def LSHIFT(): obj2 = S.pop() ; obj1 = S.pop() ; S.push( obj1 << obj2 )
 W['<<'] = W['LSHIFT'] = Fn(LSHIFT)
+
+# ################################################# syntax parser (lexer only)
 
 import ply.lex as lex
 
@@ -119,6 +145,8 @@ def t_ANY_error(t): raise SyntaxError(t)
 
 lexer = lex.lex()
 
+# ########################################################## FORTH interpreter
+
 def WORD():
     token = lexer.token()
     if not token: return False
@@ -144,8 +172,21 @@ def INTERPRET(SRC):
         if not WORD(): break
         if S.top().type in ['sym']:
             if FIND(): EXECUTE()
+            else: raise KeyError(S.pop().head())
 
-try:
-    with open(sys.argv[1],'r') as src: INTERPRET(src.read())
-except IndexError:
-    with open(sys.argv[0]+'.ml','r') as src: INTERPRET(src.read())
+def REPL():
+    while True: print S ; INTERPRET(raw_input('ok> '))
+W << REPL
+
+# #################################################################### compiler
+
+def CONST(): WORD() ; STORE()
+W << CONST
+
+# ############################################################## system startup
+
+for file in sys.argv[1:]:
+    with open(file,'r') as src:
+        INTERPRET(src.read())
+
+if len(sys.argv) == 1: REPL()
