@@ -1,3 +1,5 @@
+#!/usr/bin/env python2.7
+
 # metaLanguage engine: FORTH in Python -> ANSI'C
 
 import os,sys,dill,gzip
@@ -58,7 +60,8 @@ S = StacK('data')
 # vocabulary
 W = Map('FORTH')
 
-W['?'] = W['WORDS'] = Fn(W.dump)
+def q(): print W
+W['?'] = W['WORDS'] = Fn(q)
 
 W['.'] = W['DROPALL'] = Fn(S.dropall)
 W['DUP']   = Fn(S.dup)
@@ -73,12 +76,27 @@ W << SAVE
 
 def LOAD():
     with gzip.open(sys.argv[0]+'.db','rb',9) as db: W = dill.load(db)
+W << LOAD
 
 import ply.lex as lex
 
 tokens = ['sym','num','str']
 
 t_ignore = ' \t\r\n'
+
+states = (('str','exclusive'),)
+
+t_str_ignore = ''
+
+def t_str(t):
+    r'\''
+    t.lexer.string = '' ; t.lexer.push_state('str')
+def t_str_str(t):
+    r'\''
+    t.lexer.pop_state() ; return Str(t.lexer.string)
+def t_str_any(t):
+    r'.'
+    t.lexer.string += t.value
 
 def t_num(t):
     r'[0-9]+'
@@ -87,7 +105,7 @@ def t_sym(t):
     r'[^ \t\r\n]+'
     return Sym(t.value)
 
-def t_error(t): raise SyntaxError(t)
+def t_ANY_error(t): raise SyntaxError(t)
 
 lexer = lex.lex()
 
@@ -114,7 +132,8 @@ def INTERPRET(SRC):
     lexer.input(SRC)
     while True:
         if not WORD(): break
-        if FIND(): EXECUTE()
+        if S.top().type in ['sym']:
+            if FIND(): EXECUTE()
 
 # REPL
 while True: print S ; INTERPRET(raw_input('\nok> '))
