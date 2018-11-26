@@ -2,7 +2,7 @@
 
 # metaLanguage engine: FORTH in Python -> ANSI'C
 
-import os,sys,dill,gzip
+import os,sys
 
 class Obj:
     # construct with name
@@ -13,8 +13,12 @@ class Obj:
     # print object
     def __repr__(self):
         return self.dump()
+    dumped=[]
     def dump(self,depth=0,prefix=''):
         S = self.pad(depth) + self.head(prefix)
+        if not depth: Obj.dumped = []
+        if self in Obj.dumped: return S+'...'
+        else: Obj.dumped.append(self)
         for i in self.attr: S += self.attr[i].dump(depth+1,prefix='%s = '%i)
         for j in self.nest: S += j.dump(depth+1)
         return S
@@ -54,11 +58,16 @@ class Fn(Obj):
     def __init__(self,F): Obj.__init__(self, F.__name__) ; self.fn = F
     def __call__(self): self.fn()
 
+class Module(Obj): pass
+
 # stack
 S = StacK('data')
 
 # vocabulary
 W = Map('FORTH')
+
+W['S'] = S
+W['W'] = W
 
 def q(): print W
 W['?'] = W['WORDS'] = Fn(q)
@@ -70,19 +79,20 @@ W['SWAP']  = Fn(S.swap)
 W['OVER']  = Fn(S.over)
 W['PRESS'] = Fn(S.press)
 
-def SAVE():
-    with gzip.GzipFile(sys.argv[0]+'.db','wb',9) as db: dill.dump(W,db)
-W << SAVE
+def MODULE(): S.push( Module(S.pop().value) )
+W << MODULE
 
-def LOAD():
-    with gzip.open(sys.argv[0]+'.db','rb',9) as db: W = dill.load(db)
-W << LOAD
+def LSHIFT(): obj2 = S.pop() ; obj1 = S.pop() ; S.push( obj1 << obj2 )
+W['<<'] = W['LSHIFT'] = Fn(LSHIFT)
 
 import ply.lex as lex
 
 tokens = ['sym','num','str']
 
 t_ignore = ' \t\r\n'
+
+def t_ignore_COMMENT(t):
+    '\#.*'
 
 states = (('str','exclusive'),)
 
@@ -125,7 +135,7 @@ def FIND():
 W << FIND
     
 def EXECUTE():
-    S.pop() ()
+    if callable(S.top()): S.pop() ()
 W << EXECUTE
     
 def INTERPRET(SRC):
@@ -135,5 +145,7 @@ def INTERPRET(SRC):
         if S.top().type in ['sym']:
             if FIND(): EXECUTE()
 
-# REPL
-while True: print S ; INTERPRET(raw_input('\nok> '))
+try:
+    with open(sys.argv[1],'r') as src: INTERPRET(src.read())
+except IndexError:
+    with open(sys.argv[0]+'.ml','r') as src: INTERPRET(src.read())
