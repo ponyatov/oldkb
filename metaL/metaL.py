@@ -62,6 +62,8 @@ class Fn(Obj):
 
 class Module(Obj): pass
 
+class Mcu(Obj): pass
+
 # ############################################### virtual object FORTH machine
 
 # stack
@@ -81,6 +83,13 @@ W['?'] = W['WORDS'] = Fn(q)
 
 def qq(): print W ; print S ; BYE()
 W['??'] = Fn(qq)
+
+# ################################################ target system configuration
+
+def MCU(): W << Mcu(S.pop().value)
+W << MCU
+
+# ############################################################ metaprogramming
 
 def MODULE(): S.push( Module(S.pop().value) )
 W << MODULE
@@ -118,7 +127,7 @@ tokens = ['sym','num','str']
 t_ignore = ' \t\r\n'
 
 def t_ignore_COMMENT(t):
-    '\#.*'
+    '[\\\#].*'
 
 states = (('str','exclusive'),)
 
