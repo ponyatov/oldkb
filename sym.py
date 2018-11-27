@@ -58,7 +58,7 @@ class Object:
     def delete(self,key): del self.attr[key] ; return self
     def __lshift__(self,obj):
         if isinstance(obj, Object): self.attr[obj.value] = obj
-        elif callable(obj): self << Fn(obj)
+        elif callable(obj): self << Cmd(obj)
         else: raise TypeError(obj)
     ## operator `obj >> key` return inner `obj` slot
     ## @param[in] key string: slot name 
@@ -271,11 +271,14 @@ class Map(Container): pass
 
 class Active(Object): pass
 
+## Function
+class Fn(Active): pass
+    
 ## Virtual Machine
 class VM(Active): pass
 
-## Function
-class Fn(Active):
+## VM command
+class Cmd(Active):
     def __init__(self,F): Active.__init__(self, F.__name__) ; self.fn = F
     def __call__(self,vm): self.fn(vm)
     

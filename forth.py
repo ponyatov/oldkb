@@ -27,7 +27,7 @@ F << BYE
 
 ## `? ( -- )` dump stack
 def q(vm): print vm.pop()
-F['?'] = Fn(q)
+F['?'] = Cmd(q)
 
 ## `WORDS ( -- slots )` isolate vocabulary
 def WORDS(vm): vm.push(vm.slots())
@@ -76,7 +76,7 @@ F << PRESS
 ## `DROPALL ( `...` -- )` clear stack
 def DROPALL(vm): vm.dropall()
 F << DROPALL
-F['.'] = Fn(DROPALL)
+F['.'] = Cmd(DROPALL)
 
 ## @}
 
@@ -87,32 +87,32 @@ F['.'] = Fn(DROPALL)
 ## `+ ADD ( a b -- a+b )`
 def ADD(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.add(B))
 F << ADD
-F['+'] = Fn(ADD)
+F['+'] = Cmd(ADD)
 
 ## `- SUB ( a b -- a-b )`
 def SUB(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.sub(B))
 F << SUB
-F['-'] = Fn(SUB)
+F['-'] = Cmd(SUB)
 
 ## `* MUL ( a b -- a*b )`
 def MUL(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.mul(B))
 F << MUL
-F['*'] = Fn(MUL)
+F['*'] = Cmd(MUL)
 
 ## `/ DIV ( a b -- a/b )`
 def DIV(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.div(B))
 F << DIV
-F['/'] = Fn(DIV)
+F['/'] = Cmd(DIV)
 
 ## `% MOD ( a b -- a%b )`
 def MOD(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.mod(B))
 F << MOD
-F['%'] = Fn(MOD)
+F['%'] = Cmd(MOD)
 
 ## `^ POW ( a b -- a^b )`
 def POW(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.pow(B))
 F << POW
-F['^'] = Fn(POW)
+F['^'] = Cmd(POW)
 
 ## `SQRT ( a -- Va )` square root
 def SQRT(vm): vm.push(vm.pop().sqrt())
@@ -209,11 +209,11 @@ F << MAP
 
 ## `.SAVE ( obj -- obj )` save object to persistant store
 def pSAVE(vm): vm.top().save()
-F['.SAVE'] = Fn(pSAVE)
+F['.SAVE'] = Cmd(pSAVE)
 
 ## `.LOAD ( obj -- obj )` load object from persistant store
 def pLOAD(vm): vm.top().load()
-F['.LOAD'] = Fn(pLOAD)
+F['.LOAD'] = Cmd(pLOAD)
 
 ## @}
 
@@ -224,29 +224,29 @@ F['.LOAD'] = Fn(pLOAD)
 
 ## `// .PUSH ( obj1 obj2 -- obj1/obj2 )` push obj2 to obj1 (as stack)
 def pPUSH(vm): obj2 = vm.pop() ; vm.top().push(obj2)
-F['.PUSH'] = Fn(pPUSH)
-F['//']    = Fn(pPUSH)
+F['.PUSH'] = Cmd(pPUSH)
+F['//']    = Cmd(pPUSH)
 
 ## `.POP ( obj1/obj2 -- obj1 obj2 )` decompose obj1 by popping obj2
 def pPOP(vm): vm.push(vm.top().pop())
-F['.POP'] = Fn(pPOP)
+F['.POP'] = Cmd(pPOP)
 
 ## `<< LSHIFT ( obj1 obj2 -- obj1/obj2 )` push obj2 as slot into obj1
 def LSHIFT(vm):
     obj2 = vm.pop() ; vm.top() << obj2
-F['<<'] = Fn(LSHIFT)
-F['LSHIFT'] = Fn(LSHIFT)
+F['<<'] = Cmd(LSHIFT)
+F['LSHIFT'] = Cmd(LSHIFT)
 
 ## `>> RSHIFT ( obj1/obj2 string:obj2 -- obj1/obj2 obj2 )` lookup from obj1
 def RSHIFT(vm):
     obj2 = vm.pop() ; vm.push( vm.top() >> obj2 )
-F['>>'] = Fn(RSHIFT)
-F['RSHIFT'] = Fn(RSHIFT)
+F['>>'] = Cmd(RSHIFT)
+F['RSHIFT'] = Cmd(RSHIFT)
 
 ## `.DEL ( object key -- )` delete object by key
 def pDEL(vm):
     key = vm.pop().value ; vm.top().delete(key)
-F['.DEL'] = Fn(pDEL)
+F['.DEL'] = Cmd(pDEL)
 
 ## @}
 
