@@ -189,8 +189,15 @@ W << REPL
 
 # #################################################################### compiler
 
-def CONST(): WORD() ; STORE()
-W << CONST
+def DEF(): WORD() ; STORE()
+W << DEF
+
+# ######################################################### object programming
+
+def INHER():
+    WORD() ; child = S.pop() ; super = S.pop()
+    child.type = super.type ; child['super'] = super ; W << child
+W << INHER
 
 # ############################################################## system startup
 

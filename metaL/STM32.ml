@@ -3,8 +3,9 @@
 ?
 
 \ target system triplet
-'arm-none-eabi' const TARGET
+'arm-none-eabi' def TARGET
 
-'STM32F1'	MCU
-STM32F1		const	STM32F103
-STM32F103	const	STM32F103CBT7
+'CortexM'	MCU
+CortexM		inher	STM32F1
+STM32F1		inher	STM32F103
+STM32F103	inher	STM32F103CBT7
