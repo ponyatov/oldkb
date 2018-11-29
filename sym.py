@@ -62,7 +62,8 @@ class Object:
     ## `delete object[key]` operator
     ## @param[in] key string: slot name 
     def delete(self,key): del self.attr[key] ; return self
-    ## `<<` operator
+    ## `<<` operator: push `obj` as new slot
+    ## @param [in] obj using `obj.value` as new slot name
     def __lshift__(self,obj):
         if isinstance(obj, Object): self.attr[obj.value] = obj
         elif callable(obj): self << Cmd(obj)
