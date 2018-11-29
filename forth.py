@@ -26,7 +26,7 @@ def BYE(vm): sys.exit(0)
 F << BYE
 
 ## `? ( -- )` dump stack
-def q(vm): print vm.pop()
+def q(vm): print vm.dump(slots=False)
 F['?'] = Cmd(q)
 
 ## `WORDS ( -- slots )` isolate vocabulary

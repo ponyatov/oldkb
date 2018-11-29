@@ -52,10 +52,17 @@ class Object:
     ## @brief operations on named attributes = frame slots
     ## @ingroup object
     ## @{
-        
+
+    ## `object[key] = value` operator
+    ## @param[in] key string: slot name 
     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
+    ## `object[key]` operator
+    ## @param[in] key string: slot name 
     def __getitem__(self,key): return self.attr[key]
+    ## `delete object[key]` operator
+    ## @param[in] key string: slot name 
     def delete(self,key): del self.attr[key] ; return self
+    ## `<<` operator
     def __lshift__(self,obj):
         if isinstance(obj, Object): self.attr[obj.value] = obj
         elif callable(obj): self << Cmd(obj)
