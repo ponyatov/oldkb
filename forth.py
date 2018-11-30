@@ -118,23 +118,23 @@ F['^'] = Cmd(POW)
 def SQRT(vm): vm.push(vm.pop().sqrt())
 F << SQRT
 
-## `sin ( a -- sin(a) )`
+## `SIN ( a -- sin(a) )`
 def SIN(vm): vm.push(vm.pop().sin())
 F << SIN
 
-## `cos ( a -- cos(a) )`
+## `COS ( a -- cos(a) )`
 def COS(vm): vm.push(vm.pop().cos())
 F << COS
 
-## `tan ( a -- tan(a) )`
+## `TAN ( a -- tan(a) )`
 def TAN(vm): vm.push(vm.pop().tan())
 F << TAN
 
-## `int ( number: -- integer: )` trail to integer part
+## `INT ( number: -- integer: )` trail to integer part
 def INT(vm): vm.push(vm.pop().int())
 F << INT
 
-## `num ( integer: -- number: )` to floating point
+## `NUM ( integer: -- number: )` to floating point
 def NUM(vm): vm.push(vm.pop().num())
 F << NUM
 
