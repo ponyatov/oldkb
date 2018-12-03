@@ -73,9 +73,9 @@ class Object:
     def __rshift__(self,key):
         return self[key.value]
     def slots(self):
-        R = self.__class__(self.value)
-        R.attr = self.attr
-        return R
+        R = self.head()+' :\n'
+        for i in self.attr: R += '%s '%i
+        return String(R)
     
     ## @}
 

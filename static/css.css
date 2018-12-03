@@ -9,6 +9,7 @@ html,body { width:100%; overflow: hidden; margin: 0; padding: 0; }
 label[for=error]	{ color:yellow; }
 
 #plan	{ color: cyan; }
+#words	{ color: darkcyan; max-width: 99%; word-wrap: break-word; }
 #plot	{ padding:5px; }
 
 #cmd	{ position: absolute; bottom:0; width:100%; }
@@ -23,7 +24,7 @@ label[for=error]	{ color:yellow; }
 }
 
 #slider > * {
-	overflow: auto; max-height: 100%;
+	overflow: auto; max-height: 55%;
 	border: solid 1px; border-color: darkgreen;
 	display: inline-block;
 }
@@ -31,4 +32,5 @@ label[for=error]	{ color:yellow; }
 @media only screen and (max-width: 800px) {
 	*	{ font-size:	5mm; }
 	#go	{ height:		11vmin; }
+	#slider > * { max-height: 33%; }
 }
