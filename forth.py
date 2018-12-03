@@ -260,6 +260,14 @@ F['.DEL'] = Cmd(pDEL)
 ## @ingroup meta
 ## @{
 
+## `FN ( name -- fn:name )` define function
+def FN(vm): vm.push(Fn(vm.pop().value))
+F << FN
+
+## `GROUP ( name -- group:name)` object group
+def GROUP(vm): vm.push(Group(vm.pop().value))
+F << GROUP
+
 ## @ingroup oop OOP
 ## @{
 

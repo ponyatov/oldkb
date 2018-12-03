@@ -303,6 +303,9 @@ class Cmd(Active):
 ## @brief with source autogeneration for embedded systems
 ## @{
 
+## object group
+class Group(Object): pass
+
 ## @defgroup oop OOP
 
 ## @defgroup hwsw HWSW
