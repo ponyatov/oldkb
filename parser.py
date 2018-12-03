@@ -70,7 +70,7 @@ def t_integer(t):
 ## @}
 
 def t_symbol(t):
-    r'[a-zA-Z0-9_\?\.\:\;\+\-\*\/\%\^\@\!\<\>]+'
+    r'[a-zA-Z0-9_\?\.\:\;\+\-\*\/\%\^\@\!\$\<\>]+'
     return Symbol(t.value)
 
 ## lexer error callback

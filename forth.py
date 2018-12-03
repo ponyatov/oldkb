@@ -231,21 +231,45 @@ F['//']    = Cmd(pPUSH)
 def pPOP(vm): vm.push(vm.top().pop())
 F['.POP'] = Cmd(pPOP)
 
+## `.FETCH @ ( obj1 name -- obj2 )` fetch slot from obj1 by name
+def pFETCH(vm):
+    name = vm.pop() ; obj1 = vm.pop() ; vm.push(obj1[name.value])
+F['.FETCH'] = Cmd(pFETCH)
+F['@'] = Cmd(pFETCH)
+
+## `.STORE ! ( obj1 obj2 name -- obj1 )` store obj2 to obj1 slot with name
+def pSTORE(vm):
+    name = vm.pop() ; obj2 = vm.pop() ; vm.top()[name.value] = obj2
+F['.STORE'] = Cmd(pSTORE)
+F['!'] = Cmd(pSTORE)
+
 ## `.SLOT ( obj1 obj2 -- obj1/obj2 )` push obj2 as slot into obj1
 def pSLOT(vm):
     obj2 = vm.pop() ; vm.top() << obj2
 F['.SLOT'] = Cmd(pSLOT)    
-
-## `>> RSHIFT ( obj1/obj2 string:obj2 -- obj1/obj2 obj2 )` lookup from obj1
-def RSHIFT(vm):
-    obj2 = vm.pop() ; vm.push( vm.top() >> obj2 )
-F['>>'] = Cmd(RSHIFT)
-F['RSHIFT'] = Cmd(RSHIFT)
+F['$'] = Cmd(pSLOT)    
 
 ## `.DEL ( object key -- )` delete object by key
 def pDEL(vm):
     key = vm.pop().value ; vm.top().delete(key)
 F['.DEL'] = Cmd(pDEL)
+
+## @}
+
+# ############################ metaprogramming ###############################
+## @defgroup meta Metapogramming
+## @{
+
+## @defgroup oop OOP
+## @{
+
+## 'INHER ( obj1 obj2 -- obj2.super -> obj1 )` inherit obj2 from obj1
+def INHER(vm):
+    obj2 = vm.pop() ; obj1 = vm.pop()
+    vm.push(obj2) ; obj2['super'] = obj1
+F << INHER
+
+## @}
 
 ## @}
 
