@@ -231,11 +231,10 @@ F['//']    = Cmd(pPUSH)
 def pPOP(vm): vm.push(vm.top().pop())
 F['.POP'] = Cmd(pPOP)
 
-## `<< LSHIFT ( obj1 obj2 -- obj1/obj2 )` push obj2 as slot into obj1
-def LSHIFT(vm):
+## `.SLOT ( obj1 obj2 -- obj1/obj2 )` push obj2 as slot into obj1
+def pSLOT(vm):
     obj2 = vm.pop() ; vm.top() << obj2
-F['<<'] = Cmd(LSHIFT)
-F['LSHIFT'] = Cmd(LSHIFT)
+F['.SLOT'] = Cmd(pSLOT)    
 
 ## `>> RSHIFT ( obj1/obj2 string:obj2 -- obj1/obj2 obj2 )` lookup from obj1
 def RSHIFT(vm):
