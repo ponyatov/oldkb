@@ -275,7 +275,7 @@ F << INHER
 ## @{
 
 ## `CPU ( name -- cpu:name)` define CPU
-def CPU(vm): pass
+def CPU(vm): vm.push(Cpu(vm.pop().value))
 F << CPU
 
 ## `MCU ( name -- mcu:name)` define MCU microcontroller SoC
@@ -285,14 +285,15 @@ F << MCU
 F << Mcu('STM32')
 
 ## `ARCH ( name -- arch:name)` define new architecture
-def ARCH(vm): pass
+def ARCH(vm): vm.push(Arch(vm.pop().value))
 F << ARCH
 
 F << Arch('x86')
 F << Arch('arm')
 F << Arch('mips')
 
-def OS(vm): pass
+## `OS ( name -- os:name )` define OS
+def OS(vm): vm.push(Os(vm.pop().value))
 F << OS
 
 ## @}

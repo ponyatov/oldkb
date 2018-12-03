@@ -307,15 +307,23 @@ class Cmd(Active):
 
 ## @defgroup hwsw HWSW
 ## @brief hardware/software co-design
+## @{
 
+## hardware/software co-design metaobject
 class HwSw(Object): pass
 
+## CPU processor/SoC
 class Cpu(HwSw): pass
+## MCU microcontroller
 class Mcu(Cpu): pass
 
+## ARCH computer architecture
 class Arch(HwSw): pass
 
+## OS operational system
 class Os(HwSw): pass
+
+## @}
 
 ## @defgroup stm32 STM32
 ## @brief [Cortex-M](https://ponyatov.quora.com/metaL-metaprogramming-for-STM32-Cortex-M-microcontrollers)
