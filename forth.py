@@ -148,7 +148,7 @@ F['PI'] = Number(math.pi)
 ## @brief Simplest postfix script language
 ## @{
 
-from parser import *
+from syntax import *
 
 ## `WORD ( -- token )` read next token from source code stream
 def WORD(vm):
