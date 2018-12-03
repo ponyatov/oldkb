@@ -257,17 +257,43 @@ F['.DEL'] = Cmd(pDEL)
 ## @}
 
 # ############################ metaprogramming ###############################
-## @defgroup meta Metapogramming
+## @ingroup meta
 ## @{
 
-## @defgroup oop OOP
+## @ingroup oop OOP
 ## @{
 
-## 'INHER ( obj1 obj2 -- obj2.super -> obj1 )` inherit obj2 from obj1
+## `INHER ( obj1 obj2 -- obj2.super=obj1 )` inherit obj2 from obj1
 def INHER(vm):
     obj2 = vm.pop() ; obj1 = vm.pop()
     vm.push(obj2) ; obj2['super'] = obj1
 F << INHER
+
+## @}
+
+## @ingroup hwsw
+## @{
+
+## `CPU ( name -- cpu:name)` define CPU
+def CPU(vm): pass
+F << CPU
+
+## `MCU ( name -- mcu:name)` define MCU microcontroller SoC
+def MCU(vm): vm.push(Mcu(vm.pop().value))
+F << MCU
+
+F << Mcu('STM32')
+
+## `ARCH ( name -- arch:name)` define new architecture
+def ARCH(vm): pass
+F << ARCH
+
+F << Arch('x86')
+F << Arch('arm')
+F << Arch('mips')
+
+def OS(vm): pass
+F << OS
 
 ## @}
 

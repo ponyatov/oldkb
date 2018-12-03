@@ -1,5 +1,5 @@
 (isym
-Symbol
+Mcu
 p0
 (dp1
 S'nest'
@@ -7,7 +7,7 @@ p2
 (lp3
 sS'type'
 p4
-S'symbol'
+S'mcu'
 p5
 sS'attr'
 p6
@@ -60,6 +60,6 @@ sg6
 sg14
 g22
 sbssg14
-VSTM32
+S'STM32'
 p28
 sb.

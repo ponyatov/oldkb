@@ -294,5 +294,31 @@ class Cmd(Active):
 
 ## @}
 
+# ############################### Messaging ##################################
 ## @defgroup msg Messaging
 ## @brief message-passing OOP & distributed computing
+
+# ############################ Metaprogramming ###############################
+## @defgroup meta Metaprogramming
+## @brief with source autogeneration for embedded systems
+## @{
+
+## @defgroup oop OOP
+
+## @defgroup hwsw HWSW
+## @brief hardware/software co-design
+
+class HwSw(Object): pass
+
+class Cpu(HwSw): pass
+class Mcu(Cpu): pass
+
+class Arch(HwSw): pass
+
+class Os(HwSw): pass
+
+## @defgroup stm32 STM32
+## @brief [Cortex-M](https://ponyatov.quora.com/metaL-metaprogramming-for-STM32-Cortex-M-microcontrollers)
+##        code generation target
+
+## @}
