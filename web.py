@@ -44,11 +44,7 @@ def index():
         return flask.redirect('/login')
     form = CmdForm()
     if form.validate_on_submit(): F.push(String(form.pad.data)) ; INTERPRET(F)
-    return flask.render_template('index.html', form=form, \
-                                vm=F.dump(slots=False), \
-                                plan=F['plan'].dump(), \
-                                words=F.slots().value \
-                                )
+    return flask.render_template('index.html', form=form, F=F)
 
 class User(flask_login.UserMixin):
     def __init__(self,id): self.id = id

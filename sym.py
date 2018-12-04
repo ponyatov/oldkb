@@ -31,15 +31,17 @@ class Object:
         
     def __repr__(self): return self.dump()
     dumped = []
-    def dump(self, depth=0, prefix='', slots=True):
-        S = self.pad(depth) + self.head(prefix)
+    def dump(self, depth=0, prefix='', slots=True, header=True):
+        if header: S = self.pad(depth) + self.head(prefix)
+        else: S = ''
         if not depth: Object.dumped = []
         if self in Object.dumped: return S + '...' 
         else: Object.dumped.append(self)
         if slots:
             for i in self.attr: S += self.attr[i].dump(depth + 1, prefix = '%s = ' % i)
         for j in self.nest: S += j.dump(depth + 1)
-        return S
+        if header: return S
+        else: return S[1:]
     def head(self, prefix=''):
         return '%s<%s:%s> @%x' % (prefix, self.type, self.str(), id(self))
     def pad(self, N): return '\n' + '    ' * N

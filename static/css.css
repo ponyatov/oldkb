@@ -32,8 +32,10 @@ label[for=error]	{ color:yellow; }
 #slider > * {
 	overflow: auto; max-height: 55%;
 	border: solid 1px; border-color: darkgreen;
-	display: inline-block;
+	display: inline-block; vertical-align: top;
 }
+
+#slider > * > #header { position:absolute; top:0; width:100%; color:lightblue; }
 
 @media only screen and (max-width: 800px) {
 	*	{ font-size:	5mm; }
