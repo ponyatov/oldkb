@@ -18,6 +18,11 @@ label[for=error]	{ color:yellow; }
 #file	{ width:100%; }
 #log	{ width:100%; }
 
+#dump {
+	width: 99%; height: 99%; overflow: auto;
+	border: solid 1px; border-color: darkgreen;
+}
+
 #slider {
 	max-height: 100%;
 	border: solid 1px; border-color: darkgreen;
