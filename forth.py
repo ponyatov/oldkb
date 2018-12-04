@@ -231,27 +231,27 @@ F['//']    = Cmd(pPUSH)
 def pPOP(vm): vm.push(vm.top().pop())
 F['.POP'] = Cmd(pPOP)
 
+## `.DROP ( obj1/obj2 -- obj1 )` drop from obj1
+def pDROP(vm): vm.top().drop()
+F['.DROP'] = Cmd(pDROP)
+
 ## `.FETCH @ ( obj1 name -- obj2 )` fetch slot from obj1 by name
-def pFETCH(vm):
-    name = vm.pop() ; obj1 = vm.pop() ; vm.push(obj1[name.value])
+def pFETCH(vm): name = vm.pop() ; obj1 = vm.pop() ; vm.push(obj1[name.value])
 F['.FETCH'] = Cmd(pFETCH)
 F['@'] = Cmd(pFETCH)
 
-## `.STORE ! ( obj1 obj2 name -- obj1 )` store obj2 to obj1 slot with name
-def pSTORE(vm):
-    name = vm.pop() ; obj2 = vm.pop() ; vm.top()[name.value] = obj2
+## `.STORE ! ( obj1 obj2 name -- obj1.name=obj2 )` store obj2 to obj1 slot with name
+def pSTORE(vm): name = vm.pop() ; obj2 = vm.pop() ; vm.top()[name.value] = obj2
 F['.STORE'] = Cmd(pSTORE)
 F['!'] = Cmd(pSTORE)
 
-## `.SLOT ( obj1 obj2 -- obj1/obj2 )` push obj2 as slot into obj1
-def pSLOT(vm):
-    obj2 = vm.pop() ; vm.top() << obj2
+## `.SLOT ( obj1 obj2 -- obj1.obj2 )` push obj2 as slot into obj1
+def pSLOT(vm): obj2 = vm.pop() ; vm.top() << obj2
 F['.SLOT'] = Cmd(pSLOT)    
 F['$'] = Cmd(pSLOT)    
 
-## `.DEL ( object key -- )` delete object by key
-def pDEL(vm):
-    key = vm.pop().value ; vm.top().delete(key)
+## `.DEL ( obj.key key -- obj )` delete object by key
+def pDEL(vm): key = vm.pop().value ; vm.top().delete(key)
 F['.DEL'] = Cmd(pDEL)
 
 ## @}
