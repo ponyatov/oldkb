@@ -1,7 +1,7 @@
 <map id="Object" name="Object">
-<area shape="rect" id="node1" href="$group__slot.html" title="operations on named attributes = frame slots " alt="" coords="313,5,408,32"/>
-<area shape="rect" id="node2" href="$group__sym.html" title="universal object/frame/tree data structures " alt="" coords="5,81,157,108"/>
-<area shape="rect" id="node3" href="$group__persist.html" title="persistance" alt="" coords="316,56,405,83"/>
-<area shape="rect" id="node4" href="$group__dump.html" title="represent object in human&#45;readable text form " alt="" coords="319,107,402,133"/>
-<area shape="rect" id="node5" href="$group__stack.html" title="Any object can act as generic stack. " alt="" coords="333,157,388,184"/>
+<area shape="rect" id="node1" href="$group__slot.html" title="operations on named attributes = frame slots " alt="" coords="210,60,305,87"/>
+<area shape="rect" id="node2" href="$group__sym.html" title="universal object/frame/tree data structures " alt="" coords="181,5,333,32"/>
+<area shape="rect" id="node3" href="$group__persist.html" title="persistance" alt="" coords="213,111,302,137"/>
+<area shape="rect" id="node4" href="$group__dump.html" title="represent object in human&#45;readable text form " alt="" coords="216,161,299,188"/>
+<area shape="rect" id="node5" href="$group__stack.html" title="Any object can act as generic stack. " alt="" coords="230,212,285,239"/>
 </map>

@@ -26,8 +26,8 @@ def BYE(vm): sys.exit(0)
 F << BYE
 
 ## `? ( -- )` dump stack
-def q(vm): print vm.pop()
-F['?'] = Fn(q)
+def q(vm): print vm.dump(slots=False)
+F['?'] = Cmd(q)
 
 ## `WORDS ( -- slots )` isolate vocabulary
 def WORDS(vm): vm.push(vm.slots())
@@ -76,7 +76,7 @@ F << PRESS
 ## `DROPALL ( `...` -- )` clear stack
 def DROPALL(vm): vm.dropall()
 F << DROPALL
-F['.'] = Fn(DROPALL)
+F['.'] = Cmd(DROPALL)
 
 ## @}
 
@@ -87,54 +87,54 @@ F['.'] = Fn(DROPALL)
 ## `+ ADD ( a b -- a+b )`
 def ADD(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.add(B))
 F << ADD
-F['+'] = Fn(ADD)
+F['+'] = Cmd(ADD)
 
 ## `- SUB ( a b -- a-b )`
 def SUB(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.sub(B))
 F << SUB
-F['-'] = Fn(SUB)
+F['-'] = Cmd(SUB)
 
 ## `* MUL ( a b -- a*b )`
 def MUL(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.mul(B))
 F << MUL
-F['*'] = Fn(MUL)
+F['*'] = Cmd(MUL)
 
 ## `/ DIV ( a b -- a/b )`
 def DIV(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.div(B))
 F << DIV
-F['/'] = Fn(DIV)
+F['/'] = Cmd(DIV)
 
 ## `% MOD ( a b -- a%b )`
 def MOD(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.mod(B))
 F << MOD
-F['%'] = Fn(MOD)
+F['%'] = Cmd(MOD)
 
 ## `^ POW ( a b -- a^b )`
 def POW(vm): B = vm.pop() ; A = vm.pop() ; vm.push(A.pow(B))
 F << POW
-F['^'] = Fn(POW)
+F['^'] = Cmd(POW)
 
 ## `SQRT ( a -- Va )` square root
 def SQRT(vm): vm.push(vm.pop().sqrt())
 F << SQRT
 
-## `sin ( a -- sin(a) )`
+## `SIN ( a -- sin(a) )`
 def SIN(vm): vm.push(vm.pop().sin())
 F << SIN
 
-## `cos ( a -- cos(a) )`
+## `COS ( a -- cos(a) )`
 def COS(vm): vm.push(vm.pop().cos())
 F << COS
 
-## `tan ( a -- tan(a) )`
+## `TAN ( a -- tan(a) )`
 def TAN(vm): vm.push(vm.pop().tan())
 F << TAN
 
-## `int ( number: -- integer: )` trail to integer part
+## `INT ( number: -- integer: )` trail to integer part
 def INT(vm): vm.push(vm.pop().int())
 F << INT
 
-## `num ( integer: -- number: )` to floating point
+## `NUM ( integer: -- number: )` to floating point
 def NUM(vm): vm.push(vm.pop().num())
 F << NUM
 
@@ -148,7 +148,7 @@ F['PI'] = Number(math.pi)
 ## @brief Simplest postfix script language
 ## @{
 
-from parser import *
+from syntax import *
 
 ## `WORD ( -- token )` read next token from source code stream
 def WORD(vm):
@@ -182,10 +182,162 @@ F << INTERPRET
 
 ## @}
 
+# ####################### container manipulations ############################
+## @ingroup cont
+## @{
+
+## `VECTOR ( symbol:name -- vector:name )`  create vector
+def VECTOR(vm):
+    vm.push(Vector(vm.pop().value))
+F << VECTOR
+
+## `STACK ( symbol:name -- stack:name )` create stack
+def STACK(vm):
+    vm.push(Stack(vm.pop().value))
+F << STACK
+
+## `MAP ( symbol:name -- map:name )` create associative array
+def MAP(vm):
+    vm.push(Map(vm.pop().value))
+F << MAP
+
+## @}
+
+# ############################### messaging ##################################
+## @ingroup persist
+## @{
+
+## `.SAVE ( obj -- obj )` save object to persistant store
+def pSAVE(vm): vm.top().save()
+F['.SAVE'] = Cmd(pSAVE)
+
+## `.LOAD ( obj -- obj )` load object from persistant store
+def pLOAD(vm): vm.top().load()
+F['.LOAD'] = Cmd(pLOAD)
+
+## @}
+
+## @defgroup compose compose
+## @ingroup msg
+## @brief [de]compose objects inner/outer elements
+## @{
+
+## `// .PUSH ( obj1 obj2 -- obj1/obj2 )` push obj2 to obj1 (as stack)
+def pPUSH(vm): obj2 = vm.pop() ; vm.top().push(obj2)
+F['.PUSH'] = Cmd(pPUSH)
+F['//']    = Cmd(pPUSH)
+
+## `.POP ( obj1/obj2 -- obj1 obj2 )` decompose obj1 by popping obj2
+def pPOP(vm): vm.push(vm.top().pop())
+F['.POP'] = Cmd(pPOP)
+
+## `.FETCH @ ( obj1 name -- obj2 )` fetch slot from obj1 by name
+def pFETCH(vm):
+    name = vm.pop() ; obj1 = vm.pop() ; vm.push(obj1[name.value])
+F['.FETCH'] = Cmd(pFETCH)
+F['@'] = Cmd(pFETCH)
+
+## `.STORE ! ( obj1 obj2 name -- obj1 )` store obj2 to obj1 slot with name
+def pSTORE(vm):
+    name = vm.pop() ; obj2 = vm.pop() ; vm.top()[name.value] = obj2
+F['.STORE'] = Cmd(pSTORE)
+F['!'] = Cmd(pSTORE)
+
+## `.SLOT ( obj1 obj2 -- obj1/obj2 )` push obj2 as slot into obj1
+def pSLOT(vm):
+    obj2 = vm.pop() ; vm.top() << obj2
+F['.SLOT'] = Cmd(pSLOT)    
+F['$'] = Cmd(pSLOT)    
+
+## `.DEL ( object key -- )` delete object by key
+def pDEL(vm):
+    key = vm.pop().value ; vm.top().delete(key)
+F['.DEL'] = Cmd(pDEL)
+
+## @}
+
+# ############################ metaprogramming ###############################
+## @ingroup meta
+## @{
+
+## `FN ( name -- fn:name )` define function
+def FN(vm): vm.push(Fn(vm.pop().value))
+F << FN
+
+## `GROUP ( name -- group:name)` object group
+def GROUP(vm): vm.push(Group(vm.pop().value))
+F << GROUP
+
+## @ingroup oop OOP
+## @{
+
+## `INHER ( obj1 obj2 -- obj2.super=obj1 )` inherit obj2 from obj1
+def INHER(vm):
+    obj2 = vm.pop() ; obj1 = vm.pop()
+    vm.push(obj2) ; obj2['super'] = obj1
+F << INHER
+
+## @}
+
+## @ingroup hwsw
+## @{
+
+## `CPU ( name -- cpu:name)` define CPU
+def CPU(vm): vm.push(Cpu(vm.pop().value))
+F << CPU
+
+## `MCU ( name -- mcu:name)` define MCU microcontroller SoC
+def MCU(vm): vm.push(Mcu(vm.pop().value))
+F << MCU
+
+F << Mcu('STM32')
+
+## `ARCH ( name -- arch:name)` define new architecture
+def ARCH(vm): vm.push(Arch(vm.pop().value))
+F << ARCH
+
+F << Arch('x86')
+F << Arch('arm')
+F << Arch('mips')
+
+## `OS ( name -- os:name )` define OS
+def OS(vm): vm.push(Os(vm.pop().value))
+F << OS
+
+## @}
+
+## @}
+
+# ############################ PPS integration ###############################
+## @ingroup pps
+## @{
+
+from pps import *
+
+F << Plan('plan')
+
+## create new task
+def TASK(vm): vm.push(Task(vm.pop().value))
+F << TASK
+
+## create big task (elephant)
+def SLON(vm): vm.push(Slon(vm.pop().value))
+F << SLON
+
+## create boring task
+def FROG(vm): vm.push(Frog(vm.pop().value))
+F << FROG
+
+## create new axis
+def AXIS(vm): vm.push(Axis(vm.pop().value))
+F << AXIS
+
+## @}
+
 # ################################# startup ##################################
 
 while __name__ == '__main__':
     print F.dump(slots=None)
     F.push( String( raw_input('\ninfer> ') ) ) ; INTERPRET(F)
 
-#}
+## @}

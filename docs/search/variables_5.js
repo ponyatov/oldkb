@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quit',['quit',['../classgui_1_1GUI__window.html#addd3dbbf3bfefac4f31c19f5bd203921',1,'gui::GUI_window']]]
+  ['nest',['nest',['../classsym_1_1Object.html#ade9a27fcc39f240adf79eb9ae6bbe073',1,'sym::Object']]]
 ];

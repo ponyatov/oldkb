@@ -1,6 +1,7 @@
 var searchData=
 [
   ['debug',['debug',['../classgui_1_1GUI__window.html#a639e71ec64de949803a52b4be6afe49c',1,'gui.GUI_window.debug()'],['../group__debug.html',1,'(Global Namespace)']]],
+  ['delete',['delete',['../group__slot.html#ga3f3efddb96232ce4c2e83dfea490a8cd',1,'sym::Object']]],
   ['div',['DIV',['../group__math.html#ga3857033cc438afba5e54a1e1c14cf8ca',1,'forth']]],
   ['drop',['DROP',['../group__stack.html#ga79d748491eddb0e40ac10a02b41ba749',1,'forth']]],
   ['dropall',['DROPALL',['../group__stack.html#ga37d7c3b3e5f1d89b82c92b252a8b1639',1,'forth']]],

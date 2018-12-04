@@ -1,5 +1,6 @@
 <map id="sym.Container" name="sym.Container">
 <area shape="rect" id="node3" href="$classsym_1_1Map.html" title="sym.Map" alt="" coords="5,155,81,181"/>
 <area shape="rect" id="node4" href="$classsym_1_1Stack.html" title="sym.Stack" alt="" coords="106,155,191,181"/>
-<area shape="rect" id="node2" href="$classsym_1_1Object.html" title="sym.Object" alt="" coords="51,5,140,32"/>
+<area shape="rect" id="node5" href="$classsym_1_1Vector.html" title="sym.Vector" alt="" coords="216,155,305,181"/>
+<area shape="rect" id="node2" href="$classsym_1_1Object.html" title="base object " alt="" coords="104,5,193,32"/>
 </map>

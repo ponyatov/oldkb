@@ -75,7 +75,8 @@ Collaboration diagram for kb/FORTH:</div>
 <div class="dyncontent">
 <center><table><tr><td><img src="group__forth.png" border="0" alt="" usemap="#group____forth"/>
 <map name="group____forth" id="group____forth">
-<area shape="rect" id="node1" href="group__interpret.html" title="Simplest postfix script language. " alt="" coords="140,5,221,32"/>
+<area shape="rect" id="node1" href="group__compose.html" title="[de]compose objects inner/outer elements " alt="" coords="143,5,218,32"/>
+<area shape="rect" id="node2" href="group__interpret.html" title="Simplest postfix script language. " alt="" coords="140,56,221,83"/>
 </map>
 </td></tr></table></center>
 </div>
@@ -84,6 +85,9 @@ Collaboration diagram for kb/FORTH:</div>
 Modules</h2></td></tr>
 <tr class="memitem:group__interpret"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__interpret.html">Interpreter</a></td></tr>
 <tr class="memdesc:group__interpret"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplest postfix script language. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__compose"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__compose.html">compose</a></td></tr>
+<tr class="memdesc:group__compose"><td class="mdescLeft">&#160;</td><td class="mdescRight">[de]compose objects inner/outer elements <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -98,9 +102,6 @@ Variables</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__forth.html#ga4f494902fea18beef406388c3b90a3e6">forth.F</a> = <a class="el" href="classforth_1_1FORTH.html">FORTH</a>('vm')</td></tr>
 <tr class="memdesc:ga4f494902fea18beef406388c3b90a3e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">global FVM <br /></td></tr>
 <tr class="separator:ga4f494902fea18beef406388c3b90a3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga51a0f60ad2af415918a80fa857f14637"><td class="memItemLeft" align="right" valign="top"><a id="ga51a0f60ad2af415918a80fa857f14637"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>forth.slots</b></td></tr>
-<tr class="separator:ga51a0f60ad2af415918a80fa857f14637"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0277e1b21b1d96540fbe3561658b2ea3"><td class="memItemLeft" align="right" valign="top"><a id="ga0277e1b21b1d96540fbe3561658b2ea3"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__debug.html#ga0277e1b21b1d96540fbe3561658b2ea3">forth.q</a> (vm)</td></tr>
 <tr class="memdesc:ga0277e1b21b1d96540fbe3561658b2ea3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>? ( -- )</code> dump stack <br /></td></tr>
@@ -159,24 +160,52 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 <tr class="separator:ga3b02920ca844c6cb9fc6db26e36429b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5bc6d7101b2208bdc9582b31920c17f1"><td class="memItemLeft" align="right" valign="top"><a id="ga5bc6d7101b2208bdc9582b31920c17f1"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__math.html#ga5bc6d7101b2208bdc9582b31920c17f1">forth.SIN</a> (vm)</td></tr>
-<tr class="memdesc:ga5bc6d7101b2208bdc9582b31920c17f1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>sin ( a -- sin(a) )</code> <br /></td></tr>
+<tr class="memdesc:ga5bc6d7101b2208bdc9582b31920c17f1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>SIN ( a -- sin(a) )</code> <br /></td></tr>
 <tr class="separator:ga5bc6d7101b2208bdc9582b31920c17f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga22b75f18a06ec810e35d6eef11b9d6ba"><td class="memItemLeft" align="right" valign="top"><a id="ga22b75f18a06ec810e35d6eef11b9d6ba"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__math.html#ga22b75f18a06ec810e35d6eef11b9d6ba">forth.COS</a> (vm)</td></tr>
-<tr class="memdesc:ga22b75f18a06ec810e35d6eef11b9d6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>cos ( a -- cos(a) )</code> <br /></td></tr>
+<tr class="memdesc:ga22b75f18a06ec810e35d6eef11b9d6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>COS ( a -- cos(a) )</code> <br /></td></tr>
 <tr class="separator:ga22b75f18a06ec810e35d6eef11b9d6ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9fdebc8c6a12252a77e8a292dd653986"><td class="memItemLeft" align="right" valign="top"><a id="ga9fdebc8c6a12252a77e8a292dd653986"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__math.html#ga9fdebc8c6a12252a77e8a292dd653986">forth.TAN</a> (vm)</td></tr>
-<tr class="memdesc:ga9fdebc8c6a12252a77e8a292dd653986"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>tan ( a -- tan(a) )</code> <br /></td></tr>
+<tr class="memdesc:ga9fdebc8c6a12252a77e8a292dd653986"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>TAN ( a -- tan(a) )</code> <br /></td></tr>
 <tr class="separator:ga9fdebc8c6a12252a77e8a292dd653986"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga95b8def66744e24021efee2a47478c9b"><td class="memItemLeft" align="right" valign="top"><a id="ga95b8def66744e24021efee2a47478c9b"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__math.html#ga95b8def66744e24021efee2a47478c9b">forth.INT</a> (vm)</td></tr>
-<tr class="memdesc:ga95b8def66744e24021efee2a47478c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>int ( number: -- integer: )</code> trail to integer part <br /></td></tr>
+<tr class="memdesc:ga95b8def66744e24021efee2a47478c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>INT ( number: -- integer: )</code> trail to integer part <br /></td></tr>
 <tr class="separator:ga95b8def66744e24021efee2a47478c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga133c9411950d695b5a2a777da804835d"><td class="memItemLeft" align="right" valign="top"><a id="ga133c9411950d695b5a2a777da804835d"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__math.html#ga133c9411950d695b5a2a777da804835d">forth.NUM</a> (vm)</td></tr>
-<tr class="memdesc:ga133c9411950d695b5a2a777da804835d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>num ( integer: -- number: )</code> to floating point <br /></td></tr>
+<tr class="memdesc:ga133c9411950d695b5a2a777da804835d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>NUM ( integer: -- number: )</code> to floating point <br /></td></tr>
 <tr class="separator:ga133c9411950d695b5a2a777da804835d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4ccda39db69ba24d6a99f806b4505423"><td class="memItemLeft" align="right" valign="top"><a id="ga4ccda39db69ba24d6a99f806b4505423"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cont.html#ga4ccda39db69ba24d6a99f806b4505423">forth.STACK</a> (vm)</td></tr>
+<tr class="memdesc:ga4ccda39db69ba24d6a99f806b4505423"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>STACK ( symbol:name -- stack:name )</code> create stack <br /></td></tr>
+<tr class="separator:ga4ccda39db69ba24d6a99f806b4505423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga09e304737ba22fe3ccd0f0d6102980a8"><td class="memItemLeft" align="right" valign="top"><a id="ga09e304737ba22fe3ccd0f0d6102980a8"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__cont.html#ga09e304737ba22fe3ccd0f0d6102980a8">forth.MAP</a> (vm)</td></tr>
+<tr class="memdesc:ga09e304737ba22fe3ccd0f0d6102980a8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>MAP ( symbol:name -- map:name )</code> create associative array <br /></td></tr>
+<tr class="separator:ga09e304737ba22fe3ccd0f0d6102980a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9bf88f1b2a3ccc4fe27a4a0913826e7b"><td class="memItemLeft" align="right" valign="top"><a id="ga9bf88f1b2a3ccc4fe27a4a0913826e7b"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__persist.html#ga9bf88f1b2a3ccc4fe27a4a0913826e7b">forth.pLOAD</a> (vm)</td></tr>
+<tr class="memdesc:ga9bf88f1b2a3ccc4fe27a4a0913826e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>.LOAD ( obj -- obj )</code> load object from persistant store <br /></td></tr>
+<tr class="separator:ga9bf88f1b2a3ccc4fe27a4a0913826e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga702a1f3bd551396b56f0792ea8464751"><td class="memItemLeft" align="right" valign="top"><a id="ga702a1f3bd551396b56f0792ea8464751"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__meta.html#ga702a1f3bd551396b56f0792ea8464751">forth.GROUP</a> (vm)</td></tr>
+<tr class="memdesc:ga702a1f3bd551396b56f0792ea8464751"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>GROUP ( name -- group:name)</code> object group <br /></td></tr>
+<tr class="separator:ga702a1f3bd551396b56f0792ea8464751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae3ae9a5744457bf7c874f2dcc8017fb3"><td class="memItemLeft" align="right" valign="top"><a id="gae3ae9a5744457bf7c874f2dcc8017fb3"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hwsw.html#gae3ae9a5744457bf7c874f2dcc8017fb3">forth.MCU</a> (vm)</td></tr>
+<tr class="memdesc:gae3ae9a5744457bf7c874f2dcc8017fb3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>MCU ( name -- mcu:name)</code> define MCU microcontroller SoC <br /></td></tr>
+<tr class="separator:gae3ae9a5744457bf7c874f2dcc8017fb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacdf668c837715ce2c7d0d49fa8affdaa"><td class="memItemLeft" align="right" valign="top"><a id="gacdf668c837715ce2c7d0d49fa8affdaa"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hwsw.html#gacdf668c837715ce2c7d0d49fa8affdaa">forth.ARCH</a> (vm)</td></tr>
+<tr class="memdesc:gacdf668c837715ce2c7d0d49fa8affdaa"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>ARCH ( name -- arch:name)</code> define new architecture <br /></td></tr>
+<tr class="separator:gacdf668c837715ce2c7d0d49fa8affdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga244cc2928fe80fd7cf5e68f44d949ea7"><td class="memItemLeft" align="right" valign="top"><a id="ga244cc2928fe80fd7cf5e68f44d949ea7"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hwsw.html#ga244cc2928fe80fd7cf5e68f44d949ea7">forth.OS</a> (vm)</td></tr>
+<tr class="memdesc:ga244cc2928fe80fd7cf5e68f44d949ea7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>OS ( name -- os:name )</code> define OS <br /></td></tr>
+<tr class="separator:ga244cc2928fe80fd7cf5e68f44d949ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>FORTH-like script language (more: <a class="el" href="kbf.html">kb/FORTH</a>) </p>

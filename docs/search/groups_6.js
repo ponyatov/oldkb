@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['native_20client_20gui',['Native client GUI',['../group__gui.html',1,'']]],
-  ['number',['Number',['../group__num.html',1,'']]]
+  ['math',['math',['../group__math.html',1,'']]],
+  ['metaprogramming',['Metaprogramming',['../group__meta.html',1,'']]],
+  ['messaging',['Messaging',['../group__msg.html',1,'']]]
 ];

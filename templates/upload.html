@@ -1,0 +1,12 @@
+{% extends "template.html" %}
+
+{% block body %}
+
+<form method=post enctype=multipart/form-data>
+	<input id=file type=file name=file>
+	<input id=go type=submit value=Upload>
+</form>
+
+<div><pre>{{ S }}</pre></div>
+
+{% endblock %}

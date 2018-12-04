@@ -9,15 +9,15 @@
 
 from forth import *
 
-import os
+import os,sys
 import flask,flask_wtf,wtforms
 
-app = flask.Flask(__name__)
+web = flask.Flask(__name__)
 
-app.config['SECRET_KEY'] = os.urandom(32)
+web.config['SECRET_KEY'] = os.urandom(32)
 
 import flask_login
-logman = flask_login.LoginManager() ; logman.init_app(app)
+logman = flask_login.LoginManager() ; logman.init_app(web)
 
 from secrets import IP,PORT
 from secrets import LOGIN_HASH, PSWD_HASH 
@@ -38,13 +38,12 @@ class CmdForm(flask_wtf.FlaskForm):
     pad   = wtforms.TextAreaField('pad')
     go    = wtforms.SubmitField('GO')
 
-@app.route('/', methods=['GET', 'POST'])
+@web.route('/', methods=['GET', 'POST'])
 def index():
     if not flask_login.current_user.is_authenticated:
         return flask.redirect('/login')
     form = CmdForm()
-    if form.validate_on_submit():
-        F.push(String(form.pad.data)) ; INTERPRET(F)
+    if form.validate_on_submit(): F.push(String(form.pad.data)) ; INTERPRET(F)
     return flask.render_template('index.html', form=form, vm=F.dump(slots=False))
 
 class User(flask_login.UserMixin):
@@ -57,7 +56,7 @@ class LoginForm(flask_wtf.FlaskForm):
     pswd  = wtforms.PasswordField('password', [wtforms.validators.DataRequired()])
     go    = wtforms.SubmitField('GO')
 
-@app.route('/login', methods = ['GET', 'POST'])
+@web.route('/login', methods = ['GET', 'POST'])
 def login():
     flask_login.logout_user()
     form = LoginForm()
@@ -74,16 +73,16 @@ def login():
             return flask.redirect('/login')
     return flask.render_template('login.html',form=form)
 
-@app.route('/logout')
+@web.route('/logout')
 @flask_login.login_required
 def logout(): flask.redirect('/login')
 
-@app.route('/dump/<sym>')
+@web.route('/<sym>')
 @flask_login.login_required
 def dump(sym):
     return flask.render_template('dump.html',dump=F[sym].dump())
 
 if __name__ == '__main__':
-    app.run(debug=True, host=IP, port=PORT, ssl_context = SSL_KEYS)
+    web.run(debug=True, host=IP, port=PORT, ssl_context = SSL_KEYS)
 
 ## @}

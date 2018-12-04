@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['object',['Object',['../group__object.html',1,'']]]
+  ['native_20client_20gui',['Native client GUI',['../group__gui.html',1,'']]],
+  ['number',['Number',['../group__num.html',1,'']]]
 ];

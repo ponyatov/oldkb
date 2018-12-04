@@ -1,7 +1,7 @@
 <map id="Symbolic type system" name="Symbolic type system">
-<area shape="rect" id="node2" href="$group__active.html" title="Objects has execution semantics. " alt="" coords="215,5,274,32"/>
-<area shape="rect" id="node3" href="$group__prim.html" title="primitive types in implementation language (Python) " alt="" coords="208,56,281,83"/>
-<area shape="rect" id="node4" href="$group__object.html" title="Object" alt="" coords="215,107,275,133"/>
-<area shape="rect" id="node5" href="$group__cont.html" title="Data containers. " alt="" coords="205,157,284,184"/>
-<area shape="rect" id="node6" href="$group__debug.html" title="debug" alt="" coords="216,208,273,235"/>
+<area shape="rect" id="node2" href="$group__active.html" title="Objects has execution semantics. " alt="" coords="283,5,342,32"/>
+<area shape="rect" id="node3" href="$group__prim.html" title="primitive types in implementation language (Python) " alt="" coords="276,56,349,83"/>
+<area shape="rect" id="node4" href="$group__object.html" title="Object" alt="" coords="283,112,343,139"/>
+<area shape="rect" id="node5" href="$group__cont.html" title="Data containers. " alt="" coords="273,168,352,195"/>
+<area shape="rect" id="node6" href="$group__debug.html" title="debug" alt="" coords="284,219,341,245"/>
 </map>

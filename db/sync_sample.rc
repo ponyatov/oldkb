@@ -1,0 +1,2 @@
+#!/bin/sh
+rsync -rv db/plan user@hosting.ru:kb/db

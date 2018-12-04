@@ -1,6 +1,7 @@
 <map id="sym.Active" name="sym.Active">
-<area shape="rect" id="node3" href="$classsym_1_1Fn.html" title="Function. " alt="" coords="5,155,72,181"/>
-<area shape="rect" id="node4" href="$classsym_1_1VM.html" title="Virtual Machine. " alt="" coords="97,155,167,181"/>
-<area shape="rect" id="node2" href="$classsym_1_1Object.html" title="sym.Object" alt="" coords="41,5,130,32"/>
-<area shape="rect" id="node5" href="$classforth_1_1FORTH.html" title="kb/FORTH Virtual Machine " alt="" coords="83,229,181,256"/>
+<area shape="rect" id="node3" href="$classsym_1_1Cmd.html" title="VM command. " alt="" coords="5,155,84,181"/>
+<area shape="rect" id="node4" href="$classsym_1_1Fn.html" title="Function. " alt="" coords="109,155,175,181"/>
+<area shape="rect" id="node5" href="$classsym_1_1VM.html" title="Virtual Machine. " alt="" coords="200,155,271,181"/>
+<area shape="rect" id="node2" href="$classsym_1_1Object.html" title="base object " alt="" coords="97,5,187,32"/>
+<area shape="rect" id="node6" href="$classforth_1_1FORTH.html" title="kb/FORTH Virtual Machine " alt="" coords="186,229,285,256"/>
 </map>

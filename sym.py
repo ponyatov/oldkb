@@ -10,11 +10,17 @@ import os,sys,time,pickle
 # ############################## Object #####################################
 ## @defgroup object Object 
 
+## base object
+## @ingroup object
 class Object:
     def __init__(self, V):
+        ## type/class tag
         self.type  = self.__class__.__name__.lower()
+        ## primitive value (implementation language type)
         self.value = V
+        ## object attributes/slots
         self.attr  = {}
+        ## nested elements = vector = stack
         self.nest  = []
         
     # ############# dump ##############
@@ -46,17 +52,30 @@ class Object:
     ## @brief operations on named attributes = frame slots
     ## @ingroup object
     ## @{
-        
+
+    ## `object[key] = value` operator
+    ## @param[in] key string: slot name 
     def __setitem__(self,key,obj): self.attr[key] = obj ; return self
+    ## `object[key]` operator
+    ## @param[in] key string: slot name 
     def __getitem__(self,key): return self.attr[key]
+    ## `delete object[key]` operator
+    ## @param[in] key string: slot name 
+    def delete(self,key): del self.attr[key] ; return self
+    ## `<<` operator: push `obj` as new slot
+    ## @param [in] obj using `obj.value` as new slot name
     def __lshift__(self,obj):
         if isinstance(obj, Object): self.attr[obj.value] = obj
-        elif callable(obj): self << Fn(obj)
+        elif callable(obj): self << Cmd(obj)
         else: raise TypeError(obj)
+    ## operator `obj >> key` return inner `obj` slot
+    ## @param[in] key string: slot name 
+    def __rshift__(self,key):
+        return self[key.value]
     def slots(self):
-        R = self.__class__(self.value)
-        R.attr = self.attr
-        return R
+        R = self.head()+' :\n'
+        for i in self.attr: R += '%s '%i
+        return String(R)
     
     ## @}
 
@@ -95,6 +114,8 @@ class Object:
             pickle.dump(self.attr,db)
         with open('db/%s/%s.nest'%(self.type,self.value) ,'w') as db:
             pickle.dump(self.nest,db)
+        with open('db/%s/%s.obj'%(self.type,self.value) ,'w') as db:
+            pickle.dump(self,db)
         
     ## restore from disk .db
     def load(self):
@@ -118,7 +139,15 @@ class Object:
 
 class Primitive(Object): pass
 class Symbol(Primitive): pass
-class String(Primitive): pass
+
+class String(Primitive):
+    def str(self):
+        S = ''
+        for c in self.value:
+            if   c == '\t': S += '\\t'
+            elif c == '\n': S += '\\n'
+            else: S += c
+        return S
 
 # ################################ Number ###################################
 ## @defgroup num Number
@@ -237,6 +266,7 @@ class Bin(Integer):
 ## @{
 
 class Container(Object): pass
+class Vector(Container): pass
 class Stack(Container): pass
 class Map(Container): pass
 
@@ -249,14 +279,57 @@ class Map(Container): pass
 
 class Active(Object): pass
 
+## Function
+class Fn(Active): pass
+    
 ## Virtual Machine
 class VM(Active): pass
 
-## Function
-class Fn(Active):
+## VM command
+class Cmd(Active):
     def __init__(self,F): Active.__init__(self, F.__name__) ; self.fn = F
     def __call__(self,vm): self.fn(vm)
     
 ## @}
+
+## @}
+
+# ############################### Messaging ##################################
+## @defgroup msg Messaging
+## @brief message-passing OOP & distributed computing
+
+# ############################ Metaprogramming ###############################
+## @defgroup meta Metaprogramming
+## @brief with source autogeneration for embedded systems
+## @{
+
+## object group
+class Group(Object): pass
+
+## @defgroup oop OOP
+
+## @defgroup hwsw HWSW
+## @brief hardware/software co-design
+## @{
+
+## hardware/software co-design metaobject
+class HwSw(Object): pass
+
+## CPU processor/SoC
+class Cpu(HwSw): pass
+## MCU microcontroller
+class Mcu(Cpu): pass
+
+## ARCH computer architecture
+class Arch(HwSw): pass
+
+## OS operational system
+class Os(HwSw): pass
+
+## @}
+
+## @defgroup stm32 STM32
+## @brief [Cortex-M](https://ponyatov.quora.com/metaL-metaprogramming-for-STM32-Cortex-M-microcontrollers)
+##        code generation target
 
 ## @}

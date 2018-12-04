@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['inher',['INHER',['../group__meta.html#gaa1597d91a9d275b6929aec2570676672',1,'forth']]],
   ['initcolorizer',['initColorizer',['../classgui_1_1GUI__window.html#aab1c72e075f6dcd14faa2014b7e400d7',1,'gui::GUI_window']]],
   ['initeditor',['initEditor',['../classgui_1_1GUI__window.html#a91da71b1eba4e278c526be790f97ddd9',1,'gui::GUI_window']]],
   ['initmenu',['initMenu',['../classgui_1_1GUI__window.html#a23531b180fb49894f3b4e48f43ce33c8',1,'gui::GUI_window']]],
