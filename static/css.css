@@ -9,7 +9,8 @@ html,body { width:100%; overflow: hidden; margin: 0; padding: 0; }
 label[for=error]	{ color:yellow; }
 
 #plan	{ color: cyan; }
-#words	{ color: darkcyan; max-width: 99%; word-wrap: break-word; }
+#words	{ color: darkcyan; max-width: 99%;
+			word-wrap: break-word; white-space: pre-wrap; }
 #plot	{ padding:5px; }
 
 #cmd	{ position: absolute; bottom:0; width:100%; }
