@@ -7,8 +7,7 @@ from sym import *
 ## @brief Personal Planning System
 ## @{
 
-class Plan(Object):
-    def push(self,obj): self[obj.value] = obj ; return self
+class Plan(Object): pass
     
 ## target axes (metrics)
 class Axis(Plan): pass
