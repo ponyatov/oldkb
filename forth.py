@@ -203,6 +203,15 @@ F << MAP
 
 ## @}
 
+# ############################ Documenting ###############################
+## @ingroup doc Documenting
+## @{
+
+def URL(vm): vm.push(Url(vm.pop().value))
+F << URL
+
+## @}
+
 # ############################### messaging ##################################
 ## @ingroup persist
 ## @{

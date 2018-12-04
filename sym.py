@@ -300,6 +300,21 @@ class Cmd(Active):
 ## @defgroup msg Messaging
 ## @brief message-passing OOP & distributed computing
 
+# ############################ Documenting ###############################
+## @defgroup doc Documenting
+## @brief and html generation
+## @{
+
+class Doc(Object): pass
+
+class Html(Doc): pass
+
+class Url(Doc): pass
+
+class Email(Doc): pass
+
+## @}
+
 # ############################ Metaprogramming ###############################
 ## @defgroup meta Metaprogramming
 ## @brief with source autogeneration for embedded systems

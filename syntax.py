@@ -11,7 +11,7 @@ from sym import *
 import ply.lex as lex
 
 ## parse directly into primitive @ref sym objects
-tokens = ['symbol','string','number','integer','hex','bin']
+tokens = ['symbol','string','number','integer','hex','bin','url']
 
 ## @name string
 ## @{
@@ -68,6 +68,10 @@ def t_integer(t):
     return Integer(t.value)
 
 ## @}
+
+def t_url(t):
+	r'https?://[a-zA-Z0-9_\.\/\?\=]+'
+	return Url(t.value)
 
 def t_symbol(t):
     r'[a-zA-Z0-9_\?\.\:\;\+\-\*\/\%\^\@\!\$\<\>]+'
