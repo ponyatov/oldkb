@@ -11,16 +11,16 @@ from forth import *
 import os,sys
 import flask,flask_wtf,wtforms,werkzeug
 
-web = flask.Flask(__name__)
+app = flask.Flask(__name__)
 
-web.config['SECRET_KEY'] = os.urandom(32)
+app.config['SECRET_KEY'] = os.urandom(32)
 
 class CmdForm(flask_wtf.FlaskForm):
     error = wtforms.StringField('no error')
     pad   = wtforms.TextAreaField('pad')
     go    = wtforms.SubmitField('GO')
-    
-@web.route('/', methods=['GET', 'POST'])
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
     form = CmdForm()
     if form.validate_on_submit(): F.push(String(form.pad.data)) ; INTERPRET(F)
@@ -30,13 +30,13 @@ def index():
                                 words=F.slots().value \
                                 )
 
-@web.route('/<sym>')
+@app.route('/<sym>')
 def dump(sym):
     return flask.render_template('dump.html',dump=F[sym].dump())
 
-web.config['MAX_CONTENT_LENGTH'] = 2 << 10
+app.config['MAX_CONTENT_LENGTH'] = 2 << 10
 
-@web.route('/upload', methods=['GET','POST'])
+@app.route('/upload', methods=['GET','POST'])
 def upload():
     if flask.request.method == 'POST':
         print flask.request.files
@@ -50,6 +50,6 @@ def upload():
         return flask.redirect('/')
     return flask.render_template('upload.html',S=F.dump(slots=False))
 
-web.run(debug=True,host='127.0.0.1',port=8888)
+app.run(debug=True,host='127.0.0.1',port=8888)
 
 ## @}

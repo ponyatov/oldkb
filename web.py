@@ -12,12 +12,12 @@ from forth import *
 import os,sys
 import flask,flask_wtf,wtforms
 
-web = flask.Flask(__name__)
+app = flask.Flask(__name__)
 
-web.config['SECRET_KEY'] = os.urandom(32)
+app.config['SECRET_KEY'] = os.urandom(32)
 
 import flask_login
-logman = flask_login.LoginManager() ; logman.init_app(web)
+logman = flask_login.LoginManager() ; logman.init_app(app)
 
 from secrets import IP,PORT
 from secrets import LOGIN_HASH, PSWD_HASH 
@@ -38,13 +38,17 @@ class CmdForm(flask_wtf.FlaskForm):
     pad   = wtforms.TextAreaField('pad')
     go    = wtforms.SubmitField('GO')
 
-@web.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if not flask_login.current_user.is_authenticated:
         return flask.redirect('/login')
     form = CmdForm()
     if form.validate_on_submit(): F.push(String(form.pad.data)) ; INTERPRET(F)
-    return flask.render_template('index.html', form=form, vm=F.dump(slots=False))
+    return flask.render_template('index.html', form=form, \
+                                vm=F.dump(slots=False), \
+                                plan=F['plan'].dump(), \
+                                words=F.slots().value \
+                                )
 
 class User(flask_login.UserMixin):
     def __init__(self,id): self.id = id
@@ -56,7 +60,7 @@ class LoginForm(flask_wtf.FlaskForm):
     pswd  = wtforms.PasswordField('password', [wtforms.validators.DataRequired()])
     go    = wtforms.SubmitField('GO')
 
-@web.route('/login', methods = ['GET', 'POST'])
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
     flask_login.logout_user()
     form = LoginForm()
@@ -73,16 +77,16 @@ def login():
             return flask.redirect('/login')
     return flask.render_template('login.html',form=form)
 
-@web.route('/logout')
+@app.route('/logout')
 @flask_login.login_required
 def logout(): flask.redirect('/login')
 
-@web.route('/<sym>')
+@app.route('/<sym>')
 @flask_login.login_required
 def dump(sym):
     return flask.render_template('dump.html',dump=F[sym].dump())
 
 if __name__ == '__main__':
-    web.run(debug=True, host=IP, port=PORT, ssl_context = SSL_KEYS)
+    app.run(debug=True, host=IP, port=PORT, ssl_context = SSL_KEYS)
 
 ## @}
