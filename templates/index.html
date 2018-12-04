@@ -3,9 +3,13 @@
 {% block body %}
 
 <div id=slider>
-<pre id=vm>{{ vm }}</pre>
-<pre id=plan>{{ plan }}</pre>
-<pre id=words>{{ words }}</pre>
+<pre id=vm><pre id=header>{{ F.head() }}</pre>
+{{ F.dump(slots=False,header=False) }}</pre>
+
+<pre id=plan><pre id=header>{{ F['plan'].head() }}</pre>
+{{ F['plan'].dump(header=False) }}</pre>
+
+<pre id=words>{{ F.slots().value }}</pre>
 </div>
 
 <form id=cmd action="" method=post novalidate>
@@ -19,20 +23,31 @@
 
 {% block script %}
 
+var cmd,slider,vm,plan;
+
 window.onload = function() {
 	
 	cmd		= document.getElementById('cmd');
 	slider	= document.getElementById('slider');
+	vm		= document.getElementById('vm');
+	plan	= document.getElementById('plan');
 	
 	window.onresize();
 	
 	cmd.onkeydown = function(e) {
 		if(e.keyCode == 13 && e.ctrlKey) { cmd.submit() }
 	}
+	
+	scroll_down();
 }
 
 window.onresize = function() {
 	slider.style.height = cmd.offsetTop-5;
+}
+
+function scroll_down() {
+	vm.scrollTop = vm.scrollHeight;
+	plan.scrollTop = plan.scrollHeight;
 }
 
 {% endblock %}
