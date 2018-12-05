@@ -21,20 +21,21 @@
  
 ## @{
 
-## yield with unifying logic variable
-
+# yield with 
+## unifying logic variable
 class Var:
     def __init__(self): self.value = None
-    def __lshift__(self,obj): return self.unify(obj)
     def __repr__(self):
         if self.value: return '<%s>' % self.value
         else: return '<>'
+    ## `<<` unifying operator
+    def __lshift__(self,arg): return self.unify(arg)
     def unify(self,arg):
         if not self.value:      # == if not bound
             self.value = arg    # bind
             yield self          # return self bounded
             self.value = None   # remove binding
-        elif self.value == arg: # == or if bounded var equals
+        elif self.value == arg: # == or bounded var is equals
             yield self          # return self unmodified
 
 def male(P):
