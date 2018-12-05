@@ -1,8 +1,8 @@
 ## @file
-## @brief back-tracking logic inferense
+## @brief back-tracking logic inference
 
 ## @defgroup infer Logic
-## @brief back-tracking logic inferense on trees/frames
+## @brief back-tracking logic inference on trees/frames
 ## @details
 ## * [**YieldProlog**](http://yieldprolog.sourceforge.net/)
 ## * [Marvin Minky's Frame system](https://www.youtube.com/watch?v=nXJ_2uGWM-M&index=3&list=PLddc343N7YqgYvD0Kfc91QUcssH_5_sn8&t=24)

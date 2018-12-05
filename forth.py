@@ -269,10 +269,6 @@ F['.DEL'] = Cmd(pDEL)
 ## @ingroup meta
 ## @{
 
-## `META ( name -- meta:name )` metaprogramming object
-def META(vm): vm.push(Meta(vm.pop().value))
-F << META
-
 ## `FN ( name -- fn:name )` define function
 def FN(vm): vm.push(Fn(vm.pop().value))
 F << FN
