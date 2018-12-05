@@ -21,23 +21,34 @@
  
 ## @{
 
-def male():
-    yield 'Homer'
-    yield 'Bart'
-    yield 'Abraham'
-    yield 'Skinner'
-    
-def female():
-    yield 'Marge'
-    yield 'Lisa'
-    yield 'Maggie'
-    yield 'Mona'
-    yield 'Jacqueline'
-    yield 'Paty'
-    yield 'Selma'
+## yield with logic variable'
 
-for m in male(): print m
-print
-for f in female(): print f
+class Var:
+    def __init__(self): self.value = None
+    def __lshift__(self,obj): self.value = obj ; return self
+    def __repr__(self):
+        if self.value: return '<%s>' % self.value
+        else: return '<>'
+
+def male(P):
+    yield P << 'Homer'
+    yield P << 'Bart'
+    yield P << 'Abraham'
+    yield P << 'Skinner'
+
+def female(P):
+    yield P << 'Marge'
+    yield P << 'Lisa'
+    yield P << 'Maggie'
+    yield P << 'Mona'
+    yield P << 'Jacqueline'
+    yield P << 'Paty'
+    yield P << 'Selma'
+
+P = Var() ; print 'P',P,
+print ; print
+for i in male(P): print i,
+print ; print
+for j in female(P): print j,
 
 ## @}
