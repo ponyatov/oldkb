@@ -3,7 +3,8 @@
 ## @brief kiosk web server (local http only)
 
 ## @defgroup kiosk
-## @brief local web server (http only)
+## @ingroup web
+## @brief local web server (light http only)
 ## @{
 
 from forth import *

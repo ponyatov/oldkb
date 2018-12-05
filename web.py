@@ -3,8 +3,12 @@
 ## @file
 ## @brief Web interface /Flask/
 
+## @defgroup interactive interactive
+## @brief interfaces
+
 ## @defgroup web Web interface
-## @brief Flask-based: http/https, user authorisation
+## @ingroup interactive 
+## @brief Flask-based: full-sized http/https, user authorization
 ## @{ 
 
 from forth import *

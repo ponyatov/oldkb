@@ -3,8 +3,9 @@
 
 # https://github.com/ponyatov/pyFORTH/blob/master/FORTH.py
 
-## @defgroup gui Native client GUI
-## @frief wxWidgets
+## @defgroup wx wxWidgets
+## @ingroup interactive
+## @frief Native client GUI
 ## @{
 
 from sym   import *
