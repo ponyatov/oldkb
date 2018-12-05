@@ -21,29 +21,31 @@
  
 ## @{
 
-## yield with logic variable'
+## yield with unifying logic variable
 
 class Var:
     def __init__(self): self.value = None
-    def __lshift__(self,obj): self.value = obj ; return self
+    def __lshift__(self,obj): return self.unify(obj)
     def __repr__(self):
         if self.value: return '<%s>' % self.value
         else: return '<>'
+    def unify(self,arg):
+        if not self.value:      # == if not bound
+            self.value = arg    # bind
+            yield self          # return self bounded
+            self.value = None   # remove binding
+        elif self.value == arg: # == or if bounded var equals
+            yield self          # return self unmodified
 
 def male(P):
-    yield P << 'Homer'
-    yield P << 'Bart'
-    yield P << 'Abraham'
-    yield P << 'Skinner'
+    for i in 'Homer Bart Abraham Skinner'.split():
+        for j in P << i:
+            yield j
 
 def female(P):
-    yield P << 'Marge'
-    yield P << 'Lisa'
-    yield P << 'Maggie'
-    yield P << 'Mona'
-    yield P << 'Jacqueline'
-    yield P << 'Paty'
-    yield P << 'Selma'
+    for i in 'Marge Lisa Maggie Paty Selma Mona Jacqueline'.split():
+        for j in P << i:
+            yield j
 
 P = Var() ; print 'P',P,
 print ; print
