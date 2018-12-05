@@ -1,5 +1,5 @@
 (dp0
-VHTML
+VJSON
 p1
 (isym
 Lang
@@ -18,7 +18,7 @@ p8
 sS'value'
 p10
 g1
-sbsVCSS
+sbsVHTML
 p11
 (isym
 Lang
@@ -33,7 +33,7 @@ sg8
 (dp16
 sg10
 g11
-sbsVJS
+sbsVCSS
 p17
 (isym
 Lang
@@ -48,4 +48,19 @@ sg8
 (dp22
 sg10
 g17
+sbsVJS
+p23
+(isym
+Lang
+p24
+(dp25
+g4
+(lp26
+sg6
+S'lang'
+p27
+sg8
+(dp28
+sg10
+g23
 sbs.
