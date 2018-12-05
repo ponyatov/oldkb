@@ -269,6 +269,10 @@ F['.DEL'] = Cmd(pDEL)
 ## @ingroup meta
 ## @{
 
+## `META ( name -- meta:name )` metaprogramming object
+def META(vm): vm.push(Meta(vm.pop().value))
+F << META
+
 ## `FN ( name -- fn:name )` define function
 def FN(vm): vm.push(Fn(vm.pop().value))
 F << FN
@@ -277,7 +281,24 @@ F << FN
 def GROUP(vm): vm.push(Group(vm.pop().value))
 F << GROUP
 
-## @ingroup oop OOP
+## @ingroup lang
+## @{
+
+## `LANG ( name -- lang:name )` programming language
+def LANG(vm): vm.push(Lang(vm.pop().value))
+F << LANG
+
+## `SYNTAX ( name -- syntax:name )` syntax parser/checker
+def SYNTAX(vm): vm.push(Syntax(vm.pop().value))
+F << SYNTAX
+
+## `COMPILER ( name -- compiler:name )` compiler/language implementation
+def COMPILER(vm): vm.push(Compiler(vm.pop().value))
+F << COMPILER
+
+## @}
+
+## @ingroup oop
 ## @{
 
 ## `INHER ( obj1 obj2 -- obj2.super=obj1 )` inherit obj2 from obj1

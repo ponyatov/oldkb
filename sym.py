@@ -320,8 +320,25 @@ class Email(Doc): pass
 ## @brief with source autogeneration for embedded systems
 ## @{
 
+class Meta(Object): pass
+
 ## object group
-class Group(Object): pass
+class Group(Meta): pass
+
+## @defgroup lang Syntax
+## @brief Programming languages (parser/generate/compile)
+## @{
+
+## programming language
+class Lang(Meta): pass
+
+## syntax parser/checker
+class Syntax(Lang): pass
+
+## compiler/language implementation
+class Compiler(Lang): pass
+
+## @}
 
 ## @defgroup oop OOP
 
@@ -330,7 +347,7 @@ class Group(Object): pass
 ## @{
 
 ## hardware/software co-design metaobject
-class HwSw(Object): pass
+class HwSw(Meta): pass
 
 ## CPU processor/SoC
 class Cpu(HwSw): pass
@@ -343,10 +360,10 @@ class Arch(HwSw): pass
 ## OS operational system
 class Os(HwSw): pass
 
-## @}
-
 ## @defgroup stm32 STM32
 ## @brief [Cortex-M](https://ponyatov.quora.com/metaL-metaprogramming-for-STM32-Cortex-M-microcontrollers)
 ##        code generation target
+
+## @}
 
 ## @}
