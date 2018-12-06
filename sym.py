@@ -325,6 +325,9 @@ class Meta(Object): pass
 ## object group
 class Group(Meta): pass
 
+## private group
+class Priv(Group): pass
+
 ## @defgroup lang Syntax
 ## @brief Programming languages (parser/generate/compile)
 ## @{

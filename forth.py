@@ -277,6 +277,10 @@ F << FN
 def GROUP(vm): vm.push(Group(vm.pop().value))
 F << GROUP
 
+## `PRIV ( name -- priv:name)` private group
+def PRIV(vm): vm.push(Priv(vm.pop().value))
+F << PRIV
+
 ## @ingroup lang
 ## @{
 
