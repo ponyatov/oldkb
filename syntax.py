@@ -70,7 +70,7 @@ def t_integer(t):
 ## @}
 
 def t_url(t):
-	r'https?://[a-zA-Z0-9_\.\/\?\=\#\!\~]+'
+	r'https?://[a-zA-Z0-9_\.\/\?\=\#\!\~\-]+'
 	return Url(t.value)
 
 def t_symbol(t):
