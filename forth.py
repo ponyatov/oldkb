@@ -207,8 +207,13 @@ F << MAP
 ## @ingroup doc Documenting
 ## @{
 
+## `URL ( string:url -- url: )`
 def URL(vm): vm.push(Url(vm.pop().value))
 F << URL
+
+## `EMAIL ( :email -- email: )`
+def EMAIL(vm): vm.push(Email(vm.pop().value))
+F << EMAIL
 
 ## @}
 
@@ -346,21 +351,34 @@ from pps import *
 
 F << Plan('plan')
 
-## create new task
+## `TASK ( name -- task:name)` task
 def TASK(vm): vm.push(Task(vm.pop().value))
 F << TASK
 
-## create big task (elephant)
+## `SLON ( name -- slon:name)` big task (elephant)
 def SLON(vm): vm.push(Slon(vm.pop().value))
 F << SLON
 
-## create boring task
+## `FROG ( name -- frog:name)` boring task
 def FROG(vm): vm.push(Frog(vm.pop().value))
 F << FROG
 
-## create new axis
+## `AXIS ( name -- axis:name)` axis (toplevel planning target)
 def AXIS(vm): vm.push(Axis(vm.pop().value))
 F << AXIS
+
+## @ingroup contact
+## @{
+
+## `CONTACT ( name -- contact:name)` contact
+def CONTACT(vm): vm.push(Contact(vm.pop().value))
+F << CONTACT
+
+## `TEL ( name -- tel:name)` telephone
+def TEL(vm): vm.push(Tel(vm.pop().value))
+F << TEL
+
+## @}
 
 ## @}
 

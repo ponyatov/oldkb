@@ -43,4 +43,16 @@ class Place(Plan): pass
 
 ## @}
 
+## @defgroup contact contacts
+## @brief & HR
+## @{
+
+## contact
+class Contact(Plan): pass
+
+## telephone
+class Tel(Contact): pass
+
+## @}
+
 ## @}
