@@ -303,6 +303,10 @@ F << COMPILER
 
 ## @}
 
+## @ingroup generic
+## @{
+## @}
+
 ## @ingroup oop
 ## @{
 

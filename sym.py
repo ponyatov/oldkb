@@ -307,7 +307,11 @@ class Cmd(Active):
 
 class Doc(Object): pass
 
+## @defgroup html HTML
+## @brief HTML/CSS markup
+## @{
 class Html(Doc): pass
+## @}
 
 class Url(Doc): pass
 
@@ -340,6 +344,44 @@ class Syntax(Lang): pass
 
 ## compiler/language implementation
 class Compiler(Lang): pass
+
+## @}
+
+## @defgroup generic Generic
+## @brief Generic programming using constructs common for most prog.languages
+## @{
+
+## @defgroup c89 ANSI C'89
+## @brief code generation bindings (tuned for embedded software design)
+## @{
+
+## @}
+
+## @defgroup webdev Web dev
+## @{
+
+## @defgroup py   Python
+## @brief KB system bootstrap
+
+## @defgroup go   Go
+## @brief High-load backend
+
+## @defgroup js   JavaScript
+## @brief Frontend
+
+## @}
+
+## @defgroup cpp  C++
+## @brief Native desktop 
+
+## @defgroup java Java
+## @brief Business hish-scale software development
+## @{
+
+## @defgroup android Android
+## @brief Mobile
+
+## @}
 
 ## @}
 
