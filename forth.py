@@ -378,6 +378,8 @@ F << CONTACT
 def TEL(vm): vm.push(Tel(vm.pop().value))
 F << TEL
 
+F << Priv('people')
+
 ## @}
 
 ## @}
