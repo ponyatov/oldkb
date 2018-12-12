@@ -12,6 +12,5 @@ secrets.py
 docs/
 
 env/
-lib/
 upsync.rc
 

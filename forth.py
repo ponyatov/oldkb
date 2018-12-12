@@ -305,6 +305,17 @@ F << COMPILER
 
 ## @ingroup generic
 ## @{
+
+F['gen'] = Gen('eric')
+
+## `FN ( name -- fn:name)` function
+def FN(vm): vm.push(Fn(vm.pop().value))
+F << FN
+
+## `LIB ( name -- lib:name)` library
+def LIB(vm): vm.push(Lib(vm.pop().value))
+F << LIB
+
 ## @}
 
 ## @ingroup oop

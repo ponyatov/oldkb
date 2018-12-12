@@ -281,9 +281,6 @@ class Map(Container): pass
 
 class Active(Object): pass
 
-## Function
-class Fn(Active): pass
-    
 ## Virtual Machine
 class VM(Active): pass
 
@@ -321,7 +318,6 @@ class Email(Doc): pass
 
 # ############################ Metaprogramming ###############################
 ## @defgroup meta Metaprogramming
-## @brief with source autogeneration for embedded systems
 ## @{
 
 class Meta(Object): pass
@@ -336,24 +332,51 @@ class Priv(Group): pass
 ## @brief Programming languages (parser/generate/compile)
 ## @{
 
-## programming language
+## @brief programming language
 class Lang(Meta): pass
 
-## syntax parser/checker
+## @brief syntax parser/checker
 class Syntax(Lang): pass
 
-## compiler/language implementation
+## @brief compiler/language implementation
 class Compiler(Lang): pass
 
 ## @}
 
+# ################################ Generic ###################################
 ## @defgroup generic Generic
-## @brief Generic programming using constructs common for most prog.languages
+## @brief Generic (meta)programming using constructs common for most prog.languages
 ## @{
 
-## @defgroup c89 ANSI C'89
-## @brief code generation bindings (tuned for embedded software design)
+## @brief Generic metaprogramming
+class Gen(Meta): pass
+
+## @brief Function
+class Fn(Gen): pass
+
+## @brief Library
+class Lib(Gen): pass
+
+## @brief Module
+class Module(Gen): pass
+
+## @defgroup emb Embedded
+## @brief source code autogeneration for embedded systems
 ## @{
+
+# ################################## LLVM ####################################
+## @defgroup llvm LLVM
+## @brief low-level code generation
+    
+# ################################# ANSI'C ###################################
+## @defgroup c89 ANSI C'89
+## @brief Portable code generation
+## @{
+
+## @brief ANSI'C
+class C89(Lang): pass
+
+## @}
 
 ## @}
 
