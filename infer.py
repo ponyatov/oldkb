@@ -77,7 +77,7 @@ def female(P):
     for i in 'Marge Lisa Maggie Paty Selma Mona Jacqueline'.split():
         for j in generalUnify(P,i):
             yield j
-
+            
 P = Var() #; P.value = 'Marge'; 
 print 'P',P,
 print ; print
@@ -85,5 +85,12 @@ for i in male(P): print i,
 print ; print
 for j in female(P): print j,
 print ; print
+
+def brother(Person, Brother):
+    for i in generalUnify(Brother, 'Bart'):
+        for j in generalUnify(Person, 'Lisa'):  yield i,'is brother',j
+        for j in generalUnify(Person, 'Marge'): yield i,'is brother',j
+    
+for b in brother(Var(),'Bart'): print b
 
 ## @}
