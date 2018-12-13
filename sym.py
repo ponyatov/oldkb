@@ -360,6 +360,17 @@ class Lib(Gen): pass
 ## @brief Module
 class Module(Gen): pass
 
+## @defgroup vcs VCS
+## @brief Version Control System
+## @{
+
+## @brief Version Control System
+class Vcs(Meta): pass
+## @brief Git repo
+class Git(Vcs): pass
+
+## @}
+
 ## @defgroup emb Embedded
 ## @brief source code autogeneration for embedded systems
 ## @{

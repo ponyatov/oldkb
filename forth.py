@@ -318,6 +318,15 @@ F << LIB
 
 ## @}
 
+## @ingrpup vcs
+## @{
+
+## `GIT ( name -- git:name)` git repository
+def GIT(vm): vm.push(Git(vm.pop().value))
+F << GIT
+
+## @}
+
 ## @ingroup oop
 ## @{
 
