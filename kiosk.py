@@ -32,9 +32,12 @@ def index():
     return flask.render_template('index.html', form=form, F=F, plan=plan, words=words)
 
 ## dump any object by `/sym` route
-@app.route('/<sym>')
+@app.route('/<path:sym>')
 def dump(sym):
-    return flask.render_template('dump.html',dump=F[sym].dump())
+    R = F
+    # iterate over slashed path
+    for i in sym.split('/'): R=R[i]
+    return flask.render_template('dump.html',dump=R.dump())
 
 app.config['MAX_CONTENT_LENGTH'] = 2 << 10
 

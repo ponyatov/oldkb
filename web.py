@@ -105,10 +105,12 @@ def login():
 def logout(): flask.redirect('/login')
 
 ## dump any object by `/sym` route
-@app.route('/<sym>')
-@flask_login.login_required
+@app.route('/<path:sym>')
 def dump(sym):
-    return flask.render_template('dump.html',dump=F[sym].dump())
+    R = F
+    # iterate over slashed path
+    for i in sym.split('/'): R=R[i]
+    return flask.render_template('dump.html',dump=R.dump())
 
 if __name__ == '__main__':
     ## @param host IP address or `0.0.0.0` for all
