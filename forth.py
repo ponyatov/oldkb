@@ -203,6 +203,20 @@ F << MAP
 
 ## @}
 
+# ########################## input/output ###########################
+## @ingroup io
+## @{
+
+## `DIR ( name -- dir:name )` define directory
+def DIR(vm): vm.push(Dir(vm.pop().value))
+F << DIR
+
+## `FILE ( name -- file:name )` define file
+def FILE(vm): vm.push(File(vm.pop().value))
+F << FILE
+
+## @}
+
 # ############################ Documenting ###############################
 ## @ingroup doc Documenting
 ## @{

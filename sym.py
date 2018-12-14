@@ -322,13 +322,29 @@ class Cmd(Active):
     
 ## @}
 
+# ########################## input/output ###########################
+## @defgroup io IO
+## @brief input/output
+## @{
+
+## @brief input/output object
+class IO(Object): pass
+
+## @brief directory
+class Dir(IO): pass
+
+## @brief file
+class File(IO): pass
+
 ## @}
 
-# ############################### Messaging ##################################
+## @}
+
+# ############################# Messaging ###########################
 ## @defgroup msg Messaging
 ## @brief message-passing OOP & distributed computing
 
-# ############################ Documenting ###############################
+# ############################ Documenting ##########################
 ## @defgroup doc Documenting
 ## @brief and html generation
 ## @{
