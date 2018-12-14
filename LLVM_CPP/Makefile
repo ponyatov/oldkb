@@ -16,13 +16,13 @@ WGET = wget -c -P $(GZ)
 hello.log: hello.src ./compiler
 	./compiler < $< > $@ && tail $(TAIL) $@ 
 
-C = compiler.cpp compiler.yacc.cpp compiler.lex.cpp
-H = compiler.hpp compiler.yacc.hpp
+C = compiler.cpp parser.cpp lexer.cpp
+H = compiler.hpp parser.hpp
 ./compiler: $(C) $(H)
 	$(CXX) $(CXXFLAGS) -o $@ $(C)
-compiler.lex.cpp: compiler.lex
+lexer.cpp: compiler.lex
 	flex -o $@ $<
-compiler.yacc.cpp: compiler.yacc
+parser.cpp: compiler.yacc
 	bison -o $@ $<
 
 install: $(PREFIX)/bin/llc

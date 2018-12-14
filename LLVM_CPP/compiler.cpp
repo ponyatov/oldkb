@@ -4,6 +4,4 @@
 void yyerror(std::string msg) {
 	std::cout << YYERR; std::cerr << YYERR; exit(-1); }
 
-int main() {
-	while (yylex()) { std::cout << yytext << std::endl; }
-}
+int main() { return yyparse(); }

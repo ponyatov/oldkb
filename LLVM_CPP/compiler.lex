@@ -12,4 +12,6 @@
 \.target		{return TARGET;}
 \.end			{return END;}
 
+[a-zA-Z0-9_]+	{yylval.s = yytext; return SYM;}
+
 .				{yyerror("lexer");}		// any undetected char

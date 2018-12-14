@@ -3,10 +3,11 @@
 
 #include <iostream>
 
-extern int yylex();
+extern int yylex();						// lexer/parser interface
 extern int yylineno;
 extern char* yytext;
-extern void yyparse();
+extern int yyparse();
 extern void yyerror(std::string);
+#include "parser.hpp"
 
 #endif // _COMPILER_H

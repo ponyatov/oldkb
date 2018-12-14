@@ -8,4 +8,7 @@
 %token <s> SYM
 
 %%
-REPL : MODULE SYM		{ std::cout << "module:" << $2 << std.endl; }
+REPL :
+REPL : REPL MODULE SYM	{ std::cout << "module:" << $3 << std::endl; }
+REPL : REPL TARGET SYM	{ std::cout << "target:" << $3 << std::endl; }
+REPL : REPL END			{ exit(0); }

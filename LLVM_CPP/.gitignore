@@ -1,8 +1,9 @@
 
-bld/
-src/
 gz/
+src/
+build/
 
 compiler
-compiler.*.?pp
+lexer.cpp
+parser.?pp
 
