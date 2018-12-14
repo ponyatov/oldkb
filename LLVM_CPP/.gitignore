@@ -7,3 +7,5 @@ compiler
 lexer.cpp
 parser.?pp
 
+*.il*
+

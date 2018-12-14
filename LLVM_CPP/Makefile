@@ -18,8 +18,12 @@ hello.log: hello.src ./compiler
 
 C = compiler.cpp parser.cpp lexer.cpp
 H = compiler.hpp parser.hpp
-./compiler: $(C) $(H)
-	$(CXX) $(CXXFLAGS) -o $@ $(C)
+
+CXXFLAGS	+= -I$(shell llvm-config --includedir )
+L			+= $(shell llvm-config --libs core --system-libs )
+
+./compiler: $(C) $(H) Makefile
+	$(CXX) $(CXXFLAGS) -o $@ $(C) $(L) && ls -la $@
 lexer.cpp: compiler.lex
 	flex -o $@ $<
 parser.cpp: compiler.yacc
@@ -27,16 +31,17 @@ parser.cpp: compiler.yacc
 
 install: $(PREFIX)/bin/llc
 #	$(MAKE) distclean
-$(PREFIX)/bin/llc: $(BLD)/bin/llc
-	cd $(BLD) ; sudo $(MAKE) install 
 
-$(BLD)/bin/llc: $(BLD)/CMakeCache.txt
+llvm: $(PREFIX)/bin/llvm-config
+$(PREFIX)/bin/llvm-config: $(BLD)/bin/llvm-config
+	cd $(BLD) ; sudo $(MAKE) install 
+$(BLD)/bin/llvm-config: $(BLD)/CMakeCache.txt
 	cd $(BLD) ; $(MAKE) -j$(shell grep processor /proc/cpuinfo|wc -l )
 $(BLD)/CMakeCache.txt: $(SRC)/$(LLVM).src/CMakeLists.txt
 	rm -rf $(BLD) ; mkdir $(BLD) ; cd $(BLD) ;\
 		cmake $(SRC)/$(LLVM).src \
-			-DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(PREFIX) \
-			-DLLVM_TARGETS_TO_BUILD="X86"
+			-DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_INSTALL_PREFIX=$(PREFIX) \
+			-DLLVM_TARGETS_TO_BUILD="host"
 
 src: $(SRC)/$(LLVM).src/CMakeLists.txt
 $(SRC)/$(LLVM).src/CMakeLists.txt: $(GZ)/$(LLVM_GZ)
@@ -50,4 +55,4 @@ uninstall:
 			$(PREFIX)/lib/BugpointPasses.so $(PREFIX)/lib/TestPlugin.so
 
 distclean:
-	rm -rf $(SRC) $(BLD)
+	sudo rm -rf $(SRC) $(BLD)

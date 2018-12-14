@@ -1,8 +1,13 @@
 %{
 #include "compiler.hpp"
+
+std::string* LexString;
+
 %}
 
 %option yylineno noyywrap
+
+%s str
 
 %%
 #[^\n]*			{}						// line comments
@@ -12,6 +17,12 @@
 \.target		{return TARGET;}
 \.end			{return END;}
 
-[a-zA-Z0-9_]+	{yylval.s = yytext; return SYM;}
+<INITIAL>\"		{BEGIN(str); LexString = new std::string(""); }
+<str>\"			{BEGIN(INITIAL); yylval.s = LexString; return STR;}
+<str>.			{*LexString += yytext;}
+
+\=				{return EQ;}
+
+[a-zA-Z0-9_]+	{yylval.a = yytext; return SYM;}
 
 .				{yyerror("lexer");}		// any undetected char

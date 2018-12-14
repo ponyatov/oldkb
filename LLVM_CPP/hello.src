@@ -3,4 +3,6 @@
 .module hello
 .target native
 
+hello = "hello world!\n"
+
 .end
