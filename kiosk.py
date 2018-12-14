@@ -12,21 +12,22 @@ from forth import *
 import os,sys
 import flask,flask_wtf,wtforms,werkzeug
 
+## Flask application
 app = flask.Flask(__name__)
 
 app.config['SECRET_KEY'] = os.urandom(32)
 
-class CmdForm(flask_wtf.FlaskForm):
-    error = wtforms.StringField('no error')
-    pad   = wtforms.TextAreaField('pad')
-    go    = wtforms.SubmitField('GO')
+from web import CmdForm
 
+## @param methods
 @app.route('/', methods=['GET', 'POST'])
+## `/` index route
 def index():
     form = CmdForm()
     if form.validate_on_submit(): F.push(String(form.pad.data)) ; INTERPRET(F)
     return flask.render_template('index.html', form=form, F=F)
 
+## dump any object by `/sym` route
 @app.route('/<sym>')
 def dump(sym):
     return flask.render_template('dump.html',dump=F[sym].dump())
@@ -34,6 +35,7 @@ def dump(sym):
 app.config['MAX_CONTENT_LENGTH'] = 2 << 10
 
 @app.route('/upload', methods=['GET','POST'])
+## `/upload` route
 def upload():
     if flask.request.method == 'POST':
         print flask.request.files

@@ -24,14 +24,18 @@
 # yield with 
 ## unifying logic variable
 class Var:
-    def __init__(self,init=None): self.value = init
+    ## constuct unbound logic variable
+    def __init__(self,init=None):
+        ## value or None for unbounded
+        self.value = init
+    ## print logic variable in form `<value> @id` 
     def __repr__(self):
-        
         if self.value: R = str(self.value)
         else: R=''
         return '<%s> @%X' % (R,id(self))
     ## `<<` unifying operator
     def __lshift__(self,arg): return self.unify(arg)
+    ## Prolog unification
     def unify(self,arg):
         if not self.value:      # == if not bound
             self.value = arg    # bind

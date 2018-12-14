@@ -5,7 +5,7 @@
 
 ## @defgroup wx wxWidgets
 ## @ingroup interactive
-## @frief Native client GUI
+## @brief Native client GUI
 ## @{
 
 from sym   import *
@@ -25,6 +25,7 @@ class GUI_window(wx.Frame):
     ## define constructor parameters to default values specific for our app
     ## @param[in] title window title
     ## @param[in] filename file name will be used on save console content
+    ## @param parent
     def __init__(self,parent=None,title='KB/wx',filename=sys.argv[0]+'.save'):
         wx.Frame.__init__(self,parent,title='%s:%s'%(title,filename))
         ## file name will be used for console content save/load

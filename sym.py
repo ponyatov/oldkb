@@ -10,9 +10,10 @@ import os,sys,time,pickle
 # ############################## Object #####################################
 ## @defgroup object Object 
 
-## base object
+## base generic *frame* object
 ## @ingroup object
 class Object:
+    ## construct generic *frame* object with given primitive `value`
     def __init__(self, V):
         ## type/class tag
         self.type  = self.__class__.__name__.lower()
@@ -29,8 +30,11 @@ class Object:
     ## @ingroup object
     ## @{
         
+    ## print any object in a string form
     def __repr__(self): return self.dump()
+    ## static list holds all objects dumped by last `dump()` method call
     dumped = []
+    ## dump any object in tabbed tree text form
     def dump(self, depth=0, prefix='', slots=True, header=True):
         if header: S = self.pad(depth) + self.head(prefix)
         else: S = ''
@@ -42,9 +46,12 @@ class Object:
         for j in self.nest: S += j.dump(depth + 1)
         if header: return S
         else: return S[1:]
+    ## print only object `<type:value>` header
     def head(self, prefix=''):
         return '%s<%s:%s> @%x' % (prefix, self.type, self.str(), id(self))
+    ## left pad with tabs
     def pad(self, N): return '\n' + '    ' * N
+    ## convert value to string
     def str(self): return str(self.value)
     
     ## @}
@@ -74,6 +81,7 @@ class Object:
     ## @param[in] key string: slot name 
     def __rshift__(self,key):
         return self[key.value]
+    ## print head `+ addr{}` names only
     def slots(self):
         R = self.head()+' :\n'
         for i in self.attr: R += '%s '%i
@@ -87,15 +95,24 @@ class Object:
     ## @ingroup object
     ## @{
         
+    ## push `obj` to `nest[]` as a stack
     def push(self,obj): self.nest.append(obj) ; return self
+    ## pop top element from `nest[]`
     def pop(self): return self.nest.pop()
+    ## get top `nest[]` stack element w/o removing it
     def top(self): return self.nest[-1]
+    ## @brief `( ... -- )`
     def dropall(self): self.nest = []
     
+    ## @brief `( obj -- obj obj )`
     def dup(self): self.push(self.top())
+    ## @brief `( obj1 obj2 -- obj1 )`
     def drop(self): self.pop()
+    ## @brief `( obj1 obj2 -- obj2 obj1)`
     def swap(self): B = self.pop() ; A = self.pop() ; self.push(B) ; self.push(A)
+    ## @brief `( obj1 obj2 -- obj1 obj2 obj1 )`
     def over(self): self.push(self.nest[-2])
+    ## @brief `( obj1 obj2 -- obj2 )`
     def press(self): del self.nest[-2]
     
     ## @}
@@ -143,6 +160,7 @@ class Primitive(Object): pass
 class Symbol(Primitive): pass
 
 class String(Primitive):
+    ## print strings with `\t\r\n` special chars in a single line
     def str(self):
         S = ''
         for c in self.value:
@@ -163,6 +181,7 @@ import math
 
 ## floating point
 class Number(Primitive):
+    ## construct floating point number from string of number
     def __init__(self,V): Primitive.__init__(self, float(V))
     
     ## @ingroup math
@@ -206,6 +225,7 @@ class Number(Primitive):
 
 ## integer
 class Integer(Number):
+    ## construct integer number from string/number
     def __init__(self,V): Primitive.__init__(self, int(V))
     
     ## @ingroup math
@@ -250,13 +270,17 @@ class Integer(Number):
     ## @}
 
 ## machine hexadecimal
-class Hex(Integer): 
+class Hex(Integer):
+    ## construct hex machine number from `0x` prefixed string
     def __init__(self,V): Primitive.__init__(self, int(V[2:],0x10))
+    ## print with `0x` prefix
     def str(self): return '0x%X' % self.value
     
 ## binary string
 class Bin(Integer): 
+    ## construct binary string/number from `0b` prefixed string
     def __init__(self,V): Primitive.__init__(self, int(V[2:],0x02))
+    ## print with `0b` prefix
     def str(self): return bin(self.value)
     
 ## @}
@@ -286,7 +310,12 @@ class VM(Active): pass
 
 ## VM command
 class Cmd(Active):
-    def __init__(self,F): Active.__init__(self, F.__name__) ; self.fn = F
+    ## construct virtual machine command from Python function
+    def __init__(self,F):
+        Active.__init__(self, F.__name__)
+        ## hold Python function pointer
+        self.fn = F
+    ## callable object
     def __call__(self,vm): self.fn(vm)
     
 ## @}

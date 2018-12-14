@@ -2,7 +2,7 @@
 ## @ref kbf FORTH-like script language
 
 ## @defgroup forth kb/FORTH
-## @brief @ref FORTH-like script language (more: @ref kbf)
+## @brief @ref kbf FORTH-like script language (more: @ref metal)
 ## @{ 
 
 from sym import *
