@@ -25,7 +25,11 @@ from web import CmdForm
 def index():
     form = CmdForm()
     if form.validate_on_submit(): F.push(String(form.pad.data)) ; INTERPRET(F)
-    return flask.render_template('index.html', form=form, F=F)
+    if 'plan' in F['web'].keys(): plan = F['plan'].dump(header=False)
+    else: plan =''
+    if 'words' in F['web'].keys(): words = F.slots().value
+    else: words=''
+    return flask.render_template('index.html', form=form, F=F, plan=plan, words=words)
 
 ## dump any object by `/sym` route
 @app.route('/<sym>')

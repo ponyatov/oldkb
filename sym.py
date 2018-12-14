@@ -68,6 +68,8 @@ class Object:
     ## `object[key]` operator
     ## @param[in] key string: slot name 
     def __getitem__(self,key): return self.attr[key]
+    ## keys / slot names
+    def keys(self): return self.attr.keys()
     ## `delete object[key]` operator
     ## @param[in] key string: slot name 
     def delete(self,key): del self.attr[key] ; return self
@@ -472,6 +474,16 @@ class Os(HwSw): pass
 ## @brief [Cortex-M](https://ponyatov.quora.com/metaL-metaprogramming-for-STM32-Cortex-M-microcontrollers)
 ##        code generation target
 
+
 ## @}
+
+# ######################### User Interface ##########################
+## @defgroup ui UI
+## @brief user interface
+## @{
+
+class UI(Meta): pass
+
+## @}    
 
 ## @}
