@@ -1,0 +1,6 @@
+# hello in meta/LL
+
+.module hello
+.target native
+
+.end
