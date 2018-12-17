@@ -407,6 +407,15 @@ class Lib(Gen): pass
 ## @brief Module
 class Module(Gen): pass
 
+## @brief Variable
+class Var(Gen): pass
+
+## @brief Constant
+class Const(Var): pass
+
+## @brief Structure (data container)
+class Struct(Gen): pass
+
 ## @defgroup vcs VCS
 ## @brief Version Control System
 ## @{

@@ -330,6 +330,18 @@ F << FN
 def LIB(vm): vm.push(Lib(vm.pop().value))
 F << LIB
 
+## `VAR ( name -- var:name)` variable
+def VAR(vm): vm.push(Var(vm.pop().value))
+F << VAR
+
+## `CONST ( name -- const:name)` constant
+def CONST(vm): vm.push(Const(vm.pop().value))
+F << CONST
+
+## `STRUCT ( name -- struct:name)` structure (data container)
+def STRUCT(vm): vm.push(Struct(vm.pop().value))
+F << STRUCT
+
 ## @}
 
 ## @ingrpup vcs
