@@ -475,6 +475,18 @@ class C89(Lang): pass
 ## hardware/software co-design metaobject
 class HwSw(Meta): pass
 
+## hardware component
+class Hw(HwSw): pass
+
+## Memory
+class Memory(Hw): pass
+
+## Memory Segment
+class Segment(Memory): pass
+
+## Register
+class Reg(Hw): pass
+
 ## CPU processor/SoC
 class Cpu(HwSw): pass
 ## MCU microcontroller

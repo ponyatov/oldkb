@@ -355,6 +355,22 @@ F << INHER
 ## @ingroup hwsw
 ## @{
 
+## `HW ( name -- hw:name)` define hardware component
+def HW(vm): vm.push(Hw(vm.pop().value))
+F << HW
+
+## `MEMORY ( name -- memory:name)` define memory area
+def MEMORY(vm): vm.push(Memory(vm.pop().value))
+F << MEMORY
+
+## `SEGMENT ( name -- segment:name)` memory allocation segment
+def SEGMENT(vm): vm.push(Segment(vm.pop().value))
+F << SEGMENT
+
+## `REG ( name -- reg:name)` define register
+def REG(vm): vm.push(Reg(vm.pop().value))
+F << REG
+
 ## `CPU ( name -- cpu:name)` define CPU
 def CPU(vm): vm.push(Cpu(vm.pop().value))
 F << CPU
