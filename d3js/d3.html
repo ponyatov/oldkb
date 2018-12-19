@@ -4,10 +4,56 @@
 	<link rel="stylesheet" type="text/css" href="../static/css.css">
 </head>
 
+<script src="http://d3js.org/d3.v3.js"></script>
+
 <body>
 
-<h1>Hello
+<h1>Hello</h1>
+
+<a href="https://metanit.com/web/d3js/">tutorial</a>
+
+<svg id=svg></svg>
+
+<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+
+<script>
+window.onload = function() {
+	var svg = d3.select("#svg");
+	
+	var g = svg.append("g");
+	
+    g.append("rect")
+    	.attr("x",0) .attr("y",0)
+    	.attr("width", 320) .attr("height", 240) 
+    	.style("fill", "blue")
+    	.style("border", "solid 5px") .style("border-color", "red");
+    g.append("text").text("Yo")
+    	.attr("x",50) .attr("y",50)
+    	.attr("font-family","Verdana") .attr("font-size",35)
+		.attr("fill", "yellow");
+    
+    d3.select("h1").remove();
+    
+    var phones = ['iPhone 6', 'Samsung Galaxy S5', 'LG G4', 'MiPad 5'];
+    
+    ph = d3.select('ul').selectAll('li').data(phones);
+    ph.enter().append('li');
+    ph.text( function (d,i) { return d; });
+    ph.exit().remove();
+    
+}
+</script>
 
 </body>
 
 </html>
+
