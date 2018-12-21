@@ -1,3 +1,0 @@
-# metaL bootstrap
-
-?
