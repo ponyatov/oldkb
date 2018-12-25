@@ -33,13 +33,13 @@ window.onload = function() {
 	
     g.append("rect")
     	.attr("x",0) .attr("y",0)
-    	.attr("width", 320) .attr("height", 240) 
-    	.style("fill", "blue")
-    	.style("border", "solid 5px") .style("border-color", "red");
+    	.attr("width", 320) .attr("height", 240)
+    	.style("fill", "darkblue");
     g.append("text").text("Yo")
     	.attr("x",50) .attr("y",50)
-    	.attr("font-family","Verdana") .attr("font-size",35)
-		.attr("fill", "yellow");
+    	.style("font","30px")
+//    	.attr("font-family","Verdana").attr("font-size",135)
+		.attr("fill", "white");
     
     d3.select("h1").remove();
     
