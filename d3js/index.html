@@ -1,0 +1,22 @@
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<a href="https://www.youtube.com/playlist?list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p">youtube</a>
+
+<h1>Paragraph</h1>
+
+<script>
+
+	d3.select('h1').text('Hello World').style('color','green');
+	
+	svg = d3.select('body').append('svg');
+	
+	//g = svg.append('g');
+	
+	svg.style('border','2pt solid black').style('width','99%').style('height','55%')
+	
+	svg.append("text").text("Yo").attr("font-size",35)
+		.attr("x",50) .attr("y",50)
+		
+	svg.append('circle').attr('cx',50).attr('cy',150).attr('r',15)
+	
+</script>
