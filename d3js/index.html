@@ -6,17 +6,32 @@
 
 <script>
 
-	d3.select('h1').text('Hello World').style('color','green');
+d3.select('h1').text('Hello World').style('color','green');
+
+svg = d3.select('body').append('svg');
+
+svg.style('border','2pt solid black')
+	.attr('width' ,'99%')
+	.attr('height','55%');
 	
-	svg = d3.select('body').append('svg');
+svg.append('circle')
+	.attr('cx',50).attr('cy',150)
+	.attr('r',15)
+	.attr('fill','darkred');
 	
-	//g = svg.append('g');
+svg.append('rect')
+	.attr('width' ,'111')
+	.attr('height','55');
 	
-	svg.style('border','2pt solid black').style('width','99%').style('height','55%')
-	
-	svg.append("text").text("Yo").attr("font-size",35)
-		.attr("x",50) .attr("y",50)
-		
-	svg.append('circle').attr('cx',50).attr('cy',150).attr('r',15)
+svg.append('line')
+	.attr('x1','222')
+	.attr('y1','11')
+	.attr('x2','11')
+	.attr('y2','222')
+	.attr('stroke','green')
+	.attr('stroke-width','11');
+
+svg.append("text").text("Yo").attr("font-size",35)
+	.attr("x",150) .attr("y",150)
 	
 </script>
