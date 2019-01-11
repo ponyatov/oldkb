@@ -37,4 +37,19 @@ svg.append('line')
 svg.append("text").text("Yo").attr("font-size",35)
 	.attr("x",150) .attr("y",150)
 	
+// //////////// lite
+	
+var datArr = [20,40,50];
+	
+var bars = svg.selectAll("#plot")
+	.data(datArr)
+	.enter()
+		.append('circle')
+		.attr('cx', function(d,i) { return (1+i) << 7; } )
+		.attr('cy',255)
+		.attr('r' , function(d,i) { return d; } )
+		.attr('fill','lightyellow')
+		.attr('stroke','black')
+		.attr('stroke-width','3')
+	
 </script>
