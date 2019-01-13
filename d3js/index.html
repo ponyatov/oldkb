@@ -10,8 +10,22 @@ d3.select('h1').text('Hello World').style('color','green');
 
 svg = d3.select('body').append('svg');
 
+var datArr = [20,40,50,60];
+
+const W = 99;
+
+var scale = d3.scale.linear()
+	.domain([0,d3.max(datArr)])
+	.range([0,W])
+;
+
+var color = d3.scale.linear()
+	.domain([0,d3.max(datArr)])
+	.range(['red','lightblue'])
+;
+
 svg.style('border','2pt solid black')
-	.attr('width' ,'99%')
+	.attr('width' ,W+'%')
 	.attr('height','55%');
 	
 svg.append('circle')
@@ -39,16 +53,14 @@ svg.append("text").text("Yo").attr("font-size",35)
 	
 // //////////// lite
 	
-var datArr = [20,40,50];
-	
 var bars = svg.selectAll("#plot")
 	.data(datArr)
 	.enter()
-		.append('circle')
-		.attr('cx', function(d,i) { return (1+i) << 7; } )
-		.attr('cy',255)
-		.attr('r' , function(d,i) { return d; } )
-		.attr('fill','lightyellow')
+		.append('rect')
+		.attr('width', function(d,i) { return scale(d)+'%'; } )
+		.attr('height',33)
+		.attr('y' , function(d,i) { return 300 + i*44; } )
+		.attr('fill',color)
 		.attr('stroke','black')
 		.attr('stroke-width','3')
 	
