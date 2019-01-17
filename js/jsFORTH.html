@@ -1,2 +1,37 @@
 <title>FORTH/js</title>
 
+<style>
+
+* {
+	border: solid 1px; border-color: darkcyan;
+	background: black; color: lightgreen;
+	font-family: monospace; font-size: 4mm;
+}
+
+textarea,button { width:100%; }
+
+</style>
+
+<div id=log>log</div>
+
+<div id=stack># stack</div>
+
+<div id=cmd>
+	<textarea rows=3># put commands here</textarea>
+	<button>GO</button>
+</div>
+
+<script>
+
+/// data stack
+S = []
+
+function refresh() {
+}
+
+window.onload = function() {
+	refresh();	
+}
+
+</script>
+
