@@ -1,6 +1,6 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
-<a href="https://www.youtube.com/watch?v=SYuFy1j8SGs&index=6&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p">youtube</a>
+<a href="https://www.youtube.com/watch?v=OZXYk_bgQGQ&index=7&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p">youtube</a>
 
 <h1>Paragraph</h1>
 
@@ -71,7 +71,7 @@ var bars = g.selectAll("#plot")
 		.attr('stroke','black')
 		.attr('stroke-width','3')
 
-var axis = d3.svg.axis().scale(scale);
+var axis = d3.svg.axis().scale(scale).ticks(11);
 g.append('g').call(axis).attr('transform','translate(0,180)');
 
 </script>
