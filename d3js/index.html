@@ -1,0 +1,77 @@
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<a href="https://www.youtube.com/watch?v=SYuFy1j8SGs&index=6&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p">youtube</a>
+
+<h1>Paragraph</h1>
+
+<script>
+
+d3.select('h1').text('Hello World').style('color','green');
+
+svg = d3.select('body').append('svg');
+
+var datArr = [20,40,50,60];
+
+const W = 512;
+
+var scale = d3.scale.linear()
+	.domain([0,d3.max(datArr)])
+	.range([0,W])
+;
+
+var color = d3.scale.linear()
+	.domain([0,d3.max(datArr)])
+	.range(['red','lightblue'])
+;
+
+svg.style('border','2pt solid black')
+	.attr('width' ,W+11)
+	.attr('height','550');
+	
+var vector = svg.append('g')
+	.attr('transform','translate(11,33)');
+	
+vector.append('circle')
+	.attr('cx',50).attr('cy',150)
+	.attr('r',15)
+	.attr('fill','darkred')
+	.attr('stroke','blue')
+	.attr('stroke-width','3')
+;
+	
+vector.append('rect')
+	.attr('width' ,'111')
+	.attr('height','55');
+	
+vector.append('line')
+	.attr('x1','222')
+	.attr('y1','11')
+	.attr('x2','11')
+	.attr('y2','255')
+	.attr('stroke','green')
+	.attr('stroke-width','11');
+
+vector.append("text").text("Yo").attr("font-size",35)
+	.attr("x",150) .attr("y",150)
+	
+// //////////// lite
+
+
+var g = svg.append('g')
+		.attr('transform','translate(0,320)');
+
+var bars = g.selectAll("#plot")
+	.data(datArr)
+	.enter()
+		.append('rect')
+		.attr('width', scale )
+		.attr('height',33)
+		.attr('y' , (d,i) => i*44 )
+		.attr('fill',color)
+		.attr('stroke','black')
+		.attr('stroke-width','3')
+
+var axis = d3.svg.axis().scale(scale);
+g.append('g').call(axis).attr('transform','translate(0,180)');
+
+</script>

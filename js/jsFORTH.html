@@ -1,0 +1,61 @@
+<title>FORTH/js</title>
+
+<style>
+
+* {
+	border: solid 1px; border-color: darkcyan;
+	background: black; color: lightgreen;
+	font-family: monospace; font-size: 4mm;
+}
+
+textarea,button { width:100%; }
+
+</style>
+
+<div id=log>log</div>
+
+<div id=stack># stack</div>
+
+<div id=cmd>
+	<textarea rows=3># put commands here</textarea>
+	<button>GO</button>
+</div>
+
+<script>
+
+/// data stack
+S = []
+
+/// push to stack
+function PUSH(obj)	{ S.push(obj); return S; }
+
+/// pop from stack
+function POP()		{ return S.pop(); }
+
+/// top element
+function TOP()		{ return S[S.length-1]; }
+
+/// `DUP ( obj -- obj obj )`
+function DUP()		{ PUSH(TOP()); return S; }
+/// `DROP ( o1 o2 -- o1 )`
+function DROP()		{ POP(); return S; }
+/// `SWAP ( o1 o2 -- o2 o1 )`
+function SWAP()		{ var B = POP(), A = POP(); PUSH(B); return PUSH(A); }
+/// `OVER ( o1 o2 -- o1 o2 o1 )`
+function OVER()		{ return PUSH(S[S.length-2]); }
+/// `PRESS ( o1 o2 -- o2 )
+function PRESS()	{ var A = POP(); DROP(); return PUSH(A); }
+
+/// vocabulary
+W = { DUP:DUP , DROP:DROP , SWAP:SWAP , OVER:OVER , PRESS:PRESS }
+
+function refresh() {
+}
+
+window.onload = function() {
+	refresh();	
+	PUSH(1); PUSH(2.3);
+}
+
+</script>
+
