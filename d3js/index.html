@@ -27,8 +27,10 @@ var color = d3.scale.linear()
 svg.style('border','2pt solid black')
 	.attr('width' ,W+11)
 	.attr('height','550');
+
+// vector
 	
-var vector = svg.append('g')
+var vector = svg.append('g').attr('id','vector')
 	.attr('transform','translate(11,33)');
 	
 vector.append('circle')
@@ -54,10 +56,9 @@ vector.append('line')
 vector.append("text").text("Yo").attr("font-size",35)
 	.attr("x",150) .attr("y",150)
 	
-// //////////// lite
+// plot
 
-
-var g = svg.append('g')
+var g = svg.append('g').attr('id','plot')
 		.attr('transform','translate(0,320)');
 
 var bars = g.selectAll("#plot")
@@ -73,5 +74,39 @@ var bars = g.selectAll("#plot")
 
 var axis = d3.svg.axis().scale(scale).ticks(11);
 g.append('g').call(axis).attr('transform','translate(0,180)');
+
+// enter update exit
+
+var euxData = [10,20,30];
+var euxData = [10,20];
+var euxData = [10];
+
+var eux = svg.append('g').attr('id','eux')
+	.attr('transform','translate(277,55)')
+	;
+eux
+			.append('circle')
+			.attr('stroke','black') .attr('fill','lightgreen')
+			.attr('cx',11) .attr('cy',22) .attr('r',33)
+	;
+eux
+			.append('circle')
+			.attr('stroke','black') .attr('fill','lightblue')
+			.attr('cx',11) .attr('cy',122) .attr('r',33)
+;
+var cls = eux
+	.selectAll('circle')
+	.data(euxData)
+	;
+
+	cls.attr('fill','red')
+	cls.enter()
+			.append('circle')
+			.attr('stroke','black')
+			.attr('fill','lightyellow')
+			.attr('cx',(d,i)=>i*66) .attr('cy',55)
+			.attr('r',(d,i)=>d)
+	cls.exit()
+			 .attr('fill','blue')
 
 </script>
