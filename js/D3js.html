@@ -1,6 +1,6 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
-<a href="https://www.youtube.com/watch?v=OZXYk_bgQGQ&index=7&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p">youtube</a>
+<a href="https://www.youtube.com/watch?v=EpeOzq8eDYk&index=8&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p">youtube</a>
 
 <h1>Paragraph</h1>
 
@@ -78,8 +78,8 @@ g.append('g').call(axis).attr('transform','translate(0,180)');
 // enter update exit
 
 var euxData = [10,20,30];
-var euxData = [10,20];
-var euxData = [10];
+//var euxData = [10,20];
+//var euxData = [10];
 
 var eux = svg.append('g').attr('id','eux')
 	.attr('transform','translate(277,55)')
@@ -100,6 +100,11 @@ var cls = eux
 	;
 
 	cls.attr('fill','red')
+			.transition()
+			.duration(2222)
+			.delay((d,i)=>i*555)
+				.attr('cx',222)
+			.each('end',function(){})
 	cls.enter()
 			.append('circle')
 			.attr('stroke','black')
@@ -107,6 +112,8 @@ var cls = eux
 			.attr('cx',(d,i)=>i*66) .attr('cy',55)
 			.attr('r',(d,i)=>d)
 	cls.exit()
-			 .attr('fill','blue')
+			.transition()
+			.duration(2222)
+				.attr('fill','blue')
 
 </script>
