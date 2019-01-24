@@ -10,3 +10,4 @@ key.pem
 doxygen_sqlite3.db
 
 secrets.py
+bcx/
