@@ -1,0 +1,2 @@
+#!/bin/sh
+vim -p FORTH.src compiler.yacc compiler.lex compiler.hpp compiler.cpp bcx.h bcx.c rc.rc
