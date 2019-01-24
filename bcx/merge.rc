@@ -1,0 +1,4 @@
+#!/bin/sh
+git checkout dev -- Makefile *.c *.h *.lex *.yacc
+make doxy ; git add docs
+

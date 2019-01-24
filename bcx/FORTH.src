@@ -1,0 +1,7 @@
+\ FORTH system source code for bcx bytecode compiler/runtime
+
+nop
+bye
+
+.vm
+.end

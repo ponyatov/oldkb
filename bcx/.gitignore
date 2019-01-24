@@ -1,0 +1,15 @@
+*~
+*.swp
+*.log
+
+*.exe
+compiler
+bcx
+
+*.o
+*.hex
+
+compiler.lexer.cpp
+compiler.parser.?pp
+
+doxygen_sqlite3.db
