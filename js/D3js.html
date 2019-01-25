@@ -11,9 +11,11 @@ python -m SimpleHTTPServer 8000
 
 <script>
 
+// D3 tutorial 1-9 parts
+
 d3.select('h1').text('Hello World').style('color','green');
 
-svg = d3.select('body').append('svg');
+svg = d3.select('body').append('svg').attr('id','vector');
 
 var datArr = [20,40,50,60];
 
@@ -120,5 +122,25 @@ var cls = eux
 			.transition()
 			.duration(2222)
 				.attr('fill','blue')
+				
+// 10. tutorial .json load
+
+d3.json('D3js.json', function(dat) {
+	var json = d3.select('body').insert('svg','#vector').attr('id','json')
+		.attr('width',W)
+	json.selectAll('rect').data(dat)
+		.enter()
+			.append('rect')
+			.attr('width',(d,i) => d.age *7 )
+			.attr('height',22)
+			.attr('y',(d,i) => i*25)
+	json.selectAll('text').data(dat)
+		.enter()
+			.append('text')
+			.attr('fill','white')
+			.attr('y',(d,i) => i*25+18)
+			.text((d,i) => d.name)
+			.attr('x',5)
+})
 
 </script>
