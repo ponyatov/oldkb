@@ -23,8 +23,34 @@ textarea,button { width:100%; }
 
 <script>
 
+function Obj(V) {
+	this.type  = 'obj'
+	this.value = V
+	this.attr  = {}
+	this.nest  = []
+}
+
+Obj.prototype.head = function() { return "<"+ this.type +":"+ this.value +">"; }
+
+Obj.prototype.dump = function(depth=0) {
+	S = '\n' + this.pad(depth) + this.head() 
+	return S
+}
+
+Obj.prototype.push = function(obj) { this.nest.push(obj); return this; }
+
+function Stack(V) {
+	Obj.call(this,V)
+	this.__proto__ = Obj.__proto__
+	this.type  = 'stack'
+}
+
+//Stack.prototype = Object.create(Obj.prototype)
+
 /// data stack
-S = []
+S = new Stack('DATA')
+
+/*
 
 /// push to stack
 function PUSH(obj)	{ S.push(obj); return S; }
@@ -49,12 +75,14 @@ function PRESS()	{ var A = POP(); DROP(); return PUSH(A); }
 /// vocabulary
 W = { DUP:DUP , DROP:DROP , SWAP:SWAP , OVER:OVER , PRESS:PRESS }
 
+*/
+
 function refresh() {
 }
 
 window.onload = function() {
 	refresh();	
-	PUSH(1); PUSH(2.3);
+//	PUSH(1); PUSH(2.3);
 }
 
 </script>
