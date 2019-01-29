@@ -1,7 +1,7 @@
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
-<a href="https://www.youtube.com/watch?v=H3WsXg622WA&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p&index=11">youtube</a>
+<a href="https://www.youtube.com/watch?v=H3WsXg622WA&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p&index=11&t=360s">youtube</a>
 
 <pre>
 python -m SimpleHTTPServer 8000
@@ -142,5 +142,30 @@ d3.json('D3js.json', function(dat) {
 			.text((d,i) => d.name)
 			.attr('x',5)
 })
+
+// 11. Paths
+
+	var pthdata = [
+		{x: 10, y:20 },
+		{x: 40, y:60 },
+		{x:  5, y:70 }
+	]
+
+	var pth = d3.select('body').insert('svg','#vector').attr('id','pth')
+		.attr('width',W)
+		
+	var pthg = pth.append('g')
+	
+	var linegen = d3.svg.line()
+		.x(d => d.x)
+		.y(d => d.y)
+	
+	pthg.selectAll('path')
+		.data([pthdata])
+		.enter()
+			.append('path')
+			.attr('d',linegen)
+			.attr('fill','magenta')
+		
 
 </script>
