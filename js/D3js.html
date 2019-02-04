@@ -1,7 +1,7 @@
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
-<a href="https://www.youtube.com/watch?v=H3WsXg622WA&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p&index=11&t=360s">youtube</a>
+<a href="https://www.youtube.com/watch?v=x8dwXoWODZ4&index=14&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p&t=0s">youtube</a>
 
 <pre>
 python -m SimpleHTTPServer 8000
@@ -166,6 +166,16 @@ d3.json('D3js.json', function(dat) {
 			.append('path')
 			.attr('d',linegen)
 			.attr('fill','magenta')
-		
+			.attr('stroke','black')
+			.attr('stroke-width',4)
+			
+// 14. tree layout
+			
+  var tree = d3.select('body').insert('svg','#vector').attr('id','tree')
+  		.attr('width',W)
+  		
+  var mips220 = {}
+	
+  d3.json('mips220.json', dat => mips220 = dat )
 
 </script>
