@@ -1,7 +1,7 @@
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
-<a href="https://www.youtube.com/watch?v=x8dwXoWODZ4&index=14&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p&t=210s">youtube</a>
+<a href="https://www.youtube.com/watch?v=iZ6MSHA4FMU&index=15&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p&t=11s">youtube</a>
 
 <pre>
 python -m SimpleHTTPServer 8000
@@ -171,15 +171,35 @@ d3.json('D3js.json', function(dat) {
 			
 // 14. tree layout
 			
-  var tree = d3.select('body').insert('svg','#vector').attr('id','tree')
-  		.attr('width',W)
+    var tree = d3.select('body').insert('svg','#vector').attr('id','tree')
+  		.attr('width',W).attr('height',W/2)
+  		.append('g').attr('transform','translate(11,11)')
   		
-  var mips220 = {}
-	
-  d3.json('mips220.json', dat => mips220 = dat )
-  
-  var diagonal = d3.svg.diagonal()
-  
-  tree.append('path').attr('d', diagonal)
+  	var treelay = d3.layout.tree().size([W-22,W/2-22])
+
+	d3.json('mips220.json', function (dat) {
+		
+		nodes = treelay.nodes(dat)
+		links = treelay.links(nodes)
+		
+		node = tree.selectAll(".node")
+			.data(nodes)
+			.enter()
+			.append('g').attr('class','node')
+			.attr('transform',d => "translate("+d.x+","+d.y+")")
+		node.append('circle').attr('r',d => d.val.length).attr('fill','steelblue')
+		node.append('text').text(d => d.val)
+		
+		var diagonal = d3.svg.diagonal()
+		
+		link = tree.selectAll(".link")
+			.data(links)
+			.enter()
+			.append('path').attr('class','link')
+			.attr('fill','none').attr('stroke','black')
+			.attr('d',diagonal)
+		
+	})
+
 
 </script>

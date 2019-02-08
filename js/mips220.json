@@ -1,8 +1,11 @@
-  {
-		"value":"mips220",
-		"nest":[
-			{"value":"ade7758"},
-			{"value":"icbcom08"}
-		],
-		"root":true
-	}
+{
+	"val":"mips220",
+	"children":[
+		{"val":"ibcom08"},
+		{"val":"modbus",
+		"children":[
+			{"val":"ASCII"},
+			{"val":"RTU"}
+		]}
+	]
+}
