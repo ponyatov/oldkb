@@ -1,7 +1,7 @@
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
-<a href="https://www.youtube.com/watch?v=iZ6MSHA4FMU&index=15&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p&t=11s">youtube</a>
+<a href="https://www.youtube.com/watch?v=Z0PpaI0UlkE&index=16&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p&t=11s">youtube</a>
 
 <pre>
 python -m SimpleHTTPServer 8000
@@ -175,7 +175,7 @@ d3.json('D3js.json', function(dat) {
   		.attr('width',W).attr('height',W/2)
   		.append('g').attr('transform','translate(11,11)')
   		
-  	var treelay = d3.layout.tree().size([W-22,W/2-22])
+  	var treelay = d3.layout.tree().size([W/2-22,W/2])
 
 	d3.json('mips220.json', function (dat) {
 		
@@ -186,11 +186,12 @@ d3.json('D3js.json', function(dat) {
 			.data(nodes)
 			.enter()
 			.append('g').attr('class','node')
-			.attr('transform',d => "translate("+d.x+","+d.y+")")
+			.attr('transform',d => "translate("+d.y+","+d.x+")")
 		node.append('circle').attr('r',d => d.val.length).attr('fill','steelblue')
 		node.append('text').text(d => d.val)
 		
 		var diagonal = d3.svg.diagonal()
+			.projection(d => [d.y,d.x])
 		
 		link = tree.selectAll(".link")
 			.data(links)
